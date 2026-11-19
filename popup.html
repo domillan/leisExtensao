@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legislação Direta</title>
+  <link rel="stylesheet" href="popup.css" />
+</head>
+<body>
+  <main class="container">
+    <header class="header">
+      <h1>Legislação Direta</h1>
+      <span class="badge">Planalto</span>
+    </header>
+
+    <form id="search-form" novalidate>
+      <label class="field-label" for="query-input">Número, sigla ou nome da norma</label>
+      <div class="input-row">
+        <input
+          id="query-input"
+          type="text"
+          placeholder="Ex.: 9.784/1999, CPC, Maria da Penha, 4.950-A"
+          autocomplete="off"
+          spellcheck="false"
+          autofocus
+        />
+        <button id="submit-btn" type="submit">Abrir</button>
+      </div>
+
+      <div class="controls-row">
+        <div class="select-group">
+          <label class="field-label" for="type-select">Tipo</label>
+          <select id="type-select">
+            <option value="auto">Automático</option>
+            <option value="lei">Lei Ordinária</option>
+            <option value="lc">Lei Complementar</option>
+            <option value="decreto">Decreto</option>
+            <option value="dl">Decreto-Lei</option>
+            <option value="mp">Medida Provisória</option>
+            <option value="ec">Emenda Constitucional</option>
+            <option value="ld">Lei Delegada</option>
+          </select>
+        </div>
+
+        <label class="checkbox-label">
+          <input id="new-tab-checkbox" type="checkbox" checked />
+          <span>Abrir em nova aba</span>
+        </label>
+      </div>
+    </form>
+
+    <section id="status-area" class="status-area hidden" aria-live="polite"></section>
+
+    <footer class="footer">
+      <a href="https://portaldalegislacao.presidencia.gov.br/" target="_blank" rel="noopener noreferrer">
+        Portal da Legislação
+      </a>
+      <button id="clear-cache-btn" type="button" class="link-btn" title="Limpar páginas em cache (TTL 2h)">
+        Limpar cache
+      </button>
+    </footer>
+  </main>
+
+  <script type="module" src="popup.js"></script>
+</body>
+</html>
