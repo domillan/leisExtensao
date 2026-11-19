@@ -1,6 +1,6 @@
 **Sobre o repositório:**
 - Código de extensão de Google Chrome para acessar legislação de maneira rápida.
-- Desenvolvido com auxílio de IA, a partir da ideia do @AdvDoHardware.
+- Desenvolvido com auxílio de IA, a partir da ideia do <a href="https://x.com/AdvDoHardware/status/2123212986680557617">@AdvDoHardware</a>.
 - As ferramentas desenvolvidas com IA podem conter erros. Verifique o código e utilize por sua conta e risco.
 
 **Utilizando no Google Chrome:**
