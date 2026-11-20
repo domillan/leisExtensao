@@ -1093,6 +1093,11 @@ function tokenMatchScore(qToken, tToken) {
   return 0;
 }
 
+/**
+ * Calcula a proximidade e similaridade entre a pesquisa e um alias/título:
+ * - Combina qualidade dos tokens, cobertura dos termos, proximidade de comprimento
+ *   e bônus quando a pesquisa coincide com o início do alias.
+ */
 function similarityScore(queryRaw, targetRaw) {
   const queryNorm = normalizeAliasKey(queryRaw);
   const targetNorm = normalizeAliasKey(targetRaw);
@@ -1112,29 +1117,44 @@ function similarityScore(queryRaw, targetRaw) {
 
   let matchedSum = 0;
   let matchedCount = 0;
+  let firstMatchIndex = Infinity;
 
   for (const qt of qTokens) {
     let bestTokenScore = 0;
-    for (const tt of tTokens) {
-      const s = tokenMatchScore(qt, tt);
-      if (s > bestTokenScore) bestTokenScore = s;
+    let bestIdx = Infinity;
+    for (let i = 0; i < tTokens.length; i++) {
+      const s = tokenMatchScore(qt, tTokens[i]);
+      if (s > bestTokenScore) {
+        bestTokenScore = s;
+        bestIdx = i;
+      }
     }
     if (bestTokenScore > 0) {
       matchedSum += bestTokenScore;
       matchedCount += 1;
+      if (bestIdx < firstMatchIndex) {
+        firstMatchIndex = bestIdx;
+      }
     }
   }
 
   if (matchedCount === 0) return 0;
 
+  const startsWithBonus = targetNorm.startsWith(queryNorm)
+    ? 0.06
+    : (firstMatchIndex === 0 ? 0.03 : 0);
+  const lengthProximity = Math.min(queryNorm.length, targetNorm.length) / Math.max(queryNorm.length, targetNorm.length);
+
   if (matchedCount === qTokens.length) {
     const avgTokenQuality = matchedSum / qTokens.length;
     const coverageRatio = qTokens.length / Math.max(qTokens.length, tTokens.length);
-    return (0.68 * avgTokenQuality) + (0.30 * coverageRatio);
+    const rawScore = (0.60 * avgTokenQuality) + (0.24 * coverageRatio) + (0.10 * lengthProximity) + startsWithBonus;
+    return Math.min(0.99, rawScore);
   }
 
   const unionSize = new Set([...qTokens, ...tTokens]).size;
-  return (matchedSum / unionSize) * 0.85;
+  const partialScore = ((matchedSum / unionSize) * 0.80) + (0.05 * lengthProximity) + (startsWithBonus * 0.5);
+  return Math.min(0.89, partialScore);
 }
 
 async function resolveCatalogEntry(entry) {
@@ -1262,10 +1282,17 @@ async function resolveByName(parsedQuery) {
       return { status: 'found', result: resolvedAssunto, fallbackUrl: codigosFallback };
     }
   } else if (exactAssuntos.length > 1) {
+    const sortedExactAssuntos = exactAssuntos.slice().sort((a, b) => {
+      const scoreA = similarityScore(qAliasKey, a.topico || '');
+      const scoreB = similarityScore(qAliasKey, b.topico || '');
+      if (scoreB !== scoreA) return scoreB - scoreA;
+      return (a.topico || '').length - (b.topico || '').length;
+    });
+
     return {
       status: 'multiple',
-      message: `Encontramos ${exactAssuntos.length} assuntos correspondentes a "${parsedQuery.original}":`,
-      results: exactAssuntos.map(formatAssuntoPendingItem),
+      message: `Encontramos ${sortedExactAssuntos.length} assuntos correspondentes a "${parsedQuery.original}":`,
+      results: sortedExactAssuntos.map(formatAssuntoPendingItem),
       fallbackUrl: codigosFallback
     };
   }
@@ -1276,36 +1303,74 @@ async function resolveByName(parsedQuery) {
 
   for (const norm of knownNorms) {
     const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
-    let bestScore = similarityScore(qAliasKey, norm.title);
+    const titleScore = similarityScore(qAliasKey, norm.title);
+    let bestScore = titleScore;
+    let bestLabelLen = normalizeAliasKey(norm.title).length;
+
     for (const al of aliases) {
       const s = similarityScore(qAliasKey, al);
-      if (s > bestScore) bestScore = s;
+      const len = normalizeAliasKey(al).length;
+      if (s > bestScore || (s === bestScore && len < bestLabelLen)) {
+        bestScore = s;
+        bestLabelLen = len;
+      }
     }
+
     if (bestScore >= MIN_SIMILARITY) {
-      scored.push({ score: bestScore, kind: 'norm', item: norm });
+      scored.push({
+        score: bestScore,
+        topicScore: titleScore,
+        labelLength: bestLabelLen,
+        kind: 'norm',
+        item: norm
+      });
     }
   }
 
   for (const dyn of dynamicCatalog) {
     const s = similarityScore(qAliasKey, dyn.title);
     if (s >= MIN_SIMILARITY) {
-      scored.push({ score: s, kind: 'norm', item: dyn });
+      scored.push({
+        score: s,
+        topicScore: s,
+        labelLength: normalizeAliasKey(dyn.title).length,
+        kind: 'norm',
+        item: dyn
+      });
     }
   }
 
   for (const assunto of assuntos) {
     const aliases = Array.isArray(assunto.alias) ? assunto.alias : [];
-    let bestScore = similarityScore(qAliasKey, assunto.topico || '');
+    const topicScore = similarityScore(qAliasKey, assunto.topico || '');
+    let bestScore = topicScore;
+    let bestLabelLen = normalizeAliasKey(assunto.topico || '').length || Infinity;
+
     for (const al of aliases) {
       const s = similarityScore(qAliasKey, al);
-      if (s > bestScore) bestScore = s;
+      const len = normalizeAliasKey(al).length;
+      if (s > bestScore || (s === bestScore && len < bestLabelLen)) {
+        bestScore = s;
+        bestLabelLen = len;
+      }
     }
+
     if (bestScore >= MIN_SIMILARITY) {
-      scored.push({ score: bestScore, kind: 'assunto', item: assunto });
+      scored.push({
+        score: bestScore,
+        topicScore,
+        labelLength: bestLabelLen,
+        kind: 'assunto',
+        item: assunto
+      });
     }
   }
 
-  scored.sort((a, b) => b.score - a.score);
+  scored.sort((a, b) => {
+    if (Math.abs(b.score - a.score) > 1e-6) return b.score - a.score;
+    if (Math.abs(b.topicScore - a.topicScore) > 1e-6) return b.topicScore - a.topicScore;
+    return a.labelLength - b.labelLength;
+  });
 
   const topCandidates = [];
   const seenKeys = new Set();
@@ -1438,4 +1503,151 @@ export async function resolvePendingCatalogItem(item) {
     return resolved?.url || null;
   }
   return null;
+}
+
+// ============================================================================
+// Sugestões em Tempo Real para a Omnibox (Normas + Assuntos)
+// ============================================================================
+
+// ============================================================================
+// Sugestões em Tempo Real para a Omnibox (Normas + Assuntos)
+// ============================================================================
+
+export async function getOmniboxSuggestions(rawInput, limit = 8) {
+  const qAliasKey = normalizeAliasKey(rawInput);
+  if (!qAliasKey || qAliasKey.length < 2) return [];
+
+  const [knownNorms, assuntos] = await Promise.all([loadNormas(), loadAssuntos()]);
+  const exactMatches = [];
+  const candidates = [];
+
+  // 1) Normas conhecidas (normas.json)
+  for (const norm of knownNorms) {
+    const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
+    const titleNorm = normalizeAliasKey(norm.title);
+    const isExactTitle = titleNorm === qAliasKey;
+    const exactAliasFound = aliases.find((al) => normalizeAliasKey(al) === qAliasKey);
+
+    if (isExactTitle || exactAliasFound) {
+      exactMatches.push({
+        score: 1.0,
+        labelLength: normalizeAliasKey(exactAliasFound || norm.title).length,
+        content: exactAliasFound || norm.title,
+        title: norm.title,
+        tag: norm.category || 'Norma'
+      });
+      continue;
+    }
+
+    let bestScore = titleNorm.includes(qAliasKey)
+      ? Math.max(0.65, similarityScore(qAliasKey, norm.title))
+      : similarityScore(qAliasKey, norm.title);
+    let bestContent = aliases[0] || norm.title;
+
+    for (const al of aliases) {
+      const alNorm = normalizeAliasKey(al);
+      let s = similarityScore(qAliasKey, al);
+      if (alNorm.startsWith(qAliasKey)) {
+        s = Math.max(s, 0.85);
+      } else if (alNorm.includes(qAliasKey)) {
+        s = Math.max(s, 0.68);
+      }
+      if (s > bestScore) {
+        bestScore = s;
+        bestContent = al;
+      }
+    }
+
+    if (bestScore >= 0.50) {
+      candidates.push({
+        score: bestScore,
+        labelLength: normalizeAliasKey(bestContent).length,
+        content: bestContent,
+        title: norm.title,
+        tag: norm.category || 'Norma'
+      });
+    }
+  }
+
+  // 2) Assuntos jurídicos (assuntos.json)
+  for (const assunto of assuntos) {
+    const aliases = Array.isArray(assunto.alias) ? assunto.alias : [];
+    const topico = assunto.topico || '';
+    const topicoNorm = normalizeAliasKey(topico);
+    const artInfo = assunto.artigo ? `, Art. ${assunto.artigo}` : '';
+    const tag = `${assunto.lei}${artInfo}`;
+
+    const exactAliasFound = aliases.find((al) => normalizeAliasKey(al) === qAliasKey);
+    if (exactAliasFound) {
+      exactMatches.push({
+        score: 1.0,
+        labelLength: normalizeAliasKey(exactAliasFound).length,
+        content: exactAliasFound,
+        title: `${topico} — ${exactAliasFound}`,
+        tag
+      });
+      continue;
+    }
+
+    let bestScore = topicoNorm.startsWith(qAliasKey)
+      ? Math.max(0.82, similarityScore(qAliasKey, topico))
+      : (topicoNorm.includes(qAliasKey) ? Math.max(0.64, similarityScore(qAliasKey, topico)) : similarityScore(qAliasKey, topico));
+    let matchedAlias = aliases[0] || topico;
+
+    for (const al of aliases) {
+      const alNorm = normalizeAliasKey(al);
+      let s = similarityScore(qAliasKey, al);
+      if (alNorm.startsWith(qAliasKey)) {
+        s = Math.max(s, 0.86);
+      } else if (alNorm.includes(qAliasKey)) {
+        s = Math.max(s, 0.70);
+      }
+      if (s > bestScore) {
+        bestScore = s;
+        matchedAlias = al;
+      }
+    }
+
+    if (bestScore >= 0.50) {
+      candidates.push({
+        score: bestScore,
+        labelLength: normalizeAliasKey(matchedAlias).length,
+        content: matchedAlias,
+        title: `${topico} — ${matchedAlias}`,
+        tag
+      });
+    }
+  }
+
+  // Se houver resultado idêntico único, retorna apenas ele sem listar outras opções
+  const uniqueExact = [];
+  const seenExact = new Set();
+  for (const item of exactMatches) {
+    const key = `${normalizeAliasKey(item.title)}|${item.tag}`;
+    if (seenExact.has(key)) continue;
+    seenExact.add(key);
+    uniqueExact.push(item);
+  }
+
+  if (uniqueExact.length === 1) {
+    return [uniqueExact[0]];
+  }
+
+  const allPool = [...uniqueExact, ...candidates];
+  allPool.sort((a, b) => {
+    if (Math.abs(b.score - a.score) > 1e-6) return b.score - a.score;
+    return a.labelLength - b.labelLength;
+  });
+
+  const unique = [];
+  const seen = new Set();
+  for (const item of allPool) {
+    const key = `${normalizeAliasKey(item.title)}|${item.tag}`;
+    if (seen.has(key)) continue;
+    seen.add(key);
+    unique.push(item);
+    if (unique.length >= limit) break;
+  }
+
+  return unique;
 }

@@ -3,6 +3,7 @@
     "aliases": [
       "cf",
       "cf 88",
+      "cf88",
       "cf 1988",
       "crfb",
       "crfb 88",
@@ -21,6 +22,7 @@
   {
     "aliases": [
       "cf 67",
+	  "cf67",
       "cf 1967",
       "constituicao 1967",
       "constituicao de 1967",
@@ -33,6 +35,7 @@
   {
     "aliases": [
       "cf 69",
+	  "cf69",
       "cf 1969",
       "ec 1 69",
       "ec 1 1969",
@@ -45,6 +48,7 @@
   {
     "aliases": [
       "cf 46",
+	  "cf46",
       "cf 1946",
       "constituicao 1946",
       "constituicao de 1946"
@@ -56,6 +60,7 @@
   {
     "aliases": [
       "cf 37",
+	  "cf37",
       "cf 1937",
       "constituicao 1937",
       "constituicao de 1937"
@@ -67,6 +72,7 @@
   {
     "aliases": [
       "cf 34",
+	  "cf34",
       "cf 1934",
       "constituicao 1934",
       "constituicao de 1934"
@@ -78,6 +84,7 @@
   {
     "aliases": [
       "cf 1891",
+	  "cf1891",
       "constituicao 1891",
       "constituicao de 1891"
     ],
@@ -88,6 +95,7 @@
   {
     "aliases": [
       "cf 1824",
+	  "cf1824",
       "constituicao 1824",
       "constituicao do imperio"
     ],
@@ -96,7 +104,7 @@
     "category": "Constituição Revogada"
   },
   {
-    "aliases": ["cc", "cc 2002", "codigo civil"],
+    "aliases": ["cc", "cc 2002","cc2002", "codigo civil"],
     "title": "Código Civil (Lei nº 10.406/2002)",
     "type": "lei",
     "number": "10406",
@@ -104,7 +112,7 @@
     "category": "Código"
   },
   {
-    "aliases": ["cpc", "cpc 2015", "cpc 15", "codigo de processo civil", "processo civil"],
+    "aliases": ["cpc", "cpc 2015", "cpc 15", "cpc2015", "cpc15", "codigo de processo civil", "processo civil"],
     "title": "Código de Processo Civil (Lei nº 13.105/2015)",
     "type": "lei",
     "number": "13105",
@@ -208,7 +216,7 @@
     "category": "Código"
   },
   {
-    "aliases": ["cc 1916", "cc 16", "codigo civil de 1916", "codigo civil 1916", "cpc 1916"],
+    "aliases": ["cc 1916", "cc 16",  "cc16", "codigo civil de 1916", "codigo civil 1916", "cpc 1916"],
     "title": "Código Civil de 1916 (Lei nº 3.071/1916 - Revogado)",
     "type": "lei",
     "number": "3071",
@@ -216,7 +224,7 @@
     "category": "Código Revogado"
   },
   {
-    "aliases": ["cpc 73", "cpc 1973", "codigo de processo civil de 1973", "codigo de processo civil 1973"],
+    "aliases": ["cpc 73", "cpc 1973", "cpc73", "codigo de processo civil de 1973", "codigo de processo civil 1973"],
     "title": "Código de Processo Civil de 1973 (Lei nº 5.869/1973 - Revogado)",
     "type": "lei",
     "number": "5869",
@@ -224,7 +232,7 @@
     "category": "Código Revogado"
   },
   {
-    "aliases": ["cpc 39", "cpc 1939", "codigo de processo civil de 1939", "codigo de processo civil 1939"],
+    "aliases": ["cpc 39", "cpc39", "cpc 1939", "codigo de processo civil de 1939", "codigo de processo civil 1939"],
     "title": "Código de Processo Civil de 1939 (Decreto-Lei nº 1.608/1939 - Revogado)",
     "type": "dl",
     "number": "1608",
@@ -272,7 +280,7 @@
     "category": "Estatuto"
   },
   {
-    "aliases": ["lbi", "estatuto da pessoa com deficiencia", "lei brasileira de inclusao"],
+    "aliases": ["lbi", "epd", "estatuto da pessoa com deficiencia", "lei brasileira de inclusao"],
     "title": "Lei Brasileira de Inclusão / Estatuto da Pessoa com Deficiência (Lei nº 13.146/2015)",
     "type": "lei",
     "number": "13146",

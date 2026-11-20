@@ -1,8 +1,7 @@
 import {
   BASE_URL,
   checkSelectionCandidate,
-  loadNormas,
-  normalizeTextForSearch,
+  getOmniboxSuggestions,
   resolveLegislation,
   resolvePendingCatalogItem
 } from './resolver.js';
@@ -79,54 +78,66 @@ chrome.contextMenus.onClicked.addListener(async (info) => {
 
 // Omnibox: palavra-chave "lei" na barra de endereços
 chrome.omnibox.setDefaultSuggestion({
-  description: 'Abrir norma no Portal da Legislação: <match>%s</match>'
+  description: 'Abrir <match>%s</match> no Portal da Legislação'
 });
 
 chrome.omnibox.onInputChanged.addListener((text, suggest) => {
-  const qNorm = normalizeTextForSearch(text);
-  if (!qNorm) return;
-
-  loadNormas().then((knownNorms) => {
-    const suggestions = [];
-    for (const norm of knownNorms) {
-      const titleNorm = normalizeTextForSearch(norm.title);
-      const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
-      const matchesAlias = aliases.some((a) => normalizeTextForSearch(a).startsWith(qNorm));
-      if (matchesAlias || titleNorm.includes(qNorm)) {
-        suggestions.push({
-          content: aliases[0] || norm.title,
-          description: `${escapeXml(norm.title)} <dim>[${escapeXml(norm.category || 'Norma')}]</dim>`
-        });
-      }
-      if (suggestions.length >= 6) break;
-    }
-    suggest(suggestions);
-  }).catch(() => {});
+  getOmniboxSuggestions(text, 8)
+    .then((items) => {
+      const suggestions = items.map((item) => ({
+        content: item.content,
+        description: `${escapeXml(item.title)} <dim>[${escapeXml(item.tag)}]</dim>`
+      }));
+      suggest(suggestions);
+    })
+    .catch(() => {});
 });
 
 chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {
-  const outcome = await resolveLegislation(text, 'auto');
-  let targetUrl = BASE_URL;
+  const queryText = String(text || '').trim();
+  const outcome = await resolveLegislation(queryText, 'auto');
 
+  let targetUrl = null;
   if (outcome.status === 'found' && outcome.result?.url) {
     targetUrl = outcome.result.url;
   } else if (outcome.status === 'confirm' && outcome.suggestion) {
-    targetUrl = (await resolvePendingCatalogItem(outcome.suggestion)) || outcome.fallbackUrl || BASE_URL;
-  } else if (outcome.status === 'multiple' && outcome.results?.length > 0) {
-    targetUrl = (await resolvePendingCatalogItem(outcome.results[0])) || outcome.fallbackUrl || BASE_URL;
-  } else if (outcome.fallbackUrl) {
-    targetUrl = outcome.fallbackUrl;
+    targetUrl = await resolvePendingCatalogItem(outcome.suggestion);
   }
 
-  if (disposition === 'currentTab') {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab?.id) {
-      await chrome.tabs.update(tab.id, { url: targetUrl });
-      return;
+  // Se encontrou resultado único, abre na aba atual ou em nova aba conforme a escolha do usuário
+  if (targetUrl) {
+    if (disposition === 'currentTab') {
+      const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
+      if (tab?.id) {
+        await chrome.tabs.update(tab.id, { url: targetUrl });
+        return;
+      }
     }
+    await chrome.tabs.create({ url: targetUrl });
+    return;
   }
 
-  await chrome.tabs.create({ url: targetUrl });
+  // Se retornar uma lista ("multiple"), não encontrar ("not_found") ou der erro,
+  // salva o estado e abre o popup com a pesquisa e os resultados/avisos
+  await chrome.storage.local.set({
+    [PENDING_POPUP_STATE_KEY]: {
+      query: queryText,
+      type: 'auto',
+      outcome,
+      timestamp: Date.now()
+    }
+  });
+
+  try {
+    await chrome.action.openPopup();
+  } catch (_) {
+    await chrome.windows.create({
+      url: chrome.runtime.getURL('popup.html'),
+      type: 'popup',
+      width: 440,
+      height: 520
+    });
+  }
 });
 
 function escapeXml(str) {
