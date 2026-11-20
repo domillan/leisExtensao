@@ -10,7 +10,8 @@
 4. Clique em Carregar sem compactação e selecione a pasta.
    
 **Padrões de pesquisa reconhecidos:**
-- Número e ano ("13.105/2015", "13105/15", "13105(2015)").
+- Número e ano ("13.105/2015", "13105/15", "13105(2015)" e afins).
+- Especificada ("dl 3688", "ec 20/98" e afins)
 - Por extenso ("LEI Nº 13.105, DE 16 DE MARÇO DE 2015").
 - Siglas ("CPC").
 - Apelidos ("Lei Maria da Penha").
