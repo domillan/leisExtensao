@@ -1986,7 +1986,7 @@
   },
   {
     "id": 78,
-    "topico": "Ato Ilícito e Abuso de Direito",
+    "topico": "Ato Ilícito",
     "lei": "Código Civil (Lei nº 10.406/2002)",
     "artigo": "186/187",
     "alias": [
@@ -1994,6 +1994,10 @@
       "Exercício manifestamente excessivo de direito",
       "ato ilícito",
       "abuso de direito",
+      "dano moral",
+      "danos morais",
+      "dano material",
+      "danos materiais",
       "arts. 186/187 do Código Civil",
       "arts. 186/187 do CC",
       "Ato Ilícito e Abuso de Direito",
@@ -6707,7 +6711,7 @@
       "arts. 223-a/223-g da Consolidação das Leis do Trabalho",
       "arts. 223-a/223-g da CLT",
       "Dano Extrapatrimonial nas Relações de Trabalho",
-      "dano moral",
+      "dano moral nas Relações de Trabalho",
       "dano existencial",
       "dano extrapatrimonial",
       "tarifação e critérios",
@@ -11741,7 +11745,7 @@
       "Competência da Justiça do Trabalho",
       "competência da justiça",
       "justiça do trabalho",
-      "dano moral",
+      "dano moral trabalhista",
       "dano moral decorrente",
       "competência material da Justiça do Trabalho",
       "relação de trabalho e relação de emprego",
@@ -31662,6 +31666,19 @@
       "procedimento sumaríssimo criminal",
       "termo circunstanciado de ocorrência (TCO)",
       "composição civil dos danos"
+    ]
+  },
+  {
+    "id": 1504,
+    "topico": "Obrigações",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "233/420",
+    "alias": [
+      "obrigações",
+      "livro das obrigações",
+      "Obrigações de Dar Coisa Certa",
+      "arts. 233/420 do Código Civil",
+      "arts. 233/420246 do CC"
     ]
   }
 ]

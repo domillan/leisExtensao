@@ -121,6 +121,13 @@ export function normalizeAliasKey(str) {
     .trim();
 }
 
+function extractSignificantTokens(normStr) {
+  if (!normStr) return [];
+  const raw = normStr.split(' ').filter(Boolean);
+  const filtered = raw.filter((t) => !STOPWORDS.has(t));
+  return filtered.length > 0 ? filtered : raw;
+}
+
 export function expandYear(rawYear) {
   if (rawYear == null) return null;
   const cleaned = String(rawYear).replace(/\s+/g, '');
@@ -166,11 +173,122 @@ export function normalizeActNumber(rawNum, isMP = false) {
 }
 
 // ============================================================================
-// Carregamento de normas.json, assuntos.json e Formatação de Âncora (#art...)
+// Carregamento e Indexação Rápida de normas.json e assuntos.json
 // ============================================================================
 
 let normasMemoryCache = null;
+let normasIndexCache = null;
 let assuntosMemoryCache = null;
+let assuntosIndexCache = null;
+
+function buildNormasIndex(normas) {
+  const exactMap = new Map();
+  const entries = new Array(normas.length);
+
+  for (let i = 0; i < normas.length; i++) {
+    const norm = normas[i];
+    const titleNorm = normalizeAliasKey(norm.title);
+    const titleTokens = extractSignificantTokens(titleNorm);
+    const rawAliases = Array.isArray(norm.aliases) ? norm.aliases : [];
+    const aliases = [];
+
+    if (titleNorm) {
+      let bucket = exactMap.get(titleNorm);
+      if (!bucket) {
+        bucket = [];
+        exactMap.set(titleNorm, bucket);
+      }
+      bucket.push(norm);
+    }
+
+    for (let j = 0; j < rawAliases.length; j++) {
+      const rawAl = rawAliases[j];
+      const normAl = normalizeAliasKey(rawAl);
+      if (!normAl) continue;
+      aliases.push({
+        raw: rawAl,
+        norm: normAl,
+        tokens: extractSignificantTokens(normAl)
+      });
+
+      let bucket = exactMap.get(normAl);
+      if (!bucket) {
+        bucket = [];
+        exactMap.set(normAl, bucket);
+      }
+      if (!bucket.includes(norm)) {
+        bucket.push(norm);
+      }
+    }
+
+    entries[i] = {
+      norm,
+      titleNorm,
+      titleTokens,
+      aliases
+    };
+  }
+
+  return { exactMap, entries };
+}
+
+function buildAssuntosIndex(assuntos) {
+  const exactMap = new Map();
+  const invertedIndex = new Map();
+  const entries = new Array(assuntos.length);
+
+  for (let i = 0; i < assuntos.length; i++) {
+    const assunto = assuntos[i];
+    const topico = assunto.topico || '';
+    const topicoNorm = normalizeAliasKey(topico);
+    const topicoTokens = extractSignificantTokens(topicoNorm);
+    const rawAliases = Array.isArray(assunto.alias) ? assunto.alias : [];
+    const aliases = [];
+    const entryTokenSet = new Set(topicoTokens);
+
+    for (let j = 0; j < rawAliases.length; j++) {
+      const rawAl = rawAliases[j];
+      const normAl = normalizeAliasKey(rawAl);
+      if (!normAl) continue;
+
+      const tokens = extractSignificantTokens(normAl);
+      aliases.push({ raw: rawAl, norm: normAl, tokens });
+
+      for (let k = 0; k < tokens.length; k++) {
+        entryTokenSet.add(tokens[k]);
+      }
+
+      let exactBucket = exactMap.get(normAl);
+      if (!exactBucket) {
+        exactBucket = [];
+        exactMap.set(normAl, exactBucket);
+      }
+      if (!exactBucket.includes(assunto)) {
+        exactBucket.push(assunto);
+      }
+    }
+
+    for (const tok of entryTokenSet) {
+      let postingList = invertedIndex.get(tok);
+      if (!postingList) {
+        postingList = [];
+        invertedIndex.set(tok, postingList);
+      }
+      postingList.push(i);
+    }
+
+    entries[i] = {
+      assunto,
+      topico,
+      topicoNorm,
+      topicoTokens,
+      aliases
+    };
+  }
+
+  const vocabulary = Array.from(invertedIndex.keys());
+  return { exactMap, invertedIndex, vocabulary, entries };
+}
 
 export async function loadNormas() {
   if (Array.isArray(normasMemoryCache)) {
@@ -185,6 +303,7 @@ export async function loadNormas() {
         const data = await res.json();
         if (Array.isArray(data)) {
           normasMemoryCache = data;
+          normasIndexCache = buildNormasIndex(data);
           return normasMemoryCache;
         }
       }
@@ -194,6 +313,16 @@ export async function loadNormas() {
   }
 
   return [];
+}
+
+async function getNormasIndex() {
+  if (!normasIndexCache) {
+    const data = await loadNormas();
+    if (!normasIndexCache) {
+      normasIndexCache = buildNormasIndex(data);
+    }
+  }
+  return normasIndexCache;
 }
 
 export async function loadAssuntos() {
@@ -209,6 +338,7 @@ export async function loadAssuntos() {
         const data = await res.json();
         if (Array.isArray(data)) {
           assuntosMemoryCache = data;
+          assuntosIndexCache = buildAssuntosIndex(data);
           return assuntosMemoryCache;
         }
       }
@@ -218,6 +348,16 @@ export async function loadAssuntos() {
   }
 
   return [];
+}
+
+async function getAssuntosIndex() {
+  if (!assuntosIndexCache) {
+    const data = await loadAssuntos();
+    if (!assuntosIndexCache) {
+      assuntosIndexCache = buildAssuntosIndex(data);
+    }
+  }
+  return assuntosIndexCache;
 }
 
 /**
@@ -309,7 +449,9 @@ async function fetchHtmlWithCache(url, forceRefresh = false) {
 
 export async function clearLegislationCache() {
   normasMemoryCache = null;
+  normasIndexCache = null;
   assuntosMemoryCache = null;
+  assuntosIndexCache = null;
   if (typeof chrome === 'undefined' || !chrome.storage?.local) return 0;
   const all = await chrome.storage.local.get(null);
   const keys = Object.keys(all).filter((k) => k.startsWith(CACHE_VERSION));
@@ -666,7 +808,7 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
 }
 
 /**
- * Verifica rapidamente se um trecho selecionado na página corresponde a uma norma ou assunto aceito.
+ * Verifica rapidamente em O(1) se um trecho selecionado na página corresponde a uma norma ou assunto aceito.
  */
 export async function checkSelectionCandidate(rawInput) {
   const text = String(rawInput || '').trim();
@@ -700,31 +842,25 @@ export async function checkSelectionCandidate(rawInput) {
       return { valid: false };
     }
 
-    const knownNorms = await loadNormas();
-    for (const norm of knownNorms) {
-      const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
-      const exactAlias = aliases.some((al) => normalizeAliasKey(al) === qAliasKey);
-      const exactTitle = normalizeAliasKey(norm.title) === qAliasKey;
-      if (exactAlias || exactTitle) {
-        const shortTitle = norm.title.split('(')[0].trim();
-        return {
-          valid: true,
-          label: `Abrir ${shortTitle}`
-        };
-      }
+    const normasIdx = await getNormasIndex();
+    const normHits = normasIdx.exactMap.get(qAliasKey);
+    if (normHits && normHits.length > 0) {
+      const shortTitle = normHits[0].title.split('(')[0].trim();
+      return {
+        valid: true,
+        label: `Abrir ${shortTitle}`
+      };
     }
 
-    const assuntos = await loadAssuntos();
-    for (const assunto of assuntos) {
-      const aliases = Array.isArray(assunto.alias) ? assunto.alias : [];
-      const exactAssunto = aliases.some((al) => normalizeAliasKey(al) === qAliasKey);
-      if (exactAssunto) {
-        const artLabel = assunto.artigo ? ` (Art. ${assunto.artigo})` : '';
-        return {
-          valid: true,
-          label: `Abrir ${assunto.lei}${artLabel}`
-        };
-      }
+    const assuntosIdx = await getAssuntosIndex();
+    const assuntoHits = assuntosIdx.exactMap.get(qAliasKey);
+    if (assuntoHits && assuntoHits.length > 0) {
+      const first = assuntoHits[0];
+      const artLabel = first.artigo ? ` (Art. ${first.artigo})` : '';
+      return {
+        valid: true,
+        label: `Abrir ${first.lei}${artLabel}`
+      };
     }
   }
 
@@ -1000,7 +1136,7 @@ async function resolveWithoutYear(type, numberNorm) {
 }
 
 // ============================================================================
-// Busca por Nome / Sigla / Códigos / Estatutos / Apelidos / Assuntos
+// Busca Otimizada por Nome / Sigla / Códigos / Estatutos / Apelidos / Assuntos
 // ============================================================================
 
 async function loadDynamicCatalog() {
@@ -1019,10 +1155,12 @@ async function loadDynamicCatalog() {
         if (/\/pages\//i.test(a.url)) continue;
         const cleanTitle = a.text.replace(/\bacessar\b/gi, '').replace(/\s+/g, ' ').trim();
         if (cleanTitle.length < 4) continue;
+        const aliasKey = normalizeAliasKey(cleanTitle);
         catalog.push({
           title: cleanTitle,
           normalizedTitle: normalizeTextForSearch(cleanTitle),
-          aliasKey: normalizeAliasKey(cleanTitle),
+          aliasKey,
+          tokens: extractSignificantTokens(aliasKey),
           url: a.url,
           category: src.category
         });
@@ -1036,39 +1174,67 @@ async function loadDynamicCatalog() {
 }
 
 /**
- * Distância de Damerau-Levenshtein (inserção, remoção, substituição e transposição).
+ * Distância de Damerau-Levenshtein com buffer plano de 3 linhas (zero alocações de matriz).
  */
+let dlRowPrev2 = new Int32Array(64);
+let dlRowPrev1 = new Int32Array(64);
+let dlRowCurr = new Int32Array(64);
+
 function damerauLevenshtein(a, b) {
   const lenA = a.length;
   const lenB = b.length;
   if (lenA === 0) return lenB;
   if (lenB === 0) return lenA;
 
-  const dp = Array.from({ length: lenA + 1 }, () => new Array(lenB + 1).fill(0));
-  for (let i = 0; i <= lenA; i++) dp[i][0] = i;
-  for (let j = 0; j <= lenB; j++) dp[0][j] = j;
+  if (lenB + 1 > dlRowCurr.length) {
+    const size = Math.max(lenB + 16, dlRowCurr.length * 2);
+    dlRowPrev2 = new Int32Array(size);
+    dlRowPrev1 = new Int32Array(size);
+    dlRowCurr = new Int32Array(size);
+  }
+
+  for (let j = 0; j <= lenB; j++) {
+    dlRowPrev1[j] = j;
+  }
 
   for (let i = 1; i <= lenA; i++) {
+    dlRowCurr[0] = i;
+    const chA = a.charCodeAt(i - 1);
+    const prevChA = i > 1 ? a.charCodeAt(i - 2) : -1;
+
     for (let j = 1; j <= lenB; j++) {
-      const cost = a[i - 1] === b[j - 1] ? 0 : 1;
-      dp[i][j] = Math.min(
-        dp[i - 1][j] + 1,
-        dp[i][j - 1] + 1,
-        dp[i - 1][j - 1] + cost
-      );
-      if (i > 1 && j > 1 && a[i - 1] === b[j - 2] && a[i - 2] === b[j - 1]) {
-        dp[i][j] = Math.min(dp[i][j], dp[i - 2][j - 2] + 1);
+      const chB = b.charCodeAt(j - 1);
+      const cost = chA === chB ? 0 : 1;
+
+      let val = dlRowPrev1[j] + 1;
+      const ins = dlRowCurr[j - 1] + 1;
+      const sub = dlRowPrev1[j - 1] + cost;
+      if (ins < val) val = ins;
+      if (sub < val) val = sub;
+
+      if (i > 1 && j > 1 && chA === b.charCodeAt(j - 2) && prevChA === chB) {
+        const trans = dlRowPrev2[j - 2] + 1;
+        if (trans < val) val = trans;
       }
+
+      dlRowCurr[j] = val;
     }
+
+    const tmp = dlRowPrev2;
+    dlRowPrev2 = dlRowPrev1;
+    dlRowPrev1 = dlRowCurr;
+    dlRowCurr = tmp;
   }
-  return dp[lenA][lenB];
+
+  return dlRowPrev1[lenB];
 }
 
 /**
- * Compara dois tokens individuais com tolerância calibrada a erros de digitação:
- * - Palavras curtas (<= 4 letras) exigem exatidão para evitar falsos positivos
- * - Palavras de 5 a 7 letras aceitam até 1 erro (ex.: "drgas" -> "drogas")
- * - Palavras com >= 8 letras aceitam até 2 erros
+ * Compara dois tokens individuais contemplando:
+ * - Match exato (1.0)
+ * - Prefixo a partir de 3 letras (ex.: "fgt" -> "fgts")
+ * - Substring interna (includes) a partir de 4 letras (ex.: "constitucional" -> "inconstitucionalidade")
+ * - Erros de digitação via Damerau-Levenshtein a partir de 5 letras (ex.: "drgas" -> "drogas")
  */
 function tokenMatchScore(qToken, tToken) {
   if (qToken === tToken) return 1.0;
@@ -1076,10 +1242,18 @@ function tokenMatchScore(qToken, tToken) {
   const maxLen = Math.max(qToken.length, tToken.length);
   const minLen = Math.min(qToken.length, tToken.length);
 
-  if (qToken.length >= 4 && tToken.startsWith(qToken)) {
-    return 0.88 * (qToken.length / tToken.length) + 0.1;
+  // 1) Prefixo a partir de 3 caracteres
+  if (qToken.length >= 3 && tToken.startsWith(qToken)) {
+    const base = qToken.length === 3 ? 0.84 : 0.88;
+    return base * (qToken.length / tToken.length) + 0.1;
   }
 
+  // 2) Substring interna (includes) a partir de 4 caracteres
+  if (qToken.length >= 4 && tToken.includes(qToken)) {
+    return 0.78 * (qToken.length / tToken.length) + 0.12;
+  }
+
+  // 3) Tolerância a erros de digitação (Damerau-Levenshtein)
   if (maxLen <= 4 || minLen < 4) return 0;
   if (Math.abs(qToken.length - tToken.length) > 2) return 0;
 
@@ -1093,42 +1267,49 @@ function tokenMatchScore(qToken, tToken) {
   return 0;
 }
 
+function getCachedTokenScore(qToken, tToken, tokenScoreCache) {
+  if (qToken === tToken) return 1.0;
+  if (!tokenScoreCache) return tokenMatchScore(qToken, tToken);
+
+  let inner = tokenScoreCache.get(qToken);
+  if (!inner) {
+    inner = new Map();
+    tokenScoreCache.set(qToken, inner);
+  }
+  let cached = inner.get(tToken);
+  if (cached === undefined) {
+    cached = tokenMatchScore(qToken, tToken);
+    inner.set(tToken, cached);
+  }
+  return cached;
+}
+
 /**
- * Calcula a proximidade e similaridade entre a pesquisa e um alias/título:
- * - Combina qualidade dos tokens, cobertura dos termos, proximidade de comprimento
- *   e bônus quando a pesquisa coincide com o início do alias.
+ * Calcula similaridade usando strings e tokens já pré-normalizados (sem RegEx).
  */
-function similarityScore(queryRaw, targetRaw) {
-  const queryNorm = normalizeAliasKey(queryRaw);
-  const targetNorm = normalizeAliasKey(targetRaw);
+function similarityScorePrecomputed(queryNorm, qTokens, targetNorm, tTokens, tokenScoreCache = null) {
   if (!queryNorm || !targetNorm) return 0;
   if (queryNorm === targetNorm) return 1.0;
-
-  const rawQTokens = queryNorm.split(/\s+/).filter(Boolean);
-  const rawTTokens = targetNorm.split(/\s+/).filter(Boolean);
-
-  const qFiltered = rawQTokens.filter((t) => !STOPWORDS.has(t));
-  const tFiltered = rawTTokens.filter((t) => !STOPWORDS.has(t));
-
-  const qTokens = qFiltered.length > 0 ? qFiltered : rawQTokens;
-  const tTokens = tFiltered.length > 0 ? tFiltered : rawTTokens;
-
   if (qTokens.length === 0 || tTokens.length === 0) return 0;
 
   let matchedSum = 0;
   let matchedCount = 0;
   let firstMatchIndex = Infinity;
 
-  for (const qt of qTokens) {
+  for (let qi = 0; qi < qTokens.length; qi++) {
+    const qt = qTokens[qi];
     let bestTokenScore = 0;
     let bestIdx = Infinity;
-    for (let i = 0; i < tTokens.length; i++) {
-      const s = tokenMatchScore(qt, tTokens[i]);
+
+    for (let ti = 0; ti < tTokens.length; ti++) {
+      const s = getCachedTokenScore(qt, tTokens[ti], tokenScoreCache);
       if (s > bestTokenScore) {
         bestTokenScore = s;
-        bestIdx = i;
+        bestIdx = ti;
+        if (s === 1.0) break;
       }
     }
+
     if (bestTokenScore > 0) {
       matchedSum += bestTokenScore;
       matchedCount += 1;
@@ -1152,9 +1333,74 @@ function similarityScore(queryRaw, targetRaw) {
     return Math.min(0.99, rawScore);
   }
 
-  const unionSize = new Set([...qTokens, ...tTokens]).size;
+  let unionSize = tTokens.length;
+  for (let qi = 0; qi < qTokens.length; qi++) {
+    if (!tTokens.includes(qTokens[qi])) unionSize += 1;
+  }
   const partialScore = ((matchedSum / unionSize) * 0.80) + (0.05 * lengthProximity) + (startsWithBonus * 0.5);
   return Math.min(0.89, partialScore);
+}
+
+function similarityScore(queryRaw, targetRaw) {
+  const queryNorm = normalizeAliasKey(queryRaw);
+  const targetNorm = normalizeAliasKey(targetRaw);
+  return similarityScorePrecomputed(
+    queryNorm,
+    extractSignificantTokens(queryNorm),
+    targetNorm,
+    extractSignificantTokens(targetNorm)
+  );
+}
+
+/**
+ * Seleciona os índices candidatos em assuntosIndexCache usando o índice invertido:
+ * - Palavra inteira exata em O(1)
+ * - Prefixo a partir de 3 letras
+ * - Substring (includes) ou erro de digitação a partir de 4 letras
+ */
+function findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache) {
+  const candidateSet = new Set();
+  const vocab = assuntosIdx.vocabulary;
+
+  for (let qi = 0; qi < qTokens.length; qi++) {
+    const qt = qTokens[qi];
+
+    // 1) Match exato no vocabulário em O(1)
+    const exactList = assuntosIdx.invertedIndex.get(qt);
+    if (exactList) {
+      for (let i = 0; i < exactList.length; i++) {
+        candidateSet.add(exactList[i]);
+      }
+    }
+
+    // 2) Prefixo (>= 3 letras), substring interna (>= 4 letras) ou erro de digitação
+    if (qt.length >= 3) {
+      for (let vi = 0; vi < vocab.length; vi++) {
+        const vt = vocab[vi];
+        if (vt === qt) continue;
+
+        const isPrefix = vt.startsWith(qt);
+        if (!isPrefix) {
+          if (qt.length < 4) continue;
+          const isSubstring = vt.includes(qt);
+          const isPossibleTypo = vt.length >= 4 && Math.abs(vt.length - qt.length) <= 2;
+          if (!isSubstring && !isPossibleTypo) continue;
+        }
+
+        const score = getCachedTokenScore(qt, vt, tokenScoreCache);
+        if (score > 0) {
+          const list = assuntosIdx.invertedIndex.get(vt);
+          if (list) {
+            for (let i = 0; i < list.length; i++) {
+              candidateSet.add(list[i]);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return candidateSet;
 }
 
 async function resolveCatalogEntry(entry) {
@@ -1213,9 +1459,14 @@ function formatAssuntoPendingItem(assunto) {
 
 async function resolveByName(parsedQuery) {
   const qAliasKey = parsedQuery.aliasKey || normalizeAliasKey(parsedQuery.query);
+  const qTokens = extractSignificantTokens(qAliasKey);
+
+  const [normasIdx, dynamicCatalog, assuntosIdx] = await Promise.all([
+    getNormasIndex(),
+    loadDynamicCatalog(),
+    getAssuntosIndex()
+  ]);
   const knownNorms = await loadNormas();
-  const dynamicCatalog = await loadDynamicCatalog();
-  const assuntos = await loadAssuntos();
   const codigosFallback = new URL(INDEX_PAGES.codigos, BASE_URL).href;
 
   // 1) Termos genéricos ("código", "estatuto")
@@ -1247,16 +1498,12 @@ async function resolveByName(parsedQuery) {
     };
   }
 
-  // 2) Match exato em siglas/apelidos de normas.json
-  for (const norm of knownNorms) {
-    const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
-    const exactAlias = aliases.some((al) => normalizeAliasKey(al) === qAliasKey);
-    const exactTitle = normalizeAliasKey(norm.title) === qAliasKey;
-    if (exactAlias || exactTitle) {
-      const resolved = await resolveCatalogEntry(norm);
-      if (resolved) {
-        return { status: 'found', result: resolved, fallbackUrl: codigosFallback };
-      }
+  // 2) Match exato em O(1) nas siglas/apelidos de normas.json
+  const exactNormHits = normasIdx.exactMap.get(qAliasKey);
+  if (exactNormHits && exactNormHits.length > 0) {
+    const resolved = await resolveCatalogEntry(exactNormHits[0]);
+    if (resolved) {
+      return { status: 'found', result: resolved, fallbackUrl: codigosFallback };
     }
   }
 
@@ -1270,11 +1517,8 @@ async function resolveByName(parsedQuery) {
     };
   }
 
-  // 4) Match exato nas listas de "alias" de assuntos.json (hífen/espaço equivalentes)
-  const exactAssuntos = assuntos.filter((assunto) => {
-    const aliases = Array.isArray(assunto.alias) ? assunto.alias : [];
-    return aliases.some((al) => normalizeAliasKey(al) === qAliasKey);
-  });
+  // 4) Match exato em O(1) nas listas de "alias" de assuntos.json
+  const exactAssuntos = assuntosIdx.exactMap.get(qAliasKey) || [];
 
   if (exactAssuntos.length === 1) {
     const resolvedAssunto = await resolveAssuntoEntry(exactAssuntos[0]);
@@ -1297,22 +1541,23 @@ async function resolveByName(parsedQuery) {
     };
   }
 
-  // 5) Busca por similaridade calibrada combinando normas.json, portal e assuntos.json
-  const MIN_SIMILARITY = 0.52;
+  // 5) Busca por similaridade acelerada por índice invertido e cache de tokens
+  const MIN_SIMILARITY = 0.50;
+  const tokenScoreCache = new Map();
   const scored = [];
 
-  for (const norm of knownNorms) {
-    const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
-    const titleScore = similarityScore(qAliasKey, norm.title);
+  for (let i = 0; i < normasIdx.entries.length; i++) {
+    const entry = normasIdx.entries[i];
+    const titleScore = similarityScorePrecomputed(qAliasKey, qTokens, entry.titleNorm, entry.titleTokens, tokenScoreCache);
     let bestScore = titleScore;
-    let bestLabelLen = normalizeAliasKey(norm.title).length;
+    let bestLabelLen = entry.titleNorm.length;
 
-    for (const al of aliases) {
-      const s = similarityScore(qAliasKey, al);
-      const len = normalizeAliasKey(al).length;
-      if (s > bestScore || (s === bestScore && len < bestLabelLen)) {
+    for (let j = 0; j < entry.aliases.length; j++) {
+      const al = entry.aliases[j];
+      const s = similarityScorePrecomputed(qAliasKey, qTokens, al.norm, al.tokens, tokenScoreCache);
+      if (s > bestScore || (s === bestScore && al.norm.length < bestLabelLen)) {
         bestScore = s;
-        bestLabelLen = len;
+        bestLabelLen = al.norm.length;
       }
     }
 
@@ -1322,36 +1567,38 @@ async function resolveByName(parsedQuery) {
         topicScore: titleScore,
         labelLength: bestLabelLen,
         kind: 'norm',
-        item: norm
+        item: entry.norm
       });
     }
   }
 
-  for (const dyn of dynamicCatalog) {
-    const s = similarityScore(qAliasKey, dyn.title);
+  for (let i = 0; i < dynamicCatalog.length; i++) {
+    const dyn = dynamicCatalog[i];
+    const s = similarityScorePrecomputed(qAliasKey, qTokens, dyn.aliasKey, dyn.tokens, tokenScoreCache);
     if (s >= MIN_SIMILARITY) {
       scored.push({
         score: s,
         topicScore: s,
-        labelLength: normalizeAliasKey(dyn.title).length,
+        labelLength: dyn.aliasKey.length,
         kind: 'norm',
         item: dyn
       });
     }
   }
 
-  for (const assunto of assuntos) {
-    const aliases = Array.isArray(assunto.alias) ? assunto.alias : [];
-    const topicScore = similarityScore(qAliasKey, assunto.topico || '');
+  const candidateIndices = findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache);
+  for (const idx of candidateIndices) {
+    const entry = assuntosIdx.entries[idx];
+    const topicScore = similarityScorePrecomputed(qAliasKey, qTokens, entry.topicoNorm, entry.topicoTokens, tokenScoreCache);
     let bestScore = topicScore;
-    let bestLabelLen = normalizeAliasKey(assunto.topico || '').length || Infinity;
+    let bestLabelLen = entry.topicoNorm.length || Infinity;
 
-    for (const al of aliases) {
-      const s = similarityScore(qAliasKey, al);
-      const len = normalizeAliasKey(al).length;
-      if (s > bestScore || (s === bestScore && len < bestLabelLen)) {
+    for (let j = 0; j < entry.aliases.length; j++) {
+      const al = entry.aliases[j];
+      const s = similarityScorePrecomputed(qAliasKey, qTokens, al.norm, al.tokens, tokenScoreCache);
+      if (s > bestScore || (s === bestScore && al.norm.length < bestLabelLen)) {
         bestScore = s;
-        bestLabelLen = len;
+        bestLabelLen = al.norm.length;
       }
     }
 
@@ -1361,7 +1608,7 @@ async function resolveByName(parsedQuery) {
         topicScore,
         labelLength: bestLabelLen,
         kind: 'assunto',
-        item: assunto
+        item: entry.assunto
       });
     }
   }
@@ -1374,7 +1621,8 @@ async function resolveByName(parsedQuery) {
 
   const topCandidates = [];
   const seenKeys = new Set();
-  for (const entry of scored) {
+  for (let i = 0; i < scored.length; i++) {
+    const entry = scored[i];
     const key = entry.kind === 'assunto'
       ? `assunto_${entry.item.id ?? entry.item.topico}_${entry.item.lei}_${entry.item.artigo}`
       : `norm_${normalizeAliasKey(entry.item.title)}`;
@@ -1506,59 +1754,59 @@ export async function resolvePendingCatalogItem(item) {
 }
 
 // ============================================================================
-// Sugestões em Tempo Real para a Omnibox (Normas + Assuntos)
-// ============================================================================
-
-// ============================================================================
-// Sugestões em Tempo Real para a Omnibox (Normas + Assuntos)
+// Sugestões Rápidas para a Omnibox (Normas + Assuntos via Índice)
 // ============================================================================
 
 export async function getOmniboxSuggestions(rawInput, limit = 8) {
   const qAliasKey = normalizeAliasKey(rawInput);
   if (!qAliasKey || qAliasKey.length < 2) return [];
 
-  const [knownNorms, assuntos] = await Promise.all([loadNormas(), loadAssuntos()]);
+  const qTokens = extractSignificantTokens(qAliasKey);
+  const [normasIdx, assuntosIdx] = await Promise.all([getNormasIndex(), getAssuntosIndex()]);
+  const tokenScoreCache = new Map();
+
   const exactMatches = [];
   const candidates = [];
 
   // 1) Normas conhecidas (normas.json)
-  for (const norm of knownNorms) {
-    const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
-    const titleNorm = normalizeAliasKey(norm.title);
-    const isExactTitle = titleNorm === qAliasKey;
-    const exactAliasFound = aliases.find((al) => normalizeAliasKey(al) === qAliasKey);
+  for (let i = 0; i < normasIdx.entries.length; i++) {
+    const entry = normasIdx.entries[i];
+    const norm = entry.norm;
+    const isExactTitle = entry.titleNorm === qAliasKey;
+    const exactAliasObj = entry.aliases.find((al) => al.norm === qAliasKey);
 
-    if (isExactTitle || exactAliasFound) {
+    if (isExactTitle || exactAliasObj) {
+      const content = exactAliasObj ? exactAliasObj.raw : norm.title;
       exactMatches.push({
         score: 1.0,
-        labelLength: normalizeAliasKey(exactAliasFound || norm.title).length,
-        content: exactAliasFound || norm.title,
+        labelLength: (exactAliasObj ? exactAliasObj.norm : entry.titleNorm).length,
+        content,
         title: norm.title,
         tag: norm.category || 'Norma'
       });
       continue;
     }
 
-    let bestScore = titleNorm.includes(qAliasKey)
-      ? Math.max(0.65, similarityScore(qAliasKey, norm.title))
-      : similarityScore(qAliasKey, norm.title);
-    let bestContent = aliases[0] || norm.title;
+    let bestScore = entry.titleNorm.includes(qAliasKey)
+      ? Math.max(0.65, similarityScorePrecomputed(qAliasKey, qTokens, entry.titleNorm, entry.titleTokens, tokenScoreCache))
+      : similarityScorePrecomputed(qAliasKey, qTokens, entry.titleNorm, entry.titleTokens, tokenScoreCache);
+    let bestContent = entry.aliases[0]?.raw || norm.title;
 
-    for (const al of aliases) {
-      const alNorm = normalizeAliasKey(al);
-      let s = similarityScore(qAliasKey, al);
-      if (alNorm.startsWith(qAliasKey)) {
+    for (let j = 0; j < entry.aliases.length; j++) {
+      const al = entry.aliases[j];
+      let s = similarityScorePrecomputed(qAliasKey, qTokens, al.norm, al.tokens, tokenScoreCache);
+      if (al.norm.startsWith(qAliasKey)) {
         s = Math.max(s, 0.85);
-      } else if (alNorm.includes(qAliasKey)) {
+      } else if (al.norm.includes(qAliasKey)) {
         s = Math.max(s, 0.68);
       }
       if (s > bestScore) {
         bestScore = s;
-        bestContent = al;
+        bestContent = al.raw;
       }
     }
 
-    if (bestScore >= 0.50) {
+    if (bestScore >= 0.48) {
       candidates.push({
         score: bestScore,
         labelLength: normalizeAliasKey(bestContent).length,
@@ -1569,51 +1817,66 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
     }
   }
 
-  // 2) Assuntos jurídicos (assuntos.json)
-  for (const assunto of assuntos) {
-    const aliases = Array.isArray(assunto.alias) ? assunto.alias : [];
-    const topico = assunto.topico || '';
-    const topicoNorm = normalizeAliasKey(topico);
+  // 2) Matches exatos em O(1) em assuntos.json
+  const exactAssuntoSet = new Set();
+  const exactAssuntosList = assuntosIdx.exactMap.get(qAliasKey) || [];
+  for (let i = 0; i < exactAssuntosList.length; i++) {
+    const assunto = exactAssuntosList[i];
+    exactAssuntoSet.add(assunto);
+    const artInfo = assunto.artigo ? `, Art. ${assunto.artigo}` : '';
+    const tag = `${assunto.lei}${artInfo}`;
+    const matchedRaw = (Array.isArray(assunto.alias)
+      ? assunto.alias.find((al) => normalizeAliasKey(al) === qAliasKey)
+      : null) || assunto.topico || qAliasKey;
+
+    exactMatches.push({
+      score: 1.0,
+      labelLength: qAliasKey.length,
+      content: matchedRaw,
+      title: `${assunto.topico || ''} — ${matchedRaw}`,
+      tag
+    });
+  }
+
+  // 3) Candidatos de assuntos filtrados pelo índice invertido (exato, prefixo, includes e typos)
+  const candidateIndices = findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache);
+  for (const idx of candidateIndices) {
+    const entry = assuntosIdx.entries[idx];
+    const assunto = entry.assunto;
+    if (exactAssuntoSet.has(assunto)) continue;
+
     const artInfo = assunto.artigo ? `, Art. ${assunto.artigo}` : '';
     const tag = `${assunto.lei}${artInfo}`;
 
-    const exactAliasFound = aliases.find((al) => normalizeAliasKey(al) === qAliasKey);
-    if (exactAliasFound) {
-      exactMatches.push({
-        score: 1.0,
-        labelLength: normalizeAliasKey(exactAliasFound).length,
-        content: exactAliasFound,
-        title: `${topico} — ${exactAliasFound}`,
-        tag
-      });
-      continue;
-    }
+    let bestScore = entry.topicoNorm.startsWith(qAliasKey)
+      ? Math.max(0.82, similarityScorePrecomputed(qAliasKey, qTokens, entry.topicoNorm, entry.topicoTokens, tokenScoreCache))
+      : (entry.topicoNorm.includes(qAliasKey)
+        ? Math.max(0.64, similarityScorePrecomputed(qAliasKey, qTokens, entry.topicoNorm, entry.topicoTokens, tokenScoreCache))
+        : similarityScorePrecomputed(qAliasKey, qTokens, entry.topicoNorm, entry.topicoTokens, tokenScoreCache));
+    let matchedAlias = entry.aliases[0]?.raw || entry.topico;
+    let matchedAliasLen = entry.aliases[0]?.norm.length || entry.topicoNorm.length;
 
-    let bestScore = topicoNorm.startsWith(qAliasKey)
-      ? Math.max(0.82, similarityScore(qAliasKey, topico))
-      : (topicoNorm.includes(qAliasKey) ? Math.max(0.64, similarityScore(qAliasKey, topico)) : similarityScore(qAliasKey, topico));
-    let matchedAlias = aliases[0] || topico;
-
-    for (const al of aliases) {
-      const alNorm = normalizeAliasKey(al);
-      let s = similarityScore(qAliasKey, al);
-      if (alNorm.startsWith(qAliasKey)) {
+    for (let j = 0; j < entry.aliases.length; j++) {
+      const al = entry.aliases[j];
+      let s = similarityScorePrecomputed(qAliasKey, qTokens, al.norm, al.tokens, tokenScoreCache);
+      if (al.norm.startsWith(qAliasKey)) {
         s = Math.max(s, 0.86);
-      } else if (alNorm.includes(qAliasKey)) {
+      } else if (al.norm.includes(qAliasKey)) {
         s = Math.max(s, 0.70);
       }
-      if (s > bestScore) {
+      if (s > bestScore || (s === bestScore && al.norm.length < matchedAliasLen)) {
         bestScore = s;
-        matchedAlias = al;
+        matchedAlias = al.raw;
+        matchedAliasLen = al.norm.length;
       }
     }
 
-    if (bestScore >= 0.50) {
+    if (bestScore >= 0.48) {
       candidates.push({
         score: bestScore,
-        labelLength: normalizeAliasKey(matchedAlias).length,
+        labelLength: matchedAliasLen,
         content: matchedAlias,
-        title: `${topico} — ${matchedAlias}`,
+        title: `${entry.topico} — ${matchedAlias}`,
         tag
       });
     }
@@ -1622,7 +1885,8 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
   // Se houver resultado idêntico único, retorna apenas ele sem listar outras opções
   const uniqueExact = [];
   const seenExact = new Set();
-  for (const item of exactMatches) {
+  for (let i = 0; i < exactMatches.length; i++) {
+    const item = exactMatches[i];
     const key = `${normalizeAliasKey(item.title)}|${item.tag}`;
     if (seenExact.has(key)) continue;
     seenExact.add(key);
@@ -1633,7 +1897,7 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
     return [uniqueExact[0]];
   }
 
-  const allPool = [...uniqueExact, ...candidates];
+  const allPool = uniqueExact.length > 0 ? [...uniqueExact, ...candidates] : candidates;
   allPool.sort((a, b) => {
     if (Math.abs(b.score - a.score) > 1e-6) return b.score - a.score;
     return a.labelLength - b.labelLength;
@@ -1641,7 +1905,8 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
 
   const unique = [];
   const seen = new Set();
-  for (const item of allPool) {
+  for (let i = 0; i < allPool.length; i++) {
+    const item = allPool[i];
     const key = `${normalizeAliasKey(item.title)}|${item.tag}`;
     if (seen.has(key)) continue;
     seen.add(key);
