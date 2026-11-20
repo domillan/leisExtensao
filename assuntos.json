@@ -1,0 +1,7462 @@
+[
+  {
+    "id": 1,
+    "topico": "Fundamentos da República Federativa do Brasil",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "1",
+    "alias": [
+      "fundamentos da república",
+      "fundamentos constitucionais",
+      "soberania",
+      "cidadania",
+      "dignidade da pessoa humana",
+      "valores sociais do trabalho",
+      "pluralismo político"
+    ]
+  },
+  {
+    "id": 2,
+    "topico": "Separação dos Poderes",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "2",
+    "alias": [
+      "poderes da união",
+      "poder executivo legislativo judiciário",
+      "freios e contrapesos",
+      "checks and balances"
+    ]
+  },
+  {
+    "id": 3,
+    "topico": "Direitos e deveres individuais e coletivos",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5",
+    "alias": [
+      "direitos fundamentais",
+      "garantias fundamentais",
+      "direitos individuais",
+      "direitos coletivos",
+      "cláusulas pétreas",
+      "artigo 5 da cf",
+      "rol de direitos fundamentais",
+      "igualdade",
+      "liberdade de expressão",
+      "legalidade",
+      "devido processo legal"
+    ]
+  },
+  {
+    "id": 4,
+    "topico": "Controle de constitucionalidade",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "97/103",
+    "alias": [
+      "controle de constitucionalidade",
+      "reserva de plenário",
+      "cláusula de reserva de plenário",
+      "adi",
+      "adc",
+      "ado",
+      "adpf",
+      "controle difuso",
+      "controle concentrado",
+      "súmula vinculante 10",
+      "inconstitucionalidade",
+      "modulação de efeitos",
+      "ação direta"
+    ]
+  },
+  {
+    "id": 5,
+    "topico": "Remédios constitucionais: habeas corpus, mandado de segurança, mandado de injunção, habeas data e ação popular",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5",
+    "alias": [
+      "remédios constitucionais",
+      "garantias constitucionais",
+      "ações constitucionais",
+      "habeas corpus constitucional",
+      "mandado de segurança constitucional",
+      "mandado de injunção constitucional",
+      "habeas data constitucional",
+      "ação popular constitucional",
+      "artigo 5 lxviii a lxxiii"
+    ]
+  },
+  {
+    "id": 6,
+    "topico": "Garantias constitucionais do processo: devido processo legal, contraditório, ampla defesa e juiz natural",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5",
+    "alias": [
+      "devido processo legal",
+      "contraditório e ampla defesa",
+      "juiz natural",
+      "vedação de prova ilícita",
+      "presunção de inocência",
+      "não culpabilidade",
+      "duração razoável do processo",
+      "inafastabilidade da jurisdição",
+      "acesso à justiça"
+    ]
+  },
+  {
+    "id": 7,
+    "topico": "Vigência, aplicação e interpretação das normas jurídicas",
+    "lei": "Lei de Introdução às Normas do Direito Brasileiro (Decreto-Lei nº 4.657/1942)",
+    "artigo": "1/6",
+    "alias": [
+      "vigência da lei",
+      "vacatio legis",
+      "publicação da lei",
+      "revogação",
+      "aplicação da lei no tempo",
+      "interpretação das normas"
+    ]
+  },
+  {
+    "id": 8,
+    "topico": "Direito intertemporal e direito adquirido",
+    "lei": "Lei de Introdução às Normas do Direito Brasileiro (Decreto-Lei nº 4.657/1942)",
+    "artigo": "6",
+    "alias": [
+      "direito intertemporal",
+      "direito adquirido",
+      "ato jurídico perfeito",
+      "coisa julgada",
+      "irretroatividade"
+    ]
+  },
+  {
+    "id": 9,
+    "topico": "Aplicação da lei no espaço e direito internacional privado",
+    "lei": "Lei de Introdução às Normas do Direito Brasileiro (Decreto-Lei nº 4.657/1942)",
+    "artigo": "7/19",
+    "alias": [
+      "direito internacional privado",
+      "conflito de leis no espaço",
+      "domicílio",
+      "lei aplicável",
+      "sentença estrangeira"
+    ]
+  },
+  {
+    "id": 10,
+    "topico": "Direitos sociais",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "6/11",
+    "alias": [
+      "direitos sociais",
+      "direito à saúde",
+      "educação",
+      "moradia",
+      "trabalho",
+      "lazer",
+      "segurança social"
+    ]
+  },
+  {
+    "id": 11,
+    "topico": "Direitos dos trabalhadores urbanos e rurais",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "7",
+    "alias": [
+      "direitos trabalhistas constitucionais",
+      "direitos dos trabalhadores",
+      "fgts",
+      "jornada constitucional",
+      "adicional noturno"
+    ]
+  },
+  {
+    "id": 12,
+    "topico": "Administração Pública: princípios e regras gerais",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "37/38",
+    "alias": [
+      "administração pública",
+      "princípios administrativos",
+      "legalidade impessoalidade moralidade publicidade eficiência",
+      "concurso público",
+      "acumulação de cargos",
+      "artigo 37",
+      "limpe",
+      "teto remuneratório",
+      "improbidade constitucional",
+      "responsabilidade objetiva do estado"
+    ]
+  },
+  {
+    "id": 13,
+    "topico": "Sistema Tributário Nacional",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "145/162",
+    "alias": [
+      "sistema tributário nacional",
+      "tributos",
+      "sistema tributário",
+      "competência tributária"
+    ]
+  },
+  {
+    "id": 14,
+    "topico": "Limitações constitucionais ao poder de tributar",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "150/152",
+    "alias": [
+      "limitações ao poder de tributar",
+      "princípios tributários",
+      "anterioridade",
+      "legalidade tributária",
+      "isonomia tributária",
+      "vedação ao confisco"
+    ]
+  },
+  {
+    "id": 15,
+    "topico": "Imunidades tributárias",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "150",
+    "alias": [
+      "imunidade tributária",
+      "imunidade recíproca",
+      "imunidade religiosa",
+      "imunidade de livros",
+      "imunidade de partidos"
+    ]
+  },
+  {
+    "id": 16,
+    "topico": "Princípios do Direito Administrativo",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "37",
+    "alias": [
+      "princípios administrativos",
+      "limpe",
+      "legalidade administrativa",
+      "impessoalidade",
+      "moralidade",
+      "publicidade",
+      "eficiência"
+    ]
+  },
+  {
+    "id": 17,
+    "topico": "Responsabilidade civil do Estado",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "37",
+    "alias": [
+      "responsabilidade civil do estado",
+      "responsabilidade objetiva",
+      "risco administrativo",
+      "omissão estatal",
+      "regresso contra agente público"
+    ]
+  },
+  {
+    "id": 18,
+    "topico": "Inviolabilidade do domicílio, sigilo das comunicações e proteção de dados constitucional",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5",
+    "alias": [
+      "inviolabilidade do domicílio",
+      "casa asilo inviolável",
+      "sigilo telefônico",
+      "sigilo de dados",
+      "sigilo bancário e fiscal",
+      "proteção de dados pessoais constitucional",
+      "artigo 5 xi xii lxxix"
+    ]
+  },
+  {
+    "id": 19,
+    "topico": "Direito constitucional de propriedade, função social e desapropriação",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5",
+    "alias": [
+      "direito de propriedade constitucional",
+      "função social da propriedade",
+      "desapropriação constitucional",
+      "justa e prévia indenização",
+      "requisição administrativa",
+      "pequena propriedade rural impenhorável",
+      "artigo 5 xxii a xxvi"
+    ]
+  },
+  {
+    "id": 20,
+    "topico": "Tribunal do Júri na Constituição: soberania dos veredictos, plenitude de defesa e sigilo das votações",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5",
+    "alias": [
+      "júri constitucional",
+      "soberania dos veredictos",
+      "plenitude de defesa",
+      "sigilo das votações",
+      "competência constitucional do júri",
+      "artigo 5 xxxviii"
+    ]
+  },
+  {
+    "id": 21,
+    "topico": "Assistência jurídica integral e gratuita constitucional",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5",
+    "alias": [
+      "assistência jurídica gratuita",
+      "justiça gratuita constitucional",
+      "insuficiência de recursos",
+      "artigo 5 lxxiv"
+    ]
+  },
+  {
+    "id": 22,
+    "topico": "Poder Judiciário: estrutura e garantias",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "92/100",
+    "alias": [
+      "poder judiciário",
+      "organização judiciária",
+      "magistratura",
+      "garantias da magistratura",
+      "quinto constitucional",
+      "precatórios"
+    ]
+  },
+  {
+    "id": 23,
+    "topico": "Supremo Tribunal Federal",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "101/103-A",
+    "alias": [
+      "stf",
+      "supremo tribunal federal",
+      "competência originária",
+      "recurso extraordinário",
+      "controle concentrado",
+      "adi",
+      "adc",
+      "adpf",
+      "súmula vinculante",
+      "reclamação constitucional"
+    ]
+  },
+  {
+    "id": 24,
+    "topico": "Superior Tribunal de Justiça",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "104/105",
+    "alias": [
+      "stj",
+      "superior tribunal de justiça",
+      "recurso especial",
+      "competência do stj",
+      "resp",
+      "uniformização da legislação federal",
+      "conflito de competência stj",
+      "habeas corpus stj"
+    ]
+  },
+  {
+    "id": 25,
+    "topico": "Funções essenciais à Justiça",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "127/135",
+    "alias": [
+      "ministério público",
+      "advocacia pública",
+      "defensoria pública",
+      "advocacia",
+      "funções essenciais"
+    ]
+  },
+  {
+    "id": 26,
+    "topico": "Ordem econômica e financeira",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "170/192",
+    "alias": [
+      "ordem econômica",
+      "livre iniciativa",
+      "livre concorrência",
+      "intervenção do estado na economia",
+      "sistema financeiro nacional"
+    ]
+  },
+  {
+    "id": 27,
+    "topico": "Ordem social",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "193/232",
+    "alias": [
+      "ordem social",
+      "seguridade social",
+      "saúde",
+      "previdência",
+      "assistência social",
+      "educação",
+      "cultura",
+      "meio ambiente",
+      "família"
+    ]
+  },
+  {
+    "id": 28,
+    "topico": "Competência material da Justiça do Trabalho",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "114",
+    "alias": [
+      "competência da justiça do trabalho",
+      "competência trabalhista",
+      "relação de trabalho"
+    ]
+  },
+  {
+    "id": 29,
+    "topico": "Reforma Tributária do Consumo: IBS, CBS e Imposto Seletivo",
+    "lei": "Constituição Federal de 1988 (redação da EC nº 132/2023)",
+    "artigo": "153/156-B",
+    "alias": [
+      "reforma tributária",
+      "ibs",
+      "cbs",
+      "imposto seletivo",
+      "iva dual",
+      "tributação do consumo"
+    ]
+  },
+  {
+    "id": 30,
+    "topico": "Transição da Reforma Tributária",
+    "lei": "ADCT da Constituição Federal (incluído pela EC nº 132/2023)",
+    "artigo": "125/133",
+    "alias": [
+      "transição tributária",
+      "período de transição da reforma",
+      "extinção de icms e iss",
+      "transição ibs cbs"
+    ]
+  },
+  {
+    "id": 31,
+    "topico": "Seguridade social: saúde, previdência e assistência",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "194/204",
+    "alias": [
+      "seguridade social",
+      "saúde previdência assistência",
+      "tripé da seguridade social"
+    ]
+  },
+  {
+    "id": 32,
+    "topico": "Normas fundamentais do processo civil",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1/12",
+    "alias": [
+      "normas fundamentais",
+      "princípios do processo civil",
+      "contraditório",
+      "cooperação",
+      "boa-fé processual",
+      "primazia do mérito",
+      "cpc 2015",
+      "artigo 1 a 12 cpc",
+      "vedação à decisão surpresa",
+      "duração razoável do processo",
+      "ordem cronológica"
+    ]
+  },
+  {
+    "id": 33,
+    "topico": "Jurisdição, ação e condições para exercício da ação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "16/20",
+    "alias": [
+      "jurisdição",
+      "ação",
+      "interesse de agir",
+      "legitimidade",
+      "direito de ação"
+    ]
+  },
+  {
+    "id": 34,
+    "topico": "Competência: regras gerais e modificação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "42/69",
+    "alias": [
+      "competência",
+      "competência absoluta",
+      "competência relativa",
+      "conexão",
+      "continência",
+      "foro de eleição",
+      "conflito de competência"
+    ]
+  },
+  {
+    "id": 35,
+    "topico": "Tutela provisória: urgência e evidência",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "294/311",
+    "alias": [
+      "tutela provisória",
+      "tutela de urgência",
+      "tutela antecipada",
+      "tutela cautelar",
+      "tutela de evidência",
+      "liminar",
+      "tutela antecipada antecedente",
+      "estabilização da tutela",
+      "tutela cautelar antecedente",
+      "fumus boni iuris",
+      "periculum in mora",
+      "probabilidade do direito"
+    ]
+  },
+  {
+    "id": 36,
+    "topico": "Petição inicial e seus requisitos",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "319/321",
+    "alias": [
+      "petição inicial",
+      "requisitos da inicial",
+      "emenda da inicial",
+      "inépcia da inicial",
+      "indeferimento da petição inicial",
+      "pedido certo e determinado",
+      "pedido genérico",
+      "cumulação de pedidos",
+      "causa de pedir",
+      "emenda à inicial"
+    ]
+  },
+  {
+    "id": 37,
+    "topico": "Contestação e reconvenção",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "335/343",
+    "alias": [
+      "contestação",
+      "reconvenção",
+      "defesa do réu",
+      "preliminares de contestação",
+      "preliminares",
+      "impugnação específica",
+      "prejudicial de mérito",
+      "reconvenção cpc"
+    ]
+  },
+  {
+    "id": 38,
+    "topico": "Teoria geral das provas",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "369/380",
+    "alias": [
+      "provas",
+      "direito probatório",
+      "ônus da prova",
+      "prova ilícita",
+      "prova emprestada",
+      "distribuição dinâmica do ônus da prova",
+      "inversão do ônus da prova cpc",
+      "ata notarial",
+      "prova digital"
+    ]
+  },
+  {
+    "id": 39,
+    "topico": "Sentença e decisões judiciais",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "485/495",
+    "alias": [
+      "sentença",
+      "extinção sem resolução do mérito",
+      "resolução do mérito",
+      "fundamentação da sentença",
+      "congruência",
+      "artigo 485 cpc",
+      "artigo 487 cpc",
+      "artigo 489 cpc",
+      "fundamentação analítica",
+      "coisa julgada"
+    ]
+  },
+  {
+    "id": 40,
+    "topico": "Coisa julgada",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "502/508",
+    "alias": [
+      "coisa julgada",
+      "coisa julgada material",
+      "coisa julgada formal",
+      "limites objetivos e subjetivos"
+    ]
+  },
+  {
+    "id": 41,
+    "topico": "Cumprimento de sentença",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "513/538",
+    "alias": [
+      "cumprimento de sentença",
+      "execução de título judicial",
+      "impugnação ao cumprimento de sentença",
+      "cumprimento definitivo",
+      "cumprimento provisório",
+      "intimação para pagamento",
+      "multa de 10 por cento"
+    ]
+  },
+  {
+    "id": 42,
+    "topico": "Cumprimento de sentença de obrigação de pagar quantia",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "523/527",
+    "alias": [
+      "cumprimento de sentença por quantia",
+      "multa do artigo 523",
+      "honorários no cumprimento"
+    ]
+  },
+  {
+    "id": 43,
+    "topico": "Cumprimento de sentença contra a Fazenda Pública",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "534/535",
+    "alias": [
+      "cumprimento contra fazenda pública",
+      "execução contra fazenda",
+      "impugnação da fazenda pública"
+    ]
+  },
+  {
+    "id": 44,
+    "topico": "Cumprimento de sentença de alimentos",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "528/533",
+    "alias": [
+      "execução de alimentos",
+      "prisão civil por alimentos",
+      "desconto em folha de alimentos"
+    ]
+  },
+  {
+    "id": 45,
+    "topico": "Execução de título extrajudicial",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "824/909",
+    "alias": [
+      "título executivo extrajudicial",
+      "execução por quantia certa",
+      "penhora",
+      "avaliação",
+      "expropriação",
+      "sisbajud",
+      "renajud",
+      "infojud",
+      "penhora online",
+      "expropriação de bens",
+      "hasta pública",
+      "leilão judicial"
+    ]
+  },
+  {
+    "id": 46,
+    "topico": "Recursos: teoria geral",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "994/1008",
+    "alias": [
+      "recursos cíveis",
+      "teoria geral dos recursos",
+      "duplo grau de jurisdição",
+      "efeitos dos recursos"
+    ]
+  },
+  {
+    "id": 47,
+    "topico": "Apelação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1009/1014",
+    "alias": [
+      "apelação",
+      "recurso de apelação",
+      "sentença recorrível",
+      "efeito devolutivo",
+      "efeito suspensivo",
+      "contrarrazões de apelação",
+      "apelação cível",
+      "teoria da causa madura"
+    ]
+  },
+  {
+    "id": 48,
+    "topico": "Agravo de instrumento",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1015/1020",
+    "alias": [
+      "agravo de instrumento",
+      "decisão interlocutória",
+      "taxatividade mitigada",
+      "rol do artigo 1015",
+      "urgência agravo",
+      "efeito suspensivo ativo",
+      "antecipação de tutela recursal"
+    ]
+  },
+  {
+    "id": 49,
+    "topico": "Embargos de declaração",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1022/1026",
+    "alias": [
+      "embargos de declaração",
+      "omissão",
+      "contradição",
+      "obscuridade",
+      "erro material",
+      "prequestionamento",
+      "embargos prequestionadores",
+      "efeito infringente",
+      "efeito modificativo",
+      "multa protelatória"
+    ]
+  },
+  {
+    "id": 50,
+    "topico": "Recurso especial e recurso extraordinário",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1029/1042",
+    "alias": [
+      "recurso especial",
+      "resp",
+      "recurso extraordinário",
+      "re",
+      "stj",
+      "stf",
+      "repercussão geral",
+      "relevância da questão federal",
+      "prequestionamento",
+      "súmula 7 stj",
+      "súmula 279 stf",
+      "dissídio jurisprudencial",
+      "juízo de admissibilidade"
+    ]
+  },
+  {
+    "id": 51,
+    "topico": "Transferência automática da prestação alimentícia no cumprimento de sentença (vigência diferida)",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "529-A",
+    "alias": [
+      "transferência automática de alimentos",
+      "transferência automática da pensão",
+      "pagamento automático de pensão",
+      "execução de alimentos automática",
+      "lei 15479 2026"
+    ]
+  },
+  {
+    "id": 52,
+    "topico": "Precedentes judiciais vinculantes e uniformização de jurisprudência",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "926/928",
+    "alias": [
+      "precedentes judiciais",
+      "precedentes vinculantes",
+      "sistema de precedentes",
+      "artigo 927 cpc",
+      "overruling",
+      "distinguishing",
+      "superação de precedente",
+      "distinção",
+      "stare decisis",
+      "jurisprudência estável íntegra e coerente"
+    ]
+  },
+  {
+    "id": 53,
+    "topico": "Personalidade e capacidade civil",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1/5",
+    "alias": [
+      "personalidade civil",
+      "capacidade civil",
+      "capacidade de direito",
+      "capacidade de fato",
+      "incapacidade absoluta",
+      "incapacidade relativa"
+    ]
+  },
+  {
+    "id": 54,
+    "topico": "Direitos da personalidade",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "11/21",
+    "alias": [
+      "direitos da personalidade",
+      "nome",
+      "imagem",
+      "honra",
+      "privacidade",
+      "integridade física",
+      "direito ao esquecimento"
+    ]
+  },
+  {
+    "id": 55,
+    "topico": "Pessoas jurídicas",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "40/69",
+    "alias": [
+      "pessoa jurídica",
+      "associação",
+      "sociedade",
+      "fundação",
+      "desconsideração da personalidade jurídica",
+      "desconsideração inversa",
+      "teoria maior",
+      "teoria menor",
+      "abuso da personalidade",
+      "confusão patrimonial",
+      "desvio de finalidade"
+    ]
+  },
+  {
+    "id": 56,
+    "topico": "Negócio jurídico: requisitos, validade e defeitos",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "104/184",
+    "alias": [
+      "negócio jurídico",
+      "validade do negócio",
+      "nulidade",
+      "anulabilidade",
+      "erro",
+      "dolo",
+      "coação",
+      "estado de perigo",
+      "lesão",
+      "fraude contra credores",
+      "vícios do consentimento",
+      "vícios sociais",
+      "simulação",
+      "reserva mental",
+      "lesão contratual"
+    ]
+  },
+  {
+    "id": 57,
+    "topico": "Prescrição e decadência",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "189/211",
+    "alias": [
+      "prescrição civil",
+      "decadência",
+      "prazo prescricional",
+      "prazo decadencial",
+      "interrupção da prescrição",
+      "suspensão da prescrição",
+      "prescrição trienal",
+      "prescrição quinquenal",
+      "prescrição decenal",
+      "actio nata",
+      "prescrição intercorrente civil"
+    ]
+  },
+  {
+    "id": 58,
+    "topico": "Obrigações de dar, fazer e não fazer",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "233/251",
+    "alias": [
+      "obrigações",
+      "obrigação de dar",
+      "obrigação de fazer",
+      "obrigação de não fazer",
+      "inadimplemento"
+    ]
+  },
+  {
+    "id": 59,
+    "topico": "Pagamento e formas de extinção das obrigações",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "304/388",
+    "alias": [
+      "pagamento",
+      "consignação em pagamento",
+      "sub-rogação",
+      "imputação do pagamento",
+      "dação em pagamento",
+      "novação",
+      "compensação",
+      "confusão",
+      "remissão"
+    ]
+  },
+  {
+    "id": 60,
+    "topico": "Inadimplemento das obrigações",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "389/420",
+    "alias": [
+      "inadimplemento",
+      "mora",
+      "perdas e danos",
+      "juros",
+      "cláusula penal",
+      "arras",
+      "juros de mora",
+      "correção monetária",
+      "multa contratual",
+      "sinal",
+      "inadimplemento absoluto",
+      "inadimplemento relativo"
+    ]
+  },
+  {
+    "id": 61,
+    "topico": "Contratos: princípios e formação",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "421/435",
+    "alias": [
+      "contratos",
+      "princípios contratuais",
+      "função social do contrato",
+      "boa-fé objetiva",
+      "formação dos contratos",
+      "proposta e aceitação",
+      "revisão contratual",
+      "onerosidade excessiva",
+      "teoria da imprevisão",
+      "venire contra factum proprium",
+      "supressio",
+      "surrectio"
+    ]
+  },
+  {
+    "id": 62,
+    "topico": "Responsabilidade civil subjetiva e objetiva",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "186/188",
+    "alias": [
+      "responsabilidade civil",
+      "ato ilícito",
+      "abuso de direito",
+      "culpa",
+      "responsabilidade objetiva",
+      "responsabilidade subjetiva",
+      "dever de indenizar",
+      "dano moral",
+      "dano material",
+      "dano estético",
+      "lucros cessantes",
+      "danos emergentes",
+      "nexo de causalidade",
+      "culpa exclusiva da vítima",
+      "fortuito externo"
+    ]
+  },
+  {
+    "id": 63,
+    "topico": "Posse e seus efeitos",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1196/1224",
+    "alias": [
+      "posse",
+      "possuidor",
+      "detenção",
+      "posse direta e indireta",
+      "interditos possessórios"
+    ]
+  },
+  {
+    "id": 64,
+    "topico": "Propriedade e função social",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1228/1276",
+    "alias": [
+      "propriedade",
+      "direito de propriedade",
+      "função social da propriedade",
+      "faculdade de usar gozar dispor"
+    ]
+  },
+  {
+    "id": 65,
+    "topico": "Usucapião",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1238/1244",
+    "alias": [
+      "usucapião",
+      "prescrição aquisitiva",
+      "usucapião extraordinária",
+      "usucapião ordinária",
+      "usucapião especial"
+    ]
+  },
+  {
+    "id": 66,
+    "topico": "Direito de família: casamento e regime de bens",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1511/1688",
+    "alias": [
+      "direito de família",
+      "casamento",
+      "regime de bens",
+      "comunhão parcial",
+      "comunhão universal",
+      "separação de bens",
+      "pacto antenupcial"
+    ]
+  },
+  {
+    "id": 67,
+    "topico": "Dissolução do casamento e divórcio",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1571/1582",
+    "alias": [
+      "divórcio",
+      "separação",
+      "dissolução do casamento",
+      "dissolução da sociedade conjugal"
+    ]
+  },
+  {
+    "id": 68,
+    "topico": "Alimentos",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1694/1710",
+    "alias": [
+      "alimentos",
+      "pensão alimentícia",
+      "ação de alimentos",
+      "alimentos gravídicos",
+      "revisão de alimentos",
+      "exoneração de alimentos",
+      "prisão civil por dívida alimentar",
+      "binômio necessidade possibilidade",
+      "trinômio alimentar",
+      "alimentos avoengos",
+      "exoneração de pensão"
+    ]
+  },
+  {
+    "id": 69,
+    "topico": "União estável",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1723/1727",
+    "alias": [
+      "união estável",
+      "companheiro",
+      "reconhecimento e dissolução de união estável"
+    ]
+  },
+  {
+    "id": 70,
+    "topico": "Sucessão legítima e testamentária",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1784/1990",
+    "alias": [
+      "direito das sucessões",
+      "sucessão legítima",
+      "sucessão testamentária",
+      "herança",
+      "herdeiros",
+      "ordem de vocação hereditária"
+    ]
+  },
+  {
+    "id": 71,
+    "topico": "Indenização e liquidação do dano moral, material e estético",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "944/954",
+    "alias": [
+      "indenização",
+      "quantificação do dano moral",
+      "quantum indenizatório",
+      "danos materiais",
+      "danos emergentes",
+      "lucros cessantes",
+      "dano estético",
+      "pensão mensal indenizatória",
+      "culpa concorrente",
+      "artigo 944 cc"
+    ]
+  },
+  {
+    "id": 72,
+    "topico": "Código de Defesa do Consumidor: direitos básicos e responsabilidade",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "1/54",
+    "alias": [
+      "cdc",
+      "direito do consumidor",
+      "relação de consumo",
+      "consumidor",
+      "fornecedor",
+      "responsabilidade pelo fato do produto",
+      "artigo 12 cdc",
+      "artigo 14 cdc",
+      "fato do produto",
+      "fato do serviço",
+      "acidente de consumo",
+      "responsabilidade objetiva consumidor"
+    ]
+  },
+  {
+    "id": 73,
+    "topico": "Código de Defesa do Consumidor: práticas comerciais e proteção contratual",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "29/54",
+    "alias": [
+      "práticas abusivas",
+      "publicidade enganosa",
+      "publicidade abusiva",
+      "cláusulas abusivas",
+      "contrato de adesão"
+    ]
+  },
+  {
+    "id": 74,
+    "topico": "Direitos básicos do consumidor e inversão do ônus da prova",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "6/7",
+    "alias": [
+      "direitos básicos do consumidor",
+      "artigo 6 cdc",
+      "inversão do ônus da prova",
+      "hipossuficiência",
+      "verossimilhança",
+      "informação adequada e clara",
+      "revisão de cláusulas contratuais"
+    ]
+  },
+  {
+    "id": 75,
+    "topico": "Vício do produto e do serviço no CDC",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "18/25",
+    "alias": [
+      "vício do produto",
+      "vício do serviço",
+      "artigo 18 cdc",
+      "prazo de 30 dias para reparo",
+      "troca do produto",
+      "restituição da quantia paga",
+      "abatimento proporcional do preço",
+      "vício oculto consumidor"
+    ]
+  },
+  {
+    "id": 76,
+    "topico": "Cobrança de dívidas, repetição de indébito e bancos de dados (SPC/Serasa)",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "42/44",
+    "alias": [
+      "cobrança indevida",
+      "repetição de indébito em dobro",
+      "artigo 42 parágrafo único",
+      "negativação indevida",
+      "inscrição indevida spc serasa",
+      "cadastro de inadimplentes",
+      "notificação prévia negativação",
+      "súmula 385 stj"
+    ]
+  },
+  {
+    "id": 77,
+    "topico": "Prevenção e tratamento do superendividamento do consumidor",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "54-A/54-G",
+    "alias": [
+      "superendividamento",
+      "mínimo existencial",
+      "crédito responsável",
+      "repactuação de dívidas",
+      "lei 14181",
+      "artigo 104-a cdc"
+    ]
+  },
+  {
+    "id": 78,
+    "topico": "Princípio da legalidade e anterioridade penal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "1",
+    "alias": [
+      "legalidade penal",
+      "reserva legal",
+      "anterioridade penal",
+      "nullum crimen nulla poena"
+    ]
+  },
+  {
+    "id": 79,
+    "topico": "Lei penal no tempo",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "2",
+    "alias": [
+      "lei penal no tempo",
+      "abolitio criminis",
+      "novatio legis",
+      "retroatividade da lei penal benéfica",
+      "ultratividade"
+    ]
+  },
+  {
+    "id": 80,
+    "topico": "Dolo e culpa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "18",
+    "alias": [
+      "dolo",
+      "dolo eventual",
+      "culpa consciente",
+      "culpa inconsciente",
+      "crime culposo",
+      "crime doloso"
+    ]
+  },
+  {
+    "id": 81,
+    "topico": "Crime consumado e tentado",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "14",
+    "alias": [
+      "tentativa",
+      "crime consumado",
+      "iter criminis",
+      "início da execução"
+    ]
+  },
+  {
+    "id": 82,
+    "topico": "Exclusão da ilicitude",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "23/25",
+    "alias": [
+      "excludentes de ilicitude",
+      "estado de necessidade",
+      "legítima defesa",
+      "estrito cumprimento do dever legal",
+      "exercício regular de direito"
+    ]
+  },
+  {
+    "id": 83,
+    "topico": "Imputabilidade penal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "26/28",
+    "alias": [
+      "imputabilidade",
+      "inimputabilidade",
+      "semi-imputabilidade",
+      "menoridade penal",
+      "embriaguez"
+    ]
+  },
+  {
+    "id": 84,
+    "topico": "Concurso de pessoas",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "29/31",
+    "alias": [
+      "concurso de agentes",
+      "coautoria",
+      "participação",
+      "autoria mediata",
+      "participação de menor importância"
+    ]
+  },
+  {
+    "id": 85,
+    "topico": "Penas: espécies e regimes",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "32/42",
+    "alias": [
+      "penas",
+      "espécies de pena",
+      "reclusão",
+      "detenção",
+      "pena privativa de liberdade",
+      "pena restritiva de direitos",
+      "multa"
+    ]
+  },
+  {
+    "id": 86,
+    "topico": "Dosimetria da pena",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "59/68",
+    "alias": [
+      "dosimetria",
+      "pena-base",
+      "circunstâncias judiciais",
+      "agravantes",
+      "atenuantes",
+      "causas de aumento",
+      "causas de diminuição",
+      "sistema trifásico"
+    ]
+  },
+  {
+    "id": 87,
+    "topico": "Concurso material, formal e crime continuado",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "69/71",
+    "alias": [
+      "concurso material",
+      "concurso formal",
+      "continuidade delitiva",
+      "crime continuado"
+    ]
+  },
+  {
+    "id": 88,
+    "topico": "Ação penal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "100/106",
+    "alias": [
+      "ação penal",
+      "ação pública",
+      "ação privada",
+      "representação",
+      "queixa-crime",
+      "decadência do direito de queixa"
+    ]
+  },
+  {
+    "id": 89,
+    "topico": "Extinção da punibilidade",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "107/120",
+    "alias": [
+      "extinção da punibilidade",
+      "prescrição",
+      "decadência",
+      "perempção",
+      "anistia",
+      "graça",
+      "indulto",
+      "morte do agente"
+    ]
+  },
+  {
+    "id": 90,
+    "topico": "Prescrição penal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "109/119",
+    "alias": [
+      "prescrição penal",
+      "prescrição da pretensão punitiva",
+      "prescrição executória",
+      "prescrição retroativa",
+      "prescrição intercorrente",
+      "prescrição da pretensão executória",
+      "prescrição virtual",
+      "termo inicial da prescrição penal",
+      "causas interruptivas da prescrição"
+    ]
+  },
+  {
+    "id": 91,
+    "topico": "Reincidência e maus antecedentes na dosimetria da pena",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "61/64",
+    "alias": [
+      "reincidência",
+      "maus antecedentes",
+      "período depurador",
+      "5 anos reincidência",
+      "reincidência específica",
+      "artigo 63 cp",
+      "artigo 64 cp"
+    ]
+  },
+  {
+    "id": 92,
+    "topico": "Objetivos fundamentais da República",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "3",
+    "alias": [
+      "objetivos fundamentais",
+      "objetivos da república",
+      "erradicar pobreza",
+      "reduzir desigualdades"
+    ]
+  },
+  {
+    "id": 93,
+    "topico": "Princípios das relações internacionais",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "4",
+    "alias": [
+      "relações internacionais",
+      "direitos humanos",
+      "asilo político",
+      "não intervenção"
+    ]
+  },
+  {
+    "id": 94,
+    "topico": "Nacionalidade brasileira",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "12/13",
+    "alias": [
+      "nacionalidade",
+      "brasileiro nato",
+      "brasileiro naturalizado",
+      "perda da nacionalidade",
+      "naturalização"
+    ]
+  },
+  {
+    "id": 95,
+    "topico": "Direitos políticos e alistamento eleitoral",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "14/16",
+    "alias": [
+      "direitos políticos",
+      "voto",
+      "sufrágio",
+      "alistamento eleitoral",
+      "elegibilidade",
+      "inelegibilidade constitucional"
+    ]
+  },
+  {
+    "id": 96,
+    "topico": "Partidos políticos",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "17",
+    "alias": [
+      "partidos políticos",
+      "fidelidade partidária",
+      "autonomia partidária",
+      "cláusula de desempenho"
+    ]
+  },
+  {
+    "id": 97,
+    "topico": "Organização político-administrativa",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "18/19",
+    "alias": [
+      "organização do estado",
+      "federação",
+      "união estados municípios distrito federal",
+      "bens da união"
+    ]
+  },
+  {
+    "id": 98,
+    "topico": "Repartição de competências constitucionais",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "20/24",
+    "alias": [
+      "competências da união",
+      "competência legislativa",
+      "competência concorrente",
+      "competência comum",
+      "competência privativa"
+    ]
+  },
+  {
+    "id": 99,
+    "topico": "Competências dos Estados, Municípios e Distrito Federal",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "25/32",
+    "alias": [
+      "competência estadual",
+      "competência municipal",
+      "competência do distrito federal",
+      "autonomia federativa"
+    ]
+  },
+  {
+    "id": 100,
+    "topico": "Servidores públicos",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "39/41",
+    "alias": [
+      "servidor público",
+      "regime jurídico",
+      "estabilidade",
+      "estágio probatório",
+      "remuneração servidor"
+    ]
+  },
+  {
+    "id": 101,
+    "topico": "Organização do Poder Legislativo",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "44/58",
+    "alias": [
+      "congresso nacional",
+      "câmara dos deputados",
+      "senado federal",
+      "comissões parlamentares",
+      "imunidade parlamentar"
+    ]
+  },
+  {
+    "id": 102,
+    "topico": "Processo legislativo",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "59/69",
+    "alias": [
+      "processo legislativo",
+      "emenda constitucional",
+      "lei complementar",
+      "lei ordinária",
+      "medida provisória",
+      "iniciativa legislativa",
+      "sanção e veto"
+    ]
+  },
+  {
+    "id": 103,
+    "topico": "Poder Executivo e responsabilidade do Presidente",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "76/91",
+    "alias": [
+      "presidente da república",
+      "poder executivo",
+      "crime de responsabilidade",
+      "impeachment",
+      "ministros de estado"
+    ]
+  },
+  {
+    "id": 104,
+    "topico": "Conselho Nacional de Justiça",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "103-B",
+    "alias": [
+      "cnj",
+      "conselho nacional de justiça",
+      "controle administrativo do judiciário",
+      "controle disciplinar da magistratura"
+    ]
+  },
+  {
+    "id": 105,
+    "topico": "Justiça Federal",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "106/110",
+    "alias": [
+      "justiça federal",
+      "juízes federais",
+      "tribunais regionais federais",
+      "trf",
+      "competência federal"
+    ]
+  },
+  {
+    "id": 106,
+    "topico": "Justiça do Trabalho",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "111/116",
+    "alias": [
+      "justiça do trabalho",
+      "tribunal superior do trabalho",
+      "tst",
+      "trt",
+      "competência trabalhista"
+    ]
+  },
+  {
+    "id": 107,
+    "topico": "Justiça dos Estados e do Distrito Federal",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "125/126",
+    "alias": [
+      "justiça estadual",
+      "tribunal de justiça",
+      "tj",
+      "justiça comum estadual",
+      "competência da justiça estadual"
+    ]
+  },
+  {
+    "id": 108,
+    "topico": "Forças Armadas e segurança pública",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "142/144",
+    "alias": [
+      "forças armadas",
+      "segurança pública",
+      "polícias",
+      "polícia federal",
+      "polícia civil",
+      "polícia militar",
+      "guarda municipal"
+    ]
+  },
+  {
+    "id": 109,
+    "topico": "Princípios e aplicação da lei processual penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "1/3",
+    "alias": [
+      "processo penal",
+      "lei processual penal",
+      "princípios do processo penal",
+      "sistema acusatório",
+      "devido processo penal"
+    ]
+  },
+  {
+    "id": 110,
+    "topico": "Inquérito policial",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "4/23",
+    "alias": [
+      "inquérito policial",
+      "investigação criminal",
+      "indiciamento",
+      "diligências policiais",
+      "arquivamento de inquérito"
+    ]
+  },
+  {
+    "id": 111,
+    "topico": "Acordo de não persecução penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "28-A",
+    "alias": [
+      "anpp",
+      "acordo de não persecução penal",
+      "justiça penal consensual",
+      "negócio jurídico processual penal",
+      "confissão formal e circunstanciada",
+      "requisitos do anpp",
+      "homologação do anpp"
+    ]
+  },
+  {
+    "id": 112,
+    "topico": "Ação penal pública e privada",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "24/62",
+    "alias": [
+      "ação penal",
+      "ação penal pública",
+      "ação penal privada",
+      "ação penal condicionada",
+      "representação criminal",
+      "queixa-crime"
+    ]
+  },
+  {
+    "id": 113,
+    "topico": "Denúncia e queixa-crime",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "41/44",
+    "alias": [
+      "denúncia criminal",
+      "queixa crime",
+      "requisitos da denúncia",
+      "inépcia da denúncia"
+    ]
+  },
+  {
+    "id": 114,
+    "topico": "Competência criminal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "69/91",
+    "alias": [
+      "competência criminal",
+      "foro criminal",
+      "competência territorial",
+      "competência por prerrogativa de função"
+    ]
+  },
+  {
+    "id": 115,
+    "topico": "Provas no processo penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "155/157",
+    "alias": [
+      "prova penal",
+      "provas ilícitas",
+      "cadeia de custódia",
+      "ônus da prova penal",
+      "livre convencimento motivado",
+      "artigo 155 cpp",
+      "artigo 157 cpp",
+      "prova ilícita por derivação",
+      "frutos da árvore envenenada",
+      "standard probatório",
+      "in dubio pro reo"
+    ]
+  },
+  {
+    "id": 116,
+    "topico": "Prisão em flagrante",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "301/310",
+    "alias": [
+      "prisão em flagrante",
+      "flagrante próprio",
+      "flagrante impróprio",
+      "flagrante presumido",
+      "auto de prisão em flagrante"
+    ]
+  },
+  {
+    "id": 117,
+    "topico": "Audiência de custódia",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "310",
+    "alias": [
+      "audiência de custódia",
+      "custódia",
+      "controle judicial da prisão"
+    ]
+  },
+  {
+    "id": 118,
+    "topico": "Prisão preventiva",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "311/316",
+    "alias": [
+      "prisão preventiva",
+      "requisitos da preventiva",
+      "garantia da ordem pública",
+      "revisão nonagesimal",
+      "periculum libertatis",
+      "fumus comissi delicti",
+      "contemporaneidade",
+      "artigo 312 cpp",
+      "artigo 315 cpp"
+    ]
+  },
+  {
+    "id": 119,
+    "topico": "Medidas cautelares diversas da prisão",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "319/320",
+    "alias": [
+      "medidas cautelares",
+      "cautelares diversas da prisão",
+      "monitoramento eletrônico",
+      "comparecimento periódico"
+    ]
+  },
+  {
+    "id": 120,
+    "topico": "Liberdade provisória e fiança",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "321/350",
+    "alias": [
+      "liberdade provisória",
+      "fiança",
+      "relaxamento de prisão",
+      "revogação da preventiva"
+    ]
+  },
+  {
+    "id": 121,
+    "topico": "Procedimento comum ordinário e sumário",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "394/405",
+    "alias": [
+      "procedimento ordinário",
+      "procedimento sumário",
+      "rito comum",
+      "resposta à acusação",
+      "audiência de instrução"
+    ]
+  },
+  {
+    "id": 122,
+    "topico": "Tribunal do Júri",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "406/497",
+    "alias": [
+      "tribunal do júri",
+      "júri",
+      "crimes dolosos contra a vida",
+      "pronúncia",
+      "impronúncia",
+      "absolvição sumária",
+      "quesitação"
+    ]
+  },
+  {
+    "id": 123,
+    "topico": "Sentença penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "381/393",
+    "alias": [
+      "sentença penal",
+      "condenação",
+      "absolvição",
+      "dosimetria da pena na sentença"
+    ]
+  },
+  {
+    "id": 124,
+    "topico": "Nulidades no processo penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "563/573",
+    "alias": [
+      "nulidades penais",
+      "nulidade processual penal",
+      "pas de nullité sans grief",
+      "prejuízo"
+    ]
+  },
+  {
+    "id": 125,
+    "topico": "Recursos no processo penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "574/667",
+    "alias": [
+      "recursos criminais",
+      "apelação criminal",
+      "recurso em sentido estrito",
+      "embargos infringentes",
+      "carta testemunhável"
+    ]
+  },
+  {
+    "id": 126,
+    "topico": "Habeas corpus",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "647/667",
+    "alias": [
+      "habeas corpus",
+      "hc",
+      "liberdade de locomoção",
+      "constrangimento ilegal",
+      "habeas corpus preventivo",
+      "habeas corpus liberatório",
+      "salvo-conduto",
+      "trancamento da ação penal",
+      "autoridade coatora"
+    ]
+  },
+  {
+    "id": 127,
+    "topico": "PPA, LDO e LOA",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "165/169",
+    "alias": [
+      "ppa",
+      "plano plurianual",
+      "ldo",
+      "lei de diretrizes orçamentárias",
+      "loa",
+      "lei orçamentária anual"
+    ]
+  },
+  {
+    "id": 128,
+    "topico": "Usucapião especial urbana",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "183",
+    "alias": [
+      "usucapião urbana",
+      "usucapião constitucional",
+      "moradia urbana"
+    ]
+  },
+  {
+    "id": 129,
+    "topico": "Direitos políticos, elegibilidade e inelegibilidades",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "14",
+    "alias": [
+      "inelegibilidade",
+      "elegibilidade",
+      "direitos políticos",
+      "registro de candidatura"
+    ]
+  },
+  {
+    "id": 130,
+    "topico": "Cadeia de custódia da prova penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "158-A/158-F",
+    "alias": [
+      "cadeia de custódia",
+      "vestígios",
+      "prova pericial penal",
+      "vestígio criminal",
+      "preservação da prova",
+      "rastreabilidade da prova"
+    ]
+  },
+  {
+    "id": 131,
+    "topico": "Apelação criminal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "593/603",
+    "alias": [
+      "apelação criminal",
+      "recurso de apelação penal",
+      "apelação do júri",
+      "razões de apelação criminal",
+      "artigo 593 cpp"
+    ]
+  },
+  {
+    "id": 132,
+    "topico": "Estabilidade da gestante",
+    "lei": "ADCT da Constituição Federal",
+    "artigo": "10",
+    "alias": [
+      "estabilidade gestante",
+      "estabilidade provisória da gestante",
+      "gravidez no curso do aviso prévio",
+      "gravidez contrato por prazo determinado",
+      "artigo 10 ii b adct"
+    ]
+  },
+  {
+    "id": 133,
+    "topico": "IPTU, ITBI e IPVA: impostos sobre o patrimônio",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "155/156",
+    "alias": [
+      "iptu",
+      "itbi",
+      "ipva",
+      "imposto predial",
+      "transmissão de bens imóveis",
+      "base de cálculo itbi",
+      "progressividade iptu"
+    ]
+  },
+  {
+    "id": 134,
+    "topico": "Partes, capacidade processual e representação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "70/76",
+    "alias": [
+      "partes",
+      "capacidade processual",
+      "representação processual",
+      "substituição processual"
+    ]
+  },
+  {
+    "id": 135,
+    "topico": "Deveres das partes e litigância de má-fé",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "77/81",
+    "alias": [
+      "deveres processuais",
+      "litigância de má-fé",
+      "multa por má-fé",
+      "ato atentatório à dignidade da justiça"
+    ]
+  },
+  {
+    "id": 136,
+    "topico": "Procuradores e honorários advocatícios",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "103/107",
+    "alias": [
+      "advogado",
+      "procuração",
+      "honorários advocatícios",
+      "capacidade postulatória",
+      "honorários de sucumbência",
+      "honorários sucumbenciais",
+      "sucumbência recursal",
+      "equidade honorários",
+      "artigo 85 cpc"
+    ]
+  },
+  {
+    "id": 137,
+    "topico": "Litisconsórcio",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "113/118",
+    "alias": [
+      "litisconsórcio",
+      "litisconsórcio necessário",
+      "litisconsórcio facultativo",
+      "litisconsórcio unitário"
+    ]
+  },
+  {
+    "id": 138,
+    "topico": "Intervenção de terceiros",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "119/138",
+    "alias": [
+      "intervenção de terceiros",
+      "assistência",
+      "denunciação da lide",
+      "chamamento ao processo",
+      "incidente de desconsideração",
+      "amicus curiae",
+      "idpj",
+      "incidente de desconsideração da personalidade jurídica"
+    ]
+  },
+  {
+    "id": 139,
+    "topico": "Prazos processuais",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "218/235",
+    "alias": [
+      "prazos processuais",
+      "contagem de prazo",
+      "prazo em dias úteis",
+      "preclusão temporal"
+    ]
+  },
+  {
+    "id": 140,
+    "topico": "Comunicação dos atos: citação e intimação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "236/275",
+    "alias": [
+      "citação",
+      "intimação",
+      "carta precatória",
+      "carta de ordem",
+      "carta rogatória",
+      "citação eletrônica"
+    ]
+  },
+  {
+    "id": 141,
+    "topico": "Nulidades processuais",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "276/283",
+    "alias": [
+      "nulidades processuais",
+      "instrumentalidade das formas",
+      "pas de nullité sans grief"
+    ]
+  },
+  {
+    "id": 142,
+    "topico": "Revelia",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "344/346",
+    "alias": [
+      "revelia",
+      "efeitos da revelia",
+      "presunção de veracidade"
+    ]
+  },
+  {
+    "id": 143,
+    "topico": "Providências preliminares e saneamento",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "347/357",
+    "alias": [
+      "saneamento do processo",
+      "organização do processo",
+      "decisão de saneamento"
+    ]
+  },
+  {
+    "id": 144,
+    "topico": "Julgamento antecipado do mérito",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "355/356",
+    "alias": [
+      "julgamento antecipado",
+      "julgamento parcial do mérito",
+      "julgamento antecipado parcial"
+    ]
+  },
+  {
+    "id": 145,
+    "topico": "Prova documental",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "405/441",
+    "alias": [
+      "prova documental",
+      "documento público",
+      "documento particular",
+      "autenticidade documental"
+    ]
+  },
+  {
+    "id": 146,
+    "topico": "Prova testemunhal",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "442/463",
+    "alias": [
+      "prova testemunhal",
+      "testemunha",
+      "testemunhas",
+      "oitiva de testemunha",
+      "rol de testemunhas"
+    ]
+  },
+  {
+    "id": 147,
+    "topico": "Prova pericial",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "464/480",
+    "alias": [
+      "prova pericial",
+      "perícia",
+      "perito judicial",
+      "laudo pericial",
+      "assistente técnico"
+    ]
+  },
+  {
+    "id": 148,
+    "topico": "Embargos à execução",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "914/920",
+    "alias": [
+      "embargos à execução",
+      "defesa na execução",
+      "excesso de execução"
+    ]
+  },
+  {
+    "id": 149,
+    "topico": "Ação rescisória",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "966/975",
+    "alias": [
+      "ação rescisória",
+      "desconstituir coisa julgada",
+      "rescindibilidade"
+    ]
+  },
+  {
+    "id": 150,
+    "topico": "Incidente de resolução de demandas repetitivas",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "976/987",
+    "alias": [
+      "irdr",
+      "demandas repetitivas",
+      "incidente de resolução"
+    ]
+  },
+  {
+    "id": 151,
+    "topico": "Agravo interno",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1021",
+    "alias": [
+      "agravo interno",
+      "agravo regimental"
+    ]
+  },
+  {
+    "id": 152,
+    "topico": "Reclamação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "988/993",
+    "alias": [
+      "reclamação constitucional",
+      "reclamação ao stf",
+      "reclamação ao stj",
+      "preservar competência",
+      "garantir autoridade de decisão"
+    ]
+  },
+  {
+    "id": 153,
+    "topico": "Agravo em recurso especial e em recurso extraordinário (AREsp e ARE)",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1042",
+    "alias": [
+      "aresp",
+      "are",
+      "agravo em recurso especial",
+      "agravo em recurso extraordinário",
+      "agravo nos próprios autos",
+      "inadmissão de resp",
+      "inadmissão de re",
+      "artigo 1042 cpc"
+    ]
+  },
+  {
+    "id": 154,
+    "topico": "Gratuidade da justiça no processo civil",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "98/102",
+    "alias": [
+      "gratuidade da justiça",
+      "justiça gratuita",
+      "ajg",
+      "assistência judiciária gratuita",
+      "hipossuficiência financeira",
+      "impugnação à gratuidade",
+      "artigo 98 cpc"
+    ]
+  },
+  {
+    "id": 155,
+    "topico": "Penhora, ordem preferencial e bens impenhoráveis",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "831/836",
+    "alias": [
+      "penhora",
+      "impenhorabilidade",
+      "bens impenhoráveis",
+      "artigo 833 cpc",
+      "impenhorabilidade de salário",
+      "impenhorabilidade de poupança",
+      "ordem de penhora",
+      "substituição da penhora"
+    ]
+  },
+  {
+    "id": 156,
+    "topico": "Relação de emprego e requisitos",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "2/3",
+    "alias": [
+      "relação de emprego",
+      "vínculo empregatício",
+      "empregado",
+      "empregador",
+      "pessoalidade",
+      "subordinação",
+      "onerosidade",
+      "não eventualidade"
+    ]
+  },
+  {
+    "id": 157,
+    "topico": "Contrato individual de trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "442/456",
+    "alias": [
+      "contrato de trabalho",
+      "contrato individual",
+      "contrato tácito",
+      "contrato expresso"
+    ]
+  },
+  {
+    "id": 158,
+    "topico": "Jornada de trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "58/65",
+    "alias": [
+      "jornada",
+      "duração do trabalho",
+      "limites de jornada",
+      "controle de ponto"
+    ]
+  },
+  {
+    "id": 159,
+    "topico": "Horas extraordinárias e banco de horas",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "59/59-B",
+    "alias": [
+      "horas extras",
+      "hora extraordinária",
+      "banco de horas",
+      "compensação de jornada",
+      "acordo de compensação",
+      "jornada 12x36",
+      "supressão de horas extras",
+      "cargo de confiança"
+    ]
+  },
+  {
+    "id": 160,
+    "topico": "Intervalos intrajornada e interjornada",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "66/72",
+    "alias": [
+      "intervalo intrajornada",
+      "intervalo interjornada",
+      "intervalo para refeição",
+      "descanso entre jornadas"
+    ]
+  },
+  {
+    "id": 161,
+    "topico": "Férias individuais e coletivas",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "129/153",
+    "alias": [
+      "férias",
+      "férias vencidas",
+      "férias proporcionais",
+      "férias coletivas",
+      "abono pecuniário"
+    ]
+  },
+  {
+    "id": 162,
+    "topico": "Salário e remuneração",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "457/467",
+    "alias": [
+      "salário",
+      "remuneração",
+      "gorjetas",
+      "parcelas salariais",
+      "natureza salarial"
+    ]
+  },
+  {
+    "id": 163,
+    "topico": "Adicionais de insalubridade e periculosidade",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "189/197",
+    "alias": [
+      "insalubridade",
+      "periculosidade",
+      "adicional de insalubridade",
+      "adicional de periculosidade",
+      "perícia de insalubridade",
+      "perícia de periculosidade",
+      "epi eficaz",
+      "base de cálculo insalubridade",
+      "nr 15",
+      "nr 16"
+    ]
+  },
+  {
+    "id": 164,
+    "topico": "Fundo de Garantia do Tempo de Serviço",
+    "lei": "Lei nº 8.036/1990 (Lei do FGTS)",
+    "artigo": "15/23",
+    "alias": [
+      "fgts",
+      "fundo de garantia",
+      "depósitos fundiários",
+      "multa de 40 por cento"
+    ]
+  },
+  {
+    "id": 165,
+    "topico": "Aviso-prévio",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "487/491",
+    "alias": [
+      "aviso prévio",
+      "aviso-prévio proporcional",
+      "aviso trabalhado",
+      "aviso indenizado"
+    ]
+  },
+  {
+    "id": 166,
+    "topico": "Rescisão do contrato de trabalho e verbas rescisórias",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "477/486",
+    "alias": [
+      "rescisão contratual",
+      "verbas rescisórias",
+      "saldo de salário",
+      "férias proporcionais",
+      "13º proporcional",
+      "multa do artigo 477",
+      "multa do artigo 467",
+      "dispensa sem justa causa",
+      "pedido de demissão"
+    ]
+  },
+  {
+    "id": 167,
+    "topico": "Justa causa do empregado",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "482",
+    "alias": [
+      "justa causa",
+      "falta grave do empregado",
+      "despedida motivada"
+    ]
+  },
+  {
+    "id": 168,
+    "topico": "Rescisão indireta",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "483",
+    "alias": [
+      "rescisão indireta",
+      "justa causa do empregador",
+      "falta grave patronal"
+    ]
+  },
+  {
+    "id": 169,
+    "topico": "Estabilidade provisória e garantias de emprego",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "391-A/500",
+    "alias": [
+      "estabilidade provisória",
+      "gestante",
+      "acidente de trabalho",
+      "cipeiro",
+      "dirigente sindical"
+    ]
+  },
+  {
+    "id": 170,
+    "topico": "Reclamação trabalhista e petição inicial",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "840/842",
+    "alias": [
+      "reclamação trabalhista",
+      "petição inicial trabalhista",
+      "ação trabalhista"
+    ]
+  },
+  {
+    "id": 171,
+    "topico": "Audiência trabalhista e defesa",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "843/850",
+    "alias": [
+      "audiência trabalhista",
+      "contestação trabalhista",
+      "revelia trabalhista",
+      "confissão ficta"
+    ]
+  },
+  {
+    "id": 172,
+    "topico": "Provas no processo do trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "818",
+    "alias": [
+      "ônus da prova trabalhista",
+      "prova testemunhal trabalhista",
+      "perícia trabalhista"
+    ]
+  },
+  {
+    "id": 173,
+    "topico": "Sentença e recursos trabalhistas",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "831/900",
+    "alias": [
+      "sentença trabalhista",
+      "recurso ordinário",
+      "recurso de revista",
+      "agravo de petição",
+      "embargos de declaração trabalhistas",
+      "recurso ordinário trabalhista",
+      "transcendência",
+      "agravo de instrumento trabalhista",
+      "depósito recursal"
+    ]
+  },
+  {
+    "id": 174,
+    "topico": "Execução trabalhista",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "876/892",
+    "alias": [
+      "execução trabalhista",
+      "liquidação trabalhista",
+      "penhora trabalhista",
+      "embargos à execução trabalhista"
+    ]
+  },
+  {
+    "id": 175,
+    "topico": "Dano extrapatrimonial na relação de trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "223-A/223-G",
+    "alias": [
+      "dano moral trabalhista",
+      "dano extrapatrimonial trabalhista",
+      "assédio moral no trabalho",
+      "tarifação do dano moral",
+      "artigo 223-g clt"
+    ]
+  },
+  {
+    "id": 176,
+    "topico": "Honorários advocatícios e justiça gratuita na Justiça do Trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "790/791-A",
+    "alias": [
+      "honorários sucumbenciais trabalhistas",
+      "justiça gratuita trabalhista",
+      "artigo 791-a clt",
+      "artigo 790 clt",
+      "adi 5766"
+    ]
+  },
+  {
+    "id": 177,
+    "topico": "Bens e classificação dos bens",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "79/103",
+    "alias": [
+      "bens",
+      "bens móveis",
+      "bens imóveis",
+      "bens públicos",
+      "pertenças",
+      "bens fungíveis"
+    ]
+  },
+  {
+    "id": 178,
+    "topico": "Invalidade do negócio jurídico",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "166/184",
+    "alias": [
+      "nulidade do negócio jurídico",
+      "anulabilidade",
+      "simulação",
+      "negócio jurídico nulo"
+    ]
+  },
+  {
+    "id": 179,
+    "topico": "Prova dos fatos jurídicos",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "212/232",
+    "alias": [
+      "prova civil",
+      "meios de prova",
+      "confissão",
+      "documento",
+      "prova testemunhal",
+      "presunção"
+    ]
+  },
+  {
+    "id": 180,
+    "topico": "Obrigações solidárias",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "264/285",
+    "alias": [
+      "solidariedade",
+      "obrigação solidária",
+      "solidariedade ativa",
+      "solidariedade passiva"
+    ]
+  },
+  {
+    "id": 181,
+    "topico": "Evicção e vícios redibitórios",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "441/457",
+    "alias": [
+      "evicção",
+      "vício redibitório",
+      "vício oculto",
+      "garantia contratual"
+    ]
+  },
+  {
+    "id": 182,
+    "topico": "Extinção dos contratos",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "472/480",
+    "alias": [
+      "extinção dos contratos",
+      "resolução",
+      "resilição",
+      "rescisão contratual",
+      "exceção do contrato não cumprido"
+    ]
+  },
+  {
+    "id": 183,
+    "topico": "Compra e venda",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "481/532",
+    "alias": [
+      "compra e venda",
+      "contrato de compra e venda",
+      "venda ad corpus",
+      "venda ad mensuram",
+      "cláusulas especiais da compra e venda"
+    ]
+  },
+  {
+    "id": 184,
+    "topico": "Doação",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "538/564",
+    "alias": [
+      "doação",
+      "contrato de doação",
+      "revogação da doação"
+    ]
+  },
+  {
+    "id": 185,
+    "topico": "Empréstimo: comodato e mútuo",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "579/592",
+    "alias": [
+      "comodato",
+      "mútuo",
+      "empréstimo gratuito",
+      "empréstimo de consumo"
+    ]
+  },
+  {
+    "id": 186,
+    "topico": "Prestação de serviço e empreitada",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "593/626",
+    "alias": [
+      "prestação de serviços",
+      "empreitada",
+      "contrato de serviço"
+    ]
+  },
+  {
+    "id": 187,
+    "topico": "Mandato",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "653/692",
+    "alias": [
+      "mandato",
+      "procuração",
+      "mandatário",
+      "mandante"
+    ]
+  },
+  {
+    "id": 188,
+    "topico": "Seguro",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "757/802",
+    "alias": [
+      "contrato de seguro",
+      "seguro de vida",
+      "seguro de dano",
+      "seguradora",
+      "sinistro"
+    ]
+  },
+  {
+    "id": 189,
+    "topico": "Responsabilidade civil por fato de terceiro e por coisas",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "932/938",
+    "alias": [
+      "responsabilidade por fato de terceiro",
+      "responsabilidade dos pais",
+      "responsabilidade do empregador",
+      "responsabilidade por animais",
+      "ruína de edifício"
+    ]
+  },
+  {
+    "id": 190,
+    "topico": "Enriquecimento sem causa",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "884/886",
+    "alias": [
+      "enriquecimento sem causa",
+      "locupletamento ilícito",
+      "repetição de indébito civil"
+    ]
+  },
+  {
+    "id": 191,
+    "topico": "Condomínio geral e edilício",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1314/1358",
+    "alias": [
+      "condomínio",
+      "condomínio edilício",
+      "condomínio geral",
+      "síndico",
+      "assembleia condominial"
+    ]
+  },
+  {
+    "id": 192,
+    "topico": "Direitos reais de garantia",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1419/1510",
+    "alias": [
+      "hipoteca",
+      "penhor",
+      "anticrese",
+      "garantias reais"
+    ]
+  },
+  {
+    "id": 193,
+    "topico": "Poder familiar",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1630/1638",
+    "alias": [
+      "poder familiar",
+      "pátrio poder",
+      "suspensão do poder familiar",
+      "perda do poder familiar"
+    ]
+  },
+  {
+    "id": 194,
+    "topico": "Inventário e partilha",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1991/2027",
+    "alias": [
+      "inventário",
+      "partilha",
+      "herdeiros",
+      "inventário extrajudicial",
+      "sonegados"
+    ]
+  },
+  {
+    "id": 195,
+    "topico": "Responsabilidade civil médica e dos profissionais liberais",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "951",
+    "alias": [
+      "erro médico",
+      "responsabilidade médica",
+      "responsabilidade do médico",
+      "responsabilidade do hospital",
+      "obrigação de meio",
+      "obrigação de resultado",
+      "cirurgia estética",
+      "artigo 951 cc"
+    ]
+  },
+  {
+    "id": 196,
+    "topico": "Guarda de filhos e direito de convivência",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1583/1590",
+    "alias": [
+      "guarda compartilhada",
+      "guarda unilateral",
+      "direito de visitas",
+      "direito de convivência",
+      "regulamentação de visitas",
+      "modificação de guarda",
+      "melhor interesse da criança",
+      "artigo 1583 cc"
+    ]
+  },
+  {
+    "id": 197,
+    "topico": "Filiação, investigação de paternidade e multiparentalidade",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1596/1629",
+    "alias": [
+      "filiação",
+      "investigação de paternidade",
+      "negatória de paternidade",
+      "reconhecimento de filho",
+      "filiação socioafetiva",
+      "multiparentalidade",
+      "exame de dna"
+    ]
+  },
+  {
+    "id": 198,
+    "topico": "Tutela, curatela e tomada de decisão apoiada",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1728/1783-A",
+    "alias": [
+      "tutela",
+      "curatela",
+      "interdição",
+      "tomada de decisão apoiada",
+      "curador",
+      "prestação de contas do curador",
+      "incapacidade civil"
+    ]
+  },
+  {
+    "id": 199,
+    "topico": "Testamento, legítima e deserdação",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1857/1990",
+    "alias": [
+      "testamento",
+      "testamento público",
+      "testamento particular",
+      "legítima",
+      "herdeiros necessários",
+      "deserdação",
+      "indignidade sucessória",
+      "codicilo"
+    ]
+  },
+  {
+    "id": 200,
+    "topico": "Promessa de compra e venda e adjudicação compulsória",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1417/1418",
+    "alias": [
+      "compromisso de compra e venda",
+      "promessa de compra e venda",
+      "adjudicação compulsória",
+      "outorga de escritura",
+      "adjudicação compulsória extrajudicial"
+    ]
+  },
+  {
+    "id": 201,
+    "topico": "Empresário individual, estabelecimento empresarial e nome empresarial",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "966/980",
+    "alias": [
+      "direito empresarial",
+      "empresário",
+      "estabelecimento empresarial",
+      "fundo de comércio",
+      "trespasse",
+      "nome empresarial"
+    ]
+  },
+  {
+    "id": 202,
+    "topico": "Sociedade limitada",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1052/1087",
+    "alias": [
+      "sociedade limitada",
+      "ltda",
+      "sociedade limitada unipessoal",
+      "slu",
+      "quotas sociais",
+      "responsabilidade dos sócios",
+      "exclusão de sócio",
+      "retirada de sócio"
+    ]
+  },
+  {
+    "id": 203,
+    "topico": "Títulos de crédito: disposições gerais",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "887/926",
+    "alias": [
+      "títulos de crédito",
+      "cartularidade",
+      "literalidade",
+      "autonomia",
+      "endosso",
+      "aval",
+      "protesto de título"
+    ]
+  },
+  {
+    "id": 204,
+    "topico": "Homicídio simples, privilegiado e qualificado",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "121",
+    "alias": [
+      "homicídio",
+      "assassinato",
+      "homicídio simples",
+      "homicídio privilegiado",
+      "homicídio qualificado",
+      "crime contra a vida"
+    ]
+  },
+  {
+    "id": 205,
+    "topico": "Feminicídio",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "121-A",
+    "alias": [
+      "feminicídio",
+      "matar mulher",
+      "crime de gênero",
+      "violência letal contra mulher"
+    ]
+  },
+  {
+    "id": 206,
+    "topico": "Lesão corporal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "129",
+    "alias": [
+      "lesão corporal",
+      "lesão leve",
+      "lesão grave",
+      "lesão gravíssima",
+      "lesão seguida de morte",
+      "lesão culposa"
+    ]
+  },
+  {
+    "id": 207,
+    "topico": "Lesão corporal em contexto de violência doméstica",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "129",
+    "alias": [
+      "violência doméstica",
+      "lesão doméstica",
+      "agressão doméstica",
+      "lesão contra mulher"
+    ]
+  },
+  {
+    "id": 208,
+    "topico": "Lesão corporal contra mulher por razões da condição do sexo feminino",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "129",
+    "alias": [
+      "lesão contra mulher",
+      "lesão por razões da condição do sexo feminino",
+      "violência de gênero"
+    ]
+  },
+  {
+    "id": 209,
+    "topico": "Calúnia, difamação e injúria",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "138/140",
+    "alias": [
+      "crimes contra a honra",
+      "calúnia",
+      "difamação",
+      "injúria",
+      "ofensa à honra"
+    ]
+  },
+  {
+    "id": 210,
+    "topico": "Ameaça",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "147",
+    "alias": [
+      "ameaça",
+      "ameaçar",
+      "promessa de mal injusto e grave"
+    ]
+  },
+  {
+    "id": 211,
+    "topico": "Perseguição (stalking)",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "147-A",
+    "alias": [
+      "stalking",
+      "perseguição",
+      "perseguidor",
+      "perseguir reiteradamente"
+    ]
+  },
+  {
+    "id": 212,
+    "topico": "Violência psicológica contra a mulher",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "147-B",
+    "alias": [
+      "violência psicológica",
+      "violência emocional",
+      "controle psicológico",
+      "violência contra mulher"
+    ]
+  },
+  {
+    "id": 213,
+    "topico": "Furto simples e qualificado",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "155",
+    "alias": [
+      "furto",
+      "subtração",
+      "furto qualificado",
+      "furto simples",
+      "furto mediante fraude",
+      "furto de energia"
+    ]
+  },
+  {
+    "id": 214,
+    "topico": "Roubo próprio e impróprio",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "157",
+    "alias": [
+      "roubo",
+      "assalto",
+      "subtração com violência",
+      "roubo próprio",
+      "roubo impróprio",
+      "roubo majorado"
+    ]
+  },
+  {
+    "id": 215,
+    "topico": "Latrocínio",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "157",
+    "alias": [
+      "latrocínio",
+      "roubo seguido de morte",
+      "roubo com resultado morte"
+    ]
+  },
+  {
+    "id": 216,
+    "topico": "Extorsão",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "158",
+    "alias": [
+      "extorsão",
+      "chantagem",
+      "obter vantagem mediante violência ou grave ameaça"
+    ]
+  },
+  {
+    "id": 217,
+    "topico": "Extorsão mediante restrição da liberdade (sequestro-relâmpago)",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "158",
+    "alias": [
+      "sequestro relâmpago",
+      "extorsão com restrição da liberdade",
+      "saque forçado"
+    ]
+  },
+  {
+    "id": 218,
+    "topico": "Extorsão mediante sequestro",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "159",
+    "alias": [
+      "extorsão mediante sequestro",
+      "sequestro para resgate",
+      "resgate"
+    ]
+  },
+  {
+    "id": 219,
+    "topico": "Estelionato",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "171",
+    "alias": [
+      "estelionato",
+      "golpe",
+      "fraude",
+      "obter vantagem ilícita",
+      "171 do código penal",
+      "fraude contra idoso",
+      "estelionato contra idoso",
+      "representação no estelionato",
+      "artigo 171"
+    ]
+  },
+  {
+    "id": 220,
+    "topico": "Fraude eletrônica",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "171",
+    "alias": [
+      "golpe eletrônico",
+      "estelionato digital",
+      "fraude digital",
+      "golpe por internet",
+      "phishing",
+      "fraude por aplicativo"
+    ]
+  },
+  {
+    "id": 221,
+    "topico": "Receptação",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "180",
+    "alias": [
+      "receptação",
+      "produto de crime",
+      "comprar coisa roubada",
+      "receptação qualificada",
+      "receptação culposa"
+    ]
+  },
+  {
+    "id": 222,
+    "topico": "Estupro",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "213",
+    "alias": [
+      "estupro",
+      "violência sexual",
+      "conjunção carnal mediante violência",
+      "crime sexual"
+    ]
+  },
+  {
+    "id": 223,
+    "topico": "Importunação sexual",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "215-A",
+    "alias": [
+      "importunação sexual",
+      "ato libidinoso sem consentimento",
+      "assédio em transporte público"
+    ]
+  },
+  {
+    "id": 224,
+    "topico": "Estupro de vulnerável",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "217-A",
+    "alias": [
+      "estupro de vulnerável",
+      "vulnerável",
+      "menor de 14 anos",
+      "vítima incapaz de consentir"
+    ]
+  },
+  {
+    "id": 225,
+    "topico": "Divulgação de cena de estupro, sexo, nudez ou pornografia sem consentimento",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "218-C",
+    "alias": [
+      "revenge porn",
+      "pornografia de vingança",
+      "divulgação de nudes",
+      "vazamento de fotos íntimas",
+      "divulgação de cena sexual"
+    ]
+  },
+  {
+    "id": 226,
+    "topico": "Peculato",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "312",
+    "alias": [
+      "peculato",
+      "desvio de dinheiro público",
+      "apropriação por funcionário público",
+      "peculato furto",
+      "peculato apropriação"
+    ]
+  },
+  {
+    "id": 227,
+    "topico": "Concussão",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "316",
+    "alias": [
+      "concussão",
+      "exigir vantagem indevida",
+      "exigência de propina"
+    ]
+  },
+  {
+    "id": 228,
+    "topico": "Corrupção passiva",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "317",
+    "alias": [
+      "corrupção passiva",
+      "receber propina",
+      "solicitar vantagem indevida",
+      "funcionário público corrupto"
+    ]
+  },
+  {
+    "id": 229,
+    "topico": "Corrupção ativa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "333",
+    "alias": [
+      "corrupção ativa",
+      "oferecer propina",
+      "prometer vantagem indevida"
+    ]
+  },
+  {
+    "id": 230,
+    "topico": "Crimes contra o Estado Democrático de Direito",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "359-I/359-T",
+    "alias": [
+      "estado democrático de direito",
+      "golpe de estado",
+      "abolição violenta do estado democrático",
+      "atentado ao estado democrático",
+      "crimes contra as instituições democráticas"
+    ]
+  },
+  {
+    "id": 231,
+    "topico": "Decadência e prescrição nas relações de consumo",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "26/27",
+    "alias": [
+      "decadência no cdc",
+      "prescrição no cdc",
+      "artigo 26 cdc",
+      "artigo 27 cdc",
+      "prazo de 30 e 90 dias",
+      "prazo de 5 anos acidente de consumo"
+    ]
+  },
+  {
+    "id": 232,
+    "topico": "Desconsideração da personalidade jurídica no Código de Defesa do Consumidor",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "28",
+    "alias": [
+      "desconsideração no cdc",
+      "teoria menor da desconsideração",
+      "artigo 28 cdc",
+      "obstáculo ao ressarcimento de consumidores"
+    ]
+  },
+  {
+    "id": 233,
+    "topico": "Direito de arrependimento nas compras fora do estabelecimento comercial",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "49",
+    "alias": [
+      "direito de arrependimento",
+      "prazo de reflexão",
+      "7 dias compra online",
+      "compra pela internet",
+      "artigo 49 cdc"
+    ]
+  },
+  {
+    "id": 234,
+    "topico": "Tráfico de drogas",
+    "lei": "Lei nº 11.343/2006 (Lei de Drogas)",
+    "artigo": "33",
+    "alias": [
+      "tráfico",
+      "drogas",
+      "tráfico de drogas",
+      "narcotráfico",
+      "vender drogas",
+      "transportar drogas",
+      "guardar entorpecente",
+      "artigo 33",
+      "tráfico privilegiado",
+      "artigo 33 parágrafo 4",
+      "tráfico ilícito de entorpecentes",
+      "causa de diminuição tráfico"
+    ]
+  },
+  {
+    "id": 235,
+    "topico": "Porte ilegal de arma de fogo de uso permitido",
+    "lei": "Lei nº 10.826/2003 (Estatuto do Desarmamento)",
+    "artigo": "14",
+    "alias": [
+      "porte ilegal de arma",
+      "porte de arma",
+      "arma de uso permitido",
+      "porte irregular de arma"
+    ]
+  },
+  {
+    "id": 236,
+    "topico": "Posse ou porte ilegal de arma de fogo de uso restrito ou proibido",
+    "lei": "Lei nº 10.826/2003 (Estatuto do Desarmamento)",
+    "artigo": "16",
+    "alias": [
+      "arma de uso restrito",
+      "arma proibida",
+      "posse ilegal de arma restrita",
+      "porte ilegal de arma restrita"
+    ]
+  },
+  {
+    "id": 237,
+    "topico": "Abuso de autoridade",
+    "lei": "Lei nº 13.869/2019 (Lei de Abuso de Autoridade)",
+    "artigo": "9/38",
+    "alias": [
+      "abuso de autoridade",
+      "abuso policial",
+      "abuso de poder",
+      "prisão ilegal por abuso",
+      "conduta abusiva de agente público",
+      "lei 13869",
+      "violação de prerrogativas",
+      "busca e apreensão abusiva"
+    ]
+  },
+  {
+    "id": 238,
+    "topico": "Organização criminosa",
+    "lei": "Lei nº 12.850/2013 (Lei de Organizações Criminosas)",
+    "artigo": "2",
+    "alias": [
+      "organização criminosa",
+      "facção criminosa",
+      "crime organizado",
+      "orcrim",
+      "integrar organização criminosa"
+    ]
+  },
+  {
+    "id": 239,
+    "topico": "Lavagem de dinheiro",
+    "lei": "Lei nº 9.613/1998 (Lei de Lavagem de Dinheiro)",
+    "artigo": "1",
+    "alias": [
+      "lavagem de dinheiro",
+      "ocultação de bens",
+      "ocultar valores ilícitos",
+      "branqueamento de capitais"
+    ]
+  },
+  {
+    "id": 240,
+    "topico": "Crimes hediondos",
+    "lei": "Lei nº 8.072/1990 (Lei dos Crimes Hediondos)",
+    "artigo": "1/2",
+    "alias": [
+      "crimes hediondos",
+      "crime hediondo",
+      "rol de hediondos",
+      "equiparados a hediondos",
+      "lei dos crimes hediondos"
+    ]
+  },
+  {
+    "id": 241,
+    "topico": "Racismo e discriminação racial",
+    "lei": "Lei nº 7.716/1989 (Lei dos Crimes de Preconceito)",
+    "artigo": "2-A/20",
+    "alias": [
+      "racismo",
+      "discriminação racial",
+      "preconceito racial",
+      "crime racial",
+      "injúria racial",
+      "racismo recreativo",
+      "homofobia",
+      "transfobia",
+      "discriminação por orientação sexual",
+      "discriminação por identidade de gênero"
+    ]
+  },
+  {
+    "id": 242,
+    "topico": "Violência doméstica e familiar contra a mulher: descumprimento de medida protetiva",
+    "lei": "Lei nº 11.340/2006 (Lei Maria da Penha)",
+    "artigo": "24-A",
+    "alias": [
+      "descumprimento de medida protetiva",
+      "quebrar medida protetiva",
+      "violação de medida protetiva",
+      "medida protetiva maria da penha",
+      "lei maria da penha",
+      "medida protetiva de urgência",
+      "crime de descumprimento de medida protetiva",
+      "artigo 24-a"
+    ]
+  },
+  {
+    "id": 243,
+    "topico": "Crimes contra a ordem tributária",
+    "lei": "Lei nº 8.137/1990 (Crimes contra a Ordem Tributária)",
+    "artigo": "1/3",
+    "alias": [
+      "crime tributário",
+      "sonegação fiscal",
+      "ordem tributária",
+      "fraude fiscal",
+      "crime contra o fisco"
+    ]
+  },
+  {
+    "id": 244,
+    "topico": "Execução penal",
+    "lei": "Lei nº 7.210/1984 (Lei de Execução Penal)",
+    "artigo": "1/204",
+    "alias": [
+      "execução penal",
+      "lep",
+      "regime fechado",
+      "regime semiaberto",
+      "regime aberto",
+      "progressão de regime",
+      "regressão",
+      "remição",
+      "falta grave",
+      "livramento condicional"
+    ]
+  },
+  {
+    "id": 245,
+    "topico": "Regressão e progressão de regime",
+    "lei": "Lei nº 7.210/1984 (Lei de Execução Penal)",
+    "artigo": "112/118",
+    "alias": [
+      "progressão de regime",
+      "regressão de regime",
+      "lapso temporal",
+      "requisito subjetivo",
+      "requisito objetivo",
+      "pacote anticrime",
+      "percentuais de progressão",
+      "exame criminológico",
+      "saída temporária"
+    ]
+  },
+  {
+    "id": 246,
+    "topico": "Remição da pena",
+    "lei": "Lei nº 7.210/1984 (Lei de Execução Penal)",
+    "artigo": "126/130",
+    "alias": [
+      "remição",
+      "remição pelo trabalho",
+      "remição pelo estudo",
+      "dias remidos"
+    ]
+  },
+  {
+    "id": 247,
+    "topico": "Lei Maria da Penha: formas de violência e medidas protetivas",
+    "lei": "Lei nº 11.340/2006 (Lei Maria da Penha)",
+    "artigo": "5/24-A",
+    "alias": [
+      "lei maria da penha",
+      "violência doméstica",
+      "violência familiar",
+      "medida protetiva",
+      "medidas protetivas de urgência",
+      "violência patrimonial",
+      "violência moral"
+    ]
+  },
+  {
+    "id": 248,
+    "topico": "Lei de Abuso de Autoridade: crimes e disposições gerais",
+    "lei": "Lei nº 13.869/2019 (Lei de Abuso de Autoridade)",
+    "artigo": "1/45",
+    "alias": [
+      "lei de abuso de autoridade",
+      "abuso de autoridade",
+      "abuso policial",
+      "abuso judicial"
+    ]
+  },
+  {
+    "id": 249,
+    "topico": "Lei de Lavagem de Dinheiro: prevenção e persecução",
+    "lei": "Lei nº 9.613/1998 (Lei de Lavagem de Dinheiro)",
+    "artigo": "1/17",
+    "alias": [
+      "lei de lavagem de dinheiro",
+      "lavagem de capitais",
+      "coaf",
+      "ocultação de patrimônio"
+    ]
+  },
+  {
+    "id": 250,
+    "topico": "Lei de Execução Penal: direitos, deveres e assistência ao preso",
+    "lei": "Lei nº 7.210/1984 (Lei de Execução Penal)",
+    "artigo": "10/43",
+    "alias": [
+      "direitos do preso",
+      "deveres do preso",
+      "assistência material",
+      "assistência à saúde",
+      "assistência jurídica",
+      "assistência educacional"
+    ]
+  },
+  {
+    "id": 251,
+    "topico": "Colaboração premiada",
+    "lei": "Lei nº 12.850/2013 (Lei de Organizações Criminosas)",
+    "artigo": "3-A/7",
+    "alias": [
+      "colaboração premiada",
+      "delação premiada",
+      "acordo de colaboração",
+      "homologação da delação",
+      "regra de corroboração"
+    ]
+  },
+  {
+    "id": 252,
+    "topico": "Agravo em execução penal",
+    "lei": "Lei nº 7.210/1984 (Lei de Execução Penal)",
+    "artigo": "197",
+    "alias": [
+      "agravo em execução",
+      "recurso na execução penal",
+      "artigo 197 lep",
+      "súmula 700 stf"
+    ]
+  },
+  {
+    "id": 253,
+    "topico": "Livramento condicional e saída temporária na execução penal",
+    "lei": "Lei nº 7.210/1984 (Lei de Execução Penal)",
+    "artigo": "122/146",
+    "alias": [
+      "saída temporária",
+      "saidinha",
+      "livramento condicional execução",
+      "monitoração eletrônica execução",
+      "trabalho externo"
+    ]
+  },
+  {
+    "id": 254,
+    "topico": "Alienação fiduciária de imóvel",
+    "lei": "Lei nº 9.514/1997",
+    "artigo": "22/33",
+    "alias": [
+      "alienação fiduciária de imóvel",
+      "financiamento imobiliário",
+      "consolidação da propriedade",
+      "leilão extrajudicial"
+    ]
+  },
+  {
+    "id": 255,
+    "topico": "Registros Públicos",
+    "lei": "Lei nº 6.015/1973",
+    "artigo": "1/300",
+    "alias": [
+      "lei de registros públicos",
+      "registro civil",
+      "registro de imóveis",
+      "registro de títulos e documentos",
+      "retificação de registro"
+    ]
+  },
+  {
+    "id": 256,
+    "topico": "Retificação e suprimento de registro civil",
+    "lei": "Lei nº 6.015/1973",
+    "artigo": "109/113",
+    "alias": [
+      "retificação de registro civil",
+      "alteração de nome",
+      "registro tardio",
+      "suprimento de registro"
+    ]
+  },
+  {
+    "id": 257,
+    "topico": "Bem de família legal e impenhorabilidade residencial",
+    "lei": "Lei nº 8.009/1990",
+    "artigo": "1/8",
+    "alias": [
+      "bem de família",
+      "impenhorabilidade do bem de família",
+      "lei 8009",
+      "único imóvel residencial",
+      "exceções à impenhorabilidade",
+      "fiador de locação bem de família"
+    ]
+  },
+  {
+    "id": 258,
+    "topico": "Planos e seguros privados de assistência à saúde",
+    "lei": "Lei nº 9.656/1998 (Lei dos Planos de Saúde)",
+    "artigo": "1/36",
+    "alias": [
+      "plano de saúde",
+      "negativa de cobertura",
+      "rol da ans",
+      "reajuste de mensalidade",
+      "reajuste por faixa etária",
+      "home care",
+      "medicamento de alto custo",
+      "urgência e emergência plano de saúde"
+    ]
+  },
+  {
+    "id": 259,
+    "topico": "Marco Civil da Internet: direitos, neutralidade e responsabilidade de provedores",
+    "lei": "Lei nº 12.965/2014 (Marco Civil da Internet)",
+    "artigo": "1/32",
+    "alias": [
+      "marco civil da internet",
+      "lei 12965",
+      "responsabilidade de provedor",
+      "artigo 19 marco civil",
+      "remoção de conteúdo",
+      "quebra de sigilo de registros",
+      "guarda de logs",
+      "neutralidade da rede"
+    ]
+  },
+  {
+    "id": 260,
+    "topico": "Lei de Improbidade Administrativa",
+    "lei": "Lei nº 8.429/1992",
+    "artigo": "1/25",
+    "alias": [
+      "improbidade administrativa",
+      "ato de improbidade",
+      "enriquecimento ilícito",
+      "dano ao erário",
+      "violação de princípios",
+      "lei 8429",
+      "lei 14230",
+      "dolo específico improbidade",
+      "prescrição improbidade",
+      "acordo de não persecução civil",
+      "anpc"
+    ]
+  },
+  {
+    "id": 261,
+    "topico": "Lei de Licitações e Contratos Administrativos",
+    "lei": "Lei nº 14.133/2021",
+    "artigo": "1/194",
+    "alias": [
+      "nova lei de licitações",
+      "licitações",
+      "contratos administrativos",
+      "pregão",
+      "concorrência",
+      "dispensa",
+      "inexigibilidade",
+      "sanções licitatórias",
+      "lei 14133",
+      "pncp",
+      "diálogo competitivo",
+      "matriz de riscos",
+      "sobrepreço",
+      "superfaturamento"
+    ]
+  },
+  {
+    "id": 262,
+    "topico": "Processo Administrativo Federal",
+    "lei": "Lei nº 9.784/1999",
+    "artigo": "1/69",
+    "alias": [
+      "processo administrativo",
+      "processo administrativo federal",
+      "lei 9784",
+      "anulação administrativa",
+      "revogação administrativa",
+      "recurso administrativo"
+    ]
+  },
+  {
+    "id": 263,
+    "topico": "Regime Jurídico dos Servidores Públicos Federais",
+    "lei": "Lei nº 8.112/1990",
+    "artigo": "1/253",
+    "alias": [
+      "lei 8112",
+      "servidor público federal",
+      "regime jurídico único",
+      "processo administrativo disciplinar",
+      "pad",
+      "sindicância"
+    ]
+  },
+  {
+    "id": 264,
+    "topico": "Lei Geral de Proteção de Dados Pessoais",
+    "lei": "Lei nº 13.709/2018",
+    "artigo": "1/65",
+    "alias": [
+      "lgpd",
+      "proteção de dados",
+      "dados pessoais",
+      "dados sensíveis",
+      "controlador",
+      "operador",
+      "encarregado",
+      "lei 13709",
+      "anpd",
+      "bases legais lgpd",
+      "consentimento",
+      "vazamento de dados",
+      "direitos do titular",
+      "eliminação de dados"
+    ]
+  },
+  {
+    "id": 265,
+    "topico": "Atos administrativos: elementos, atributos e classificação",
+    "lei": "Lei nº 9.784/1999",
+    "artigo": "2/3",
+    "alias": [
+      "ato administrativo",
+      "elementos do ato",
+      "competência finalidade forma motivo objeto",
+      "atributos do ato administrativo",
+      "presunção de legitimidade"
+    ]
+  },
+  {
+    "id": 266,
+    "topico": "Anulação, revogação e convalidação dos atos administrativos",
+    "lei": "Lei nº 9.784/1999",
+    "artigo": "53/55",
+    "alias": [
+      "anulação",
+      "revogação",
+      "convalidação",
+      "autotutela",
+      "súmula 473 stf"
+    ]
+  },
+  {
+    "id": 267,
+    "topico": "Desapropriação",
+    "lei": "Decreto-Lei nº 3.365/1941",
+    "artigo": "1/35",
+    "alias": [
+      "desapropriação",
+      "expropriação",
+      "desapropriação por utilidade pública",
+      "imissão provisória na posse"
+    ]
+  },
+  {
+    "id": 268,
+    "topico": "Improbidade administrativa: atos, sanções e prescrição",
+    "lei": "Lei nº 8.429/1992",
+    "artigo": "9/23",
+    "alias": [
+      "improbidade",
+      "enriquecimento ilícito",
+      "prejuízo ao erário",
+      "violação a princípios",
+      "sanções de improbidade"
+    ]
+  },
+  {
+    "id": 269,
+    "topico": "Licitações: planejamento, modalidades e julgamento",
+    "lei": "Lei nº 14.133/2021",
+    "artigo": "18/39",
+    "alias": [
+      "fase preparatória",
+      "modalidades de licitação",
+      "pregão",
+      "concorrência",
+      "critério de julgamento"
+    ]
+  },
+  {
+    "id": 270,
+    "topico": "Contratação direta: dispensa e inexigibilidade",
+    "lei": "Lei nº 14.133/2021",
+    "artigo": "72/75",
+    "alias": [
+      "dispensa de licitação",
+      "inexigibilidade",
+      "contratação direta",
+      "emergência licitação"
+    ]
+  },
+  {
+    "id": 271,
+    "topico": "Contratos administrativos: execução, alteração e extinção",
+    "lei": "Lei nº 14.133/2021",
+    "artigo": "89/154",
+    "alias": [
+      "contrato administrativo",
+      "reequilíbrio econômico financeiro",
+      "alteração contratual",
+      "extinção do contrato",
+      "fiscalização contratual"
+    ]
+  },
+  {
+    "id": 272,
+    "topico": "Desapropriação indireta e juros compensatórios",
+    "lei": "Decreto-Lei nº 3.365/1941",
+    "artigo": "15-A/35",
+    "alias": [
+      "desapropriação indireta",
+      "apossamento administrativo",
+      "juros compensatórios",
+      "juros moratórios desapropriação",
+      "justa indenização"
+    ]
+  },
+  {
+    "id": 273,
+    "topico": "Conceito e espécies tributárias",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "3/5",
+    "alias": [
+      "conceito de tributo",
+      "espécies tributárias",
+      "imposto",
+      "taxa",
+      "contribuição de melhoria",
+      "empréstimo compulsório"
+    ]
+  },
+  {
+    "id": 274,
+    "topico": "Obrigação tributária e fato gerador",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "113/118",
+    "alias": [
+      "obrigação tributária",
+      "fato gerador",
+      "obrigação principal",
+      "obrigação acessória"
+    ]
+  },
+  {
+    "id": 275,
+    "topico": "Responsabilidade tributária",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "128/138",
+    "alias": [
+      "responsabilidade tributária",
+      "responsabilidade de terceiros",
+      "sucessão tributária",
+      "responsabilidade por infrações"
+    ]
+  },
+  {
+    "id": 276,
+    "topico": "Crédito tributário e lançamento",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "139/150",
+    "alias": [
+      "crédito tributário",
+      "lançamento tributário",
+      "lançamento de ofício",
+      "lançamento por declaração",
+      "lançamento por homologação"
+    ]
+  },
+  {
+    "id": 277,
+    "topico": "Suspensão da exigibilidade do crédito tributário",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "151",
+    "alias": [
+      "suspensão da exigibilidade",
+      "moratória",
+      "depósito integral",
+      "liminar em mandado de segurança",
+      "parcelamento"
+    ]
+  },
+  {
+    "id": 278,
+    "topico": "Extinção do crédito tributário",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "156/174",
+    "alias": [
+      "extinção do crédito",
+      "pagamento",
+      "compensação tributária",
+      "transação tributária",
+      "remissão",
+      "prescrição tributária",
+      "decadência tributária"
+    ]
+  },
+  {
+    "id": 279,
+    "topico": "Exclusão do crédito tributário",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "175/182",
+    "alias": [
+      "exclusão do crédito",
+      "isenção",
+      "anistia tributária"
+    ]
+  },
+  {
+    "id": 280,
+    "topico": "Dívida ativa e execução fiscal",
+    "lei": "Lei nº 6.830/1980",
+    "artigo": "1/40",
+    "alias": [
+      "dívida ativa",
+      "execução fiscal",
+      "lei de execução fiscal",
+      "lef",
+      "embargos à execução fiscal",
+      "exceção de pré-executividade",
+      "lei 6830",
+      "cda",
+      "certidão de dívida ativa",
+      "prescrição intercorrente fiscal",
+      "redirecionamento para sócio",
+      "garantia do juízo"
+    ]
+  },
+  {
+    "id": 281,
+    "topico": "Decadência e prescrição tributárias",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "150/174",
+    "alias": [
+      "decadência tributária",
+      "prescrição tributária",
+      "prazo para lançamento",
+      "prazo para cobrança"
+    ]
+  },
+  {
+    "id": 282,
+    "topico": "Regulamentação do IBS e da CBS",
+    "lei": "Lei Complementar nº 214/2025",
+    "artigo": "1/544",
+    "alias": [
+      "lc 214",
+      "lei complementar 214",
+      "ibs",
+      "cbs",
+      "regimes diferenciados",
+      "não cumulatividade",
+      "creditamento"
+    ]
+  },
+  {
+    "id": 283,
+    "topico": "ICMS: incidência, não cumulatividade e substituição tributária",
+    "lei": "Lei Complementar nº 87/1996 (Lei Kandir)",
+    "artigo": "1/36",
+    "alias": [
+      "icms",
+      "lei kandir",
+      "lc 87",
+      "substituição tributária",
+      "icms-st",
+      "difal",
+      "diferencial de alíquota",
+      "não cumulatividade icms"
+    ]
+  },
+  {
+    "id": 284,
+    "topico": "ISS: fato gerador, local da prestação e lista de serviços",
+    "lei": "Lei Complementar nº 116/2003",
+    "artigo": "1/10",
+    "alias": [
+      "iss",
+      "issqn",
+      "lc 116",
+      "imposto sobre serviços",
+      "município competente iss",
+      "lista de serviços iss"
+    ]
+  },
+  {
+    "id": 285,
+    "topico": "Imposto sobre a Renda (IRPF e IRPJ): fato gerador e base de cálculo",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "43/45",
+    "alias": [
+      "imposto de renda",
+      "irpf",
+      "irpj",
+      "isenção imposto de renda moléstia grave",
+      "lei 7713",
+      "acréscimo patrimonial"
+    ]
+  },
+  {
+    "id": 286,
+    "topico": "Simples Nacional e Estatuto da Microempresa e Empresa de Pequeno Porte",
+    "lei": "Lei Complementar nº 123/2006",
+    "artigo": "1/89",
+    "alias": [
+      "simples nacional",
+      "lc 123",
+      "mei",
+      "microempreendedor individual",
+      "microempresa",
+      "empresa de pequeno porte",
+      "exclusão do simples nacional"
+    ]
+  },
+  {
+    "id": 287,
+    "topico": "Segurados obrigatórios e facultativos do RGPS",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "11/15",
+    "alias": [
+      "segurados do inss",
+      "segurado obrigatório",
+      "segurado facultativo",
+      "empregado",
+      "contribuinte individual",
+      "segurado especial"
+    ]
+  },
+  {
+    "id": 288,
+    "topico": "Aposentadoria programada e regras de transição",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "48/51",
+    "alias": [
+      "aposentadoria por idade",
+      "aposentadoria programada",
+      "aposentadoria urbana",
+      "regra de transição",
+      "ec 103"
+    ]
+  },
+  {
+    "id": 289,
+    "topico": "Aposentadoria especial",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "57/58",
+    "alias": [
+      "aposentadoria especial",
+      "atividade especial",
+      "agentes nocivos",
+      "ppp",
+      "ltcat"
+    ]
+  },
+  {
+    "id": 290,
+    "topico": "Aposentadoria por incapacidade permanente",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "42/47",
+    "alias": [
+      "aposentadoria por invalidez",
+      "incapacidade permanente",
+      "invalidez previdenciária",
+      "aposentadoria por incapacidade permanente",
+      "antiga aposentadoria por invalidez",
+      "adicional de 25 por cento",
+      "perícia médica inss"
+    ]
+  },
+  {
+    "id": 291,
+    "topico": "Benefício por incapacidade temporária",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "59/63",
+    "alias": [
+      "auxílio-doença",
+      "benefício por incapacidade temporária",
+      "incapacidade temporária",
+      "auxílio por incapacidade temporária",
+      "antigo auxílio-doença",
+      "data de cessação do benefício",
+      "alta programada"
+    ]
+  },
+  {
+    "id": 292,
+    "topico": "Pensão por morte e auxílio-reclusão",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "74/80",
+    "alias": [
+      "pensão por morte",
+      "auxílio-reclusão",
+      "benefícios para dependentes"
+    ]
+  },
+  {
+    "id": 293,
+    "topico": "Benefício de prestação continuada (BPC/LOAS)",
+    "lei": "Lei nº 8.742/1993 (Lei Orgânica da Assistência Social - LOAS)",
+    "artigo": "20/21",
+    "alias": [
+      "bpc",
+      "loas",
+      "benefício assistencial",
+      "benefício de prestação continuada",
+      "idoso de baixa renda",
+      "pessoa com deficiência baixa renda",
+      "bpc loas",
+      "critério de miserabilidade",
+      "renda per capita",
+      "avaliação biopsicossocial",
+      "grupo familiar bpc"
+    ]
+  },
+  {
+    "id": 294,
+    "topico": "Reforma da Previdência: regras constitucionais e transição",
+    "lei": "Emenda Constitucional nº 103/2019",
+    "artigo": "1/36",
+    "alias": [
+      "reforma da previdência",
+      "ec 103 de 2019",
+      "regras de transição previdenciária",
+      "pedágio 50",
+      "pedágio 100"
+    ]
+  },
+  {
+    "id": 295,
+    "topico": "Estabilidade acidentária e reintegração no emprego",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "118",
+    "alias": [
+      "estabilidade acidentária",
+      "estabilidade acidente de trabalho",
+      "artigo 118 lei 8213",
+      "doença ocupacional estabilidade",
+      "reintegração trabalhista"
+    ]
+  },
+  {
+    "id": 296,
+    "topico": "Revisão de benefícios previdenciários, decadência e prescrição",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "103/103-A",
+    "alias": [
+      "revisão de benefício previdenciário",
+      "decadência previdenciária",
+      "prazo decenal inss",
+      "artigo 103 lei 8213",
+      "prescrição quinquenal previdenciária",
+      "revisão da vida toda"
+    ]
+  },
+  {
+    "id": 297,
+    "topico": "Ação civil pública",
+    "lei": "Lei nº 7.347/1985",
+    "artigo": "1/21",
+    "alias": [
+      "ação civil pública",
+      "acp",
+      "tutela coletiva",
+      "direitos difusos",
+      "direitos coletivos",
+      "interesses individuais homogêneos"
+    ]
+  },
+  {
+    "id": 298,
+    "topico": "Ação popular",
+    "lei": "Lei nº 4.717/1965",
+    "artigo": "1/22",
+    "alias": [
+      "ação popular",
+      "ação popular constitucional",
+      "cidadão",
+      "anulação de ato lesivo",
+      "patrimônio público",
+      "legitimidade do cidadão"
+    ]
+  },
+  {
+    "id": 299,
+    "topico": "Mandado de segurança: cabimento e direito líquido e certo",
+    "lei": "Lei nº 12.016/2009",
+    "artigo": "1/5",
+    "alias": [
+      "mandado de segurança cabimento",
+      "direito líquido e certo",
+      "ato de autoridade",
+      "ms contra ato judicial"
+    ]
+  },
+  {
+    "id": 300,
+    "topico": "Mandado de segurança: liminar, procedimento e recursos",
+    "lei": "Lei nº 12.016/2009",
+    "artigo": "6/20",
+    "alias": [
+      "liminar em mandado de segurança",
+      "informações da autoridade",
+      "sentença no ms",
+      "recurso em mandado de segurança",
+      "suspensão de segurança"
+    ]
+  },
+  {
+    "id": 301,
+    "topico": "Mandado de segurança coletivo",
+    "lei": "Lei nº 12.016/2009",
+    "artigo": "21/22",
+    "alias": [
+      "mandado de segurança coletivo",
+      "ms coletivo",
+      "legitimidade coletiva"
+    ]
+  },
+  {
+    "id": 302,
+    "topico": "Mandado de segurança: prazo decadencial",
+    "lei": "Lei nº 12.016/2009",
+    "artigo": "23",
+    "alias": [
+      "prazo do mandado de segurança",
+      "decadência do ms",
+      "120 dias"
+    ]
+  },
+  {
+    "id": 303,
+    "topico": "Mandado de segurança em matéria tributária",
+    "lei": "Lei nº 12.016/2009",
+    "artigo": "1",
+    "alias": [
+      "mandado de segurança tributário",
+      "ms tributário",
+      "liminar tributária em mandado de segurança",
+      "suspensão da exigibilidade por liminar"
+    ]
+  },
+  {
+    "id": 304,
+    "topico": "Ação direta de inconstitucionalidade e ação declaratória de constitucionalidade",
+    "lei": "Lei nº 9.868/1999",
+    "artigo": "1/29",
+    "alias": [
+      "adi",
+      "adc",
+      "ação direta de inconstitucionalidade",
+      "ação declaratória de constitucionalidade",
+      "controle concentrado"
+    ]
+  },
+  {
+    "id": 305,
+    "topico": "Arguição de descumprimento de preceito fundamental",
+    "lei": "Lei nº 9.882/1999",
+    "artigo": "1/13",
+    "alias": [
+      "adpf",
+      "arguição de descumprimento de preceito fundamental",
+      "subsidiariedade adpf"
+    ]
+  },
+  {
+    "id": 306,
+    "topico": "Mandado de injunção",
+    "lei": "Lei nº 13.300/2016",
+    "artigo": "1/15",
+    "alias": [
+      "mandado de injunção",
+      "mi",
+      "omissão legislativa",
+      "direito inviabilizado por falta de norma"
+    ]
+  },
+  {
+    "id": 307,
+    "topico": "Habeas data",
+    "lei": "Lei nº 9.507/1997",
+    "artigo": "1/23",
+    "alias": [
+      "habeas data",
+      "acesso a dados pessoais",
+      "retificação de dados"
+    ]
+  },
+  {
+    "id": 308,
+    "topico": "Súmula vinculante: edição, revisão, cancelamento e reclamação",
+    "lei": "Lei nº 11.417/2006",
+    "artigo": "1/11",
+    "alias": [
+      "súmula vinculante",
+      "efeito vinculante",
+      "lei 11417",
+      "revisão de súmula vinculante",
+      "cancelamento de súmula vinculante",
+      "artigo 103-a cf"
+    ]
+  },
+  {
+    "id": 309,
+    "topico": "Procedimento sumaríssimo e Juizados Criminais",
+    "lei": "Lei nº 9.099/1995",
+    "artigo": "60/92",
+    "alias": [
+      "juizado especial criminal",
+      "jecrim",
+      "procedimento sumaríssimo penal",
+      "termo circunstanciado",
+      "transação penal",
+      "suspensão condicional do processo"
+    ]
+  },
+  {
+    "id": 310,
+    "topico": "Lei dos Juizados Especiais Cíveis e Criminais",
+    "lei": "Lei nº 9.099/1995",
+    "artigo": "1/92",
+    "alias": [
+      "juizado especial",
+      "jec",
+      "jecrim",
+      "juizado de pequenas causas",
+      "juizado especial cível",
+      "juizado especial criminal"
+    ]
+  },
+  {
+    "id": 311,
+    "topico": "Juizados Especiais Federais",
+    "lei": "Lei nº 10.259/2001",
+    "artigo": "1/27",
+    "alias": [
+      "jef",
+      "juizado especial federal",
+      "juizado federal",
+      "turma recursal federal",
+      "tnu",
+      "turma nacional de uniformização",
+      "lei 10259"
+    ]
+  },
+  {
+    "id": 312,
+    "topico": "Juizados Especiais da Fazenda Pública",
+    "lei": "Lei nº 12.153/2009",
+    "artigo": "1/28",
+    "alias": [
+      "jefaz",
+      "juizado fazendário",
+      "juizado da fazenda pública",
+      "juizado especial da fazenda"
+    ]
+  },
+  {
+    "id": 313,
+    "topico": "Juizados Especiais Cíveis: princípios e competência",
+    "lei": "Lei nº 9.099/1995",
+    "artigo": "2/4",
+    "alias": [
+      "jec",
+      "juizado especial cível",
+      "competência do juizado",
+      "oralidade",
+      "simplicidade",
+      "celeridade"
+    ]
+  },
+  {
+    "id": 314,
+    "topico": "Juizados Especiais Cíveis: partes e procedimento",
+    "lei": "Lei nº 9.099/1995",
+    "artigo": "8/37",
+    "alias": [
+      "partes no jec",
+      "petição inicial jec",
+      "audiência jec",
+      "contestação jec",
+      "provas no juizado"
+    ]
+  },
+  {
+    "id": 315,
+    "topico": "Juizados Especiais Cíveis: sentença, recursos e execução",
+    "lei": "Lei nº 9.099/1995",
+    "artigo": "38/55",
+    "alias": [
+      "recurso inominado",
+      "execução no jec",
+      "custas no jec",
+      "honorários no juizado"
+    ]
+  },
+  {
+    "id": 316,
+    "topico": "Juizados Especiais Federais: competência e limites",
+    "lei": "Lei nº 10.259/2001",
+    "artigo": "3/6",
+    "alias": [
+      "jef competência",
+      "60 salários mínimos",
+      "competência juizado federal",
+      "exclusões jef"
+    ]
+  },
+  {
+    "id": 317,
+    "topico": "Juizados Especiais Federais: provas, sentença e recursos",
+    "lei": "Lei nº 10.259/2001",
+    "artigo": "4/17",
+    "alias": [
+      "recurso jef",
+      "turma recursal",
+      "uniformização de jurisprudência",
+      "tnu",
+      "perícia no jef",
+      "turma nacional de uniformização",
+      "incidente de uniformização"
+    ]
+  },
+  {
+    "id": 318,
+    "topico": "Juizados Especiais da Fazenda Pública: competência e partes",
+    "lei": "Lei nº 12.153/2009",
+    "artigo": "2/6",
+    "alias": [
+      "jefaz competência",
+      "juizado fazenda pública",
+      "60 salários mínimos fazenda"
+    ]
+  },
+  {
+    "id": 319,
+    "topico": "Juizados Especiais da Fazenda Pública: tutela, provas e recursos",
+    "lei": "Lei nº 12.153/2009",
+    "artigo": "3/19",
+    "alias": [
+      "tutela provisória jefaz",
+      "recurso jefaz",
+      "pedido de uniformização jefaz",
+      "pagamento rpv jefaz"
+    ]
+  },
+  {
+    "id": 320,
+    "topico": "Ministério Público no processo civil",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "176/181",
+    "alias": [
+      "ministério público",
+      "fiscal da ordem jurídica",
+      "custos legis"
+    ]
+  },
+  {
+    "id": 321,
+    "topico": "Advocacia Pública e Defensoria Pública",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "182/187",
+    "alias": [
+      "advocacia pública",
+      "defensoria pública",
+      "representação judicial da fazenda"
+    ]
+  },
+  {
+    "id": 322,
+    "topico": "Atos processuais, forma e publicidade",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "188/211",
+    "alias": [
+      "atos processuais",
+      "forma dos atos",
+      "publicidade processual",
+      "processo eletrônico"
+    ]
+  },
+  {
+    "id": 323,
+    "topico": "Distribuição, registro e valor da causa",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "284/293",
+    "alias": [
+      "distribuição",
+      "registro",
+      "valor da causa",
+      "impugnação ao valor da causa"
+    ]
+  },
+  {
+    "id": 324,
+    "topico": "Improcedência liminar do pedido",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "332",
+    "alias": [
+      "improcedência liminar",
+      "julgamento liminar de improcedência"
+    ]
+  },
+  {
+    "id": 325,
+    "topico": "Audiência de conciliação ou mediação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "334",
+    "alias": [
+      "audiência de conciliação",
+      "audiência de mediação",
+      "autocomposição"
+    ]
+  },
+  {
+    "id": 326,
+    "topico": "Depoimento pessoal e confissão",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "385/395",
+    "alias": [
+      "depoimento pessoal",
+      "confissão",
+      "pena de confesso"
+    ]
+  },
+  {
+    "id": 327,
+    "topico": "Exibição de documento ou coisa",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "396/404",
+    "alias": [
+      "exibição de documento",
+      "exibição de coisa",
+      "documento em poder da parte"
+    ]
+  },
+  {
+    "id": 328,
+    "topico": "Liquidação de sentença",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "509/512",
+    "alias": [
+      "liquidação de sentença",
+      "liquidação por arbitramento",
+      "liquidação pelo procedimento comum"
+    ]
+  },
+  {
+    "id": 329,
+    "topico": "Execução: disposições gerais",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "771/796",
+    "alias": [
+      "processo de execução",
+      "execução civil",
+      "princípios da execução",
+      "responsabilidade patrimonial"
+    ]
+  },
+  {
+    "id": 330,
+    "topico": "Títulos executivos judiciais e extrajudiciais",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "515/784",
+    "alias": [
+      "título executivo",
+      "título judicial",
+      "título extrajudicial",
+      "rol de títulos executivos"
+    ]
+  },
+  {
+    "id": 331,
+    "topico": "Ação monitória",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "700/702",
+    "alias": [
+      "ação monitória",
+      "monitória",
+      "prova escrita sem eficácia de título executivo",
+      "mandado monitório"
+    ]
+  },
+  {
+    "id": 332,
+    "topico": "Ações possessórias",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "554/568",
+    "alias": [
+      "ação possessória",
+      "reintegração de posse",
+      "manutenção de posse",
+      "interdito proibitório"
+    ]
+  },
+  {
+    "id": 333,
+    "topico": "Inventário e partilha judicial",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "610/673",
+    "alias": [
+      "inventário judicial",
+      "arrolamento",
+      "partilha judicial",
+      "remoção de inventariante"
+    ]
+  },
+  {
+    "id": 334,
+    "topico": "Embargos de terceiro",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "674/681",
+    "alias": [
+      "embargos de terceiro",
+      "terceiro proprietário",
+      "desconstituir penhora de terceiro"
+    ]
+  },
+  {
+    "id": 335,
+    "topico": "Ações de família",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "693/699",
+    "alias": [
+      "ações de família",
+      "divórcio judicial",
+      "guarda",
+      "alimentos",
+      "mediação familiar"
+    ]
+  },
+  {
+    "id": 336,
+    "topico": "Relevância da questão de direito federal infraconstitucional no recurso especial",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1035-A",
+    "alias": [
+      "relevância da questão federal",
+      "relevância no recurso especial",
+      "relevância do resp",
+      "filtro de relevância do stj",
+      "admissibilidade do recurso especial",
+      "lei 15484 2026"
+    ]
+  },
+  {
+    "id": 337,
+    "topico": "Incidente de assunção de competência (IAC)",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "947",
+    "alias": [
+      "iac",
+      "incidente de assunção de competência",
+      "assunção de competência",
+      "relevante questão de direito",
+      "artigo 947 cpc"
+    ]
+  },
+  {
+    "id": 338,
+    "topico": "Embargos de divergência",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "1043/1044",
+    "alias": [
+      "embargos de divergência",
+      "divergência interna no stj",
+      "divergência interna no stf",
+      "acórdão paradigma",
+      "cotejo analítico",
+      "artigo 1043 cpc"
+    ]
+  },
+  {
+    "id": 339,
+    "topico": "Impedimento e suspeição do juiz e auxiliares",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "144/148",
+    "alias": [
+      "impedimento do juiz",
+      "suspeição do juiz",
+      "arguição de impedimento",
+      "arguição de suspeição",
+      "parcialidade do julgador",
+      "artigo 144 cpc",
+      "artigo 145 cpc"
+    ]
+  },
+  {
+    "id": 340,
+    "topico": "Negócio jurídico processual e calendarização",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "190/191",
+    "alias": [
+      "negócio jurídico processual",
+      "njp",
+      "convenção processual",
+      "calendarização processual",
+      "artigo 190 cpc"
+    ]
+  },
+  {
+    "id": 341,
+    "topico": "Ordem dos processos nos tribunais e sustentação oral",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "929/946",
+    "alias": [
+      "julgamento nos tribunais",
+      "sustentação oral",
+      "técnica de ampliação do colegiado",
+      "artigo 942 cpc",
+      "julgamento estendido",
+      "poderes do relator",
+      "artigo 932 cpc"
+    ]
+  },
+  {
+    "id": 342,
+    "topico": "Exibição de documentos e produção antecipada da prova",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "381/383",
+    "alias": [
+      "produção antecipada da prova",
+      "ação autônoma de prova",
+      "produção antecipada de provas",
+      "artigo 381 cpc"
+    ]
+  },
+  {
+    "id": 343,
+    "topico": "Crimes previstos no Estatuto da Criança e do Adolescente",
+    "lei": "Lei nº 8.069/1990 (ECA)",
+    "artigo": "228/244-B",
+    "alias": [
+      "crimes do eca",
+      "crime contra criança",
+      "crime contra adolescente",
+      "corrupção de menores eca"
+    ]
+  },
+  {
+    "id": 344,
+    "topico": "Estatuto da Criança e do Adolescente: direitos fundamentais e proteção integral",
+    "lei": "Lei nº 8.069/1990 (ECA)",
+    "artigo": "1/69",
+    "alias": [
+      "eca",
+      "estatuto da criança e do adolescente",
+      "proteção integral",
+      "direitos da criança",
+      "direitos do adolescente"
+    ]
+  },
+  {
+    "id": 345,
+    "topico": "ECA: medidas de proteção e medidas socioeducativas",
+    "lei": "Lei nº 8.069/1990 (ECA)",
+    "artigo": "98/128",
+    "alias": [
+      "medidas de proteção",
+      "medidas socioeducativas",
+      "ato infracional",
+      "internação de adolescente",
+      "liberdade assistida"
+    ]
+  },
+  {
+    "id": 346,
+    "topico": "ECA: Conselho Tutelar e políticas de atendimento",
+    "lei": "Lei nº 8.069/1990 (ECA)",
+    "artigo": "131/140",
+    "alias": [
+      "conselho tutelar",
+      "política de atendimento",
+      "conselheiros tutelares"
+    ]
+  },
+  {
+    "id": 347,
+    "topico": "Estatuto da Pessoa Idosa",
+    "lei": "Lei nº 10.741/2003 (Estatuto da Pessoa Idosa)",
+    "artigo": "1/118",
+    "alias": [
+      "estatuto do idoso",
+      "pessoa idosa",
+      "direitos do idoso",
+      "prioridade idoso",
+      "violência contra idoso"
+    ]
+  },
+  {
+    "id": 348,
+    "topico": "Estatuto da Pessoa com Deficiência",
+    "lei": "Lei nº 13.146/2015",
+    "artigo": "1/127",
+    "alias": [
+      "lei brasileira de inclusão",
+      "lbi",
+      "pessoa com deficiência",
+      "capacidade civil da pessoa com deficiência",
+      "acessibilidade",
+      "curatela"
+    ]
+  },
+  {
+    "id": 349,
+    "topico": "Recuperação judicial e falência",
+    "lei": "Lei nº 11.101/2005",
+    "artigo": "1/201",
+    "alias": [
+      "recuperação judicial",
+      "falência",
+      "recuperação extrajudicial",
+      "stay period",
+      "créditos concursais",
+      "lei 11101",
+      "administrador judicial",
+      "plano de recuperação judicial",
+      "cram down",
+      "habilitação de crédito",
+      "falência fraudulenta"
+    ]
+  },
+  {
+    "id": 350,
+    "topico": "Alienação parental",
+    "lei": "Lei nº 12.318/2010",
+    "artigo": "1/11",
+    "alias": [
+      "alienação parental",
+      "lei 12318",
+      "atos de alienação parental",
+      "inversão da guarda por alienação",
+      "perícia biopsicossocial"
+    ]
+  },
+  {
+    "id": 351,
+    "topico": "Adoção e destituição do poder familiar",
+    "lei": "Lei nº 8.069/1990 (ECA)",
+    "artigo": "39/52-D",
+    "alias": [
+      "adoção",
+      "adoção intuitu personae",
+      "cadastro nacional de adoção",
+      "destituição do poder familiar",
+      "entrega voluntária para adoção"
+    ]
+  },
+  {
+    "id": 352,
+    "topico": "Cheque: emissão, circulação, sustação e prescrição",
+    "lei": "Lei nº 7.357/1985 (Lei do Cheque)",
+    "artigo": "1/71",
+    "alias": [
+      "lei do cheque",
+      "cheque",
+      "cheque sem fundos",
+      "cheque pós-datado",
+      "sustação de cheque",
+      "prescrição do cheque",
+      "ação monitória de cheque prescrito"
+    ]
+  },
+  {
+    "id": 353,
+    "topico": "Duplicata mercantil e de prestação de serviços",
+    "lei": "Lei nº 5.474/1968 (Lei das Duplicatas)",
+    "artigo": "1/28",
+    "alias": [
+      "duplicata",
+      "duplicata mercantil",
+      "duplicata virtual",
+      "duplicata simulada",
+      "aceite de duplicata",
+      "protesto por indicação"
+    ]
+  },
+  {
+    "id": 354,
+    "topico": "Protesto de títulos e outros documentos de dívida",
+    "lei": "Lei nº 9.492/1997 (Lei de Protesto)",
+    "artigo": "1/44",
+    "alias": [
+      "protesto de título",
+      "cartório de protesto",
+      "cancelamento de protesto",
+      "sustação de protesto",
+      "protesto indevido"
+    ]
+  },
+  {
+    "id": 355,
+    "topico": "Arbitragem: convenção arbitral, árbitros e sentença arbitral",
+    "lei": "Lei nº 9.307/1996 (Lei de Arbitragem)",
+    "artigo": "1/44",
+    "alias": [
+      "arbitragem",
+      "lei de arbitragem",
+      "cláusula compromissória",
+      "compromisso arbitral",
+      "sentença arbitral",
+      "nulidade de sentença arbitral",
+      "carta arbitral"
+    ]
+  },
+  {
+    "id": 356,
+    "topico": "Mediação e autocomposição de conflitos",
+    "lei": "Lei nº 13.140/2015 (Lei de Mediação)",
+    "artigo": "1/48",
+    "alias": [
+      "mediação",
+      "lei de mediação",
+      "mediador judicial",
+      "mediador extrajudicial",
+      "autocomposição",
+      "confidencialidade na mediação"
+    ]
+  },
+  {
+    "id": 357,
+    "topico": "Prerrogativas profissionais do advogado",
+    "lei": "Lei nº 8.906/1994 (Estatuto da Advocacia e da OAB)",
+    "artigo": "6/7-B",
+    "alias": [
+      "prerrogativas do advogado",
+      "inviolabilidade do escritório",
+      "comunicação com cliente preso",
+      "acesso aos autos",
+      "sustentação oral prerrogativa",
+      "artigo 7 estatuto oab"
+    ]
+  },
+  {
+    "id": 358,
+    "topico": "Honorários advocatícios contratuais, sucumbenciais e arbitrados no Estatuto da OAB",
+    "lei": "Lei nº 8.906/1994 (Estatuto da Advocacia e da OAB)",
+    "artigo": "22/26",
+    "alias": [
+      "honorários contratuais",
+      "honorários sucumbenciais oab",
+      "natureza alimentar dos honorários",
+      "execução autônoma de honorários",
+      "destaque de honorários",
+      "artigo 22 estatuto oab"
+    ]
+  },
+  {
+    "id": 359,
+    "topico": "Lei penal no espaço",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "5/7",
+    "alias": [
+      "lei penal no espaço",
+      "territorialidade",
+      "extraterritorialidade",
+      "lugar do crime"
+    ]
+  },
+  {
+    "id": 360,
+    "topico": "Tempo e lugar do crime",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "4/6",
+    "alias": [
+      "tempo do crime",
+      "lugar do crime",
+      "teoria da atividade",
+      "teoria da ubiquidade"
+    ]
+  },
+  {
+    "id": 361,
+    "topico": "Conceito de crime e contravenção penal",
+    "lei": "Lei de Introdução ao Código Penal (Decreto-Lei nº 3.914/1941)",
+    "artigo": "1",
+    "alias": [
+      "conceito de crime",
+      "contravenção penal",
+      "diferença entre crime e contravenção",
+      "infração penal"
+    ]
+  },
+  {
+    "id": 362,
+    "topico": "Relação de causalidade e imputação do resultado",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "13",
+    "alias": [
+      "nexo causal",
+      "causalidade",
+      "imputação objetiva",
+      "causa superveniente"
+    ]
+  },
+  {
+    "id": 363,
+    "topico": "Desistência voluntária e arrependimento eficaz",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "15",
+    "alias": [
+      "desistência voluntária",
+      "arrependimento eficaz",
+      "ponte de ouro"
+    ]
+  },
+  {
+    "id": 364,
+    "topico": "Arrependimento posterior",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "16",
+    "alias": [
+      "arrependimento posterior",
+      "reparação do dano",
+      "restituição da coisa"
+    ]
+  },
+  {
+    "id": 365,
+    "topico": "Erro de tipo",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "20",
+    "alias": [
+      "erro de tipo",
+      "erro sobre elemento do tipo",
+      "erro essencial",
+      "erro acidental"
+    ]
+  },
+  {
+    "id": 366,
+    "topico": "Erro de proibição",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "21",
+    "alias": [
+      "erro de proibição",
+      "erro sobre ilicitude",
+      "desconhecimento da lei"
+    ]
+  },
+  {
+    "id": 367,
+    "topico": "Penas restritivas de direitos",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "43/48",
+    "alias": [
+      "penas alternativas",
+      "prestação de serviços",
+      "limitação de fim de semana",
+      "interdição temporária de direitos"
+    ]
+  },
+  {
+    "id": 368,
+    "topico": "Pena de multa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "49/52",
+    "alias": [
+      "multa penal",
+      "dias-multa",
+      "cálculo da multa"
+    ]
+  },
+  {
+    "id": 369,
+    "topico": "Suspensão condicional da pena",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "77/82",
+    "alias": [
+      "sursis",
+      "suspensão condicional da pena"
+    ]
+  },
+  {
+    "id": 370,
+    "topico": "Livramento condicional",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "83/90",
+    "alias": [
+      "livramento condicional",
+      "liberdade condicional"
+    ]
+  },
+  {
+    "id": 371,
+    "topico": "Efeitos da condenação e reabilitação",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "91/95",
+    "alias": [
+      "efeitos da condenação",
+      "perda de bens",
+      "reparação do dano",
+      "reabilitação criminal"
+    ]
+  },
+  {
+    "id": 372,
+    "topico": "Medidas de segurança",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "96/99",
+    "alias": [
+      "medida de segurança",
+      "internação",
+      "tratamento ambulatorial",
+      "periculosidade"
+    ]
+  },
+  {
+    "id": 373,
+    "topico": "Aborto: crimes e hipóteses legais",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "124/128",
+    "alias": [
+      "aborto",
+      "aborto provocado",
+      "autoaborto",
+      "aborto consentido",
+      "aborto legal",
+      "aborto necessário",
+      "aborto sentimental"
+    ]
+  },
+  {
+    "id": 374,
+    "topico": "Constrangimento ilegal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "146",
+    "alias": [
+      "constrangimento ilegal",
+      "coação",
+      "obrigar alguém a fazer"
+    ]
+  },
+  {
+    "id": 375,
+    "topico": "Intimidação sistemática (bullying e cyberbullying)",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "146-A",
+    "alias": [
+      "bullying",
+      "cyberbullying",
+      "intimidação sistemática",
+      "perseguição escolar",
+      "violência virtual"
+    ]
+  },
+  {
+    "id": 376,
+    "topico": "Sequestro e cárcere privado",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "148",
+    "alias": [
+      "sequestro",
+      "cárcere privado",
+      "privação da liberdade"
+    ]
+  },
+  {
+    "id": 377,
+    "topico": "Redução à condição análoga à de escravo",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "149",
+    "alias": [
+      "trabalho escravo",
+      "escravidão contemporânea",
+      "condição análoga à escravidão"
+    ]
+  },
+  {
+    "id": 378,
+    "topico": "Tráfico de pessoas",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "149-A",
+    "alias": [
+      "tráfico de pessoas",
+      "tráfico humano",
+      "exploração de pessoas",
+      "tráfico para exploração sexual ou laboral"
+    ]
+  },
+  {
+    "id": 379,
+    "topico": "Violação de domicílio",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "150",
+    "alias": [
+      "violação de domicílio",
+      "invasão de casa",
+      "entrar em casa sem autorização"
+    ]
+  },
+  {
+    "id": 380,
+    "topico": "Invasão de dispositivo informático",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "154-A",
+    "alias": [
+      "invasão de dispositivo",
+      "invasão de computador",
+      "hacker",
+      "invasão de celular",
+      "crime cibernético"
+    ]
+  },
+  {
+    "id": 381,
+    "topico": "Apropriação indébita",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "168",
+    "alias": [
+      "apropriação indébita",
+      "apropriar-se de coisa alheia",
+      "retenção indevida"
+    ]
+  },
+  {
+    "id": 382,
+    "topico": "Apropriação indébita previdenciária",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "168-A",
+    "alias": [
+      "apropriação previdenciária",
+      "não recolhimento de contribuição descontada",
+      "contribuição previdenciária descontada"
+    ]
+  },
+  {
+    "id": 383,
+    "topico": "Assédio sexual",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "216-A",
+    "alias": [
+      "assédio sexual",
+      "assédio no trabalho",
+      "constrangimento sexual por superior"
+    ]
+  },
+  {
+    "id": 384,
+    "topico": "Associação criminosa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "288",
+    "alias": [
+      "associação criminosa",
+      "associação para cometer crimes",
+      "quadrilha",
+      "bando"
+    ]
+  },
+  {
+    "id": 385,
+    "topico": "Falsificação de documento público",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "297",
+    "alias": [
+      "falsificação de documento público",
+      "documento público falso",
+      "falsidade material pública"
+    ]
+  },
+  {
+    "id": 386,
+    "topico": "Falsificação de documento particular",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "298",
+    "alias": [
+      "falsificação de documento particular",
+      "documento particular falso"
+    ]
+  },
+  {
+    "id": 387,
+    "topico": "Falsidade ideológica",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "299",
+    "alias": [
+      "falsidade ideológica",
+      "inserir declaração falsa",
+      "omitir declaração em documento"
+    ]
+  },
+  {
+    "id": 388,
+    "topico": "Uso de documento falso",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "304",
+    "alias": [
+      "uso de documento falso",
+      "usar documento falso",
+      "apresentar documento falsificado"
+    ]
+  },
+  {
+    "id": 389,
+    "topico": "Prevaricação",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "319",
+    "alias": [
+      "prevaricação",
+      "retardar ato de ofício",
+      "deixar de praticar ato por interesse pessoal"
+    ]
+  },
+  {
+    "id": 390,
+    "topico": "Resistência",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "329",
+    "alias": [
+      "resistência",
+      "opor-se à execução de ato legal",
+      "resistir à prisão"
+    ]
+  },
+  {
+    "id": 391,
+    "topico": "Desobediência",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "330",
+    "alias": [
+      "desobediência",
+      "descumprir ordem legal",
+      "desobedecer funcionário público"
+    ]
+  },
+  {
+    "id": 392,
+    "topico": "Desacato",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "331",
+    "alias": [
+      "desacato",
+      "ofender funcionário público no exercício da função"
+    ]
+  },
+  {
+    "id": 393,
+    "topico": "Descaminho",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "334",
+    "alias": [
+      "descaminho",
+      "sonegação de imposto de importação",
+      "iludir tributo aduaneiro"
+    ]
+  },
+  {
+    "id": 394,
+    "topico": "Contrabando",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "334-A",
+    "alias": [
+      "contrabando",
+      "importação proibida",
+      "exportação proibida",
+      "entrada clandestina de mercadoria"
+    ]
+  },
+  {
+    "id": 395,
+    "topico": "Crimes em licitações e contratos administrativos",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "337-E/337-P",
+    "alias": [
+      "fraudes em licitação",
+      "crimes licitatórios",
+      "licitação fraudulenta",
+      "contratação pública ilegal",
+      "fraude em contrato administrativo"
+    ]
+  },
+  {
+    "id": 396,
+    "topico": "Denunciação caluniosa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "339",
+    "alias": [
+      "denunciação caluniosa",
+      "denúncia falsa contra inocente",
+      "imputar crime a inocente"
+    ]
+  },
+  {
+    "id": 397,
+    "topico": "Falso testemunho ou falsa perícia",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "342",
+    "alias": [
+      "falso testemunho",
+      "falsa perícia",
+      "mentir como testemunha",
+      "perjúrio",
+      "testemunha falsa"
+    ]
+  },
+  {
+    "id": 398,
+    "topico": "Crimes de trânsito",
+    "lei": "Lei nº 9.503/1997 (Código de Trânsito Brasileiro)",
+    "artigo": "302/312",
+    "alias": [
+      "crime de trânsito",
+      "homicídio no trânsito",
+      "lesão corporal no trânsito",
+      "embriaguez ao volante",
+      "dirigir bêbado",
+      "racha",
+      "fuga do local do acidente"
+    ]
+  },
+  {
+    "id": 399,
+    "topico": "Embriaguez ao volante",
+    "lei": "Lei nº 9.503/1997 (Código de Trânsito Brasileiro)",
+    "artigo": "306",
+    "alias": [
+      "embriaguez ao volante",
+      "artigo 306 ctb",
+      "bafômetro",
+      "etilômetro",
+      "dirigir alcoolizado",
+      "alteração da capacidade psicomotora"
+    ]
+  },
+  {
+    "id": 400,
+    "topico": "Homicídio culposo e lesão corporal culposa na direção de veículo automotor",
+    "lei": "Lei nº 9.503/1997 (Código de Trânsito Brasileiro)",
+    "artigo": "302/303",
+    "alias": [
+      "homicídio culposo no trânsito",
+      "lesão corporal no trânsito",
+      "artigo 302 ctb",
+      "artigo 303 ctb",
+      "acidente de trânsito com morte"
+    ]
+  },
+  {
+    "id": 401,
+    "topico": "Conexão e continência",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "76/82",
+    "alias": [
+      "conexão",
+      "continência",
+      "reunião de processos criminais"
+    ]
+  },
+  {
+    "id": 402,
+    "topico": "Exceções processuais",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "95/112",
+    "alias": [
+      "exceções",
+      "suspeição",
+      "impedimento",
+      "incompetência",
+      "litispendência",
+      "coisa julgada penal"
+    ]
+  },
+  {
+    "id": 403,
+    "topico": "Restituição de coisas apreendidas e medidas assecuratórias",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "118/144",
+    "alias": [
+      "restituição de coisas apreendidas",
+      "sequestro de bens",
+      "arresto",
+      "hipoteca legal",
+      "medidas assecuratórias"
+    ]
+  },
+  {
+    "id": 404,
+    "topico": "Incidente de insanidade mental",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "149/154",
+    "alias": [
+      "insanidade mental",
+      "exame de sanidade mental",
+      "incidente de insanidade"
+    ]
+  },
+  {
+    "id": 405,
+    "topico": "Prova testemunhal no processo penal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "202/225",
+    "alias": [
+      "testemunha",
+      "testemunhas no processo penal",
+      "prova testemunhal penal",
+      "oitiva de testemunhas"
+    ]
+  },
+  {
+    "id": 406,
+    "topico": "Reconhecimento de pessoas e coisas",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "226/228",
+    "alias": [
+      "reconhecimento pessoal",
+      "reconhecimento fotográfico",
+      "reconhecimento de coisas"
+    ]
+  },
+  {
+    "id": 407,
+    "topico": "Busca e apreensão",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "240/250",
+    "alias": [
+      "busca e apreensão",
+      "busca domiciliar",
+      "busca pessoal",
+      "apreensão de objetos"
+    ]
+  },
+  {
+    "id": 408,
+    "topico": "Revisão criminal",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "621/631",
+    "alias": [
+      "revisão criminal",
+      "desconstituir condenação penal",
+      "prova nova na revisão criminal",
+      "erro judiciário penal",
+      "artigo 621 cpp"
+    ]
+  },
+  {
+    "id": 409,
+    "topico": "Recurso em sentido estrito (RESE)",
+    "lei": "Código de Processo Penal (Decreto-Lei nº 3.689/1941)",
+    "artigo": "581/592",
+    "alias": [
+      "recurso em sentido estrito",
+      "rese",
+      "artigo 581 cpp",
+      "recurso contra pronúncia",
+      "recurso contra rejeição da denúncia"
+    ]
+  },
+  {
+    "id": 410,
+    "topico": "Grupo econômico e responsabilidade trabalhista",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "2",
+    "alias": [
+      "grupo econômico",
+      "responsabilidade solidária trabalhista",
+      "sucessão empresarial"
+    ]
+  },
+  {
+    "id": 411,
+    "topico": "Trabalho autônomo e eventual",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "3",
+    "alias": [
+      "trabalhador autônomo",
+      "trabalho eventual",
+      "pejotização",
+      "reconhecimento de vínculo"
+    ]
+  },
+  {
+    "id": 412,
+    "topico": "Contrato por prazo determinado e experiência",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "443/445",
+    "alias": [
+      "contrato por prazo determinado",
+      "contrato de experiência",
+      "prazo determinado"
+    ]
+  },
+  {
+    "id": 413,
+    "topico": "Alteração do contrato de trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "468",
+    "alias": [
+      "alteração contratual",
+      "alteração lesiva",
+      "jus variandi"
+    ]
+  },
+  {
+    "id": 414,
+    "topico": "Suspensão e interrupção do contrato de trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "471/476-A",
+    "alias": [
+      "suspensão do contrato",
+      "interrupção do contrato",
+      "afastamento do trabalho"
+    ]
+  },
+  {
+    "id": 415,
+    "topico": "Sucessão trabalhista",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "10/448-A",
+    "alias": [
+      "sucessão trabalhista",
+      "sucessão de empregadores",
+      "mudança de titularidade da empresa"
+    ]
+  },
+  {
+    "id": 416,
+    "topico": "Terceirização",
+    "lei": "Lei nº 6.019/1974 (Trabalho Temporário e Terceirização)",
+    "artigo": "4-A/5-D",
+    "alias": [
+      "terceirização",
+      "trabalho terceirizado",
+      "empresa prestadora",
+      "responsabilidade subsidiária"
+    ]
+  },
+  {
+    "id": 417,
+    "topico": "Teletrabalho e trabalho remoto",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "75-A/75-F",
+    "alias": [
+      "teletrabalho",
+      "home office",
+      "trabalho remoto",
+      "regime híbrido"
+    ]
+  },
+  {
+    "id": 418,
+    "topico": "Trabalho intermitente",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "452-A",
+    "alias": [
+      "contrato intermitente",
+      "trabalho intermitente",
+      "convocação intermitente"
+    ]
+  },
+  {
+    "id": 419,
+    "topico": "Trabalho noturno",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "73",
+    "alias": [
+      "adicional noturno",
+      "hora noturna",
+      "trabalho noturno"
+    ]
+  },
+  {
+    "id": 420,
+    "topico": "Repouso semanal remunerado e feriados",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "67/70",
+    "alias": [
+      "dsr",
+      "repouso semanal remunerado",
+      "descanso semanal",
+      "trabalho em feriado"
+    ]
+  },
+  {
+    "id": 421,
+    "topico": "Equiparação salarial",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "461",
+    "alias": [
+      "equiparação salarial",
+      "isonomia salarial",
+      "salário igual",
+      "paradigma"
+    ]
+  },
+  {
+    "id": 422,
+    "topico": "Segurança e medicina do trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "154/201",
+    "alias": [
+      "saúde e segurança do trabalho",
+      "sst",
+      "normas regulamentadoras",
+      "acidente do trabalho",
+      "epi",
+      "epc"
+    ]
+  },
+  {
+    "id": 423,
+    "topico": "Proteção do trabalho da mulher",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "372/401",
+    "alias": [
+      "trabalho da mulher",
+      "proteção à maternidade",
+      "licença maternidade",
+      "intervalo mulher"
+    ]
+  },
+  {
+    "id": 424,
+    "topico": "Proteção do trabalho do menor e aprendizagem",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "402/441",
+    "alias": [
+      "trabalho do menor",
+      "aprendizagem",
+      "menor aprendiz",
+      "trabalho infantil"
+    ]
+  },
+  {
+    "id": 425,
+    "topico": "Organização sindical e contribuição sindical",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "511/610",
+    "alias": [
+      "direito sindical",
+      "sindicato",
+      "contribuição sindical",
+      "representação sindical"
+    ]
+  },
+  {
+    "id": 426,
+    "topico": "Convenções e acordos coletivos de trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "611/625",
+    "alias": [
+      "negociação coletiva",
+      "acordo coletivo",
+      "convenção coletiva",
+      "norma coletiva",
+      "prevalência do negociado"
+    ]
+  },
+  {
+    "id": 427,
+    "topico": "Greve e serviços essenciais",
+    "lei": "Lei nº 7.783/1989 (Lei de Greve)",
+    "artigo": "1/18",
+    "alias": [
+      "greve",
+      "direito de greve",
+      "greve em serviço essencial",
+      "abusividade da greve"
+    ]
+  },
+  {
+    "id": 428,
+    "topico": "Desconsideração da personalidade jurídica no processo do trabalho",
+    "lei": "Consolidação das Leis do Trabalho (Decreto-Lei nº 5.452/1943)",
+    "artigo": "855-A",
+    "alias": [
+      "idpj trabalhista",
+      "desconsideração da personalidade jurídica trabalhista",
+      "redirecionamento contra sócios trabalhista",
+      "artigo 855-a clt"
+    ]
+  },
+  {
+    "id": 429,
+    "topico": "Trabalho doméstico",
+    "lei": "Lei Complementar nº 150/2015 (Lei dos Domésticos)",
+    "artigo": "1/47",
+    "alias": [
+      "empregado doméstico",
+      "empregada doméstica",
+      "lc 150",
+      "diarista",
+      "vínculo doméstico"
+    ]
+  },
+  {
+    "id": 430,
+    "topico": "Lei Anticorrupção: responsabilidade de pessoas jurídicas",
+    "lei": "Lei nº 12.846/2013",
+    "artigo": "1/31",
+    "alias": [
+      "lei anticorrupção",
+      "responsabilização de empresa",
+      "leniência anticorrupção",
+      "integridade corporativa",
+      "compliance público"
+    ]
+  },
+  {
+    "id": 431,
+    "topico": "Lei de Acesso à Informação",
+    "lei": "Lei nº 12.527/2011",
+    "artigo": "1/47",
+    "alias": [
+      "lai",
+      "acesso à informação",
+      "transparência pública",
+      "sigilo de informação",
+      "informação pública"
+    ]
+  },
+  {
+    "id": 432,
+    "topico": "Habilitação, recursos e sanções em licitações",
+    "lei": "Lei nº 14.133/2021",
+    "artigo": "62/71",
+    "alias": [
+      "habilitação licitação",
+      "recurso licitatório",
+      "sanções administrativas licitação",
+      "impedimento de licitar",
+      "declaração de inidoneidade"
+    ]
+  },
+  {
+    "id": 433,
+    "topico": "Processo administrativo disciplinar",
+    "lei": "Lei nº 8.112/1990",
+    "artigo": "143/182",
+    "alias": [
+      "pad",
+      "processo administrativo disciplinar",
+      "sindicância",
+      "penalidades disciplinares",
+      "demissão servidor"
+    ]
+  },
+  {
+    "id": 434,
+    "topico": "Transparência pública e acesso à informação",
+    "lei": "Lei nº 12.527/2011",
+    "artigo": "7/24",
+    "alias": [
+      "transparência pública",
+      "acesso à informação",
+      "pedido de informação",
+      "classificação de sigilo"
+    ]
+  },
+  {
+    "id": 435,
+    "topico": "Proteção de dados pessoais no Poder Público",
+    "lei": "Lei nº 13.709/2018",
+    "artigo": "23/32",
+    "alias": [
+      "lgpd poder público",
+      "dados pessoais administração pública",
+      "tratamento de dados pelo estado"
+    ]
+  },
+  {
+    "id": 436,
+    "topico": "Responsabilização administrativa e acordo de leniência",
+    "lei": "Lei nº 12.846/2013",
+    "artigo": "5/16",
+    "alias": [
+      "responsabilidade administrativa empresarial",
+      "acordo de leniência",
+      "lei anticorrupção",
+      "programa de integridade"
+    ]
+  },
+  {
+    "id": 437,
+    "topico": "Concessão e permissão de serviços públicos",
+    "lei": "Lei nº 8.987/1995 (Lei de Concessões)",
+    "artigo": "1/47",
+    "alias": [
+      "concessão de serviço público",
+      "permissão de serviço público",
+      "lei 8987",
+      "equilíbrio econômico-financeiro concessão",
+      "encampação",
+      "caducidade",
+      "tarifa de serviço público"
+    ]
+  },
+  {
+    "id": 438,
+    "topico": "Parcerias público-privadas (PPP)",
+    "lei": "Lei nº 11.079/2004 (Lei das PPPs)",
+    "artigo": "1/30",
+    "alias": [
+      "ppp",
+      "parceria público-privada",
+      "concessão patrocinada",
+      "concessão administrativa",
+      "lei 11079"
+    ]
+  },
+  {
+    "id": 439,
+    "topico": "Liberdade sindical e direito de greve",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "8/9",
+    "alias": [
+      "liberdade sindical",
+      "sindicatos",
+      "greve",
+      "direito de greve",
+      "organização sindical"
+    ]
+  },
+  {
+    "id": 440,
+    "topico": "Intervenção federal e estadual",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "34/36",
+    "alias": [
+      "intervenção federal",
+      "intervenção estadual",
+      "intervenção nos municípios",
+      "decretação de intervenção"
+    ]
+  },
+  {
+    "id": 441,
+    "topico": "Fiscalização contábil, financeira e orçamentária",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "70/75",
+    "alias": [
+      "controle externo",
+      "tribunal de contas",
+      "tcu",
+      "fiscalização financeira",
+      "prestação de contas"
+    ]
+  },
+  {
+    "id": 442,
+    "topico": "Justiça Eleitoral e Justiça Militar",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "118/124",
+    "alias": [
+      "justiça eleitoral",
+      "justiça militar",
+      "tre",
+      "tse",
+      "stm"
+    ]
+  },
+  {
+    "id": 443,
+    "topico": "Estado de defesa e estado de sítio",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "136/141",
+    "alias": [
+      "estado de defesa",
+      "estado de sítio",
+      "sistema constitucional de crises"
+    ]
+  },
+  {
+    "id": 444,
+    "topico": "Prescrição e decadência trabalhistas",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "7",
+    "alias": [
+      "prescrição trabalhista",
+      "prescrição bienal",
+      "prescrição quinquenal",
+      "prescrição intercorrente trabalhista"
+    ]
+  },
+  {
+    "id": 445,
+    "topico": "Contribuição sobre Bens e Serviços (CBS)",
+    "lei": "Constituição Federal de 1988 (redação da EC nº 132/2023)",
+    "artigo": "195",
+    "alias": [
+      "cbs",
+      "contribuição sobre bens e serviços",
+      "tributação federal do consumo"
+    ]
+  },
+  {
+    "id": 446,
+    "topico": "Poderes administrativos",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "37",
+    "alias": [
+      "poderes administrativos",
+      "poder vinculado",
+      "poder discricionário",
+      "poder hierárquico",
+      "poder disciplinar",
+      "poder regulamentar",
+      "poder de polícia"
+    ]
+  },
+  {
+    "id": 447,
+    "topico": "Serviços públicos e delegação",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "175",
+    "alias": [
+      "serviço público",
+      "concessão",
+      "permissão",
+      "autorização",
+      "delegação de serviço público"
+    ]
+  },
+  {
+    "id": 448,
+    "topico": "Intervenção do Estado na propriedade",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "5/182",
+    "alias": [
+      "desapropriação",
+      "requisição administrativa",
+      "servidão administrativa",
+      "tombamento",
+      "limitação administrativa"
+    ]
+  },
+  {
+    "id": 449,
+    "topico": "Controle da Administração Pública",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "70/75",
+    "alias": [
+      "controle administrativo",
+      "controle interno",
+      "controle externo",
+      "controle judicial",
+      "tribunal de contas"
+    ]
+  },
+  {
+    "id": 450,
+    "topico": "Responsabilidade civil, administrativa e penal ambiental",
+    "lei": "Constituição Federal de 1988",
+    "artigo": "225",
+    "alias": [
+      "responsabilidade ambiental",
+      "poluidor pagador",
+      "responsabilidade objetiva ambiental",
+      "reparação ambiental"
+    ]
+  },
+  {
+    "id": 451,
+    "topico": "Associação para o tráfico",
+    "lei": "Lei nº 11.343/2006 (Lei de Drogas)",
+    "artigo": "35",
+    "alias": [
+      "associação para o tráfico",
+      "associação ao tráfico",
+      "tráfico em associação",
+      "artigo 35 drogas"
+    ]
+  },
+  {
+    "id": 452,
+    "topico": "Comércio ilegal de arma de fogo",
+    "lei": "Lei nº 10.826/2003 (Estatuto do Desarmamento)",
+    "artigo": "17",
+    "alias": [
+      "comércio ilegal de armas",
+      "venda ilegal de arma",
+      "comércio clandestino de armas"
+    ]
+  },
+  {
+    "id": 453,
+    "topico": "Tráfico internacional de arma de fogo",
+    "lei": "Lei nº 10.826/2003 (Estatuto do Desarmamento)",
+    "artigo": "18",
+    "alias": [
+      "tráfico internacional de armas",
+      "importação ilegal de armas",
+      "exportação ilegal de armas"
+    ]
+  },
+  {
+    "id": 454,
+    "topico": "Tortura",
+    "lei": "Lei nº 9.455/1997 (Lei de Tortura)",
+    "artigo": "1",
+    "alias": [
+      "tortura",
+      "tortura-prova",
+      "tortura castigo",
+      "tortura para obter informação",
+      "tortura por agente público"
+    ]
+  },
+  {
+    "id": 455,
+    "topico": "Prisão temporária",
+    "lei": "Lei nº 7.960/1989 (Lei da Prisão Temporária)",
+    "artigo": "1/7",
+    "alias": [
+      "prisão temporária",
+      "temporária",
+      "prisão investigatória"
+    ]
+  },
+  {
+    "id": 456,
+    "topico": "Falta grave e procedimento disciplinar na execução",
+    "lei": "Lei nº 7.210/1984 (Lei de Execução Penal)",
+    "artigo": "50/60",
+    "alias": [
+      "falta grave",
+      "infração disciplinar",
+      "procedimento administrativo disciplinar",
+      "pad execução penal"
+    ]
+  },
+  {
+    "id": 457,
+    "topico": "Lei de Drogas: disposições gerais, investigação e procedimento",
+    "lei": "Lei nº 11.343/2006 (Lei de Drogas)",
+    "artigo": "1/75",
+    "alias": [
+      "lei de drogas",
+      "sisnad",
+      "drogas",
+      "entorpecentes",
+      "procedimento tráfico"
+    ]
+  },
+  {
+    "id": 458,
+    "topico": "Estatuto do Desarmamento: registro, posse e porte",
+    "lei": "Lei nº 10.826/2003 (Estatuto do Desarmamento)",
+    "artigo": "3/21",
+    "alias": [
+      "estatuto do desarmamento",
+      "registro de arma",
+      "posse de arma",
+      "porte de arma",
+      "sinarm"
+    ]
+  },
+  {
+    "id": 459,
+    "topico": "Lei de Tortura: modalidades, efeitos e procedimento",
+    "lei": "Lei nº 9.455/1997 (Lei de Tortura)",
+    "artigo": "1/4",
+    "alias": [
+      "lei de tortura",
+      "tortura",
+      "tortura castigo",
+      "tortura prova"
+    ]
+  },
+  {
+    "id": 460,
+    "topico": "Lei de Organizações Criminosas: investigação e meios de obtenção de prova",
+    "lei": "Lei nº 12.850/2013 (Lei de Organizações Criminosas)",
+    "artigo": "1/27",
+    "alias": [
+      "lei de organizações criminosas",
+      "colaboração premiada",
+      "infiltração policial",
+      "ação controlada",
+      "organização criminosa"
+    ]
+  },
+  {
+    "id": 461,
+    "topico": "Competência tributária",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "6/8",
+    "alias": [
+      "competência tributária",
+      "competência impositiva",
+      "competência da união",
+      "competência dos estados"
+    ]
+  },
+  {
+    "id": 462,
+    "topico": "Impostos, taxas e contribuição de melhoria",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "16/82",
+    "alias": [
+      "impostos",
+      "taxas",
+      "contribuição de melhoria",
+      "fato gerador de taxa"
+    ]
+  },
+  {
+    "id": 463,
+    "topico": "Sujeito ativo e sujeito passivo tributário",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "119/123",
+    "alias": [
+      "sujeito ativo",
+      "sujeito passivo",
+      "contribuinte",
+      "responsável tributário"
+    ]
+  },
+  {
+    "id": 464,
+    "topico": "Garantias e privilégios do crédito tributário",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "183/193",
+    "alias": [
+      "garantias tributárias",
+      "privilégios do crédito tributário",
+      "preferência tributária"
+    ]
+  },
+  {
+    "id": 465,
+    "topico": "Administração e fiscalização tributária",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "194/208",
+    "alias": [
+      "fiscalização tributária",
+      "sigilo fiscal",
+      "administração tributária"
+    ]
+  },
+  {
+    "id": 466,
+    "topico": "Repetição do indébito tributário",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "165/169",
+    "alias": [
+      "repetição de indébito",
+      "restituição de tributo",
+      "pagamento indevido"
+    ]
+  },
+  {
+    "id": 467,
+    "topico": "Compensação e transação tributária",
+    "lei": "Código Tributário Nacional (Lei nº 5.172/1966)",
+    "artigo": "170/171",
+    "alias": [
+      "compensação tributária",
+      "transação tributária",
+      "compensar tributos"
+    ]
+  },
+  {
+    "id": 468,
+    "topico": "Lei de Responsabilidade Fiscal",
+    "lei": "Lei Complementar nº 101/2000",
+    "artigo": "1/75",
+    "alias": [
+      "lei de responsabilidade fiscal",
+      "lrf",
+      "gestão fiscal",
+      "limite de despesa com pessoal",
+      "renúncia de receita"
+    ]
+  },
+  {
+    "id": 469,
+    "topico": "Orçamento público e créditos adicionais",
+    "lei": "Lei nº 4.320/1964",
+    "artigo": "2/46",
+    "alias": [
+      "orçamento público",
+      "créditos adicionais",
+      "crédito suplementar",
+      "crédito especial",
+      "crédito extraordinário"
+    ]
+  },
+  {
+    "id": 470,
+    "topico": "Receita, despesa e execução orçamentária",
+    "lei": "Lei nº 4.320/1964",
+    "artigo": "51/70",
+    "alias": [
+      "receita pública",
+      "despesa pública",
+      "execução orçamentária",
+      "empenho",
+      "liquidação",
+      "ordem de pagamento"
+    ]
+  },
+  {
+    "id": 471,
+    "topico": "Comitê Gestor do IBS (CGIBS): estrutura, competências e distribuição da arrecadação",
+    "lei": "Lei Complementar nº 227/2026",
+    "artigo": "1/115",
+    "alias": [
+      "lc 227",
+      "lc 227 2026",
+      "comitê gestor do ibs",
+      "comitê gestor ibs",
+      "cgibs",
+      "distribuição da arrecadação do ibs",
+      "reforma tributária gestão"
+    ]
+  },
+  {
+    "id": 472,
+    "topico": "Processo administrativo tributário do IBS",
+    "lei": "Lei Complementar nº 227/2026",
+    "artigo": "116/182",
+    "alias": [
+      "processo administrativo tributário do ibs",
+      "contencioso administrativo do ibs",
+      "contencioso do ibs",
+      "julgamento administrativo ibs",
+      "lc 227"
+    ]
+  },
+  {
+    "id": 473,
+    "topico": "Ausência e morte presumida",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "22/39",
+    "alias": [
+      "ausência",
+      "curadoria dos bens do ausente",
+      "sucessão provisória",
+      "morte presumida"
+    ]
+  },
+  {
+    "id": 474,
+    "topico": "Domicílio civil",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "70/78",
+    "alias": [
+      "domicílio",
+      "domicílio necessário",
+      "domicílio da pessoa jurídica"
+    ]
+  },
+  {
+    "id": 475,
+    "topico": "Condição, termo e encargo",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "121/137",
+    "alias": [
+      "condição",
+      "termo",
+      "encargo",
+      "elementos acidentais do negócio jurídico"
+    ]
+  },
+  {
+    "id": 476,
+    "topico": "Representação civil",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "115/120",
+    "alias": [
+      "representação",
+      "representante",
+      "representação legal",
+      "representação voluntária"
+    ]
+  },
+  {
+    "id": 477,
+    "topico": "Obrigações alternativas, divisíveis e indivisíveis",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "252/285",
+    "alias": [
+      "obrigação alternativa",
+      "obrigação divisível",
+      "obrigação indivisível"
+    ]
+  },
+  {
+    "id": 478,
+    "topico": "Locação de coisas",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "565/578",
+    "alias": [
+      "locação de coisas",
+      "aluguel de bens móveis",
+      "contrato de locação civil"
+    ]
+  },
+  {
+    "id": 479,
+    "topico": "Transporte",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "730/756",
+    "alias": [
+      "contrato de transporte",
+      "transporte de pessoas",
+      "transporte de coisas",
+      "responsabilidade do transportador"
+    ]
+  },
+  {
+    "id": 480,
+    "topico": "Bens públicos",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "98/103",
+    "alias": [
+      "bens públicos",
+      "uso comum do povo",
+      "uso especial",
+      "dominicais",
+      "afetação",
+      "desafetação"
+    ]
+  },
+  {
+    "id": 481,
+    "topico": "Bem de família voluntário",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1711/1722",
+    "alias": [
+      "bem de família voluntário",
+      "instituição de bem de família",
+      "escritura pública bem de família"
+    ]
+  },
+  {
+    "id": 482,
+    "topico": "Direitos de vizinhança",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "1277/1313",
+    "alias": [
+      "direito de vizinhança",
+      "uso anormal da propriedade",
+      "sossego segurança e saúde",
+      "passagem forçada",
+      "direito de construir",
+      "tapumes"
+    ]
+  },
+  {
+    "id": 483,
+    "topico": "Fiança civil e contratual",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "818/839",
+    "alias": [
+      "fiança",
+      "fiador",
+      "benefício de ordem",
+      "exoneração da fiança",
+      "outorga uxória na fiança"
+    ]
+  },
+  {
+    "id": 484,
+    "topico": "Cessão de crédito e assunção de dívida",
+    "lei": "Código Civil (Lei nº 10.406/2002)",
+    "artigo": "286/303",
+    "alias": [
+      "cessão de crédito",
+      "assunção de dívida",
+      "notificação da cessão",
+      "cessão de direitos"
+    ]
+  },
+  {
+    "id": 485,
+    "topico": "Custeio da seguridade social",
+    "lei": "Lei nº 8.212/1991 (Lei de Custeio da Seguridade Social)",
+    "artigo": "1/47",
+    "alias": [
+      "custeio previdenciário",
+      "contribuições sociais",
+      "lei de custeio",
+      "salário de contribuição"
+    ]
+  },
+  {
+    "id": 486,
+    "topico": "Dependentes previdenciários",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "16",
+    "alias": [
+      "dependentes do inss",
+      "dependente previdenciário",
+      "pensão por morte dependentes"
+    ]
+  },
+  {
+    "id": 487,
+    "topico": "Filiação, inscrição, qualidade de segurado e período de graça",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "11/15",
+    "alias": [
+      "filiação previdenciária",
+      "qualidade de segurado",
+      "período de graça",
+      "perda da qualidade de segurado"
+    ]
+  },
+  {
+    "id": 488,
+    "topico": "Carência previdenciária",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "24/27",
+    "alias": [
+      "carência",
+      "carência do inss",
+      "número mínimo de contribuições"
+    ]
+  },
+  {
+    "id": 489,
+    "topico": "Salário de contribuição e salário de benefício",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "28/29",
+    "alias": [
+      "salário de contribuição",
+      "salário de benefício",
+      "cálculo do benefício",
+      "período básico de cálculo"
+    ]
+  },
+  {
+    "id": 490,
+    "topico": "Auxílio-acidente",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "86",
+    "alias": [
+      "auxílio-acidente",
+      "sequela permanente",
+      "redução da capacidade laborativa"
+    ]
+  },
+  {
+    "id": 491,
+    "topico": "Salário-maternidade",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "71/73",
+    "alias": [
+      "salário-maternidade",
+      "licença maternidade inss",
+      "salário maternidade segurada especial",
+      "salário maternidade adoção"
+    ]
+  },
+  {
+    "id": 492,
+    "topico": "Aposentadoria por idade rural e segurado especial",
+    "lei": "Lei nº 8.213/1991 (Planos de Benefícios da Previdência Social)",
+    "artigo": "39/48",
+    "alias": [
+      "aposentadoria rural",
+      "trabalhador rural",
+      "segurado especial",
+      "regime de economia familiar",
+      "início de prova material rural"
+    ]
+  },
+  {
+    "id": 493,
+    "topico": "Código de Trânsito Brasileiro: infrações e penalidades",
+    "lei": "Lei nº 9.503/1997 (Código de Trânsito Brasileiro)",
+    "artigo": "161/290",
+    "alias": [
+      "ctb",
+      "código de trânsito",
+      "infrações de trânsito",
+      "multa de trânsito",
+      "suspensão da carteira",
+      "cassação da cnh"
+    ]
+  },
+  {
+    "id": 494,
+    "topico": "Crimes ambientais",
+    "lei": "Lei nº 9.605/1998 (Lei de Crimes Ambientais)",
+    "artigo": "29/69-A",
+    "alias": [
+      "crime ambiental",
+      "crimes ambientais",
+      "crime contra fauna",
+      "crime contra flora",
+      "poluição criminosa",
+      "maus-tratos a animais",
+      "desmatamento ilegal"
+    ]
+  },
+  {
+    "id": 495,
+    "topico": "Crimes e infrações administrativas ambientais",
+    "lei": "Lei nº 9.605/1998 (Lei de Crimes Ambientais)",
+    "artigo": "29/76",
+    "alias": [
+      "crime ambiental",
+      "infração ambiental",
+      "multa ambiental",
+      "sanção ambiental"
+    ]
+  },
+  {
+    "id": 496,
+    "topico": "Código Florestal: áreas de preservação permanente e reserva legal",
+    "lei": "Lei nº 12.651/2012",
+    "artigo": "3/18",
+    "alias": [
+      "código florestal",
+      "app",
+      "área de preservação permanente",
+      "reserva legal",
+      "car"
+    ]
+  },
+  {
+    "id": 497,
+    "topico": "Sistema Nacional de Unidades de Conservação",
+    "lei": "Lei nº 9.985/2000",
+    "artigo": "7/21",
+    "alias": [
+      "sistema nacional de unidades de conservação",
+      "snuc",
+      "unidade de conservação",
+      "parque nacional",
+      "apa"
+    ]
+  },
+  {
+    "id": 498,
+    "topico": "Política Nacional de Recursos Hídricos",
+    "lei": "Lei nº 9.433/1997",
+    "artigo": "1/57",
+    "alias": [
+      "recursos hídricos",
+      "água",
+      "outorga de uso da água",
+      "comitê de bacia"
+    ]
+  },
+  {
+    "id": 499,
+    "topico": "Estatuto da Cidade e política urbana",
+    "lei": "Lei nº 10.257/2001",
+    "artigo": "1/58",
+    "alias": [
+      "estatuto da cidade",
+      "política urbana",
+      "função social da cidade",
+      "instrumentos urbanísticos"
+    ]
+  },
+  {
+    "id": 500,
+    "topico": "Plano diretor municipal",
+    "lei": "Lei nº 10.257/2001",
+    "artigo": "39/42-B",
+    "alias": [
+      "plano diretor",
+      "ordenamento territorial",
+      "planejamento urbano"
+    ]
+  },
+  {
+    "id": 501,
+    "topico": "Parcelamento do solo urbano",
+    "lei": "Lei nº 6.766/1979",
+    "artigo": "1/55",
+    "alias": [
+      "parcelamento do solo",
+      "loteamento",
+      "desmembramento",
+      "loteamento irregular"
+    ]
+  },
+  {
+    "id": 502,
+    "topico": "Regularização fundiária urbana (REURB)",
+    "lei": "Lei nº 13.465/2017",
+    "artigo": "9/82",
+    "alias": [
+      "reurb",
+      "regularização fundiária",
+      "reurb-s",
+      "reurb-e",
+      "titulação urbana"
+    ]
+  },
+  {
+    "id": 503,
+    "topico": "Formação, suspensão e extinção do processo",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "312/317",
+    "alias": [
+      "formação do processo",
+      "suspensão do processo",
+      "extinção do processo",
+      "suspensão processual"
+    ]
+  },
+  {
+    "id": 504,
+    "topico": "Inspeção judicial",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "481/484",
+    "alias": [
+      "inspeção judicial",
+      "inspeção do juiz"
+    ]
+  },
+  {
+    "id": 505,
+    "topico": "Execução contra a Fazenda Pública",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "910",
+    "alias": [
+      "execução fazenda pública",
+      "embargos da fazenda pública"
+    ]
+  },
+  {
+    "id": 506,
+    "topico": "Procedimentos especiais de jurisdição contenciosa",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "539/718",
+    "alias": [
+      "procedimentos especiais",
+      "consignação em pagamento",
+      "exigir contas",
+      "possessórias",
+      "divisão e demarcação",
+      "inventário e partilha"
+    ]
+  },
+  {
+    "id": 507,
+    "topico": "Oposição e habilitação",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "682/692",
+    "alias": [
+      "oposição",
+      "habilitação processual"
+    ]
+  },
+  {
+    "id": 508,
+    "topico": "Ação de dissolução parcial de sociedade",
+    "lei": "Código de Processo Civil (Lei nº 13.105/2015)",
+    "artigo": "599/609",
+    "alias": [
+      "dissolução parcial de sociedade",
+      "apuração de haveres"
+    ]
+  },
+  {
+    "id": 509,
+    "topico": "Crimes eleitorais",
+    "lei": "Lei nº 4.737/1965 (Código Eleitoral)",
+    "artigo": "289/354",
+    "alias": [
+      "crime eleitoral",
+      "compra de votos",
+      "corrupção eleitoral",
+      "fraude eleitoral",
+      "boca de urna",
+      "transporte ilegal de eleitores"
+    ]
+  },
+  {
+    "id": 510,
+    "topico": "Lei das Inelegibilidades",
+    "lei": "Lei Complementar nº 64/1990",
+    "artigo": "1/28",
+    "alias": [
+      "lei das inelegibilidades",
+      "ficha limpa",
+      "inelegibilidade eleitoral",
+      "abuso de poder eleitoral"
+    ]
+  },
+  {
+    "id": 511,
+    "topico": "Lei das Eleições",
+    "lei": "Lei nº 9.504/1997",
+    "artigo": "1/107",
+    "alias": [
+      "lei das eleições",
+      "propaganda eleitoral",
+      "condutas vedadas",
+      "arrecadação de campanha",
+      "prestação de contas eleitoral"
+    ]
+  },
+  {
+    "id": 512,
+    "topico": "Lei dos Partidos Políticos",
+    "lei": "Lei nº 9.096/1995",
+    "artigo": "1/63",
+    "alias": [
+      "lei dos partidos políticos",
+      "partidos",
+      "fundo partidário",
+      "fidelidade partidária"
+    ]
+  },
+  {
+    "id": 513,
+    "topico": "Pornografia infantil: produção, divulgação e armazenamento",
+    "lei": "Lei nº 8.069/1990 (ECA)",
+    "artigo": "240/241-E",
+    "alias": [
+      "pornografia infantil",
+      "pedofilia na internet",
+      "produção de pornografia infantil",
+      "divulgação de pornografia infantil",
+      "armazenar pornografia infantil",
+      "sexting infantil"
+    ]
+  },
+  {
+    "id": 514,
+    "topico": "Submissão de criança ou adolescente à prostituição ou exploração sexual",
+    "lei": "Lei nº 8.069/1990 (ECA)",
+    "artigo": "244-A",
+    "alias": [
+      "exploração sexual de menor",
+      "prostituição infantil",
+      "exploração sexual infantojuvenil"
+    ]
+  },
+  {
+    "id": 515,
+    "topico": "Crimes falimentares",
+    "lei": "Lei nº 11.101/2005",
+    "artigo": "168/178",
+    "alias": [
+      "crime falimentar",
+      "crimes falimentares",
+      "fraude a credores na falência",
+      "desvio de bens na falência"
+    ]
+  },
+  {
+    "id": 516,
+    "topico": "Crimes contra as relações de consumo",
+    "lei": "Lei nº 8.078/1990 (Código de Defesa do Consumidor)",
+    "artigo": "61/80",
+    "alias": [
+      "crime contra consumidor",
+      "crime consumerista",
+      "fraude contra consumidor",
+      "publicidade enganosa criminosa"
+    ]
+  },
+  {
+    "id": 517,
+    "topico": "Crimes contra o Sistema Financeiro Nacional",
+    "lei": "Lei nº 7.492/1986 (Crimes contra o Sistema Financeiro Nacional)",
+    "artigo": "2/23",
+    "alias": [
+      "crime financeiro",
+      "crime contra o sistema financeiro",
+      "gestão fraudulenta",
+      "gestão temerária",
+      "evasão de divisas"
+    ]
+  },
+  {
+    "id": 518,
+    "topico": "Genocídio",
+    "lei": "Lei nº 2.889/1956 (Lei do Genocídio)",
+    "artigo": "1/2",
+    "alias": [
+      "genocídio",
+      "crime de genocídio",
+      "extermínio de grupo",
+      "destruição de grupo nacional étnico racial religioso"
+    ]
+  },
+  {
+    "id": 519,
+    "topico": "Terrorismo",
+    "lei": "Lei nº 13.260/2016 (Lei Antiterrorismo)",
+    "artigo": "2/20",
+    "alias": [
+      "terrorismo",
+      "crime de terrorismo",
+      "ato terrorista",
+      "financiamento do terrorismo",
+      "organização terrorista"
+    ]
+  },
+  {
+    "id": 520,
+    "topico": "Crimes contra a propriedade industrial",
+    "lei": "Lei nº 9.279/1996 (Lei da Propriedade Industrial)",
+    "artigo": "183/195",
+    "alias": [
+      "crime de propriedade industrial",
+      "violação de marca",
+      "falsificação de marca",
+      "pirataria de marca",
+      "patente"
+    ]
+  },
+  {
+    "id": 521,
+    "topico": "Lei de Interceptação Telefônica e Telemática",
+    "lei": "Lei nº 9.296/1996",
+    "artigo": "1/12",
+    "alias": [
+      "interceptação telefônica",
+      "escuta telefônica",
+      "grampo telefônico",
+      "interceptação telemática",
+      "captação de comunicação"
+    ]
+  },
+  {
+    "id": 522,
+    "topico": "Lei do Inquilinato: locação urbana",
+    "lei": "Lei nº 8.245/1991",
+    "artigo": "1/90",
+    "alias": [
+      "lei do inquilinato",
+      "locação urbana",
+      "aluguel",
+      "despejo",
+      "ação renovatória",
+      "ação revisional de aluguel",
+      "lei 8245",
+      "ação de despejo",
+      "purgação da mora",
+      "garantias locatícias",
+      "fiador",
+      "caução",
+      "direito de preferência locação"
+    ]
+  },
+  {
+    "id": 523,
+    "topico": "Estatuto da Advocacia e da OAB",
+    "lei": "Lei nº 8.906/1994",
+    "artigo": "1/87",
+    "alias": [
+      "estatuto da oab",
+      "advocacia",
+      "direitos do advogado",
+      "prerrogativas",
+      "honorários advocatícios disciplinares",
+      "processo disciplinar oab"
+    ]
+  },
+  {
+    "id": 524,
+    "topico": "Estatuto da Igualdade Racial",
+    "lei": "Lei nº 12.288/2010",
+    "artigo": "1/65",
+    "alias": [
+      "estatuto da igualdade racial",
+      "igualdade racial",
+      "ações afirmativas",
+      "política nacional de igualdade racial"
+    ]
+  },
+  {
+    "id": 525,
+    "topico": "Estatuto da Juventude",
+    "lei": "Lei nº 12.852/2013",
+    "artigo": "1/48",
+    "alias": [
+      "estatuto da juventude",
+      "direitos dos jovens",
+      "jovem"
+    ]
+  },
+  {
+    "id": 526,
+    "topico": "Lei de Migração",
+    "lei": "Lei nº 13.445/2017",
+    "artigo": "1/125",
+    "alias": [
+      "lei de migração",
+      "imigração",
+      "migrante",
+      "refugiado",
+      "deportação",
+      "expulsão",
+      "extradição"
+    ]
+  },
+  {
+    "id": 527,
+    "topico": "Política Nacional do Meio Ambiente",
+    "lei": "Lei nº 6.938/1981",
+    "artigo": "2/21",
+    "alias": [
+      "política nacional do meio ambiente",
+      "pnma",
+      "sisnama",
+      "licenciamento ambiental"
+    ]
+  },
+  {
+    "id": 528,
+    "topico": "Sociedade anônima (Lei das S.A.)",
+    "lei": "Lei nº 6.404/1976",
+    "artigo": "1/300",
+    "alias": [
+      "sociedade anônima",
+      "lei das sa",
+      "lei 6404",
+      "ações",
+      "acionista controlador",
+      "assembleia geral",
+      "conselho de administração",
+      "deveres dos administradores"
+    ]
+  },
+  {
+    "id": 529,
+    "topico": "Contravenções penais",
+    "lei": "Decreto-Lei nº 3.688/1941 (Lei das Contravenções Penais)",
+    "artigo": "1/72",
+    "alias": [
+      "contravenção penal",
+      "lei das contravenções penais",
+      "perturbação do sossego",
+      "vias de fato",
+      "jogo do bicho",
+      "porte de arma branca"
+    ]
+  },
+  {
+    "id": 530,
+    "topico": "Interpretação e integração da lei penal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "1",
+    "alias": [
+      "interpretação penal",
+      "analogia penal",
+      "analogia in malam partem",
+      "lei penal em branco"
+    ]
+  },
+  {
+    "id": 531,
+    "topico": "Crime impossível",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "17",
+    "alias": [
+      "crime impossível",
+      "tentativa inidônea",
+      "ineficácia absoluta do meio",
+      "impropriedade absoluta do objeto"
+    ]
+  },
+  {
+    "id": 532,
+    "topico": "Coação irresistível e obediência hierárquica",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "22",
+    "alias": [
+      "coação moral irresistível",
+      "obediência hierárquica",
+      "exigibilidade de conduta diversa"
+    ]
+  },
+  {
+    "id": 533,
+    "topico": "Excesso punível",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "23",
+    "alias": [
+      "excesso doloso",
+      "excesso culposo",
+      "excesso nas excludentes"
+    ]
+  },
+  {
+    "id": 534,
+    "topico": "Circunstâncias incomunicáveis",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "30",
+    "alias": [
+      "comunicabilidade",
+      "circunstâncias pessoais",
+      "elementares do crime"
+    ]
+  },
+  {
+    "id": 535,
+    "topico": "Induzimento, instigação ou auxílio ao suicídio ou à automutilação",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "122",
+    "alias": [
+      "induzimento ao suicídio",
+      "instigação ao suicídio",
+      "auxílio ao suicídio",
+      "automutilação",
+      "suicídio"
+    ]
+  },
+  {
+    "id": 536,
+    "topico": "Infanticídio",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "123",
+    "alias": [
+      "infanticídio",
+      "mãe sob influência do estado puerperal"
+    ]
+  },
+  {
+    "id": 537,
+    "topico": "Perigo de contágio venéreo ou de moléstia grave",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "130/131",
+    "alias": [
+      "perigo de contágio",
+      "contágio venéreo",
+      "moléstia grave"
+    ]
+  },
+  {
+    "id": 538,
+    "topico": "Perigo para a vida ou saúde de outrem",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "132",
+    "alias": [
+      "perigo para a vida",
+      "perigo para saúde",
+      "exposição a perigo"
+    ]
+  },
+  {
+    "id": 539,
+    "topico": "Abandono de incapaz",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "133",
+    "alias": [
+      "abandono de incapaz",
+      "abandono de pessoa vulnerável"
+    ]
+  },
+  {
+    "id": 540,
+    "topico": "Exposição ou abandono de recém-nascido",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "134",
+    "alias": [
+      "abandono de recém-nascido",
+      "exposição de recém nascido"
+    ]
+  },
+  {
+    "id": 541,
+    "topico": "Omissão de socorro",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "135",
+    "alias": [
+      "omissão de socorro",
+      "deixar de socorrer",
+      "não prestar assistência"
+    ]
+  },
+  {
+    "id": 542,
+    "topico": "Maus-tratos",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "136",
+    "alias": [
+      "maus tratos",
+      "castigo",
+      "abuso de incapaz"
+    ]
+  },
+  {
+    "id": 543,
+    "topico": "Rixa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "137",
+    "alias": [
+      "rixa",
+      "briga generalizada",
+      "briga coletiva"
+    ]
+  },
+  {
+    "id": 544,
+    "topico": "Dano",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "163",
+    "alias": [
+      "dano",
+      "depredação",
+      "vandalismo",
+      "destruição de coisa alheia"
+    ]
+  },
+  {
+    "id": 545,
+    "topico": "Violação sexual mediante fraude",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "215",
+    "alias": [
+      "violação sexual mediante fraude",
+      "fraude sexual",
+      "estelionato sexual"
+    ]
+  },
+  {
+    "id": 546,
+    "topico": "Registro não autorizado da intimidade sexual",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "216-B",
+    "alias": [
+      "registro íntimo sem autorização",
+      "gravação íntima clandestina",
+      "fotografia íntima não autorizada"
+    ]
+  },
+  {
+    "id": 547,
+    "topico": "Corrupção de menores",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "218",
+    "alias": [
+      "corrupção de menores",
+      "praticar ato sexual na presença de menor"
+    ]
+  },
+  {
+    "id": 548,
+    "topico": "Satisfação de lascívia mediante presença de criança ou adolescente",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "218-A",
+    "alias": [
+      "lascívia na presença de menor",
+      "ato libidinoso na presença de criança"
+    ]
+  },
+  {
+    "id": 549,
+    "topico": "Favorecimento da prostituição ou exploração sexual de criança ou vulnerável",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "218-B",
+    "alias": [
+      "exploração sexual infantil",
+      "prostituição infantil",
+      "favorecimento da prostituição de vulnerável"
+    ]
+  },
+  {
+    "id": 550,
+    "topico": "Abandono material",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "244",
+    "alias": [
+      "abandono material",
+      "não pagar pensão alimentícia",
+      "abandono financeiro familiar"
+    ]
+  },
+  {
+    "id": 551,
+    "topico": "Bigamia",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "235",
+    "alias": [
+      "bigamia",
+      "casamento duplo",
+      "casar estando casado"
+    ]
+  },
+  {
+    "id": 552,
+    "topico": "Constituição de milícia privada",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "288-A",
+    "alias": [
+      "milícia privada",
+      "milícia",
+      "grupo paramilitar"
+    ]
+  },
+  {
+    "id": 553,
+    "topico": "Moeda falsa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "289",
+    "alias": [
+      "moeda falsa",
+      "dinheiro falso",
+      "falsificação de moeda",
+      "nota falsa"
+    ]
+  },
+  {
+    "id": 554,
+    "topico": "Falsa identidade",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "307",
+    "alias": [
+      "falsa identidade",
+      "identidade falsa",
+      "fingir ser outra pessoa"
+    ]
+  },
+  {
+    "id": 555,
+    "topico": "Adulteração de sinal identificador de veículo",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "311",
+    "alias": [
+      "adulteração de chassi",
+      "adulteração de placa",
+      "sinal identificador de veículo",
+      "remarcação de veículo"
+    ]
+  },
+  {
+    "id": 556,
+    "topico": "Inserção de dados falsos em sistema de informações",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "313-A",
+    "alias": [
+      "peculato eletrônico",
+      "inserção de dados falsos",
+      "fraude em sistema público"
+    ]
+  },
+  {
+    "id": 557,
+    "topico": "Excesso de exação",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "316",
+    "alias": [
+      "excesso de exação",
+      "cobrança tributária indevida por funcionário"
+    ]
+  },
+  {
+    "id": 558,
+    "topico": "Advocacia administrativa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "321",
+    "alias": [
+      "advocacia administrativa",
+      "patrocinar interesse privado na administração"
+    ]
+  },
+  {
+    "id": 559,
+    "topico": "Violação de sigilo funcional",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "325",
+    "alias": [
+      "violação de sigilo funcional",
+      "quebra de sigilo por servidor",
+      "divulgação de informação sigilosa"
+    ]
+  },
+  {
+    "id": 560,
+    "topico": "Usurpação de função pública",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "328",
+    "alias": [
+      "usurpação de função pública",
+      "fingir ser servidor",
+      "exercer função pública indevidamente"
+    ]
+  },
+  {
+    "id": 561,
+    "topico": "Tráfico de influência",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "332",
+    "alias": [
+      "tráfico de influência",
+      "vender influência",
+      "solicitar vantagem a pretexto de influir"
+    ]
+  },
+  {
+    "id": 562,
+    "topico": "Sonegação de contribuição previdenciária",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "337-A",
+    "alias": [
+      "sonegação previdenciária",
+      "fraude em contribuição previdenciária",
+      "omitir contribuição social"
+    ]
+  },
+  {
+    "id": 563,
+    "topico": "Comunicação falsa de crime ou contravenção",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "340",
+    "alias": [
+      "comunicação falsa de crime",
+      "falsa comunicação de ocorrência",
+      "simular crime"
+    ]
+  },
+  {
+    "id": 564,
+    "topico": "Autoacusação falsa",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "341",
+    "alias": [
+      "autoacusação falsa",
+      "confessar crime que não cometeu"
+    ]
+  },
+  {
+    "id": 565,
+    "topico": "Coação no curso do processo",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "344",
+    "alias": [
+      "coação no curso do processo",
+      "ameaçar testemunha",
+      "intimidar parte ou testemunha"
+    ]
+  },
+  {
+    "id": 566,
+    "topico": "Exercício arbitrário das próprias razões",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "345",
+    "alias": [
+      "exercício arbitrário das próprias razões",
+      "fazer justiça com as próprias mãos",
+      "justiça pelas próprias mãos"
+    ]
+  },
+  {
+    "id": 567,
+    "topico": "Fraude processual",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "347",
+    "alias": [
+      "fraude processual",
+      "alterar local de crime",
+      "inovar artificiosamente estado de lugar ou coisa"
+    ]
+  },
+  {
+    "id": 568,
+    "topico": "Favorecimento pessoal",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "348",
+    "alias": [
+      "favorecimento pessoal",
+      "ajudar criminoso a fugir",
+      "esconder autor de crime"
+    ]
+  },
+  {
+    "id": 569,
+    "topico": "Favorecimento real",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "349",
+    "alias": [
+      "favorecimento real",
+      "ocultar proveito de crime",
+      "ajudar a garantir proveito criminoso"
+    ]
+  },
+  {
+    "id": 570,
+    "topico": "Violação de direito autoral",
+    "lei": "Código Penal (Decreto-Lei nº 2.848/1940)",
+    "artigo": "184",
+    "alias": [
+      "violação de direito autoral",
+      "pirataria",
+      "pirataria digital",
+      "plágio",
+      "contrafação"
+    ]
+  },
+  {
+    "id": 571,
+    "topico": "Licença-paternidade e salário-paternidade (vigência a partir de 2027)",
+    "lei": "Lei nº 15.371/2026",
+    "artigo": "2/14",
+    "alias": [
+      "licença paternidade",
+      "salário paternidade",
+      "licença do pai",
+      "afastamento por nascimento de filho",
+      "licença por adoção para o pai",
+      "lei 15371 2026"
+    ]
+  }
+]

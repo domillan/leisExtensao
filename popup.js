@@ -164,7 +164,6 @@ newTabCheckbox.addEventListener('change', async () => {
 clearCacheBtn.addEventListener('click', async () => {
   const count = await clearLegislationCache();
   statusArea.classList.remove('hidden', 'status-error', 'status-loading');
-  statusArea.classList.add('status-info');
   statusArea.textContent = count > 0
     ? `Cache limpo (${count} página(s) removida(s)).`
     : 'O cache já está vazio.';

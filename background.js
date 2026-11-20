@@ -1,7 +1,7 @@
 import {
   BASE_URL,
-  KNOWN_NORMS,
   checkSelectionCandidate,
+  loadNormas,
   normalizeTextForSearch,
   resolveLegislation,
   resolvePendingCatalogItem
@@ -55,9 +55,10 @@ chrome.runtime.onInstalled.addListener(() => {
 // Mensagens vindas do botão flutuante na página (content.js)
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type === 'CHECK_SELECTION') {
-    const result = checkSelectionCandidate(message.text);
-    sendResponse(result);
-    return false;
+    checkSelectionCandidate(message.text)
+      .then((result) => sendResponse(result))
+      .catch(() => sendResponse({ valid: false }));
+    return true;
   }
 
   if (message?.type === 'OPEN_SELECTION_LEGISLATION') {
@@ -85,20 +86,22 @@ chrome.omnibox.onInputChanged.addListener((text, suggest) => {
   const qNorm = normalizeTextForSearch(text);
   if (!qNorm) return;
 
-  const suggestions = [];
-  for (const norm of KNOWN_NORMS) {
-    const titleNorm = normalizeTextForSearch(norm.title);
-    const matchesAlias = norm.aliases.some((a) => normalizeTextForSearch(a).startsWith(qNorm));
-    if (matchesAlias || titleNorm.includes(qNorm)) {
-      suggestions.push({
-        content: norm.aliases[0] || norm.title,
-        description: `${escapeXml(norm.title)} <dim>[${escapeXml(norm.category)}]</dim>`
-      });
+  loadNormas().then((knownNorms) => {
+    const suggestions = [];
+    for (const norm of knownNorms) {
+      const titleNorm = normalizeTextForSearch(norm.title);
+      const aliases = Array.isArray(norm.aliases) ? norm.aliases : [];
+      const matchesAlias = aliases.some((a) => normalizeTextForSearch(a).startsWith(qNorm));
+      if (matchesAlias || titleNorm.includes(qNorm)) {
+        suggestions.push({
+          content: aliases[0] || norm.title,
+          description: `${escapeXml(norm.title)} <dim>[${escapeXml(norm.category || 'Norma')}]</dim>`
+        });
+      }
+      if (suggestions.length >= 6) break;
     }
-    if (suggestions.length >= 6) break;
-  }
-
-  suggest(suggestions);
+    suggest(suggestions);
+  }).catch(() => {});
 });
 
 chrome.omnibox.onInputEntered.addListener(async (text, disposition) => {

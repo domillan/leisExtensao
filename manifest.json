@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Legislação Direta - Planalto",
   "version": "1.1.0",
-  "description": "Abre normas federais diretamente no Portal da Legislação da Presidência da República a partir do número, sigla ou nome.",
+  "description": "Abre normas federais diretamente no Portal da Legislação da Presidência da República.",
   "permissions": [
     "storage",
     "unlimitedStorage",
