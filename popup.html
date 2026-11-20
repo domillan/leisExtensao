@@ -4,62 +4,237 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Legislação Direta</title>
-  <link rel="stylesheet" href="popup.css" />
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      width: 410px;
+      padding: 14px;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      font-size: 13px;
+      color: #1e293b;
+      background: #f8fafc;
+    }
+
+    h1 {
+      font-size: 15px;
+      font-weight: 700;
+      color: #0c326f;
+      margin-bottom: 10px;
+    }
+
+    .form-row {
+      display: flex;
+      gap: 6px;
+      margin-bottom: 8px;
+    }
+
+    select, input[type="text"] {
+      padding: 8px 10px;
+      font-size: 13px;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+      color: #0f172a;
+      outline: none;
+    }
+
+    select:focus, input[type="text"]:focus {
+      border-color: #0c326f;
+    }
+
+    #typeSelect {
+      width: 135px;
+      flex-shrink: 0;
+    }
+
+    #queryInput {
+      flex: 1;
+      min-width: 0;
+    }
+
+    .controls-row {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      margin-bottom: 10px;
+    }
+
+    .open-target-group {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12.5px;
+      color: #334155;
+    }
+
+    #openModeSelect {
+      padding: 5px 8px;
+      font-size: 12.5px;
+    }
+
+    #searchBtn {
+      padding: 7px 14px;
+      font-size: 13px;
+      font-weight: 600;
+      color: #ffffff;
+      background: #0c326f;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+    }
+
+    #searchBtn:hover {
+      background: #092654;
+    }
+
+    #feedbackArea {
+      margin-top: 6px;
+    }
+
+    .msg-box {
+      padding: 10px;
+      border-radius: 6px;
+      background: #e2e8f0;
+      color: #1e293b;
+      line-height: 1.4;
+    }
+
+    .msg-box.error {
+      background: #fee2e2;
+      color: #991b1b;
+    }
+
+    .msg-box.success {
+      background: #dcfce7;
+      color: #166534;
+    }
+
+    .result-list {
+      list-style: none;
+      margin-top: 8px;
+      max-height: 270px;
+      overflow-y: auto;
+      border: 1px solid #cbd5e1;
+      border-radius: 6px;
+      background: #ffffff;
+    }
+
+    .result-list li + li {
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .result-btn {
+      display: block;
+      width: 100%;
+      padding: 9px 10px;
+      text-align: left;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      font-size: 12.5px;
+      color: #0f172a;
+    }
+
+    .result-btn:hover {
+      background: #eff6ff;
+    }
+
+    .result-cat {
+      display: block;
+      font-size: 11px;
+      color: #64748b;
+      margin-top: 2px;
+    }
+
+    .fallback-link {
+      display: inline-block;
+      margin-top: 8px;
+      font-size: 12px;
+      color: #0c326f;
+      text-decoration: underline;
+      cursor: pointer;
+      background: none;
+      border: none;
+    }
+
+    .footer-actions {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-top: 12px;
+      padding-top: 10px;
+      border-top: 1px solid #e2e8f0;
+    }
+
+    .footer-btn {
+      font-size: 12px;
+      color: #0c326f;
+      background: none;
+      border: none;
+      cursor: pointer;
+      text-decoration: underline;
+      padding: 2px 0;
+    }
+
+    .footer-btn:hover {
+      color: #092654;
+    }
+  </style>
 </head>
 <body>
-  <main class="container">
-    <header class="header">
-      <h1>Legislação Direta</h1>
-      <span class="badge">Legislação Federal</span>
-    </header>
+  <h1>Legislação Direta</h1>
 
-    <form id="search-form" novalidate>
-      <label class="field-label" for="query-input">Pesquisa</label>
-      <div class="input-row">
-        <input
-          id="query-input"
-          type="text"
-          placeholder="Ex.: 9.784/1999, CPC, Maria da Penha, 4.950-A"
-          autocomplete="off"
-          spellcheck="false"
-          autofocus
-        />
-        <button id="submit-btn" type="submit">Abrir</button>
-      </div>
+  <form id="searchForm">
+    <div class="form-row">
+      <select id="typeSelect" aria-label="Tipo de norma">
+        <option value="auto">Automático</option>
+        <option value="lei">Lei Ordinária</option>
+        <option value="lc">Lei Complementar</option>
+        <option value="decreto">Decreto</option>
+        <option value="dl">Decreto-Lei</option>
+        <option value="mp">Medida Provisória</option>
+        <option value="ec">Emenda Const.</option>
+        <option value="ld">Lei Delegada</option>
+      </select>
+      <input
+        id="queryInput"
+        type="text"
+        placeholder="Número, sigla, código ou assunto..."
+        autocomplete="off"
+        autofocus
+      />
+    </div>
 
-      <div class="controls-row">
-        <div class="select-group">
-          <label class="field-label" for="type-select">Tipo</label>
-          <select id="type-select">
-            <option value="auto">Automático</option>
-            <option value="lei">Lei Ordinária</option>
-            <option value="lc">Lei Complementar</option>
-            <option value="decreto">Decreto</option>
-            <option value="dl">Decreto-Lei</option>
-            <option value="mp">Medida Provisória</option>
-            <option value="ec">Emenda Constitucional</option>
-            <option value="ld">Lei Delegada</option>
-          </select>
-        </div>
+    <div class="controls-row">
+      <label class="open-target-group" for="openModeSelect">
+        <span>Abrir em:</span>
+        <select id="openModeSelect">
+          <option value="new_tab" selected>Nova aba</option>
+          <option value="side_panel">Painel lateral</option>
+          <option value="current_tab">Aba atual</option>
+        </select>
+      </label>
 
-        <label class="checkbox-label">
-          <input id="new-tab-checkbox" type="checkbox" checked />
-          <span>Abrir em nova aba</span>
-        </label>
-      </div>
-    </form>
+      <button id="searchBtn" type="submit">Buscar</button>
+    </div>
+  </form>
 
-    <section id="status-area" class="status-area hidden" aria-live="polite"></section>
+  <div id="feedbackArea"></div>
 
-    <footer class="footer">
-      <a href="https://portaldalegislacao.presidencia.gov.br/" target="_blank" rel="noopener noreferrer">
-        Portal da Legislação
-      </a>
-      <button id="clear-cache-btn" type="button" class="link-btn" title="Limpar páginas em cache (TTL 2h)">
-        Limpar cache
-      </button>
-    </footer>
-  </main>
+  <footer class="footer-actions">
+    <button id="openPortalBtn" class="footer-btn" type="button">
+      Portal da Legislação
+    </button>
+    <button id="clearCacheBtn" class="footer-btn" type="button">
+      Limpar cache
+    </button>
+  </footer>
 
   <script type="module" src="popup.js"></script>
 </body>

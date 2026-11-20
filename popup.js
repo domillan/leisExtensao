@@ -1,199 +1,202 @@
 import {
+  BASE_URL,
   clearLegislationCache,
   resolveLegislation,
   resolvePendingCatalogItem
 } from './resolver.js';
 
 const PENDING_POPUP_STATE_KEY = 'pending_popup_state_v1';
-const PREF_NEW_TAB_KEY = 'pref_open_new_tab';
+const OPEN_TARGET_PREF_KEY = 'open_target_mode_v1';
+const SIDEPANEL_STATE_KEY = 'sidepanel_state_v1';
 
-const form = document.getElementById('search-form');
-const queryInput = document.getElementById('query-input');
-const typeSelect = document.getElementById('type-select');
-const newTabCheckbox = document.getElementById('new-tab-checkbox');
-const submitBtn = document.getElementById('submit-btn');
-const statusArea = document.getElementById('status-area');
-const clearCacheBtn = document.getElementById('clear-cache-btn');
+const searchForm = document.getElementById('searchForm');
+const typeSelect = document.getElementById('typeSelect');
+const queryInput = document.getElementById('queryInput');
+const openModeSelect = document.getElementById('openModeSelect');
+const feedbackArea = document.getElementById('feedbackArea');
+const openPortalBtn = document.getElementById('openPortalBtn');
+const clearCacheBtn = document.getElementById('clearCacheBtn');
 
-async function openUrl(url) {
-  if (newTabCheckbox.checked) {
-    await chrome.tabs.create({ url });
+async function loadSavedOpenMode() {
+  const stored = await chrome.storage.local.get(OPEN_TARGET_PREF_KEY);
+  const saved = stored[OPEN_TARGET_PREF_KEY];
+  if (saved === 'new_tab' || saved === 'side_panel' || saved === 'current_tab') {
+    openModeSelect.value = saved;
   } else {
-    const [tab] = await chrome.tabs.query({ active: true, currentWindow: true });
-    if (tab?.id) {
-      await chrome.tabs.update(tab.id, { url });
-    } else {
-      await chrome.tabs.create({ url });
+    openModeSelect.value = 'new_tab';
+  }
+}
+
+openModeSelect.addEventListener('change', async () => {
+  await chrome.storage.local.set({ [OPEN_TARGET_PREF_KEY]: openModeSelect.value });
+});
+
+async function navigateToUrl(targetUrl) {
+  const mode = openModeSelect.value || 'new_tab';
+  await chrome.storage.local.set({ [OPEN_TARGET_PREF_KEY]: mode });
+
+  if (mode === 'side_panel') {
+    const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    await chrome.storage.local.set({
+      [SIDEPANEL_STATE_KEY]: {
+        status: 'ready',
+        url: targetUrl,
+        tabId: activeTab?.id ?? null,
+        isDockedPopup: false,
+        ts: Date.now()
+      }
+    });
+
+    if (activeTab?.id && chrome.sidePanel?.open) {
+      try {
+        if (chrome.sidePanel.setOptions) {
+          await chrome.sidePanel.setOptions({
+            tabId: activeTab.id,
+            path: 'sidepanel.html',
+            enabled: true
+          });
+        }
+        await chrome.sidePanel.open({ tabId: activeTab.id });
+        window.close();
+        return;
+      } catch (_) {}
     }
   }
+
+  if (mode === 'current_tab') {
+    const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (activeTab?.id) {
+      await chrome.tabs.update(activeTab.id, { url: targetUrl });
+      window.close();
+      return;
+    }
+  }
+
+  await chrome.tabs.create({ url: targetUrl });
   window.close();
 }
 
 function renderOutcome(outcome) {
-  statusArea.classList.remove('hidden', 'status-loading', 'status-error', 'status-info');
-  statusArea.innerHTML = '';
+  feedbackArea.innerHTML = '';
+  if (!outcome) return;
 
-  if (outcome.status === 'not_found' || outcome.status === 'error') {
-    statusArea.classList.add('status-error');
-    const p = document.createElement('p');
-    p.textContent = outcome.message || 'Norma não encontrada.';
-    statusArea.appendChild(p);
+  if (outcome.status === 'error' || outcome.status === 'not_found') {
+    const box = document.createElement('div');
+    box.className = 'msg-box error';
+    box.textContent = outcome.message || 'Norma ou assunto não encontrado.';
+    feedbackArea.appendChild(box);
 
     if (outcome.fallbackUrl) {
-      const a = document.createElement('a');
-      a.href = outcome.fallbackUrl;
-      a.target = '_blank';
-      a.rel = 'noopener noreferrer';
-      a.className = 'fallback-link';
-      a.textContent = 'Abrir lista correspondente no portal';
-      statusArea.appendChild(a);
+      const fbBtn = document.createElement('button');
+      fbBtn.type = 'button';
+      fbBtn.className = 'fallback-link';
+      fbBtn.textContent = 'Abrir listagem oficial no portal';
+      fbBtn.addEventListener('click', () => navigateToUrl(outcome.fallbackUrl));
+      feedbackArea.appendChild(fbBtn);
     }
     return;
   }
 
   if (outcome.status === 'confirm' && outcome.suggestion) {
-    statusArea.classList.add('status-info');
     const box = document.createElement('div');
-    box.className = 'confirm-box';
+    box.className = 'msg-box';
+    box.textContent = 'Você quis dizer:';
+    feedbackArea.appendChild(box);
 
-    const p = document.createElement('p');
-    p.innerHTML = `Você quis dizer <strong>${escapeHtml(outcome.suggestion.title)}</strong>?`;
-    box.appendChild(p);
-
-    const btn = document.createElement('button');
-    btn.type = 'button';
-    btn.className = 'confirm-btn';
-    btn.textContent = 'Sim, abrir esta norma';
-    btn.addEventListener('click', async () => {
-      btn.disabled = true;
-      btn.textContent = 'Localizando...';
-      const url = await resolvePendingCatalogItem(outcome.suggestion);
-      if (url) {
-        await openUrl(url);
-      } else {
-        renderOutcome({
-          status: 'not_found',
-          message: 'Não foi possível localizar o link desta norma no portal.',
-          fallbackUrl: outcome.fallbackUrl
-        });
-      }
-    });
-    box.appendChild(btn);
-    statusArea.appendChild(box);
+    const ul = document.createElement('ul');
+    ul.className = 'result-list';
+    ul.appendChild(createResultListItem(outcome.suggestion));
+    feedbackArea.appendChild(ul);
     return;
   }
 
   if (outcome.status === 'multiple' && Array.isArray(outcome.results)) {
-    statusArea.classList.add('status-info');
-    const p = document.createElement('p');
-    p.textContent = outcome.message || `Foram encontrados ${outcome.results.length} resultados:`;
-    statusArea.appendChild(p);
+    const box = document.createElement('div');
+    box.className = 'msg-box';
+    box.textContent = outcome.message || 'Selecione uma opção:';
+    feedbackArea.appendChild(box);
 
     const ul = document.createElement('ul');
-    ul.className = 'results-list';
-
+    ul.className = 'result-list';
     for (const item of outcome.results) {
-      const li = document.createElement('li');
-      const btn = document.createElement('button');
-      btn.type = 'button';
-      btn.className = 'result-item-btn';
-
-      const titleSpan = document.createElement('span');
-      titleSpan.className = 'result-title';
-      titleSpan.textContent = item.title || item.text || `Nº ${item.canonical}`;
-
-      const metaSpan = document.createElement('span');
-      metaSpan.className = 'result-meta';
-      const parts = [];
-      if (item.category) parts.push(item.category);
-      if (item.periodLabel) parts.push(`Período: ${item.periodLabel}`);
-      if (item.year && !item.periodLabel) parts.push(`Ano: ${item.year}`);
-      metaSpan.textContent = parts.join(' • ') || item.url || '';
-
-      btn.appendChild(titleSpan);
-      if (metaSpan.textContent) btn.appendChild(metaSpan);
-
-      btn.addEventListener('click', async () => {
-        btn.disabled = true;
-        const url = await resolvePendingCatalogItem(item);
-        if (url) {
-          await openUrl(url);
-        } else {
-          renderOutcome({
-            status: 'not_found',
-            message: 'Não foi possível resolver o link deste item.',
-            fallbackUrl: outcome.fallbackUrl
-          });
-        }
-      });
-
-      li.appendChild(btn);
-      ul.appendChild(li);
+      ul.appendChild(createResultListItem(item));
     }
-
-    statusArea.appendChild(ul);
+    feedbackArea.appendChild(ul);
   }
 }
 
-async function handleSearch(query, type) {
-  submitBtn.disabled = true;
-  statusArea.classList.remove('hidden', 'status-error', 'status-info');
-  statusArea.classList.add('status-loading');
-  statusArea.textContent = 'Consultando o Portal da Legislação...';
+function createResultListItem(item) {
+  const li = document.createElement('li');
+  const btn = document.createElement('button');
+  btn.type = 'button';
+  btn.className = 'result-btn';
+  btn.textContent = item.title || item.text || 'Abrir norma';
 
+  if (item.category || item.periodLabel) {
+    const meta = document.createElement('span');
+    meta.className = 'result-cat';
+    meta.textContent = [item.category, item.periodLabel].filter(Boolean).join(' • ');
+    btn.appendChild(meta);
+  }
+
+  btn.addEventListener('click', async () => {
+    btn.disabled = true;
+    const url = await resolvePendingCatalogItem(item);
+    if (url) {
+      await navigateToUrl(url);
+    } else {
+      btn.disabled = false;
+      renderOutcome({
+        status: 'error',
+        message: 'Não foi possível resolver o endereço da norma selecionada.'
+      });
+    }
+  });
+
+  li.appendChild(btn);
+  return li;
+}
+
+searchForm.addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const query = queryInput.value.trim();
+  const type = typeSelect.value;
+
+  feedbackArea.innerHTML = '<div class="msg-box">Buscando...</div>';
   const outcome = await resolveLegislation(query, type);
-  submitBtn.disabled = false;
 
   if (outcome.status === 'found' && outcome.result?.url) {
-    await openUrl(outcome.result.url);
+    await navigateToUrl(outcome.result.url);
     return;
   }
 
   renderOutcome(outcome);
-}
-
-form.addEventListener('submit', async (e) => {
-  e.preventDefault();
-  await handleSearch(queryInput.value, typeSelect.value);
 });
 
-newTabCheckbox.addEventListener('change', async () => {
-  await chrome.storage.local.set({ [PREF_NEW_TAB_KEY]: newTabCheckbox.checked });
+openPortalBtn.addEventListener('click', () => {
+  navigateToUrl(BASE_URL);
 });
 
 clearCacheBtn.addEventListener('click', async () => {
-  const count = await clearLegislationCache();
-  statusArea.classList.remove('hidden', 'status-error', 'status-loading');
-  statusArea.textContent = count > 0
-    ? `Cache limpo (${count} página(s) removida(s)).`
+  const removedCount = await clearLegislationCache();
+  feedbackArea.innerHTML = '';
+  const box = document.createElement('div');
+  box.className = 'msg-box success';
+  box.textContent = removedCount > 0
+    ? `Cache limpo (${removedCount} ${removedCount === 1 ? 'item removido' : 'itens removidos'}).`
     : 'O cache já está vazio.';
+  feedbackArea.appendChild(box);
 });
 
-function escapeHtml(str) {
-  return String(str)
-    .replace(/&/g, '&amp;')
-    .replace(/</g, '&lt;')
-    .replace(/>/g, '&gt;')
-    .replace(/"/g, '&quot;');
-}
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadSavedOpenMode();
 
-// Inicialização: carrega preferência de nova aba e eventual falha vinda do menu de contexto
-(async function init() {
-  const stored = await chrome.storage.local.get([PREF_NEW_TAB_KEY, PENDING_POPUP_STATE_KEY]);
-  if (typeof stored[PREF_NEW_TAB_KEY] === 'boolean') {
-    newTabCheckbox.checked = stored[PREF_NEW_TAB_KEY];
-  }
-
+  const stored = await chrome.storage.local.get(PENDING_POPUP_STATE_KEY);
   const pending = stored[PENDING_POPUP_STATE_KEY];
-  if (pending && (Date.now() - pending.timestamp) < 60_000) {
+  if (pending && Date.now() - (pending.timestamp || 0) < 30_000) {
     await chrome.storage.local.remove(PENDING_POPUP_STATE_KEY);
-    queryInput.value = pending.query || '';
-    typeSelect.value = pending.type || 'auto';
-    if (pending.outcome) {
-      renderOutcome(pending.outcome);
-    }
+    if (pending.query) queryInput.value = pending.query;
+    if (pending.type) typeSelect.value = pending.type;
+    if (pending.outcome) renderOutcome(pending.outcome);
   }
-
-  queryInput.focus();
-  queryInput.select();
-})();
+});

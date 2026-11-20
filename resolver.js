@@ -106,11 +106,6 @@ export function normalizeTextForSearch(str) {
     .trim();
 }
 
-/**
- * Normaliza termos para comparação de alias e títulos:
- * - Remove acentos e converte para minúsculas
- * - Converte hífens, travessões e pontuação em espaços ("licença-paternidade" === "licença paternidade")
- */
 export function normalizeAliasKey(str) {
   return stripAccents(str || '')
     .toLowerCase()
@@ -360,13 +355,6 @@ async function getAssuntosIndex() {
   return assuntosIndexCache;
 }
 
-/**
- * Formata o atributo "artigo" conforme a regra:
- * - Se tiver '/', pega apenas a parte antes da barra
- * - Retira o caractere '-'
- * - Converte para minúsculo
- * - Adiciona o prefixo "#art"
- */
 export function buildArticleAnchor(artigo) {
   if (artigo == null) return '';
   let value = String(artigo).trim();
@@ -807,9 +795,6 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
   };
 }
 
-/**
- * Verifica rapidamente em O(1) se um trecho selecionado na página corresponde a uma norma ou assunto aceito.
- */
 export async function checkSelectionCandidate(rawInput) {
   const text = String(rawInput || '').trim();
   if (!text || text.length < 2 || text.length > 140 || /[\r\n]/.test(text)) {
@@ -1173,9 +1158,6 @@ async function loadDynamicCatalog() {
   return catalog;
 }
 
-/**
- * Distância de Damerau-Levenshtein com buffer plano de 3 linhas (zero alocações de matriz).
- */
 let dlRowPrev2 = new Int32Array(64);
 let dlRowPrev1 = new Int32Array(64);
 let dlRowCurr = new Int32Array(64);
@@ -1229,31 +1211,21 @@ function damerauLevenshtein(a, b) {
   return dlRowPrev1[lenB];
 }
 
-/**
- * Compara dois tokens individuais contemplando:
- * - Match exato (1.0)
- * - Prefixo a partir de 3 letras (ex.: "fgt" -> "fgts")
- * - Substring interna (includes) a partir de 4 letras (ex.: "constitucional" -> "inconstitucionalidade")
- * - Erros de digitação via Damerau-Levenshtein a partir de 5 letras (ex.: "drgas" -> "drogas")
- */
 function tokenMatchScore(qToken, tToken) {
   if (qToken === tToken) return 1.0;
 
   const maxLen = Math.max(qToken.length, tToken.length);
   const minLen = Math.min(qToken.length, tToken.length);
 
-  // 1) Prefixo a partir de 3 caracteres
   if (qToken.length >= 3 && tToken.startsWith(qToken)) {
     const base = qToken.length === 3 ? 0.84 : 0.88;
     return base * (qToken.length / tToken.length) + 0.1;
   }
 
-  // 2) Substring interna (includes) a partir de 4 caracteres
   if (qToken.length >= 4 && tToken.includes(qToken)) {
     return 0.78 * (qToken.length / tToken.length) + 0.12;
   }
 
-  // 3) Tolerância a erros de digitação (Damerau-Levenshtein)
   if (maxLen <= 4 || minLen < 4) return 0;
   if (Math.abs(qToken.length - tToken.length) > 2) return 0;
 
@@ -1284,9 +1256,6 @@ function getCachedTokenScore(qToken, tToken, tokenScoreCache) {
   return cached;
 }
 
-/**
- * Calcula similaridade usando strings e tokens já pré-normalizados (sem RegEx).
- */
 function similarityScorePrecomputed(queryNorm, qTokens, targetNorm, tTokens, tokenScoreCache = null) {
   if (!queryNorm || !targetNorm) return 0;
   if (queryNorm === targetNorm) return 1.0;
@@ -1352,12 +1321,6 @@ function similarityScore(queryRaw, targetRaw) {
   );
 }
 
-/**
- * Seleciona os índices candidatos em assuntosIndexCache usando o índice invertido:
- * - Palavra inteira exata em O(1)
- * - Prefixo a partir de 3 letras
- * - Substring (includes) ou erro de digitação a partir de 4 letras
- */
 function findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache) {
   const candidateSet = new Set();
   const vocab = assuntosIdx.vocabulary;
@@ -1365,7 +1328,6 @@ function findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache) {
   for (let qi = 0; qi < qTokens.length; qi++) {
     const qt = qTokens[qi];
 
-    // 1) Match exato no vocabulário em O(1)
     const exactList = assuntosIdx.invertedIndex.get(qt);
     if (exactList) {
       for (let i = 0; i < exactList.length; i++) {
@@ -1373,7 +1335,6 @@ function findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache) {
       }
     }
 
-    // 2) Prefixo (>= 3 letras), substring interna (>= 4 letras) ou erro de digitação
     if (qt.length >= 3) {
       for (let vi = 0; vi < vocab.length; vi++) {
         const vt = vocab[vi];
@@ -1424,17 +1385,21 @@ async function resolveCatalogEntry(entry) {
 
 /**
  * Resolve um item de assuntos.json para a URL final da norma com a âncora #art...
+ * Passa { allowAssuntos: false } para impedir loop infinito caso "assunto.lei" coincida com outro alias.
  */
 async function resolveAssuntoEntry(assunto) {
-  const leiOutcome = await resolveLegislation(assunto.lei, 'auto');
-  let baseUrl = null;
+  let baseUrl = assunto.url || null;
 
-  if (leiOutcome.status === 'found' && leiOutcome.result?.url) {
-    baseUrl = leiOutcome.result.url;
-  } else if (leiOutcome.status === 'confirm' && leiOutcome.suggestion) {
-    baseUrl = await resolvePendingCatalogItem(leiOutcome.suggestion);
-  } else if (leiOutcome.status === 'multiple' && leiOutcome.results?.length > 0) {
-    baseUrl = await resolvePendingCatalogItem(leiOutcome.results[0]);
+  if (!baseUrl && assunto.lei) {
+    const leiOutcome = await resolveLegislation(assunto.lei, 'auto', { allowAssuntos: false });
+
+    if (leiOutcome.status === 'found' && leiOutcome.result?.url) {
+      baseUrl = leiOutcome.result.url;
+    } else if (leiOutcome.status === 'confirm' && leiOutcome.suggestion) {
+      baseUrl = await resolvePendingCatalogItem(leiOutcome.suggestion);
+    } else if (leiOutcome.status === 'multiple' && leiOutcome.results?.length > 0) {
+      baseUrl = await resolvePendingCatalogItem(leiOutcome.results[0]);
+    }
   }
 
   if (!baseUrl) return null;
@@ -1457,14 +1422,15 @@ function formatAssuntoPendingItem(assunto) {
   };
 }
 
-async function resolveByName(parsedQuery) {
+async function resolveByName(parsedQuery, options = {}) {
+  const allowAssuntos = options.allowAssuntos !== false;
   const qAliasKey = parsedQuery.aliasKey || normalizeAliasKey(parsedQuery.query);
   const qTokens = extractSignificantTokens(qAliasKey);
 
   const [normasIdx, dynamicCatalog, assuntosIdx] = await Promise.all([
     getNormasIndex(),
     loadDynamicCatalog(),
-    getAssuntosIndex()
+    allowAssuntos ? getAssuntosIndex() : Promise.resolve(null)
   ]);
   const knownNorms = await loadNormas();
   const codigosFallback = new URL(INDEX_PAGES.codigos, BASE_URL).href;
@@ -1517,28 +1483,35 @@ async function resolveByName(parsedQuery) {
     };
   }
 
-  // 4) Match exato em O(1) nas listas de "alias" de assuntos.json
-  const exactAssuntos = assuntosIdx.exactMap.get(qAliasKey) || [];
+  // 4) Match exato em O(1) nas listas de "alias" de assuntos.json (apenas se allowAssuntos = true)
+  if (allowAssuntos && assuntosIdx) {
+    const exactAssuntos = assuntosIdx.exactMap.get(qAliasKey) || [];
 
-  if (exactAssuntos.length === 1) {
-    const resolvedAssunto = await resolveAssuntoEntry(exactAssuntos[0]);
-    if (resolvedAssunto) {
-      return { status: 'found', result: resolvedAssunto, fallbackUrl: codigosFallback };
+    if (exactAssuntos.length === 1) {
+      const resolvedAssunto = await resolveAssuntoEntry(exactAssuntos[0]);
+      if (resolvedAssunto) {
+        return { status: 'found', result: resolvedAssunto, fallbackUrl: codigosFallback };
+      }
+      return {
+        status: 'not_found',
+        message: `Não foi possível localizar a norma "${exactAssuntos[0].lei}" vinculada ao assunto "${exactAssuntos[0].topico}".`,
+        fallbackUrl: codigosFallback
+      };
+    } else if (exactAssuntos.length > 1) {
+      const sortedExactAssuntos = exactAssuntos.slice().sort((a, b) => {
+        const scoreA = similarityScore(qAliasKey, a.topico || '');
+        const scoreB = similarityScore(qAliasKey, b.topico || '');
+        if (scoreB !== scoreA) return scoreB - scoreA;
+        return (a.topico || '').length - (b.topico || '').length;
+      });
+
+      return {
+        status: 'multiple',
+        message: `Encontramos ${sortedExactAssuntos.length} assuntos correspondentes a "${parsedQuery.original}":`,
+        results: sortedExactAssuntos.map(formatAssuntoPendingItem),
+        fallbackUrl: codigosFallback
+      };
     }
-  } else if (exactAssuntos.length > 1) {
-    const sortedExactAssuntos = exactAssuntos.slice().sort((a, b) => {
-      const scoreA = similarityScore(qAliasKey, a.topico || '');
-      const scoreB = similarityScore(qAliasKey, b.topico || '');
-      if (scoreB !== scoreA) return scoreB - scoreA;
-      return (a.topico || '').length - (b.topico || '').length;
-    });
-
-    return {
-      status: 'multiple',
-      message: `Encontramos ${sortedExactAssuntos.length} assuntos correspondentes a "${parsedQuery.original}":`,
-      results: sortedExactAssuntos.map(formatAssuntoPendingItem),
-      fallbackUrl: codigosFallback
-    };
   }
 
   // 5) Busca por similaridade acelerada por índice invertido e cache de tokens
@@ -1586,30 +1559,32 @@ async function resolveByName(parsedQuery) {
     }
   }
 
-  const candidateIndices = findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache);
-  for (const idx of candidateIndices) {
-    const entry = assuntosIdx.entries[idx];
-    const topicScore = similarityScorePrecomputed(qAliasKey, qTokens, entry.topicoNorm, entry.topicoTokens, tokenScoreCache);
-    let bestScore = topicScore;
-    let bestLabelLen = entry.topicoNorm.length || Infinity;
+  if (allowAssuntos && assuntosIdx) {
+    const candidateIndices = findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache);
+    for (const idx of candidateIndices) {
+      const entry = assuntosIdx.entries[idx];
+      const topicScore = similarityScorePrecomputed(qAliasKey, qTokens, entry.topicoNorm, entry.topicoTokens, tokenScoreCache);
+      let bestScore = topicScore;
+      let bestLabelLen = entry.topicoNorm.length || Infinity;
 
-    for (let j = 0; j < entry.aliases.length; j++) {
-      const al = entry.aliases[j];
-      const s = similarityScorePrecomputed(qAliasKey, qTokens, al.norm, al.tokens, tokenScoreCache);
-      if (s > bestScore || (s === bestScore && al.norm.length < bestLabelLen)) {
-        bestScore = s;
-        bestLabelLen = al.norm.length;
+      for (let j = 0; j < entry.aliases.length; j++) {
+        const al = entry.aliases[j];
+        const s = similarityScorePrecomputed(qAliasKey, qTokens, al.norm, al.tokens, tokenScoreCache);
+        if (s > bestScore || (s === bestScore && al.norm.length < bestLabelLen)) {
+          bestScore = s;
+          bestLabelLen = al.norm.length;
+        }
       }
-    }
 
-    if (bestScore >= MIN_SIMILARITY) {
-      scored.push({
-        score: bestScore,
-        topicScore,
-        labelLength: bestLabelLen,
-        kind: 'assunto',
-        item: entry.assunto
-      });
+      if (bestScore >= MIN_SIMILARITY) {
+        scored.push({
+          score: bestScore,
+          topicScore,
+          labelLength: bestLabelLen,
+          kind: 'assunto',
+          item: entry.assunto
+        });
+      }
     }
   }
 
@@ -1640,7 +1615,6 @@ async function resolveByName(parsedQuery) {
     };
   }
 
-  // Se houver apenas 1 resultado similar, pergunta ao usuário se é a legislação certa
   if (topCandidates.length === 1) {
     const only = topCandidates[0];
     if (only.kind === 'assunto') {
@@ -1703,7 +1677,7 @@ function deduplicateItems(items) {
 // Ponto de Entrada Principal
 // ============================================================================
 
-export async function resolveLegislation(rawInput, selectedType = 'auto') {
+export async function resolveLegislation(rawInput, selectedType = 'auto', options = {}) {
   const parsed = parseUserQuery(rawInput, selectedType);
 
   if (parsed.kind === 'empty') {
@@ -1716,7 +1690,7 @@ export async function resolveLegislation(rawInput, selectedType = 'auto') {
 
   try {
     if (parsed.kind === 'name') {
-      return await resolveByName(parsed);
+      return await resolveByName(parsed, options);
     }
 
     if (parsed.year != null) {
@@ -1768,7 +1742,6 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
   const exactMatches = [];
   const candidates = [];
 
-  // 1) Normas conhecidas (normas.json)
   for (let i = 0; i < normasIdx.entries.length; i++) {
     const entry = normasIdx.entries[i];
     const norm = entry.norm;
@@ -1817,7 +1790,6 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
     }
   }
 
-  // 2) Matches exatos em O(1) em assuntos.json
   const exactAssuntoSet = new Set();
   const exactAssuntosList = assuntosIdx.exactMap.get(qAliasKey) || [];
   for (let i = 0; i < exactAssuntosList.length; i++) {
@@ -1838,7 +1810,6 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
     });
   }
 
-  // 3) Candidatos de assuntos filtrados pelo índice invertido (exato, prefixo, includes e typos)
   const candidateIndices = findCandidateAssuntoIndices(assuntosIdx, qTokens, tokenScoreCache);
   for (const idx of candidateIndices) {
     const entry = assuntosIdx.entries[idx];
@@ -1882,7 +1853,6 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
     }
   }
 
-  // Se houver resultado idêntico único, retorna apenas ele sem listar outras opções
   const uniqueExact = [];
   const seenExact = new Set();
   for (let i = 0; i < exactMatches.length; i++) {

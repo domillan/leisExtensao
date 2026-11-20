@@ -1,13 +1,15 @@
 {
   "manifest_version": 3,
-  "name": "Legislação Direta - Planalto",
-  "version": "1.1.0",
-  "description": "Abre normas federais diretamente no Portal da Legislação da Presidência da República.",
+  "name": "Legislação Direta",
+  "version": "1.2.0",
+  "description": "Acesse rapidamente leis, decretos, códigos, estatutos e assuntos no Portal da Legislação da Presidência da República.",
   "permissions": [
     "storage",
     "unlimitedStorage",
     "contextMenus",
-    "activeTab"
+    "activeTab",
+    "sidePanel",
+    "declarativeNetRequestWithHostAccess"
   ],
   "host_permissions": [
     "https://portaldalegislacao.presidencia.gov.br/*"
@@ -39,6 +41,9 @@
   },
   "omnibox": {
     "keyword": "lei"
+  },
+  "side_panel": {
+    "default_path": "sidepanel.html"
   },
   "commands": {
     "_execute_action": {

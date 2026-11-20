@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Legislação Direta</title>
+  <style>
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    html, body {
+      width: 100%;
+      min-width: 25vw;
+      height: 100%;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+      background: #f4f6f8;
+    }
+
+    .topbar {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 8px;
+      height: 42px;
+      padding: 0 10px;
+      background: #0c326f;
+      color: #ffffff;
+      border-bottom: 1px solid #08234f;
+    }
+
+    .btn-new-tab {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      padding: 6px 12px;
+      font-size: 12.5px;
+      font-weight: 600;
+      color: #0c326f;
+      background: #ffffff;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: background 0.15s ease;
+    }
+
+    .btn-new-tab:hover:not(:disabled) {
+      background: #e8eef7;
+    }
+
+    .btn-new-tab:disabled {
+      opacity: 0.6;
+      cursor: default;
+    }
+
+    .status-text {
+      font-size: 11.5px;
+      color: #d7e3f7;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    iframe {
+      display: block;
+      width: 100%;
+      height: calc(100% - 42px);
+      border: none;
+      background: #ffffff;
+    }
+  </style>
+</head>
+<body>
+  <header class="topbar">
+    <button id="openNewTabBtn" class="btn-new-tab" type="button" disabled>
+      Abrir em nova aba
+    </button>
+    <span id="statusText" class="status-text">Legislação Direta</span>
+  </header>
+
+  <iframe id="legislationFrame" title="Portal da Legislação"></iframe>
+
+  <script type="module" src="sidepanel.js"></script>
+</body>
+</html>
