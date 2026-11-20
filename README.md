@@ -9,8 +9,14 @@
 3. Ative a chave Modo do desenvolvedor no canto superior direito.
 4. Clique em Carregar sem compactação e selecione a pasta.
    
+**Padrões de pesquisa reconhecidos:**
+- Número e ano ("13.105/2015", "13105/15", "13105(2015)").
+- Por extenso ("LEI Nº 13.105, DE 16 DE MARÇO DE 2015").
+- Siglas ("CPC").
+- Apelidos ("Lei Maria da Penha").
+- Assuntos ("Violência Doméstica").
+  
 **Funcionalidades:**
 - Busca por popup (atalho ALT+L).
 - Busca por omnibox (barra do navegador com palavra-chave 'lei').
 - Busca de texto selecionado (menu de contexto e botão flutuante).
-- Vários padrões de pesquisa reconhecidos.
