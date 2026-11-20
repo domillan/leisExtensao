@@ -1,6 +1,6 @@
 **Sobre o repositório:**
 - Código de extensão de Google Chrome para acessar legislação de maneira rápida.
-- Desenvolvido com auxílio de IA, a partir da ideia do <a href="https://x.com/AdvDoHardware/status/2123212986680557617">@AdvDoHardware</a>.
+- Desenvolvido com auxílio de IA, partindo da ideia inicial do <a href="https://x.com/AdvDoHardware/status/2123212986680557617">@AdvDoHardware</a>.
 - As ferramentas desenvolvidas com IA podem conter erros. Verifique o código e utilize por sua conta e risco.
 
 **Utilizando no Google Chrome:**
@@ -17,7 +17,12 @@
 - Apelidos ("Lei Maria da Penha").
 - Assuntos ("Violência Doméstica").
   
-**Funcionalidades:**
+**Modos de consulta:**
+- Abrir legislação em nova aba.
+- Abrir legislação no painel lateral.
+- Abrir legislação na aba atual.
+  
+**Modos de busca:**
 - Busca por popup (atalho ALT+L)<br>
   <img width="350" height="225" alt="image" src="https://github.com/user-attachments/assets/ba17197d-62be-4da2-907d-428c51f5a075" />
 
