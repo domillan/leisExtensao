@@ -18,6 +18,15 @@
 - Assuntos ("Violência Doméstica").
   
 **Funcionalidades:**
-- Busca por popup (atalho ALT+L).
-- Busca por omnibox (barra do navegador com palavra-chave 'lei').
-- Busca de texto selecionado (menu de contexto e botão flutuante).
+- Busca por popup (atalho ALT+L)<br>
+  <img width="350" height="225" alt="image" src="https://github.com/user-attachments/assets/ba17197d-62be-4da2-907d-428c51f5a075" />
+
+- Busca por omnibox (barra do navegador com palavra-chave 'lei') <br>
+  <img width="350" alt="image" src="https://github.com/user-attachments/assets/000e2506-4ed6-4cef-bda5-4d5e094d832c" />
+  
+- Busca por menu de contexto <br>
+  <img width="350" alt="image" src="https://github.com/user-attachments/assets/ab55e099-650a-4065-aa26-f4c6c794efd4" />
+ 
+- Busca por botão flutuante em texto selecionado <br>
+  <img width="350" alt="image" src="https://github.com/user-attachments/assets/34490082-1366-4bf2-8e6a-595e0f7ad11a" />
+
