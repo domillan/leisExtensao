@@ -48,9 +48,10 @@
   "commands": {
     "_execute_action": {
       "suggested_key": {
-        "default": "Alt+L"
+        "default": "Alt+L",
+        "mac": "Alt+L"
       },
-      "description": "Abrir busca rápida de legislação"
+      "description": "Abrir Legislação Direta"
     }
   }
 }

@@ -278,3 +278,10 @@
   document.addEventListener('scroll', onScroll, { passive: true, capture: true });
   document.addEventListener('selectionchange', onSelectionChange);
 })();
+
+chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
+  if (message?.type === 'GET_PAGE_SELECTION') {
+    const selectedText = String(window.getSelection()?.toString() || '').trim();
+    sendResponse({ text: selectedText });
+  }
+});

@@ -188,6 +188,20 @@ clearCacheBtn.addEventListener('click', async () => {
   feedbackArea.appendChild(box);
 });
 
+async function getSelectedTextFromActiveTab() {
+  try {
+    const [activeTab] = await chrome.tabs.query({ active: true, currentWindow: true });
+    if (!activeTab?.id) return '';
+
+    const response = await chrome.tabs.sendMessage(activeTab.id, {
+      type: 'GET_PAGE_SELECTION'
+    });
+    return String(response?.text || '').trim();
+  } catch (_) {
+    return '';
+  }
+}
+
 document.addEventListener('DOMContentLoaded', async () => {
   await loadSavedOpenMode();
 
@@ -195,8 +209,18 @@ document.addEventListener('DOMContentLoaded', async () => {
   const pending = stored[PENDING_POPUP_STATE_KEY];
   if (pending && Date.now() - (pending.timestamp || 0) < 30_000) {
     await chrome.storage.local.remove(PENDING_POPUP_STATE_KEY);
-    if (pending.query) queryInput.value = pending.query;
+    if (pending.query) {
+      queryInput.value = pending.query;
+      queryInput.select();
+    }
     if (pending.type) typeSelect.value = pending.type;
     if (pending.outcome) renderOutcome(pending.outcome);
+    return;
+  }
+
+  const selectedText = await getSelectedTextFromActiveTab();
+  if (selectedText) {
+    queryInput.value = selectedText;
+    queryInput.select();
   }
 });
