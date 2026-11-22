@@ -24,10 +24,11 @@
       hostEl = null;
       buttonEl = null;
     }
-    document.removeEventListener('mouseup', onMouseUp);
-    document.removeEventListener('keyup', onKeyUp);
+    document.removeEventListener('mouseup', onMouseUp, true);
+    document.removeEventListener('keyup', onKeyUp, true);
     document.removeEventListener('scroll', onScroll, true);
     document.removeEventListener('selectionchange', onSelectionChange);
+    window.removeEventListener('blur', onWindowBlur);
   }
 
   function removeButton(force = false) {
@@ -37,6 +38,40 @@
       hostEl = null;
       buttonEl = null;
     }
+  }
+
+  function obterSelecaoAtual() {
+    const activeEl = document.activeElement;
+    const activeTag = activeEl?.tagName;
+    if (activeTag === 'INPUT' || activeTag === 'TEXTAREA' || activeEl?.isContentEditable) {
+      return null;
+    }
+
+    const selection = window.getSelection();
+    if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+      return null;
+    }
+
+    const selectedText = selection.toString().replace(/\s+/g, ' ').trim();
+    if (!selectedText || selectedText.length < 2 || selectedText.length > 140) {
+      return null;
+    }
+
+    const range = selection.getRangeAt(0);
+    let rect = range.getBoundingClientRect();
+
+    if (!rect || (rect.width === 0 && rect.height === 0)) {
+      const clientRects = range.getClientRects();
+      if (clientRects && clientRects.length > 0) {
+        rect = clientRects[clientRects.length - 1];
+      }
+    }
+
+    if (!rect || (rect.width === 0 && rect.height === 0)) {
+      return null;
+    }
+
+    return { texto: selectedText, rect };
   }
 
   function createButton(label, rect, selectedText) {
@@ -183,30 +218,13 @@
 
     if (isClicking) return;
 
-    const selection = window.getSelection();
-    if (!selection || selection.isCollapsed || selection.rangeCount === 0) {
+    const selecao = obterSelecaoAtual();
+    if (!selecao) {
       removeButton();
       return;
     }
 
-    const activeTag = document.activeElement?.tagName;
-    if (activeTag === 'INPUT' || activeTag === 'TEXTAREA') {
-      removeButton();
-      return;
-    }
-
-    const selectedText = selection.toString().trim();
-    if (!selectedText || selectedText.length < 2 || selectedText.length > 140 || /[\r\n]/.test(selectedText)) {
-      removeButton();
-      return;
-    }
-
-    const range = selection.getRangeAt(0);
-    const rect = range.getBoundingClientRect();
-    if (!rect || (rect.width === 0 && rect.height === 0)) {
-      removeButton();
-      return;
-    }
+    const { texto: selectedText, rect } = selecao;
 
     try {
       chrome.runtime.sendMessage(
@@ -222,10 +240,10 @@
             return;
           }
 
-          const latestText = window.getSelection()?.toString().trim();
-          if (latestText !== selectedText) return;
+          const latest = obterSelecaoAtual();
+          if (!latest || latest.texto !== selectedText) return;
 
-          createButton(response.label || 'Abrir legislação', rect, selectedText);
+          createButton(response.label || 'Abrir legislação', latest.rect || rect, selectedText);
         }
       );
     } catch (_) {
@@ -267,21 +285,28 @@
 
   function onSelectionChange() {
     if (isClicking) return;
-    const sel = window.getSelection();
-    if (!sel || sel.isCollapsed || !sel.toString().trim()) {
+    const selecao = obterSelecaoAtual();
+    if (!selecao) {
       removeButton();
     }
   }
 
-  document.addEventListener('mouseup', onMouseUp);
-  document.addEventListener('keyup', onKeyUp);
+  function onWindowBlur() {
+    if (!isClicking) {
+      removeButton(true);
+    }
+  }
+
+  document.addEventListener('mouseup', onMouseUp, true);
+  document.addEventListener('keyup', onKeyUp, true);
   document.addEventListener('scroll', onScroll, { passive: true, capture: true });
   document.addEventListener('selectionchange', onSelectionChange);
+  window.addEventListener('blur', onWindowBlur);
 })();
 
 chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   if (message?.type === 'GET_PAGE_SELECTION') {
-    const selectedText = String(window.getSelection()?.toString() || '').trim();
+    const selectedText = String(window.getSelection()?.toString() || '').replace(/\s+/g, ' ').trim();
     sendResponse({ text: selectedText });
   }
 });

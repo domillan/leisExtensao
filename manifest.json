@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Legislação Direta",
-  "version": "1.2.0",
+  "version": "1.2.1",
   "description": "Acesse rapidamente leis, decretos, códigos, estatutos e assuntos no Portal da Legislação da Presidência da República.",
   "permissions": [
     "storage",
@@ -22,7 +22,8 @@
     {
       "matches": ["<all_urls>"],
       "js": ["content.js"],
-      "run_at": "document_idle"
+      "run_at": "document_idle",
+      "all_frames": true
     }
   ],
   "action": {
