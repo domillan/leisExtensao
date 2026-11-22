@@ -355,6 +355,12 @@ async function getAssuntosIndex() {
   return assuntosIndexCache;
 }
 
+/**
+ * Formata o atributo "artigo" conforme a regra:
+ * - Se tiver '/', pega apenas a parte antes da barra
+ * - Retira os caracteres '-', 'º', '°', 'ª', '.' e espaços (ex.: "4º-B" -> "4b")
+ * - Converte para minúsculo e adiciona o prefixo "#art"
+ */
 export function buildArticleAnchor(artigo) {
   if (artigo == null) return '';
   let value = String(artigo).trim();
@@ -365,20 +371,228 @@ export function buildArticleAnchor(artigo) {
   }
 
   value = value
-    .replace(/-/g, '')
-    .replace(/[º°.\s]/g, '')
+    .replace(/^art\.?\s*/i, '')
+    .replace(/[-–—º°ª.\s]/g, '')
     .toLowerCase()
     .trim();
 
   return value ? `#art${value}` : '';
 }
 
-function appendAnchorToUrl(url, artigo) {
+export function buildIdentifiersSuffix(identificadores) {
+  if (identificadores == null) return '';
+
+  const parts = Array.isArray(identificadores)
+    ? identificadores.map((v) => (v == null ? '' : String(v).trim())).filter(Boolean)
+    : [String(identificadores).trim()].filter(Boolean);
+
+  if (parts.length === 0) return '';
+  return parts.join('').replace(/^#+/, '');
+}
+
+/**
+ * Monta a URL final no formato [link]#art[artigo][identificadores]
+ */
+function appendAnchorToUrl(url, artigo, identificadores = null) {
   if (!url) return url;
-  const anchor = buildArticleAnchor(artigo);
-  if (!anchor) return url;
   const baseUrl = url.split('#')[0];
-  return `${baseUrl}${anchor}`;
+  const artAnchor = buildArticleAnchor(artigo);
+  const idSuffix = buildIdentifiersSuffix(identificadores);
+
+  if (!artAnchor && !idSuffix) {
+    return url;
+  }
+
+  if (artAnchor) {
+    return `${baseUrl}${artAnchor}${idSuffix}`;
+  }
+
+  return `${baseUrl}#${idSuffix}`;
+}
+
+function parseRomanToNumber(roman) {
+  const s = String(roman || '').trim().toUpperCase();
+  if (!s || !/^[IVXLCDM]+$/.test(s)) return null;
+  const map = { I: 1, V: 5, X: 10, L: 50, C: 100, D: 500, M: 1000 };
+  let total = 0;
+  let prev = 0;
+  for (let i = s.length - 1; i >= 0; i--) {
+    const curr = map[s[i]];
+    if (!curr) return null;
+    if (curr < prev) total -= curr;
+    else total += curr;
+    prev = curr;
+  }
+  return total > 0 ? total : null;
+}
+
+function intToRoman(num) {
+  const n = parseInt(num, 10);
+  if (!Number.isFinite(n) || n <= 0 || n > 3999) return String(num);
+  const numerals = [
+    ['M', 1000], ['CM', 900], ['D', 500], ['CD', 400],
+    ['C', 100], ['XC', 90], ['L', 50], ['XL', 40],
+    ['X', 10], ['IX', 9], ['V', 5], ['IV', 4], ['I', 1]
+  ];
+  let rem = n;
+  let out = '';
+  for (const [sym, val] of numerals) {
+    while (rem >= val) {
+      out += sym;
+      rem -= val;
+    }
+  }
+  return out;
+}
+
+function normalizeIncisoLabel(rawInc) {
+  const v = String(rawInc || '').trim();
+  if (!v) return '';
+  if (/^\d+$/.test(v)) {
+    return intToRoman(parseInt(v, 10));
+  }
+  return v.toUpperCase();
+}
+
+function normalizeAlineaLabel(rawAl) {
+  const v = String(rawAl || '')
+    .trim()
+    .replace(/^['"]+|['"]+$/g, '')
+    .toLowerCase();
+  return v ? `'${v}'` : '';
+}
+
+/**
+ * Formata "identificadores" na ordem: parágrafo -> inciso -> alínea,
+ * separados por vírgula quando houver mais de um elemento.
+ * Exemplos:
+ * - "i" -> "I"
+ * - "p" -> "parágrafo único"
+ * - "§5iiib" -> "§ 5º, III, 'b'"
+ */
+export function formatIdentifiersReadable(identificadores) {
+  if (identificadores == null) return '';
+
+  const rawJoined = Array.isArray(identificadores)
+    ? identificadores.map((v) => (v == null ? '' : String(v).trim())).filter(Boolean).join(' ')
+    : String(identificadores).trim();
+
+  let working = rawJoined.replace(/^#+/, '').trim();
+  if (!working) return '';
+
+  let paragraphLabel = '';
+  let incisoLabel = '';
+  let alineaLabel = '';
+
+  const pUnicoStart = working.match(
+    /^(?:par(?:agrafo|ágrafo)?\.?\s*unico|p\.?\s*unico|pu|p(?=$|[\s,.;:0-9ivxlcdmIVXLCDM'"]))(.*)$/i
+  );
+  if (pUnicoStart) {
+    const restAfterP = pUnicoStart[1].trim();
+    if (/^p$/i.test(working)) {
+      return 'parágrafo único';
+    }
+    if (/^(?:par(?:agrafo|ágrafo)?\.?\s*unico|p\.?\s*unico|pu)/i.test(working)) {
+      paragraphLabel = 'parágrafo único';
+      working = working.replace(/^(?:par(?:agrafo|ágrafo)?\.?\s*unico|p\.?\s*unico|pu)/i, '').trim();
+    } else if (/^p(?=[ivxlcdm])/i.test(working)) {
+      paragraphLabel = 'parágrafo único';
+      working = working.replace(/^p/i, '').trim();
+    } else if (/^p(?:\s+|,)/i.test(working)) {
+      paragraphLabel = 'parágrafo único';
+      working = restAfterP;
+    }
+  }
+
+  if (!paragraphLabel) {
+    const paraNumMatch = working.match(/^(?:§|par(?:ágrafo|agrafo)?\.?)\s*(\d+)[º°o]?/i);
+    if (paraNumMatch) {
+      paragraphLabel = `§ ${parseInt(paraNumMatch[1], 10)}º`;
+      working = working.slice(paraNumMatch[0].length).trim();
+    }
+  }
+
+  working = working.replace(/^[,;\s]+/, '').trim();
+
+  if (working) {
+    const explicitAlinea = working.match(/^(?:al(?:ínea|inea)?\.?\s*)?['"]([a-z]{1,2})['"]$/i);
+    if (explicitAlinea) {
+      alineaLabel = normalizeAlineaLabel(explicitAlinea[1]);
+    } else {
+      const alPrefixMatch = working.match(/^(?:al(?:ínea|inea)?\.?)\s*['"]?([a-z]{1,2})['"]?$/i);
+      if (alPrefixMatch) {
+        alineaLabel = normalizeAlineaLabel(alPrefixMatch[1]);
+      } else {
+        const incPrefixMatch = working.match(/^(?:inc(?:iso)?\.?)\s*([ivxlcdm]+|\d+)(.*)$/i);
+        if (incPrefixMatch) {
+          incisoLabel = normalizeIncisoLabel(incPrefixMatch[1]);
+          const restAl = incPrefixMatch[2]?.trim();
+          if (restAl) {
+            const alClean = restAl.replace(/^(?:al(?:ínea|inea)?\.?\s*)?['"]?([a-z]{1,2})['"]?$/i, '$1');
+            if (/^[a-z]{1,2}$/i.test(alClean)) {
+              alineaLabel = normalizeAlineaLabel(alClean);
+            }
+          }
+        } else {
+          const compactMatch = working.match(/^([ivxlcdm]+|\d+)(?:[\s,]+|(?=[a-z]$))?([a-z]{1,2})?$/i);
+          if (compactMatch) {
+            const firstPart = compactMatch[1];
+            const secondPart = compactMatch[2];
+
+            if (secondPart) {
+              if (/^\d+$/.test(firstPart) || parseRomanToNumber(firstPart) !== null) {
+                incisoLabel = normalizeIncisoLabel(firstPart);
+                alineaLabel = normalizeAlineaLabel(secondPart);
+              } else {
+                const fullRoman = `${firstPart}${secondPart}`;
+                if (parseRomanToNumber(fullRoman) !== null) {
+                  incisoLabel = fullRoman.toUpperCase();
+                } else {
+                  incisoLabel = normalizeIncisoLabel(firstPart);
+                  alineaLabel = normalizeAlineaLabel(secondPart);
+                }
+              }
+            } else {
+              if (/^\d+$/.test(firstPart) || parseRomanToNumber(firstPart) !== null) {
+                incisoLabel = normalizeIncisoLabel(firstPart);
+              } else {
+                alineaLabel = normalizeAlineaLabel(firstPart);
+              }
+            }
+          } else {
+            const parts = working.split(/[\s,;]+/).filter(Boolean);
+            for (const part of parts) {
+              if (!incisoLabel && (/^\d+$/.test(part) || parseRomanToNumber(part) !== null)) {
+                incisoLabel = normalizeIncisoLabel(part);
+              } else if (!alineaLabel) {
+                alineaLabel = normalizeAlineaLabel(part);
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+
+  return [paragraphLabel, incisoLabel, alineaLabel].filter(Boolean).join(', ');
+}
+
+function buildAssuntoDisplayTitle(assunto) {
+  const topico = assunto.topico || '';
+  const artClean = assunto.artigo
+    ? String(assunto.artigo).trim().replace(/^art\.?\s*/i, '')
+    : '';
+  const artPart = artClean ? `Art. ${artClean}` : '';
+  const idReadable = formatIdentifiersReadable(assunto.identificadores);
+
+  const leiPrefix = assunto.lei ? `${assunto.lei}, ` : '';
+  const deviceParts = [artPart, idReadable].filter(Boolean);
+
+  if (!leiPrefix && deviceParts.length === 0) {
+    return topico;
+  }
+
+  return `${topico} (${leiPrefix}${deviceParts.join(', ')})`;
 }
 
 // ============================================================================
@@ -696,7 +910,6 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
     }
   }
 
-  // 1) Citação formal completa com data por extenso ou numérica
   const fullCitationRegex = /^(\d[\d.\s]*\d|\d)(?:\s*-?\s*([A-Za-z]|\d{1,2}))?\s*,?\s*\bde\s+\d{1,2}(?:[º°o]?\s+de\s+[a-zçãõéíóúâêô]+\s+de|\s*[./-]\s*\d{1,2}\s*[./-])\s*(\d{2}|\d{4})\s*$/i;
   const fullMatch = working.match(fullCitationRegex);
   if (fullMatch) {
@@ -721,7 +934,6 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
     }
   }
 
-  // 2) Formatos compactos com ano
   const numWithYearRegex = /^(\d[\d.\s]*\d|\d)(?:\s*-?\s*([A-Za-z]|\d{1,2}))?\s*(?:\/|\bde\b|\(|\s+)\s*(\d{2}|\d{4})\s*\)?$/i;
   const numMatch = working.match(numWithYearRegex);
   if (numMatch) {
@@ -746,7 +958,6 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
     }
   }
 
-  // 3) Número sem ano ou formato "9099-95" vs "2.200-2"
   const numOnlyRegex = /^(\d[\d.\s]*\d|\d)(?:\s*-?\s*([A-Za-z]|\d{1,2}))?$/i;
   const singleNumMatch = working.match(numOnlyRegex);
   if (singleNumMatch) {
@@ -785,7 +996,6 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
     }
   }
 
-  // 4) Busca por nome / sigla / apelido / assunto
   return {
     kind: 'name',
     query: sanitized,
@@ -1384,7 +1594,7 @@ async function resolveCatalogEntry(entry) {
 }
 
 /**
- * Resolve um item de assuntos.json para a URL final da norma com a âncora #art...
+ * Resolve um item de assuntos.json para a URL final no formato [link]#art[artigo][identificadores].
  * Passa { allowAssuntos: false } para impedir loop infinito caso "assunto.lei" coincida com outro alias.
  */
 async function resolveAssuntoEntry(assunto) {
@@ -1404,21 +1614,25 @@ async function resolveAssuntoEntry(assunto) {
 
   if (!baseUrl) return null;
 
-  const finalUrl = appendAnchorToUrl(baseUrl, assunto.artigo);
-  const artDisplay = assunto.artigo ? ` — Art. ${assunto.artigo}` : '';
+  const finalUrl = appendAnchorToUrl(baseUrl, assunto.artigo, assunto.identificadores);
   return {
-    title: `${assunto.topico} (${assunto.lei}${artDisplay})`,
+    title: buildAssuntoDisplayTitle(assunto),
     url: finalUrl,
-    category: 'Assunto'
+    category: 'Assunto',
+    artigo: assunto.artigo || '',
+    identificadores: assunto.identificadores || '',
+    identificadoresLegiveis: formatIdentifiersReadable(assunto.identificadores)
   };
 }
 
 function formatAssuntoPendingItem(assunto) {
-  const artDisplay = assunto.artigo ? ` — Art. ${assunto.artigo}` : '';
   return {
-    title: `${assunto.topico} (${assunto.lei}${artDisplay})`,
+    title: buildAssuntoDisplayTitle(assunto),
     assuntoEntry: assunto,
-    category: 'Assunto'
+    category: 'Assunto',
+    artigo: assunto.artigo || '',
+    identificadores: assunto.identificadores || '',
+    identificadoresLegiveis: formatIdentifiersReadable(assunto.identificadores)
   };
 }
 
@@ -1435,7 +1649,6 @@ async function resolveByName(parsedQuery, options = {}) {
   const knownNorms = await loadNormas();
   const codigosFallback = new URL(INDEX_PAGES.codigos, BASE_URL).href;
 
-  // 1) Termos genéricos ("código", "estatuto")
   if (qAliasKey === 'codigo' || qAliasKey === 'codigos') {
     const allCodes = [
       ...knownNorms.filter((n) => (n.category || '').startsWith('Código')),
@@ -1464,7 +1677,6 @@ async function resolveByName(parsedQuery, options = {}) {
     };
   }
 
-  // 2) Match exato em O(1) nas siglas/apelidos de normas.json
   const exactNormHits = normasIdx.exactMap.get(qAliasKey);
   if (exactNormHits && exactNormHits.length > 0) {
     const resolved = await resolveCatalogEntry(exactNormHits[0]);
@@ -1473,7 +1685,6 @@ async function resolveByName(parsedQuery, options = {}) {
     }
   }
 
-  // 3) Match exato no catálogo dinâmico do portal (Códigos e Estatutos)
   const exactDynamic = dynamicCatalog.find((item) => item.aliasKey === qAliasKey);
   if (exactDynamic) {
     return {
@@ -1483,7 +1694,6 @@ async function resolveByName(parsedQuery, options = {}) {
     };
   }
 
-  // 4) Match exato em O(1) nas listas de "alias" de assuntos.json (apenas se allowAssuntos = true)
   if (allowAssuntos && assuntosIdx) {
     const exactAssuntos = assuntosIdx.exactMap.get(qAliasKey) || [];
 
@@ -1514,7 +1724,6 @@ async function resolveByName(parsedQuery, options = {}) {
     }
   }
 
-  // 5) Busca por similaridade acelerada por índice invertido e cache de tokens
   const MIN_SIMILARITY = 0.50;
   const tokenScoreCache = new Map();
   const scored = [];
@@ -1796,7 +2005,8 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
     const assunto = exactAssuntosList[i];
     exactAssuntoSet.add(assunto);
     const artInfo = assunto.artigo ? `, Art. ${assunto.artigo}` : '';
-    const tag = `${assunto.lei}${artInfo}`;
+    const idInfo = formatIdentifiersReadable(assunto.identificadores);
+    const tag = `${assunto.lei}${artInfo}${idInfo ? `, ${idInfo}` : ''}`;
     const matchedRaw = (Array.isArray(assunto.alias)
       ? assunto.alias.find((al) => normalizeAliasKey(al) === qAliasKey)
       : null) || assunto.topico || qAliasKey;
@@ -1817,7 +2027,8 @@ export async function getOmniboxSuggestions(rawInput, limit = 8) {
     if (exactAssuntoSet.has(assunto)) continue;
 
     const artInfo = assunto.artigo ? `, Art. ${assunto.artigo}` : '';
-    const tag = `${assunto.lei}${artInfo}`;
+    const idInfo = formatIdentifiersReadable(assunto.identificadores);
+    const tag = `${assunto.lei}${artInfo}${idInfo ? `, ${idInfo}` : ''}`;
 
     let bestScore = entry.topicoNorm.startsWith(qAliasKey)
       ? Math.max(0.82, similarityScorePrecomputed(qAliasKey, qTokens, entry.topicoNorm, entry.topicoTokens, tokenScoreCache))
