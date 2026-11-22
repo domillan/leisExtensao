@@ -16,6 +16,7 @@
 - Siglas ("CPC").
 - Apelidos ("Lei Maria da Penha").
 - Assuntos ("Violência Doméstica").
+- Dispositivo específico ("Art. 5º, LIII, da Constituição Federal").
   
 **Modos de consulta:**
 - Abrir legislação em nova aba.
