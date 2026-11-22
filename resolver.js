@@ -168,6 +168,346 @@ export function normalizeActNumber(rawNum, isMP = false) {
 }
 
 // ============================================================================
+// Extração de Dispositivo Legal (#id) e Norma Associada
+// ============================================================================
+
+const ORDINAIS_MAP = {
+  primeiro: '1',
+  '1o': '1',
+  segundo: '2',
+  '2o': '2',
+  terceiro: '3',
+  '3o': '3',
+  quarto: '4',
+  '4o': '4',
+  quinto: '5',
+  '5o': '5',
+  sexto: '6',
+  '6o': '6',
+  setimo: '7',
+  sétimo: '7',
+  '7o': '7',
+  oitavo: '8',
+  '8o': '8',
+  nono: '9',
+  '9o': '9',
+  decimo: '10',
+  décimo: '10',
+  '10o': '10'
+};
+
+const SIGLAS_PREFIXO = [
+  'CF',
+  'CRFB',
+  'CONSTITUICAO',
+  'CONSTITUIÇÃO',
+  'CPC',
+  'CC',
+  'CP',
+  'CPP',
+  'CLT',
+  'CDC',
+  'CTN',
+  'CTB',
+  'ECA',
+  'LEP',
+  'LINDB',
+  'LOMAN',
+  'LAI',
+  'LGPD'
+];
+
+const ESPECIE_NORMATIVA_PURA_REGEX = /^(?:lei(?:\s+ordin[aá]ria|\s+complementar|\s+delegada)?|decreto(?:[-\s]*lei)?|medida\s+provis[oó]ria|emenda\s+constitucional|l\.?\s*c\.?p?\.?|l\.?\s*d\.?|d\.?\s*l\.?|e\.?\s*c\.?|m\.?\s*p\.?v?\.?|dec\.?)(?:\s*(?:n[º°oª.]*|num\.?|n[úu]mero\.?))?\s*$/i;
+
+const CITACAO_DIRETA_ESPECIE_NUMERO_REGEX = /^(?:lei(?:\s+ordin[aá]ria|\s+complementar|\s+delegada)?|decreto(?:[-\s]*lei)?|medida\s+provis[oó]ria|emenda\s+constitucional|l\.?\s*c\.?p?\.?|l\.?\s*d\.?|d\.?\s*l\.?|e\.?\s*c\.?|m\.?\s*p\.?v?\.?|dec\.?)\s*(?:n[º°oª.]*\s*)?\d[\d.\s]*\d(?:\s*(?:\/|\bde\b|-)\s*\d{2,4})?\s*$/i;
+
+const ATO_NAO_LEGISLACAO_REGEX = /\b(?:s[úu]mula(?:s)?|ac[óo]rd[ãa]o(?:s)?|jurisprud[êe]ncia|recurso\s+especial|resp|re|agravo|tema(?:s)?|repercuss[ãa]o\s+geral|portaria(?:s)?|resolu[çc][ãa]o(?:oes|ões)?|instru[çc][ãa]o\s+normativa|of[íi]cio|circular|parecer(?:es)?)\b/i;
+
+function normalizarNumeroArtigo(numStr) {
+  return String(numStr || '').replace(/\./g, '').trim();
+}
+
+function extrairParagrafo(texto) {
+  if (/par[áa]gra[fd]o\s+[úu]nico\b/i.test(texto)) {
+    return 'p';
+  }
+
+  const numDepois = texto.match(
+    /(?:§+|par[áa]gra[fd]o(?:s)?)\s*(\d+)\s*(?:[ºª°])?/i
+  );
+  if (numDepois) {
+    return `§${numDepois[1]}`;
+  }
+
+  const ordinalAntes = texto.match(
+    /\b(\d+[ºª°]?|primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo)\s+par[áa]gra[fd]o\b/i
+  );
+  if (ordinalAntes) {
+    const raw = ordinalAntes[1]
+      .toLowerCase()
+      .replace(/[ºª°]/g, '');
+    const numero = /^\d+$/.test(raw) ? raw : ORDINAIS_MAP[raw];
+    if (numero) {
+      return `§${numero}`;
+    }
+  }
+
+  return '';
+}
+
+function extrairInciso(texto) {
+  const explicito = texto.match(
+    /\binc(?:iso|\.)?\s+([IVXLCDM]+)\b/i
+  );
+  if (explicito) {
+    return explicito[1].toLowerCase();
+  }
+
+  const semArtigo = texto.replace(
+    /\b(?:art\.?|artigo)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?\s*(?:[-–—]?\s*[a-zA-Z])?/i,
+    ''
+  );
+  const preposicoesIgnoradas = new Set([
+    'a', 'o', 'e', 'em', 'de', 'da', 'do', 'das', 'dos', 'na', 'no', 'nas', 'nos'
+  ]);
+  const tokens = semArtigo.split(/[\s,()'“”]+/);
+  const romanoToken = tokens.find((tok) => {
+    const clean = tok.toLowerCase();
+    if (!clean || preposicoesIgnoradas.has(clean)) return false;
+    return /^(?:m{0,3})(?:cm|cd|d?c{0,3})(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})$/.test(clean);
+  });
+
+  return romanoToken ? romanoToken.toLowerCase() : '';
+}
+
+function extrairAlinea(texto) {
+  const explicita = texto.match(/\bal[íi]nea\s*["'“”]?([a-z])["'“”]?\b/i);
+  if (explicita) {
+    return explicita[1].toLowerCase();
+  }
+
+  const entreAspas = texto.match(/["'“”]([a-z])["'“”]/i);
+  if (entreAspas) {
+    return entreAspas[1].toLowerCase();
+  }
+
+  return '';
+}
+
+export function montarIdHtml(corpoDispositivo) {
+  const artMatch =
+    corpoDispositivo.match(
+      /\b(?:art\.?|artigo)\s*(\d+(?:\.\d+)?)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
+    ) ||
+    corpoDispositivo.match(
+      /^\s*(\d+(?:\.\d+)?)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
+    );
+
+  if (!artMatch) return null;
+
+  const numeroArt = normalizarNumeroArtigo(artMatch[1]);
+  const rawLetra = artMatch[2] || artMatch[3] || '';
+  const ignorarLetras = new Set(['a', 'o', 'e']);
+  const letraArt =
+    rawLetra && (artMatch[2] || !ignorarLetras.has(rawLetra.toLowerCase()))
+      ? rawLetra.toLowerCase()
+      : '';
+  const idArtigo = `art${numeroArt}${letraArt}`;
+
+  const idParagrafo = extrairParagrafo(corpoDispositivo);
+  const idInciso = extrairInciso(corpoDispositivo);
+  const idAlinea = extrairAlinea(corpoDispositivo);
+
+  return `${idArtigo}${idParagrafo}${idInciso}${idAlinea}`;
+}
+
+export function separarLeiEId(texto) {
+  const trimmed = String(texto || '').trim();
+  if (!trimmed) {
+    return { entrada: '', idHtml: null, leiTexto: null, isUnsupportedAct: false };
+  }
+
+  const temArtigoExplicito = /\b(?:art\.?|artigo)\s*\d+/i.test(trimmed);
+  if (!temArtigoExplicito && ATO_NAO_LEGISLACAO_REGEX.test(trimmed)) {
+    return {
+      entrada: trimmed,
+      idHtml: null,
+      leiTexto: null,
+      isUnsupportedAct: true
+    };
+  }
+
+  // Caso 1: Começa com sigla de lei antes do dispositivo (ex.: "CF 5º, II", "eca 122")
+  const prefixoRegex = new RegExp(
+    `^(${SIGLAS_PREFIXO.join('|')})\\b[,\\s]+(.+)$`,
+    'i'
+  );
+  const matchPrefixo = trimmed.match(prefixoRegex);
+  if (matchPrefixo) {
+    return {
+      entrada: trimmed,
+      idHtml: montarIdHtml(matchPrefixo[2].trim()),
+      leiTexto: matchPrefixo[1].trim(),
+      isUnsupportedAct: false
+    };
+  }
+
+  // Caso 2: Possui "art." ou "artigo" em qualquer posição
+  const artPosMatch = trimmed.match(
+    /\b(?:art\.?|artigo)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?/i
+  );
+
+  if (artPosMatch) {
+    const inicioArtigo = artPosMatch.index;
+    const fimArtigo = inicioArtigo + artPosMatch[0].length;
+    const antesDoArtigo = trimmed.slice(0, inicioArtigo).trim();
+    const duranteEDepoisDoArtigo = trimmed.slice(inicioArtigo).trim();
+    const antesEDuranteArtigo = trimmed.slice(0, fimArtigo);
+    const depoisDoArtigo = trimmed.slice(fimArtigo);
+
+    // 2A: Norma vem ANTES do "art."/"artigo" (ex.: "Lei 8.245/1991, art. 39")
+    if (antesDoArtigo) {
+      const leiAntes = antesDoArtigo.replace(/[,;:\-–—]+$/, '').trim();
+      if (leiAntes.length >= 2) {
+        const idHtml = montarIdHtml(duranteEDepoisDoArtigo);
+        if (idHtml) {
+          return {
+            entrada: trimmed,
+            idHtml,
+            leiTexto: leiAntes,
+            isUnsupportedAct: false
+          };
+        }
+      }
+    }
+
+    // 2B: Norma vem APÓS o dispositivo introduzida por preposição (ex.: "artigo 12, § 3º, da Lei 11.666/2008")
+    const prepLeiMatch = depoisDoArtigo.match(
+      /^(.*?)\s*\b(?:do|da|de|dos|das|no|na)\s+(.+)$/i
+    );
+
+    if (prepLeiMatch) {
+      const complementoDispositivo = prepLeiMatch[1];
+      const leiTexto = prepLeiMatch[2].trim();
+      const corpoCompleto = `${antesEDuranteArtigo}${complementoDispositivo}`;
+
+      return {
+        entrada: trimmed,
+        idHtml: montarIdHtml(corpoCompleto),
+        leiTexto,
+        isUnsupportedAct: false
+      };
+    }
+
+    // 2C: Norma separada por vírgula no final (ex.: "art. 14, parágrafo único, CPC")
+    const virgulaMatch = depoisDoArtigo.match(/^(.*),\s*([^,]+)$/);
+    if (virgulaMatch) {
+      const possivelLei = virgulaMatch[2].trim();
+      const ehSiglaConhecida = new RegExp(
+        `^(?:${SIGLAS_PREFIXO.join('|')})$`,
+        'i'
+      ).test(possivelLei);
+      const pareceLei =
+        ehSiglaConhecida ||
+        /\b(?:lei|c[óo]digo|constitui[çc][aã]o|decreto|estatuto)\b/i.test(
+          possivelLei
+        );
+
+      if (pareceLei) {
+        const corpoCompleto = `${antesEDuranteArtigo}${virgulaMatch[1]}`;
+        return {
+          entrada: trimmed,
+          idHtml: montarIdHtml(corpoCompleto),
+          leiTexto: possivelLei,
+          isUnsupportedAct: false
+        };
+      }
+    }
+
+    return {
+      entrada: trimmed,
+      idHtml: montarIdHtml(trimmed),
+      leiTexto: null,
+      isUnsupportedAct: false
+    };
+  }
+
+  // Caso 3: Começa pelo número do dispositivo (sem "art.") e termina com sigla conhecida (ex.: "122 eca")
+  const sufixoSiglaRegex = new RegExp(
+    `^(\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?(?:[\\s,;]+.+?)?)[\\s,;]+(${SIGLAS_PREFIXO.join('|')})$`,
+    'i'
+  );
+  const matchSufixoSigla = trimmed.match(sufixoSiglaRegex);
+  if (matchSufixoSigla) {
+    const corpoDispositivo = matchSufixoSigla[1].trim();
+    const idHtml = montarIdHtml(corpoDispositivo);
+    if (idHtml) {
+      return {
+        entrada: trimmed,
+        idHtml,
+        leiTexto: matchSufixoSigla[2].trim(),
+        isUnsupportedAct: false
+      };
+    }
+  }
+
+  // Caso 4: Nome ou apelido de norma seguido do número do dispositivo no final (ex.: "lei de drogas 23")
+  const nomeSeguidoDispositivoRegex = /^([^\d]+?)[,\s]+(\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?(?:[\s,;]+.*)?)$/i;
+  const matchNomeDispositivo = trimmed.match(nomeSeguidoDispositivoRegex);
+  if (matchNomeDispositivo) {
+    const candidatoLei = matchNomeDispositivo[1].trim();
+    const candidatoDispositivo = matchNomeDispositivo[2].trim();
+
+    const ehEspeciePura = ESPECIE_NORMATIVA_PURA_REGEX.test(`${candidatoLei} `);
+    const ehAnoIsolado = /^(?:18\d{2}|19\d{2}|20\d{2})$/.test(candidatoDispositivo);
+
+    if (!ehEspeciePura && !ehAnoIsolado && candidatoLei.length >= 2) {
+      const idHtml = montarIdHtml(candidatoDispositivo);
+      if (idHtml) {
+        return {
+          entrada: trimmed,
+          idHtml,
+          leiTexto: candidatoLei,
+          isUnsupportedAct: false
+        };
+      }
+    }
+  }
+
+  // Caso 5: Dispositivo sem "art." seguido de preposição e nome da norma (ex.: "23 da lei de drogas")
+  const dispositivoPrepNomeRegex = /^(\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?(?:[\s,;]+.*?)?)\s+\b(?:do|da|de|dos|das|no|na)\s+(.+)$/i;
+  const matchDispPrepNome = trimmed.match(dispositivoPrepNomeRegex);
+  if (matchDispPrepNome) {
+    const corpoDispositivo = matchDispPrepNome[1].trim();
+    const candidatoLei = matchDispPrepNome[2].trim();
+    const idHtml = montarIdHtml(corpoDispositivo);
+    if (idHtml && candidatoLei.length >= 2) {
+      return {
+        entrada: trimmed,
+        idHtml,
+        leiTexto: candidatoLei,
+        isUnsupportedAct: false
+      };
+    }
+  }
+
+  return {
+    entrada: trimmed,
+    idHtml: null,
+    leiTexto: null,
+    isUnsupportedAct: false
+  };
+}
+
+function applyProvisionIdToUrl(baseUrl, idHtml) {
+  if (!baseUrl) return baseUrl;
+  const cleanBase = baseUrl.split('#')[0];
+  if (!idHtml) return baseUrl;
+  const normalizedId = String(idHtml).replace(/^#+/, '').trim();
+  return normalizedId ? `${cleanBase}#${normalizedId}` : cleanBase;
+}
+
+// ============================================================================
 // Carregamento e Indexação Rápida de normas.json e assuntos.json
 // ============================================================================
 
@@ -465,10 +805,6 @@ function normalizeAlineaLabel(rawAl) {
 /**
  * Formata "identificadores" na ordem: parágrafo -> inciso -> alínea,
  * separados por vírgula quando houver mais de um elemento.
- * Exemplos:
- * - "i" -> "I"
- * - "p" -> "parágrafo único"
- * - "§5iiib" -> "§ 5º, III, 'b'"
  */
 export function formatIdentifiersReadable(identificadores) {
   if (identificadores == null) return '';
@@ -889,17 +1225,37 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
     return { kind: 'empty' };
   }
 
+  const citacaoDiretaEspecieNumero = CITACAO_DIRETA_ESPECIE_NUMERO_REGEX.test(sanitized);
+
+  if (!citacaoDiretaEspecieNumero) {
+    const provisionInfo = separarLeiEId(original);
+    if (provisionInfo.isUnsupportedAct) {
+      return {
+        kind: 'unsupported',
+        original
+      };
+    }
+    if (provisionInfo.idHtml && provisionInfo.leiTexto) {
+      return {
+        kind: 'provision',
+        idHtml: provisionInfo.idHtml,
+        leiTexto: provisionInfo.leiTexto,
+        original
+      };
+    }
+  }
+
   let detectedType = selectedType !== 'auto' ? selectedType : null;
   let working = sanitized;
 
   const typePatterns = [
-    { type: 'lc', regex: /^(?:lei\s+complementar|l\.?\s*c\.?p?\.?)\s*(?:n[º°o\.]*\s*)?/i },
-    { type: 'ld', regex: /^(?:lei\s+delegada|l\.?\s*d\.?)\s*(?:n[º°o\.]*\s*)?/i },
-    { type: 'dl', regex: /^(?:decreto[-\s]*lei|dec\.?[-\s]*lei|d\.?\s*l\.?)\s*(?:n[º°o\.]*\s*)?/i },
-    { type: 'ec', regex: /^(?:emenda\s+constitucional|e\.?\s*c\.?)\s*(?:n[º°o\.]*\s*)?/i },
-    { type: 'mp', regex: /^(?:medida\s+provis[oó]ria|m\.?\s*p\.?v?\.?)\s*(?:n[º°o\.]*\s*)?/i },
-    { type: 'decreto', regex: /^(?:decreto|dec\.?)\s*(?:n[º°o\.]*\s*)?/i },
-    { type: 'lei', regex: /^(?:lei\s+ordin[aá]ria|lei)\s*(?:n[º°o\.]*\s*)?/i }
+    { type: 'lc', regex: /^(?:lei\s+complementar|l\.?\s*c\.?p?\.?)\s*(?:n[º°oª\.]*\s*)?/i },
+    { type: 'ld', regex: /^(?:lei\s+delegada|l\.?\s*d\.?)\s*(?:n[º°oª\.]*\s*)?/i },
+    { type: 'dl', regex: /^(?:decreto[-\s]*lei|dec\.?[-\s]*lei|d\.?\s*l\.?)\s*(?:n[º°oª\.]*\s*)?/i },
+    { type: 'ec', regex: /^(?:emenda\s+constitucional|e\.?\s*c\.?)\s*(?:n[º°oª\.]*\s*)?/i },
+    { type: 'mp', regex: /^(?:medida\s+provis[oó]ria|m\.?\s*p\.?v?\.?)\s*(?:n[º°oª\.]*\s*)?/i },
+    { type: 'decreto', regex: /^(?:decreto|dec\.?)\s*(?:n[º°oª\.]*\s*)?/i },
+    { type: 'lei', regex: /^(?:lei\s+ordin[aá]ria|lei)\s*(?:n[º°oª\.]*\s*)?/i }
   ];
 
   for (const item of typePatterns) {
@@ -1012,6 +1368,17 @@ export async function checkSelectionCandidate(rawInput) {
   }
 
   const parsed = parseUserQuery(text, 'auto');
+
+  if (parsed.kind === 'unsupported') {
+    return { valid: false };
+  }
+
+  if (parsed.kind === 'provision') {
+    return {
+      valid: true,
+      label: `Abrir ${parsed.leiTexto} (#${parsed.idHtml})`
+    };
+  }
 
   if (parsed.kind === 'number') {
     const hasDot = /\d\.\d/.test(text);
@@ -1261,13 +1628,29 @@ async function resolveWithoutYear(type, numberNorm) {
       return { status: 'multiple', results: matches, fallbackUrl: indexUrl };
     }
 
-    for (const page of oldPages) {
-      const acts = await parseListingPage(page.url, 'decreto', page);
-      for (const a of acts) {
-        if (matchesActNumber(a, numberNorm, false)) {
-          matches.push({ ...a, periodLabel: page.label });
+    const candidateOldPages = numberNorm.numericBase > 9000
+      ? oldPages.filter((p) => p.maxYear == null || p.maxYear >= 1990)
+      : oldPages;
+
+    const batchSize = 4;
+    for (let i = 0; i < candidateOldPages.length; i += batchSize) {
+      const batch = candidateOldPages.slice(i, i + batchSize);
+      const settled = await Promise.allSettled(
+        batch.map(async (page) => {
+          const acts = await parseListingPage(page.url, 'decreto', page);
+          return acts
+            .filter((a) => matchesActNumber(a, numberNorm, false))
+            .map((a) => ({ ...a, periodLabel: page.label }));
+        })
+      );
+
+      for (const item of settled) {
+        if (item.status === 'fulfilled' && Array.isArray(item.value)) {
+          matches.push(...item.value);
         }
       }
+
+      if (matches.length > 0) break;
     }
 
     if (matches.length === 1) {
@@ -1593,10 +1976,6 @@ async function resolveCatalogEntry(entry) {
   return null;
 }
 
-/**
- * Resolve um item de assuntos.json para a URL final no formato [link]#art[artigo][identificadores].
- * Passa { allowAssuntos: false } para impedir loop infinito caso "assunto.lei" coincida com outro alias.
- */
 async function resolveAssuntoEntry(assunto) {
   let baseUrl = assunto.url || null;
 
@@ -1897,7 +2276,62 @@ export async function resolveLegislation(rawInput, selectedType = 'auto', option
     };
   }
 
+  if (parsed.kind === 'unsupported') {
+    return {
+      status: 'not_found',
+      message: `"${parsed.original}" não é uma norma suportada.`,
+      fallbackUrl: BASE_URL
+    };
+  }
+
   try {
+    if (parsed.kind === 'provision') {
+      const leiOutcome = await resolveLegislation(parsed.leiTexto, selectedType, {
+        ...options,
+        allowAssuntos: false
+      });
+
+      if (leiOutcome.status === 'found' && leiOutcome.result?.url) {
+        return {
+          ...leiOutcome,
+          result: {
+            ...leiOutcome.result,
+            title: `${leiOutcome.result.title || parsed.leiTexto} (#${parsed.idHtml})`,
+            url: applyProvisionIdToUrl(leiOutcome.result.url, parsed.idHtml)
+          }
+        };
+      }
+
+      if (leiOutcome.status === 'confirm' && leiOutcome.suggestion) {
+        const baseUrl = await resolvePendingCatalogItem(leiOutcome.suggestion);
+        if (baseUrl) {
+          return {
+            status: 'found',
+            result: {
+              title: `${leiOutcome.suggestion.title || parsed.leiTexto} (#${parsed.idHtml})`,
+              url: applyProvisionIdToUrl(baseUrl, parsed.idHtml),
+              category: leiOutcome.suggestion.category || 'Dispositivo'
+            },
+            fallbackUrl: leiOutcome.fallbackUrl
+          };
+        }
+      }
+
+      if (leiOutcome.status === 'multiple' && Array.isArray(leiOutcome.results)) {
+        return {
+          ...leiOutcome,
+          results: leiOutcome.results.map((item) => ({
+            ...item,
+            title: `${item.title || item.text || parsed.leiTexto} (#${parsed.idHtml})`,
+            url: item.url ? applyProvisionIdToUrl(item.url, parsed.idHtml) : item.url,
+            provisionId: parsed.idHtml
+          }))
+        };
+      }
+
+      return leiOutcome;
+    }
+
     if (parsed.kind === 'name') {
       return await resolveByName(parsed, options);
     }
@@ -1924,16 +2358,23 @@ export async function resolveLegislation(rawInput, selectedType = 'auto', option
 }
 
 export async function resolvePendingCatalogItem(item) {
-  if (item.url) return item.url;
-  if (item.assuntoEntry) {
+  let resolvedUrl = null;
+
+  if (item.url) {
+    resolvedUrl = item.url;
+  } else if (item.assuntoEntry) {
     const resolved = await resolveAssuntoEntry(item.assuntoEntry);
-    return resolved?.url || null;
-  }
-  if (item.catalogEntry) {
+    resolvedUrl = resolved?.url || null;
+  } else if (item.catalogEntry) {
     const resolved = await resolveCatalogEntry(item.catalogEntry);
-    return resolved?.url || null;
+    resolvedUrl = resolved?.url || null;
   }
-  return null;
+
+  if (resolvedUrl && item.provisionId) {
+    return applyProvisionIdToUrl(resolvedUrl, item.provisionId);
+  }
+
+  return resolvedUrl;
 }
 
 // ============================================================================

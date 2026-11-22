@@ -472,7 +472,7 @@
     "category": "Apelido"
   },
   {
-    "aliases": ["jec", "jecrim", "lei dos juizados especiais", "juizados especiais", "juizados especiais civeis e criminais"],
+    "aliases": ["jec", "lei do jec",  "lei do jecrim", "jecrim", "lei dos juizados especiais", "juizados especiais", "juizados especiais civeis e criminais"],
     "title": "Lei dos Juizados Especiais Cíveis e Criminais (Lei nº 9.099/1995)",
     "type": "lei",
     "number": "9099",
@@ -584,7 +584,7 @@
     "category": "Apelido"
   },
   {
-    "aliases": ["jef", "lei dos juizados especiais federais", "juizados especiais federais"],
+    "aliases": ["jef", "lei do jef", "lei dos juizados especiais federais", "juizados especiais federais"],
     "title": "Lei dos Juizados Especiais Federais (Lei nº 10.259/2001)",
     "type": "lei",
     "number": "10259",
@@ -664,7 +664,7 @@
     "category": "Apelido"
   },
   {
-    "aliases": ["jefaz", "lei dos juizados especiais da fazenda publica", "juizados especiais da fazenda publica"],
+    "aliases": ["jefaz", "lei do jefaz","lei dos juizados especiais da fazenda publica", "juizados especiais da fazenda publica"],
     "title": "Lei dos Juizados Especiais da Fazenda Pública (Lei nº 12.153/2009)",
     "type": "lei",
     "number": "12153",
