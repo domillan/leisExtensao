@@ -232,11 +232,18 @@ function extrairParagrafo(texto) {
     return 'p';
   }
 
+  // Suporta parágrafos com número e letra opcional (ex.: "§ 3º-A", "§ 3-A", "parágrafo 3º-A")
   const numDepois = texto.match(
-    /(?:§+|par[áa]gra[fd]o(?:s)?)\s*(\d+)\s*(?:[ºª°])?/i
+    /(?:§+|par[áa]gra[fd]o(?:s)?)\s*(\d+)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
   );
   if (numDepois) {
-    return `§${numDepois[1]}`;
+    const rawLetra = numDepois[2] || numDepois[3] || '';
+    const ignorarLetras = new Set(['a', 'o', 'e']);
+    const letra =
+      rawLetra && (numDepois[2] || !ignorarLetras.has(rawLetra.toLowerCase()))
+        ? rawLetra.toLowerCase()
+        : '';
+    return `§${numDepois[1]}${letra}`;
   }
 
   const ordinalAntes = texto.match(
@@ -255,6 +262,44 @@ function extrairParagrafo(texto) {
   return '';
 }
 
+function isolarPrimeiroArtigo(corpoDispositivo) {
+  let texto = String(corpoDispositivo || '').trim();
+
+  // Substitui "arts.", "arts", "artigos" por "art." sem depender de \b após ponto
+  texto = texto.replace(/\b(?:arts\.?|artigos)(?=$|[\s,.;:()0-9])/gi, 'art.');
+
+  const primeiroArtMatch = texto.match(
+    /^([\s\S]*?\b(?:art\.?|artigo)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?)([\s\S]*)$/i
+  );
+
+  if (primeiroArtMatch) {
+    const cabecalhoPrimeiroArt = primeiroArtMatch[1];
+    let resto = primeiroArtMatch[2];
+
+    resto = resto.replace(
+      /^(.*?)(?:\s*(?:,|;|\be\b|\ba\b|\bat[ée]\b|\/|-|–|—)\s*(?:arts?\.?|artigos?)?\s*\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?(?:[\s,;]+.*)?)$/i,
+      '$1'
+    );
+
+    return `${cabecalhoPrimeiroArt}${resto}`.trim();
+  }
+
+  const semPrefixoMatch = texto.match(
+    /^(\s*\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?)([\s\S]*)$/i
+  );
+  if (semPrefixoMatch) {
+    const cabecalho = semPrefixoMatch[1];
+    let resto = semPrefixoMatch[2];
+    resto = resto.replace(
+      /^(.*?)(?:\s*(?:,|;|\be\b|\ba\b|\bat[ée]\b|\/|-|–|—)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?(?:[\s,;]+.*)?)$/i,
+      '$1'
+    );
+    return `${cabecalho}${resto}`.trim();
+  }
+
+  return texto;
+}
+
 function extrairInciso(texto) {
   const explicito = texto.match(
     /\binc(?:iso|\.)?\s+([IVXLCDM]+)\b/i
@@ -263,14 +308,21 @@ function extrairInciso(texto) {
     return explicito[1].toLowerCase();
   }
 
-  const semArtigo = texto.replace(
-    /\b(?:art\.?|artigo)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?\s*(?:[-–—]?\s*[a-zA-Z])?/i,
-    ''
-  );
+  // Remove artigo e parágrafo (inclusive com letra, ex.: "§ 1º-I" ou "§ 3º-A") para não confundir letra com inciso
+  const semArtigoEParagrafo = texto
+    .replace(
+      /\b(?:arts?\.?|artigos?)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?\s*(?:[-–—]?\s*[a-zA-Z])?/i,
+      ''
+    )
+    .replace(
+      /(?:§+|par[áa]gra[fd]o(?:s)?)\s*\d+\s*(?:[ºª°])?\s*(?:[-–—]?\s*[a-zA-Z])?/i,
+      ''
+    );
+
   const preposicoesIgnoradas = new Set([
     'a', 'o', 'e', 'em', 'de', 'da', 'do', 'das', 'dos', 'na', 'no', 'nas', 'nos'
   ]);
-  const tokens = semArtigo.split(/[\s,()'“”]+/);
+  const tokens = semArtigoEParagrafo.split(/[\s,()'“”]+/);
   const romanoToken = tokens.find((tok) => {
     const clean = tok.toLowerCase();
     if (!clean || preposicoesIgnoradas.has(clean)) return false;
@@ -295,11 +347,13 @@ function extrairAlinea(texto) {
 }
 
 export function montarIdHtml(corpoDispositivo) {
+  const corpoNormalizado = isolarPrimeiroArtigo(corpoDispositivo);
+
   const artMatch =
-    corpoDispositivo.match(
-      /\b(?:art\.?|artigo)\s*(\d+(?:\.\d+)?)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
+    corpoNormalizado.match(
+      /\b(?:arts?\.?|artigos?)\s*(\d+(?:\.\d+)?)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
     ) ||
-    corpoDispositivo.match(
+    corpoNormalizado.match(
       /^\s*(\d+(?:\.\d+)?)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
     );
 
@@ -314,9 +368,9 @@ export function montarIdHtml(corpoDispositivo) {
       : '';
   const idArtigo = `art${numeroArt}${letraArt}`;
 
-  const idParagrafo = extrairParagrafo(corpoDispositivo);
-  const idInciso = extrairInciso(corpoDispositivo);
-  const idAlinea = extrairAlinea(corpoDispositivo);
+  const idParagrafo = extrairParagrafo(corpoNormalizado);
+  const idInciso = extrairInciso(corpoNormalizado);
+  const idAlinea = extrairAlinea(corpoNormalizado);
 
   return `${idArtigo}${idParagrafo}${idInciso}${idAlinea}`;
 }
@@ -327,7 +381,7 @@ export function separarLeiEId(texto) {
     return { entrada: '', idHtml: null, leiTexto: null, isUnsupportedAct: false };
   }
 
-  const temArtigoExplicito = /\b(?:art\.?|artigo)\s*\d+/i.test(trimmed);
+  const temArtigoExplicito = /\b(?:arts?\.?|artigos?)\s*\d+/i.test(trimmed);
   if (!temArtigoExplicito && ATO_NAO_LEGISLACAO_REGEX.test(trimmed)) {
     return {
       entrada: trimmed,
@@ -352,9 +406,9 @@ export function separarLeiEId(texto) {
     };
   }
 
-  // Caso 2: Possui "art." ou "artigo" em qualquer posição
+  // Caso 2: Possui "art.", "arts.", "artigo" ou "artigos" em qualquer posição
   const artPosMatch = trimmed.match(
-    /\b(?:art\.?|artigo)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?/i
+    /\b(?:arts?\.?|artigos?)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?/i
   );
 
   if (artPosMatch) {
@@ -365,7 +419,7 @@ export function separarLeiEId(texto) {
     const antesEDuranteArtigo = trimmed.slice(0, fimArtigo);
     const depoisDoArtigo = trimmed.slice(fimArtigo);
 
-    // 2A: Norma vem ANTES do "art."/"artigo" (ex.: "Lei 8.245/1991, art. 39")
+    // 2A: Norma vem ANTES do "art."/"arts." (ex.: "Lei 8.245/1991, art. 39")
     if (antesDoArtigo) {
       const leiAntes = antesDoArtigo.replace(/[,;:\-–—]+$/, '').trim();
       if (leiAntes.length >= 2) {
@@ -381,7 +435,7 @@ export function separarLeiEId(texto) {
       }
     }
 
-    // 2B: Norma vem APÓS o dispositivo introduzida por preposição (ex.: "artigo 12, § 3º, da Lei 11.666/2008")
+    // 2B: Norma vem APÓS o dispositivo introduzida por preposição
     const prepLeiMatch = depoisDoArtigo.match(
       /^(.*?)\s*\b(?:do|da|de|dos|das|no|na)\s+(.+)$/i
     );
@@ -695,12 +749,6 @@ async function getAssuntosIndex() {
   return assuntosIndexCache;
 }
 
-/**
- * Formata o atributo "artigo" conforme a regra:
- * - Se tiver '/', pega apenas a parte antes da barra
- * - Retira os caracteres '-', 'º', '°', 'ª', '.' e espaços (ex.: "4º-B" -> "4b")
- * - Converte para minúsculo e adiciona o prefixo "#art"
- */
 export function buildArticleAnchor(artigo) {
   if (artigo == null) return '';
   let value = String(artigo).trim();
@@ -730,9 +778,6 @@ export function buildIdentifiersSuffix(identificadores) {
   return parts.join('').replace(/^#+/, '');
 }
 
-/**
- * Monta a URL final no formato [link]#art[artigo][identificadores]
- */
 function appendAnchorToUrl(url, artigo, identificadores = null) {
   if (!url) return url;
   const baseUrl = url.split('#')[0];
@@ -802,10 +847,6 @@ function normalizeAlineaLabel(rawAl) {
   return v ? `'${v}'` : '';
 }
 
-/**
- * Formata "identificadores" na ordem: parágrafo -> inciso -> alínea,
- * separados por vírgula quando houver mais de um elemento.
- */
 export function formatIdentifiersReadable(identificadores) {
   if (identificadores == null) return '';
 
@@ -841,9 +882,14 @@ export function formatIdentifiersReadable(identificadores) {
   }
 
   if (!paragraphLabel) {
-    const paraNumMatch = working.match(/^(?:§|par(?:ágrafo|agrafo)?\.?)\s*(\d+)[º°o]?/i);
+    // Suporta parágrafos com número e letra opcional (ex.: "§3a" -> "§ 3º-A", "§ 3º-A" -> "§ 3º-A")
+    const paraNumMatch = working.match(
+      /^(?:§|par(?:ágrafo|agrafo)?\.?)\s*(\d+)[º°o]?(?:\s*[-–—]?\s*([a-zA-Z]))?/i
+    );
     if (paraNumMatch) {
-      paragraphLabel = `§ ${parseInt(paraNumMatch[1], 10)}º`;
+      const numPart = `§ ${parseInt(paraNumMatch[1], 10)}º`;
+      const letterPart = paraNumMatch[2] ? `-${paraNumMatch[2].toUpperCase()}` : '';
+      paragraphLabel = `${numPart}${letterPart}`;
       working = working.slice(paraNumMatch[0].length).trim();
     }
   }
@@ -1123,7 +1169,7 @@ export function parseActFromAnchor(anchor, expectedType) {
     return null;
   }
 
-  if (/^(?:art\.?|artigo|vide|ver|revogad[oa]|alterad[oa])\b/i.test(anchor.text)) {
+  if (/^(?:arts?\.?|artigos?|vide|ver|revogad[oa]|alterad[oa])(?=$|[\s,.;:()0-9])/i.test(anchor.text)) {
     return null;
   }
 
