@@ -766,5 +766,1733 @@
     "number": "14133",
     "year": 2021,
     "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das aguas", "aguas", "politica nacional de recursos hidricos", "pnrh"],
+    "title": "Lei das Águas (Lei nº 9.433/1997)",
+    "type": "lei",
+    "number": "9433",
+    "year": 1997,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do saneamento basico", "saneamento basico", "lnsb"],
+    "title": "Lei do Saneamento Básico (Lei nº 11.445/2007)",
+    "type": "lei",
+    "number": "11445",
+    "year": 2007,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["marco legal do saneamento", "novo marco do saneamento", "novo marco legal do saneamento", "novo marco legal do saneamento basico"],
+    "title": "Novo Marco Legal do Saneamento Básico (Lei nº 14.026/2020)",
+    "type": "lei",
+    "number": "14026",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["pnma", "lei da politica nacional do meio ambiente", "politica nacional do meio ambiente"],
+    "title": "Lei da Política Nacional do Meio Ambiente (Lei nº 6.938/1981)",
+    "type": "lei",
+    "number": "6938",
+    "year": 1981,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["snuc", "lei do snuc", "unidades de conservacao", "sistema nacional de unidades de conservacao"],
+    "title": "Lei do Sistema Nacional de Unidades de Conservação - SNUC (Lei nº 9.985/2000)",
+    "type": "lei",
+    "number": "9985",
+    "year": 2000,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da mata atlantica", "mata atlantica"],
+    "title": "Lei da Mata Atlântica (Lei nº 11.428/2006)",
+    "type": "lei",
+    "number": "11428",
+    "year": 2006,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["pnrs", "lei de residuos solidos", "residuos solidos", "politica nacional de residuos solidos"],
+    "title": "Lei da Política Nacional de Resíduos Sólidos (Lei nº 12.305/2010)",
+    "type": "lei",
+    "number": "12305",
+    "year": 2010,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei dos agrotoxicos", "nova lei dos agrotoxicos", "agrotoxicos"],
+    "title": "Lei dos Agrotóxicos (Lei nº 14.785/2023)",
+    "type": "lei",
+    "number": "14785",
+    "year": 2023,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["antiga lei dos agrotoxicos", "lei dos agrotoxicos de 1989"],
+    "title": "Antiga Lei dos Agrotóxicos (Lei nº 7.802/1989 - Revogada)",
+    "type": "lei",
+    "number": "7802",
+    "year": 1989,
+    "category": "Norma Revogada"
+  },
+  {
+    "aliases": ["lgla", "lei geral do licenciamento ambiental", "lei do licenciamento ambiental", "licenciamento ambiental"],
+    "title": "Lei Geral do Licenciamento Ambiental (Lei nº 15.190/2025)",
+    "type": "lei",
+    "number": "15190",
+    "year": 2025,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de protecao a fauna", "protecao a fauna", "lei de caca"],
+    "title": "Lei de Proteção à Fauna (Lei nº 5.197/1967)",
+    "type": "lei",
+    "number": "5197",
+    "year": 1967,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["codigo de aguas"],
+    "title": "Código de Águas (Decreto nº 24.643/1934)",
+    "type": "dec",
+    "number": "24643",
+    "year": 1934,
+    "category": "Código"
+  },
+  {
+    "aliases": ["codigo de mineracao", "codigo de minas"],
+    "title": "Código de Mineração (Decreto-Lei nº 227/1967)",
+    "type": "dl",
+    "number": "227",
+    "year": 1967,
+    "category": "Código"
+  },
+  {
+    "aliases": ["codigo florestal de 1965", "codigo florestal de 65", "codigo florestal antigo"],
+    "title": "Código Florestal de 1965 (Lei nº 4.771/1965 - Revogado)",
+    "type": "lei",
+    "number": "4771",
+    "year": 1965,
+    "category": "Norma Revogada"
+  },
+  {
+    "aliases": ["codigo de menores", "codigo de menores de 1979"],
+    "title": "Código de Menores (Lei nº 6.697/1979 - Revogado)",
+    "type": "lei",
+    "number": "6697",
+    "year": 1979,
+    "category": "Norma Revogada"
+  },
+  {
+    "aliases": ["lei do petroleo", "petroleo"],
+    "title": "Lei do Petróleo (Lei nº 9.478/1997)",
+    "type": "lei",
+    "number": "9478",
+    "year": 1997,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do gas", "nova lei do gas"],
+    "title": "Nova Lei do Gás (Lei nº 14.134/2021)",
+    "type": "lei",
+    "number": "14134",
+    "year": 2021,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["marco legal da geracao distribuida", "lei da geracao distribuida"],
+    "title": "Marco Legal da Geração Distribuída (Lei nº 14.300/2022)",
+    "type": "lei",
+    "number": "14300",
+    "year": 2022,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lgt", "lei geral das telecomunicacoes", "telecomunicacoes"],
+    "title": "Lei Geral das Telecomunicações - LGT (Lei nº 9.472/1997)",
+    "type": "lei",
+    "number": "9472",
+    "year": 1997,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei carolina dieckmann", "carolina dieckmann", "lei dos crimes informaticos"],
+    "title": "Lei Carolina Dieckmann (Lei nº 12.737/2012)",
+    "type": "lei",
+    "number": "12737",
+    "year": 2012,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do governo digital", "governo digital"],
+    "title": "Lei do Governo Digital (Lei nº 14.129/2021)",
+    "type": "lei",
+    "number": "14129",
+    "year": 2021,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das assinaturas eletronicas", "assinatura eletronica", "assinaturas eletronicas"],
+    "title": "Lei das Assinaturas Eletrônicas (Lei nº 14.063/2020)",
+    "type": "lei",
+    "number": "14063",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do processo eletronico", "processo eletronico"],
+    "title": "Lei do Processo Eletrônico (Lei nº 11.419/2006)",
+    "type": "lei",
+    "number": "11419",
+    "year": 2006,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["marco legal dos criptoativos", "lei dos criptoativos", "criptoativos"],
+    "title": "Marco Legal dos Criptoativos (Lei nº 14.478/2022)",
+    "type": "lei",
+    "number": "14478",
+    "year": 2022,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do software", "software"],
+    "title": "Lei do Software (Lei nº 9.609/1998)",
+    "type": "lei",
+    "number": "9609",
+    "year": 1998,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lda", "lei de direitos autorais", "direitos autorais"],
+    "title": "Lei de Direitos Autorais - LDA (Lei nº 9.610/1998)",
+    "type": "lei",
+    "number": "9610",
+    "year": 1998,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lpi", "lei de propriedade industrial", "lei de patentes", "propriedade industrial"],
+    "title": "Lei de Propriedade Industrial - LPI (Lei nº 9.279/1996)",
+    "type": "lei",
+    "number": "9279",
+    "year": 1996,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["eca digital", "estatuto digital da crianca e do adolescente"],
+    "title": "Estatuto Digital da Criança e do Adolescente - ECA Digital (Lei nº 15.211/2025)",
+    "type": "lei",
+    "number": "15211",
+    "year": 2025,
+    "category": "Estatuto"
+  },
+  {
+    "aliases": ["lei das bets", "bets", "lei das apostas", "apostas de quota fixa"],
+    "title": "Lei das Bets (Lei nº 14.790/2023)",
+    "type": "lei",
+    "number": "14790",
+    "year": 2023,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da ficha limpa", "ficha limpa"],
+    "title": "Lei da Ficha Limpa (Lei Complementar nº 135/2010)",
+    "type": "lc",
+    "number": "135",
+    "year": 2010,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das inelegibilidades", "inelegibilidades"],
+    "title": "Lei das Inelegibilidades (Lei Complementar nº 64/1990)",
+    "type": "lc",
+    "number": "64",
+    "year": 1990,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lpp", "lei dos partidos politicos", "partidos politicos"],
+    "title": "Lei dos Partidos Políticos (Lei nº 9.096/1995)",
+    "type": "lei",
+    "number": "9096",
+    "year": 1995,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das eleicoes", "eleicoes"],
+    "title": "Lei das Eleições (Lei nº 9.504/1997)",
+    "type": "lei",
+    "number": "9504",
+    "year": 1997,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do impeachment", "impeachment", "lei dos crimes de responsabilidade", "crimes de responsabilidade"],
+    "title": "Lei dos Crimes de Responsabilidade (Lei do Impeachment) (Lei nº 1.079/1950)",
+    "type": "lei",
+    "number": "1079",
+    "year": 1950,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de responsabilidade dos prefeitos", "crimes de responsabilidade de prefeitos", "responsabilidade de prefeitos e vereadores"],
+    "title": "Lei de Responsabilidade dos Prefeitos e Vereadores (Decreto-Lei nº 201/1967)",
+    "type": "dl",
+    "number": "201",
+    "year": 1967,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da anistia", "anistia"],
+    "title": "Lei da Anistia (Lei nº 6.683/1979)",
+    "type": "lei",
+    "number": "6683",
+    "year": 1979,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei dos crimes contra o estado democratico de direito", "crimes contra o estado democratico de direito"],
+    "title": "Lei dos Crimes contra o Estado Democrático de Direito (Lei nº 14.197/2021)",
+    "type": "lei",
+    "number": "14197",
+    "year": 2021,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da transparencia", "lei capiberibe", "lei complementar da transparencia"],
+    "title": "Lei da Transparência (Lei Capiberibe) (Lei Complementar nº 131/2009)",
+    "type": "lc",
+    "number": "131",
+    "year": 2009,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de conflito de interesses", "conflito de interesses"],
+    "title": "Lei de Conflito de Interesses (Lei nº 12.813/2013)",
+    "type": "lei",
+    "number": "12813",
+    "year": 2013,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de elaboracao das leis", "lei de tecnica legislativa", "tecnica legislativa"],
+    "title": "Lei de Elaboração das Leis (Lei Complementar nº 95/1998)",
+    "type": "lc",
+    "number": "95",
+    "year": 1998,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["reforma da previdencia", "reforma previdenciaria", "reforma da previdencia de 2019", "ec 103", "ec 103 2019"],
+    "title": "Reforma da Previdência (Emenda Constitucional nº 103/2019)",
+    "type": "ec",
+    "number": "103",
+    "year": 2019,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["reforma da previdencia de 1998", "ec 20", "ec 20 1998"],
+    "title": "Reforma da Previdência de 1998 (Emenda Constitucional nº 20/1998)",
+    "type": "ec",
+    "number": "20",
+    "year": 1998,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["reforma da previdencia de 2003", "ec 41", "ec 41 2003"],
+    "title": "Reforma da Previdência de 2003 (Emenda Constitucional nº 41/2003)",
+    "type": "ec",
+    "number": "41",
+    "year": 2003,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["teto de gastos", "emenda do teto de gastos", "pec do teto", "pec do teto de gastos", "novo regime fiscal", "ec 95", "ec 95 2016"],
+    "title": "Teto de Gastos (Novo Regime Fiscal) (Emenda Constitucional nº 95/2016)",
+    "type": "ec",
+    "number": "95",
+    "year": 2016,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["reforma tributaria", "ec 132", "ec 132 2023"],
+    "title": "Reforma Tributária (Emenda Constitucional nº 132/2023)",
+    "type": "ec",
+    "number": "132",
+    "year": 2023,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["reforma do judiciario", "ec 45", "ec 45 2004"],
+    "title": "Reforma do Judiciário (Emenda Constitucional nº 45/2004)",
+    "type": "ec",
+    "number": "45",
+    "year": 2004,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["reforma administrativa de 1998", "ec 19", "ec 19 1998"],
+    "title": "Reforma Administrativa de 1998 (Emenda Constitucional nº 19/1998)",
+    "type": "ec",
+    "number": "19",
+    "year": 1998,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec do divorcio", "emenda do divorcio", "ec 66", "ec 66 2010"],
+    "title": "Emenda do Divórcio (PEC do Divórcio) (Emenda Constitucional nº 66/2010)",
+    "type": "ec",
+    "number": "66",
+    "year": 2010,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec das domesticas", "ec 72", "ec 72 2013"],
+    "title": "PEC das Domésticas (Emenda Constitucional nº 72/2013)",
+    "type": "ec",
+    "number": "72",
+    "year": 2013,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["emenda do calote", "pec do calote", "ec 62", "ec 62 2009"],
+    "title": "Emenda do Calote (Precatórios) (Emenda Constitucional nº 62/2009)",
+    "type": "ec",
+    "number": "62",
+    "year": 2009,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec dos precatorios", "emenda dos precatorios", "ec 113", "ec 113 2021"],
+    "title": "PEC dos Precatórios (Emenda Constitucional nº 113/2021)",
+    "type": "ec",
+    "number": "113",
+    "year": 2021,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec emergencial", "ec 109", "ec 109 2021"],
+    "title": "PEC Emergencial (Emenda Constitucional nº 109/2021)",
+    "type": "ec",
+    "number": "109",
+    "year": 2021,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec kamikaze", "ec 123", "ec 123 2022"],
+    "title": "PEC Kamikaze (Emenda Constitucional nº 123/2022)",
+    "type": "ec",
+    "number": "123",
+    "year": 2022,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec da transicao", "ec 126", "ec 126 2022"],
+    "title": "PEC da Transição (Emenda Constitucional nº 126/2022)",
+    "type": "ec",
+    "number": "126",
+    "year": 2022,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["emenda das medidas provisorias", "ec 32", "ec 32 2001"],
+    "title": "Emenda das Medidas Provisórias (Emenda Constitucional nº 32/2001)",
+    "type": "ec",
+    "number": "32",
+    "year": 2001,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec dos vereadores", "ec 58", "ec 58 2009"],
+    "title": "PEC dos Vereadores (Emenda Constitucional nº 58/2009)",
+    "type": "ec",
+    "number": "58",
+    "year": 2009,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["fim das coligacoes", "clausula de barreira", "clausula de desempenho", "ec 97", "ec 97 2017"],
+    "title": "Emenda do Fim das Coligações e da Cláusula de Desempenho (Emenda Constitucional nº 97/2017)",
+    "type": "ec",
+    "number": "97",
+    "year": 2017,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["orcamento de guerra", "pec do orcamento de guerra", "ec 106", "ec 106 2020"],
+    "title": "Orçamento de Guerra (Emenda Constitucional nº 106/2020)",
+    "type": "ec",
+    "number": "106",
+    "year": 2020,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["emenda da protecao de dados", "protecao de dados direito fundamental", "ec 115", "ec 115 2022"],
+    "title": "Emenda da Proteção de Dados Pessoais (Emenda Constitucional nº 115/2022)",
+    "type": "ec",
+    "number": "115",
+    "year": 2022,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec da relevancia", "relevancia do recurso especial", "ec 125", "ec 125 2022"],
+    "title": "PEC da Relevância (Recurso Especial) (Emenda Constitucional nº 125/2022)",
+    "type": "ec",
+    "number": "125",
+    "year": 2022,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["pec do trabalho escravo", "ec 81", "ec 81 2014"],
+    "title": "PEC do Trabalho Escravo (Emenda Constitucional nº 81/2014)",
+    "type": "ec",
+    "number": "81",
+    "year": 2014,
+    "category": "Emenda Constitucional"
+  },
+  {
+    "aliases": ["reforma trabalhista", "lei da reforma trabalhista"],
+    "title": "Reforma Trabalhista (Lei nº 13.467/2017)",
+    "type": "lei",
+    "number": "13467",
+    "year": 2017,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da terceirizacao", "terceirizacao"],
+    "title": "Lei da Terceirização (Lei nº 13.429/2017)",
+    "type": "lei",
+    "number": "13429",
+    "year": 2017,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do trabalho temporario", "trabalho temporario"],
+    "title": "Lei do Trabalho Temporário (Lei nº 6.019/1974)",
+    "type": "lei",
+    "number": "6019",
+    "year": 1974,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do trabalho domestico", "lei das domesticas", "empregado domestico"],
+    "title": "Lei do Trabalho Doméstico (Lei Complementar nº 150/2015)",
+    "type": "lc",
+    "number": "150",
+    "year": 2015,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de greve", "lei da greve", "greve"],
+    "title": "Lei de Greve (Lei nº 7.783/1989)",
+    "type": "lei",
+    "number": "7783",
+    "year": 1989,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do seguro desemprego", "seguro desemprego"],
+    "title": "Lei do Seguro-Desemprego (Lei nº 7.998/1990)",
+    "type": "lei",
+    "number": "7998",
+    "year": 1990,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["plr", "lei da plr", "lei da participacao nos lucros"],
+    "title": "Lei da Participação nos Lucros e Resultados - PLR (Lei nº 10.101/2000)",
+    "type": "lei",
+    "number": "10101",
+    "year": 2000,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["fgts", "lei do fgts"],
+    "title": "Lei do FGTS (Lei nº 8.036/1990)",
+    "type": "lei",
+    "number": "8036",
+    "year": 1990,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do aprendiz", "lei da aprendizagem", "jovem aprendiz"],
+    "title": "Lei do Aprendiz (Lei nº 10.097/2000)",
+    "type": "lei",
+    "number": "10097",
+    "year": 2000,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do estagio", "estagio"],
+    "title": "Lei do Estágio (Lei nº 11.788/2008)",
+    "type": "lei",
+    "number": "11788",
+    "year": 2008,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["loas", "lei organica da assistencia social", "assistencia social"],
+    "title": "Lei Orgânica da Assistência Social - LOAS (Lei nº 8.742/1993)",
+    "type": "lei",
+    "number": "8742",
+    "year": 1993,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do fator previdenciario", "fator previdenciario"],
+    "title": "Lei do Fator Previdenciário (Lei nº 9.876/1999)",
+    "type": "lei",
+    "number": "9876",
+    "year": 1999,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do consignado", "lei do credito consignado", "credito consignado", "consignado"],
+    "title": "Lei do Crédito Consignado (Lei nº 10.820/2003)",
+    "type": "lei",
+    "number": "10820",
+    "year": 2003,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do motorista", "lei do motorista profissional", "lei dos caminhoneiros"],
+    "title": "Lei do Motorista Profissional (Lei nº 13.103/2015)",
+    "type": "lei",
+    "number": "13103",
+    "year": 2015,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da igualdade salarial", "igualdade salarial"],
+    "title": "Lei da Igualdade Salarial (Lei nº 14.611/2023)",
+    "type": "lei",
+    "number": "14611",
+    "year": 2023,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do bolsa familia", "bolsa familia"],
+    "title": "Lei do Programa Bolsa Família (Lei nº 14.601/2023)",
+    "type": "lei",
+    "number": "14601",
+    "year": 2023,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do piso da enfermagem", "piso da enfermagem", "piso salarial da enfermagem"],
+    "title": "Lei do Piso Salarial da Enfermagem (Lei nº 14.434/2022)",
+    "type": "lei",
+    "number": "14434",
+    "year": 2022,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do piso do magisterio", "piso do magisterio", "lei do piso salarial do magisterio"],
+    "title": "Lei do Piso Salarial do Magistério (Lei nº 11.738/2008)",
+    "type": "lei",
+    "number": "11738",
+    "year": 2008,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do voluntariado", "voluntariado"],
+    "title": "Lei do Voluntariado (Lei nº 9.608/1998)",
+    "type": "lei",
+    "number": "9608",
+    "year": 1998,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["reforma do ensino medio", "novo ensino medio"],
+    "title": "Lei da Reforma do Ensino Médio (Lei nº 13.415/2017)",
+    "type": "lei",
+    "number": "13415",
+    "year": 2017,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["novo fundeb", "fundeb", "lei do fundeb"],
+    "title": "Lei do Novo Fundeb (Lei nº 14.113/2020)",
+    "type": "lei",
+    "number": "14113",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["pne", "lei do pne", "plano nacional de educacao"],
+    "title": "Lei do Plano Nacional de Educação - PNE (Lei nº 13.005/2014)",
+    "type": "lei",
+    "number": "13005",
+    "year": 2014,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da alienacao parental", "alienacao parental"],
+    "title": "Lei da Alienação Parental (Lei nº 12.318/2010)",
+    "type": "lei",
+    "number": "12318",
+    "year": 2010,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da guarda compartilhada", "guarda compartilhada"],
+    "title": "Lei da Guarda Compartilhada (Lei nº 13.058/2014)",
+    "type": "lei",
+    "number": "13058",
+    "year": 2014,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do divorcio"],
+    "title": "Lei do Divórcio (Lei nº 6.515/1977)",
+    "type": "lei",
+    "number": "6515",
+    "year": 1977,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de alimentos"],
+    "title": "Lei de Alimentos (Lei nº 5.478/1968)",
+    "type": "lei",
+    "number": "5478",
+    "year": 1968,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de alimentos gravidicos", "alimentos gravidicos"],
+    "title": "Lei de Alimentos Gravídicos (Lei nº 11.804/2008)",
+    "type": "lei",
+    "number": "11804",
+    "year": 2008,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da uniao estavel", "uniao estavel"],
+    "title": "Lei da União Estável (Lei nº 9.278/1996)",
+    "type": "lei",
+    "number": "9278",
+    "year": 1996,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da adocao", "nova lei da adocao", "lei nacional da adocao"],
+    "title": "Lei da Adoção (Nova Lei Nacional da Adoção) (Lei nº 12.010/2009)",
+    "type": "lei",
+    "number": "12010",
+    "year": 2009,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de investigacao de paternidade", "investigacao de paternidade"],
+    "title": "Lei de Investigação de Paternidade (Lei nº 8.560/1992)",
+    "type": "lei",
+    "number": "8560",
+    "year": 1992,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei menino bernardo", "lei da palmada"],
+    "title": "Lei Menino Bernardo (Lei da Palmada) (Lei nº 13.010/2014)",
+    "type": "lei",
+    "number": "13010",
+    "year": 2014,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["marco legal da primeira infancia", "lei da primeira infancia"],
+    "title": "Marco Legal da Primeira Infância (Lei nº 13.257/2016)",
+    "type": "lei",
+    "number": "13257",
+    "year": 2016,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da escuta protegida", "escuta especializada", "depoimento especial"],
+    "title": "Lei da Escuta Protegida (Lei nº 13.431/2017)",
+    "type": "lei",
+    "number": "13431",
+    "year": 2017,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["sinase", "lei do sinase"],
+    "title": "Lei do SINASE (Lei nº 12.594/2012)",
+    "type": "lei",
+    "number": "12594",
+    "year": 2012,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei joanna maranhao", "joanna maranhao"],
+    "title": "Lei Joanna Maranhão (Lei nº 12.650/2012)",
+    "type": "lei",
+    "number": "12650",
+    "year": 2012,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei lucas", "primeiros socorros nas escolas"],
+    "title": "Lei Lucas (Lei nº 13.722/2018)",
+    "type": "lei",
+    "number": "13722",
+    "year": 2018,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei henry borel", "henry borel"],
+    "title": "Lei Henry Borel (Lei nº 14.344/2022)",
+    "type": "lei",
+    "number": "14344",
+    "year": 2022,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei mariana ferrer", "mariana ferrer"],
+    "title": "Lei Mariana Ferrer (Lei nº 14.245/2021)",
+    "type": "lei",
+    "number": "14245",
+    "year": 2021,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do feminicidio", "feminicidio"],
+    "title": "Lei do Feminicídio (Lei nº 13.104/2015)",
+    "type": "lei",
+    "number": "13104",
+    "year": 2015,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da importunacao sexual", "importunacao sexual"],
+    "title": "Lei da Importunação Sexual (Lei nº 13.718/2018)",
+    "type": "lei",
+    "number": "13718",
+    "year": 2018,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei sansao"],
+    "title": "Lei Sansão (Lei nº 14.064/2020)",
+    "type": "lei",
+    "number": "14064",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do racismo", "lei cao", "crimes de racismo"],
+    "title": "Lei do Racismo (Lei Caó) (Lei nº 7.716/1989)",
+    "type": "lei",
+    "number": "7716",
+    "year": 1989,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do genocidio", "genocidio"],
+    "title": "Lei do Genocídio (Lei nº 2.889/1956)",
+    "type": "lei",
+    "number": "2889",
+    "year": 1956,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de cotas", "lei de cotas nas universidades", "cotas universitarias"],
+    "title": "Lei de Cotas nas Universidades (Lei nº 12.711/2012)",
+    "type": "lei",
+    "number": "12711",
+    "year": 2012,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de cotas em concursos", "cotas raciais em concursos", "lei de cotas raciais em concursos publicos"],
+    "title": "Lei de Cotas Raciais em Concursos Públicos (Lei nº 12.990/2014)",
+    "type": "lei",
+    "number": "12990",
+    "year": 2014,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da acessibilidade", "acessibilidade"],
+    "title": "Lei da Acessibilidade (Lei nº 10.098/2000)",
+    "type": "lei",
+    "number": "10098",
+    "year": 2000,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de prioridade de atendimento", "lei da prioridade de atendimento", "prioridade de atendimento"],
+    "title": "Lei de Prioridade de Atendimento (Lei nº 10.048/2000)",
+    "type": "lei",
+    "number": "10048",
+    "year": 2000,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da reforma psiquiatrica", "lei paulo delgado", "reforma psiquiatrica"],
+    "title": "Lei da Reforma Psiquiátrica (Lei Paulo Delgado) (Lei nº 10.216/2001)",
+    "type": "lei",
+    "number": "10216",
+    "year": 2001,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de migracao", "migracao"],
+    "title": "Lei de Migração (Lei nº 13.445/2017)",
+    "type": "lei",
+    "number": "13445",
+    "year": 2017,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do refugio", "refugio", "estatuto dos refugiados"],
+    "title": "Lei do Refúgio (Lei nº 9.474/1997)",
+    "type": "lei",
+    "number": "9474",
+    "year": 1997,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["estatuto do estrangeiro"],
+    "title": "Estatuto do Estrangeiro (Lei nº 6.815/1980 - Revogado)",
+    "type": "lei",
+    "number": "6815",
+    "year": 1980,
+    "category": "Norma Revogada"
+  },
+  {
+    "aliases": ["estatuto do torcedor", "estatuto de defesa do torcedor"],
+    "title": "Estatuto do Torcedor (Lei nº 10.671/2003 - Revogado)",
+    "type": "lei",
+    "number": "10671",
+    "year": 2003,
+    "category": "Norma Revogada"
+  },
+  {
+    "aliases": ["estatuto do indio"],
+    "title": "Estatuto do Índio (Lei nº 6.001/1973)",
+    "type": "lei",
+    "number": "6001",
+    "year": 1973,
+    "category": "Estatuto"
+  },
+  {
+    "aliases": ["estatuto da metropole"],
+    "title": "Estatuto da Metrópole (Lei nº 13.089/2015)",
+    "type": "lei",
+    "number": "13089",
+    "year": 2015,
+    "category": "Estatuto"
+  },
+  {
+    "aliases": ["estatuto da pessoa com cancer"],
+    "title": "Estatuto da Pessoa com Câncer (Lei nº 14.238/2021)",
+    "type": "lei",
+    "number": "14238",
+    "year": 2021,
+    "category": "Estatuto"
+  },
+  {
+    "aliases": ["estatuto da seguranca privada"],
+    "title": "Estatuto da Segurança Privada e da Segurança das Instituições Financeiras (Lei nº 14.967/2024)",
+    "type": "lei",
+    "number": "14967",
+    "year": 2024,
+    "category": "Estatuto"
+  },
+  {
+    "aliases": ["estatuto de museus", "estatuto dos museus"],
+    "title": "Estatuto de Museus (Lei nº 11.904/2009)",
+    "type": "lei",
+    "number": "11904",
+    "year": 2009,
+    "category": "Estatuto"
+  },
+  {
+    "aliases": ["simples nacional", "estatuto da microempresa", "estatuto nacional da microempresa", "lei geral das micro e pequenas empresas", "lei do simples nacional"],
+    "title": "Estatuto Nacional da Microempresa e da Empresa de Pequeno Porte (Simples Nacional) (Lei Complementar nº 123/2006)",
+    "type": "lc",
+    "number": "123",
+    "year": 2006,
+    "category": "Estatuto"
+  },
+  {
+    "aliases": ["lge", "lei geral do esporte"],
+    "title": "Lei Geral do Esporte (Lei nº 14.597/2023)",
+    "type": "lei",
+    "number": "14597",
+    "year": 2023,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei pele"],
+    "title": "Lei Pelé (Lei nº 9.615/1998)",
+    "type": "lei",
+    "number": "9615",
+    "year": 1998,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["saf", "lei da saf", "sociedade anonima do futebol"],
+    "title": "Lei da Sociedade Anônima do Futebol - SAF (Lei nº 14.193/2021)",
+    "type": "lei",
+    "number": "14193",
+    "year": 2021,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["pacote anticrime", "lei anticrime"],
+    "title": "Pacote Anticrime (Lei nº 13.964/2019)",
+    "type": "lei",
+    "number": "13964",
+    "year": 2019,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lcp", "lei das contravencoes penais", "contravencoes penais"],
+    "title": "Lei das Contravenções Penais (Decreto-Lei nº 3.688/1941)",
+    "type": "dl",
+    "number": "3688",
+    "year": 1941,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do colarinho branco", "lei dos crimes contra o sistema financeiro", "crimes contra o sistema financeiro"],
+    "title": "Lei dos Crimes contra o Sistema Financeiro Nacional (Lei do Colarinho Branco) (Lei nº 7.492/1986)",
+    "type": "lei",
+    "number": "7492",
+    "year": 1986,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei antiterrorismo", "lei do terrorismo", "terrorismo"],
+    "title": "Lei Antiterrorismo (Lei nº 13.260/2016)",
+    "type": "lei",
+    "number": "13260",
+    "year": 2016,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de protecao a testemunhas", "protecao a testemunhas", "lei de protecao a vitimas e testemunhas"],
+    "title": "Lei de Proteção a Vítimas e Testemunhas (Lei nº 9.807/1999)",
+    "type": "lei",
+    "number": "9807",
+    "year": 1999,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["nova lei seca"],
+    "title": "Nova Lei Seca (Lei nº 12.760/2012)",
+    "type": "lei",
+    "number": "12760",
+    "year": 2012,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei seca"],
+    "title": "Lei Seca (Lei nº 11.705/2008)",
+    "type": "lei",
+    "number": "11705",
+    "year": 2008,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["antiga lei de abuso de autoridade", "lei de abuso de autoridade de 1965"],
+    "title": "Antiga Lei de Abuso de Autoridade (Lei nº 4.898/1965 - Revogada)",
+    "type": "lei",
+    "number": "4898",
+    "year": 1965,
+    "category": "Norma Revogada"
+  },
+  {
+    "aliases": ["lei antifumo", "lei do fumo"],
+    "title": "Lei Antifumo (Lei nº 9.294/1996)",
+    "type": "lei",
+    "number": "9294",
+    "year": 1996,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da assistencia judiciaria gratuita", "assistencia judiciaria gratuita", "lei da justica gratuita", "justica gratuita"],
+    "title": "Lei da Assistência Judiciária Gratuita (Lei nº 1.060/1950)",
+    "type": "lei",
+    "number": "1060",
+    "year": 1950,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da acao popular", "acao popular"],
+    "title": "Lei da Ação Popular (Lei nº 4.717/1965)",
+    "type": "lei",
+    "number": "4717",
+    "year": 1965,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do habeas data", "habeas data"],
+    "title": "Lei do Habeas Data (Lei nº 9.507/1997)",
+    "type": "lei",
+    "number": "9507",
+    "year": 1997,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do mandado de injuncao", "mandado de injuncao"],
+    "title": "Lei do Mandado de Injunção (Lei nº 13.300/2016)",
+    "type": "lei",
+    "number": "13300",
+    "year": 2016,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da adi", "lei da adc", "lei da adi e da adc", "adi e adc"],
+    "title": "Lei da ADI e da ADC (Lei nº 9.868/1999)",
+    "type": "lei",
+    "number": "9868",
+    "year": 1999,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da adpf", "adpf"],
+    "title": "Lei da ADPF (Lei nº 9.882/1999)",
+    "type": "lei",
+    "number": "9882",
+    "year": 1999,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da sumula vinculante", "sumula vinculante"],
+    "title": "Lei da Súmula Vinculante (Lei nº 11.417/2006)",
+    "type": "lei",
+    "number": "11417",
+    "year": 2006,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da seguranca juridica"],
+    "title": "Lei da Segurança Jurídica (Lei nº 13.655/2018)",
+    "type": "lei",
+    "number": "13655",
+    "year": 2018,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do direito de resposta", "direito de resposta"],
+    "title": "Lei do Direito de Resposta (Lei nº 13.188/2015)",
+    "type": "lei",
+    "number": "13188",
+    "year": 2015,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei dos cartorios", "lei dos notarios e registradores", "cartorios"],
+    "title": "Lei dos Cartórios (Notários e Registradores) (Lei nº 8.935/1994)",
+    "type": "lei",
+    "number": "8935",
+    "year": 1994,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["loman", "lei organica da magistratura nacional", "lei organica da magistratura"],
+    "title": "Lei Orgânica da Magistratura Nacional - LOMAN (Lei Complementar nº 35/1979)",
+    "type": "lc",
+    "number": "35",
+    "year": 1979,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lonmp", "lei organica nacional do ministerio publico", "lei organica do ministerio publico"],
+    "title": "Lei Orgânica Nacional do Ministério Público (Lei nº 8.625/1993)",
+    "type": "lei",
+    "number": "8625",
+    "year": 1993,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei organica do ministerio publico da uniao", "lei organica do mpu"],
+    "title": "Lei Orgânica do Ministério Público da União (Lei Complementar nº 75/1993)",
+    "type": "lc",
+    "number": "75",
+    "year": 1993,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei organica da defensoria publica", "lodp"],
+    "title": "Lei Orgânica da Defensoria Pública (Lei Complementar nº 80/1994)",
+    "type": "lc",
+    "number": "80",
+    "year": 1994,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei organica da agu", "lei organica da advocacia geral da uniao"],
+    "title": "Lei Orgânica da Advocacia-Geral da União (Lei Complementar nº 73/1993)",
+    "type": "lc",
+    "number": "73",
+    "year": 1993,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei organica do tcu", "lotcu", "lei organica do tribunal de contas da uniao"],
+    "title": "Lei Orgânica do Tribunal de Contas da União (Lei nº 8.443/1992)",
+    "type": "lei",
+    "number": "8443",
+    "year": 1992,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["los", "lei organica da saude", "lei do sus"],
+    "title": "Lei Orgânica da Saúde (Lei nº 8.080/1990)",
+    "type": "lei",
+    "number": "8080",
+    "year": 1990,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei antitruste", "lei de defesa da concorrencia", "defesa da concorrencia"],
+    "title": "Lei de Defesa da Concorrência (Lei nº 12.529/2011)",
+    "type": "lei",
+    "number": "12529",
+    "year": 2011,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das agencias reguladoras", "agencias reguladoras"],
+    "title": "Lei das Agências Reguladoras (Lei nº 13.848/2019)",
+    "type": "lei",
+    "number": "13848",
+    "year": 2019,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das organizacoes sociais", "organizacoes sociais"],
+    "title": "Lei das Organizações Sociais (Lei nº 9.637/1998)",
+    "type": "lei",
+    "number": "9637",
+    "year": 1998,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["oscip", "lei das oscip"],
+    "title": "Lei das OSCIP (Lei nº 9.790/1999)",
+    "type": "lei",
+    "number": "9790",
+    "year": 1999,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do pregao", "pregao"],
+    "title": "Lei do Pregão (Lei nº 10.520/2002 - Revogada)",
+    "type": "lei",
+    "number": "10520",
+    "year": 2002,
+    "category": "Norma Revogada"
+  },
+  {
+    "aliases": ["lei do orcamento", "lei de normas gerais de direito financeiro", "normas gerais de direito financeiro"],
+    "title": "Lei do Orçamento (Normas Gerais de Direito Financeiro) (Lei nº 4.320/1964)",
+    "type": "lei",
+    "number": "4320",
+    "year": 1964,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["arcabouco fiscal", "novo arcabouco fiscal", "regime fiscal sustentavel"],
+    "title": "Arcabouço Fiscal (Regime Fiscal Sustentável) (Lei Complementar nº 200/2023)",
+    "type": "lc",
+    "number": "200",
+    "year": 2023,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do ibs e cbs", "regulamentacao da reforma tributaria", "lei complementar da reforma tributaria", "lei da reforma tributaria"],
+    "title": "Lei da Regulamentação da Reforma Tributária (IBS e CBS) (Lei Complementar nº 214/2025)",
+    "type": "lc",
+    "number": "214",
+    "year": 2025,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do iss", "iss"],
+    "title": "Lei do ISS (Lei Complementar nº 116/2003)",
+    "type": "lc",
+    "number": "116",
+    "year": 2003,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do sigilo bancario", "sigilo bancario"],
+    "title": "Lei do Sigilo Bancário (Lei Complementar nº 105/2001)",
+    "type": "lc",
+    "number": "105",
+    "year": 2001,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da reforma bancaria", "lei do sistema financeiro nacional"],
+    "title": "Lei da Reforma Bancária (Lei nº 4.595/1964)",
+    "type": "lei",
+    "number": "4595",
+    "year": 1964,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["sfh", "lei do sfh", "sistema financeiro da habitacao"],
+    "title": "Lei do Sistema Financeiro da Habitação - SFH (Lei nº 4.380/1964)",
+    "type": "lei",
+    "number": "4380",
+    "year": 1964,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do plano real", "plano real"],
+    "title": "Lei do Plano Real (Lei nº 9.069/1995)",
+    "type": "lei",
+    "number": "9069",
+    "year": 1995,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do cadastro positivo", "cadastro positivo"],
+    "title": "Lei do Cadastro Positivo (Lei nº 12.414/2011)",
+    "type": "lei",
+    "number": "12414",
+    "year": 2011,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do superendividamento", "superendividamento"],
+    "title": "Lei do Superendividamento (Lei nº 14.181/2021)",
+    "type": "lei",
+    "number": "14181",
+    "year": 2021,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da liberdade economica", "liberdade economica"],
+    "title": "Lei da Liberdade Econômica (Lei nº 13.874/2019)",
+    "type": "lei",
+    "number": "13874",
+    "year": 2019,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da desburocratizacao", "desburocratizacao"],
+    "title": "Lei da Desburocratização (Lei nº 13.726/2018)",
+    "type": "lei",
+    "number": "13726",
+    "year": 2018,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["nova lei de improbidade administrativa", "nova lei de improbidade", "nova lia"],
+    "title": "Nova Lei de Improbidade Administrativa (Lei nº 14.230/2021)",
+    "type": "lei",
+    "number": "14230",
+    "year": 2021,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["reforma da lei de falencias", "reforma da lei de recuperacao judicial"],
+    "title": "Reforma da Lei de Falências (Lei nº 14.112/2020)",
+    "type": "lei",
+    "number": "14112",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["rjet", "regime juridico emergencial e transitorio"],
+    "title": "Regime Jurídico Emergencial e Transitório - RJET (Lei nº 14.010/2020)",
+    "type": "lei",
+    "number": "14010",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da quarentena", "quarentena"],
+    "title": "Lei da Quarentena (Lei nº 13.979/2020)",
+    "type": "lei",
+    "number": "13979",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das sa", "lei das s a", "lsa", "lei das sociedades por acoes", "lei das sociedades anonimas"],
+    "title": "Lei das Sociedades por Ações - Lei das S.A. (Lei nº 6.404/1976)",
+    "type": "lei",
+    "number": "6404",
+    "year": 1976,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do mercado de capitais", "lei da cvm", "mercado de capitais"],
+    "title": "Lei do Mercado de Capitais (CVM) (Lei nº 6.385/1976)",
+    "type": "lei",
+    "number": "6385",
+    "year": 1976,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das cooperativas", "politica nacional de cooperativismo"],
+    "title": "Lei das Cooperativas (Lei nº 5.764/1971)",
+    "type": "lei",
+    "number": "5764",
+    "year": 1971,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de franquia", "lei da franquia", "franquia empresarial"],
+    "title": "Lei de Franquia (Lei nº 13.966/2019)",
+    "type": "lei",
+    "number": "13966",
+    "year": 2019,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do cheque", "cheque"],
+    "title": "Lei do Cheque (Lei nº 7.357/1985)",
+    "type": "lei",
+    "number": "7357",
+    "year": 1985,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das duplicatas", "duplicata"],
+    "title": "Lei das Duplicatas (Lei nº 5.474/1968)",
+    "type": "lei",
+    "number": "5474",
+    "year": 1968,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei lehmann", "lei do parcelamento do solo", "parcelamento do solo urbano"],
+    "title": "Lei de Parcelamento do Solo Urbano (Lei Lehmann) (Lei nº 6.766/1979)",
+    "type": "lei",
+    "number": "6766",
+    "year": 1979,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei da reforma agraria", "reforma agraria"],
+    "title": "Lei da Reforma Agrária (Lei nº 8.629/1993)",
+    "type": "lei",
+    "number": "8629",
+    "year": 1993,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei rouanet", "rouanet"],
+    "title": "Lei Rouanet (Lei nº 8.313/1991)",
+    "type": "lei",
+    "number": "8313",
+    "year": 1991,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do audiovisual"],
+    "title": "Lei do Audiovisual (Lei nº 8.685/1993)",
+    "type": "lei",
+    "number": "8685",
+    "year": 1993,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei aldir blanc", "aldir blanc"],
+    "title": "Lei Aldir Blanc (Lei nº 14.017/2020)",
+    "type": "lei",
+    "number": "14017",
+    "year": 2020,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei paulo gustavo", "paulo gustavo"],
+    "title": "Lei Paulo Gustavo (Lei Complementar nº 195/2022)",
+    "type": "lc",
+    "number": "195",
+    "year": 2022,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do bem"],
+    "title": "Lei do Bem (Lei nº 11.196/2005)",
+    "type": "lei",
+    "number": "11196",
+    "year": 2005,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de inovacao", "inovacao tecnologica"],
+    "title": "Lei de Inovação (Lei nº 10.973/2004)",
+    "type": "lei",
+    "number": "10973",
+    "year": 2004,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei geral do turismo", "turismo"],
+    "title": "Lei Geral do Turismo (Lei nº 11.771/2008)",
+    "type": "lei",
+    "number": "11771",
+    "year": 2008,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de biosseguranca", "biosseguranca"],
+    "title": "Lei de Biossegurança (Lei nº 11.105/2005)",
+    "type": "lei",
+    "number": "11105",
+    "year": 2005,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei dos planos de saude", "planos de saude"],
+    "title": "Lei dos Planos de Saúde (Lei nº 9.656/1998)",
+    "type": "lei",
+    "number": "9656",
+    "year": 1998,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei dos genericos", "genericos"],
+    "title": "Lei dos Genéricos (Lei nº 9.787/1999)",
+    "type": "lei",
+    "number": "9787",
+    "year": 1999,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei de transplantes", "lei de doacao de orgaos", "doacao de orgaos"],
+    "title": "Lei de Transplantes (Doação de Órgãos) (Lei nº 9.434/1997)",
+    "type": "lei",
+    "number": "9434",
+    "year": 1997,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["mais medicos", "lei do mais medicos"],
+    "title": "Lei do Programa Mais Médicos (Lei nº 12.871/2013)",
+    "type": "lei",
+    "number": "12871",
+    "year": 2013,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do ato medico", "ato medico"],
+    "title": "Lei do Ato Médico (Lei nº 12.842/2013)",
+    "type": "lei",
+    "number": "12842",
+    "year": 2013,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei do tombamento", "tombamento"],
+    "title": "Lei do Tombamento (Decreto-Lei nº 25/1937)",
+    "type": "dl",
+    "number": "25",
+    "year": 1937,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["dl 70", "execucao extrajudicial", "lei da execucao extrajudicial"],
+    "title": "Lei da Execução Extrajudicial de Hipoteca (Decreto-Lei nº 70/1966)",
+    "type": "dl",
+    "number": "70",
+    "year": 1966,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["lei das cedulas de credito rural", "cedula de credito rural"],
+    "title": "Lei das Cédulas de Crédito Rural (Decreto-Lei nº 167/1967)",
+    "type": "dl",
+    "number": "167",
+    "year": 1967,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["reforma administrativa federal", "reforma administrativa de 1967", "dl 200"],
+    "title": "Reforma Administrativa Federal (Decreto-Lei nº 200/1967)",
+    "type": "dl",
+    "number": "200",
+    "year": 1967,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["alienacao fiduciaria de bens moveis", "lei da alienacao fiduciaria de bens moveis", "dl 911"],
+    "title": "Lei da Alienação Fiduciária em Garantia de Bens Móveis (Decreto-Lei nº 911/1969)",
+    "type": "dl",
+    "number": "911",
+    "year": 1969,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["rps", "regulamento da previdencia social"],
+    "title": "Regulamento da Previdência Social - RPS (Decreto nº 3.048/1999)",
+    "type": "dec",
+    "number": "3048",
+    "year": 1999,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["rir", "rir 2018", "regulamento do imposto de renda"],
+    "title": "Regulamento do Imposto de Renda - RIR/2018 (Decreto nº 9.580/2018)",
+    "type": "dec",
+    "number": "9580",
+    "year": 2018,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["regulamento aduaneiro"],
+    "title": "Regulamento Aduaneiro (Decreto nº 6.759/2009)",
+    "type": "dec",
+    "number": "6759",
+    "year": 2009,
+    "category": "Apelido"
+  },
+  {
+    "aliases": ["pacto de sao jose da costa rica", "pacto de san jose", "convencao americana de direitos humanos", "convencao americana sobre direitos humanos", "cadh"],
+    "title": "Pacto de São José da Costa Rica (Convenção Americana sobre Direitos Humanos) (Decreto nº 678/1992)",
+    "type": "dec",
+    "number": "678",
+    "year": 1992,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["pidcp", "pacto internacional de direitos civis e politicos", "pacto internacional sobre direitos civis e politicos"],
+    "title": "Pacto Internacional sobre Direitos Civis e Políticos - PIDCP (Decreto nº 592/1992)",
+    "type": "dec",
+    "number": "592",
+    "year": 1992,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["pidesc", "pacto internacional de direitos economicos sociais e culturais"],
+    "title": "Pacto Internacional sobre Direitos Econômicos, Sociais e Culturais - PIDESC (Decreto nº 591/1992)",
+    "type": "dec",
+    "number": "591",
+    "year": 1992,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao de viena sobre o direito dos tratados", "convencao de viena dos tratados", "cvdt"],
+    "title": "Convenção de Viena sobre o Direito dos Tratados (Decreto nº 7.030/2009)",
+    "type": "dec",
+    "number": "7030",
+    "year": 2009,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao de haia sobre sequestro internacional de criancas", "convencao de haia de 1980", "sequestro internacional de criancas"],
+    "title": "Convenção de Haia sobre os Aspectos Civis do Sequestro Internacional de Crianças (Decreto nº 3.413/2000)",
+    "type": "dec",
+    "number": "3413",
+    "year": 2000,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao de haia sobre adocao internacional", "adocao internacional"],
+    "title": "Convenção de Haia sobre Adoção Internacional (Decreto nº 3.087/1999)",
+    "type": "dec",
+    "number": "3087",
+    "year": 1999,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao sobre os direitos da crianca"],
+    "title": "Convenção sobre os Direitos da Criança (Decreto nº 99.710/1990)",
+    "type": "dec",
+    "number": "99710",
+    "year": 1990,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["cdpd", "convencao sobre os direitos das pessoas com deficiencia", "convencao de nova york sobre pessoas com deficiencia"],
+    "title": "Convenção de Nova York sobre os Direitos das Pessoas com Deficiência - CDPD (Decreto nº 6.949/2009)",
+    "type": "dec",
+    "number": "6949",
+    "year": 2009,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao de belem do para", "convencao interamericana para prevenir a violencia contra a mulher"],
+    "title": "Convenção de Belém do Pará (Decreto nº 1.973/1996)",
+    "type": "dec",
+    "number": "1973",
+    "year": 1996,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["cedaw", "convencao sobre a eliminacao de todas as formas de discriminacao contra a mulher"],
+    "title": "Convenção sobre a Eliminação de Todas as Formas de Discriminação contra a Mulher - CEDAW (Decreto nº 4.377/2002)",
+    "type": "dec",
+    "number": "4377",
+    "year": 2002,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao de palermo"],
+    "title": "Convenção de Palermo (contra o Crime Organizado Transnacional) (Decreto nº 5.015/2004)",
+    "type": "dec",
+    "number": "5015",
+    "year": 2004,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao de merida", "convencao das nacoes unidas contra a corrupcao"],
+    "title": "Convenção de Mérida (das Nações Unidas contra a Corrupção) (Decreto nº 5.687/2006)",
+    "type": "dec",
+    "number": "5687",
+    "year": 2006,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["estatuto de roma", "tribunal penal internacional", "tpi"],
+    "title": "Estatuto de Roma do Tribunal Penal Internacional (Decreto nº 4.388/2002)",
+    "type": "dec",
+    "number": "4388",
+    "year": 2002,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao de nova york sobre sentencas arbitrais estrangeiras", "convencao de nova york sobre arbitragem", "sentencas arbitrais estrangeiras"],
+    "title": "Convenção de Nova York sobre Sentenças Arbitrais Estrangeiras (Decreto nº 4.311/2002)",
+    "type": "dec",
+    "number": "4311",
+    "year": 2002,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao da apostila", "apostila de haia", "apostilamento"],
+    "title": "Convenção da Apostila de Haia (Decreto nº 8.660/2016)",
+    "type": "dec",
+    "number": "8660",
+    "year": 2016,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["acordo de paris"],
+    "title": "Acordo de Paris (Decreto nº 9.073/2017)",
+    "type": "dec",
+    "number": "9073",
+    "year": 2017,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["tratado de marraqueche", "tratado de marraquexe"],
+    "title": "Tratado de Marraqueche (Decreto nº 9.522/2018)",
+    "type": "dec",
+    "number": "9522",
+    "year": 2018,
+    "category": "Tratado"
+  },
+  {
+    "aliases": ["convencao contra a tortura", "convencao da onu contra a tortura"],
+    "title": "Convenção contra a Tortura (Decreto nº 40/1991)",
+    "type": "dec",
+    "number": "40",
+    "year": 1991,
+    "category": "Tratado"
   }
 ]
