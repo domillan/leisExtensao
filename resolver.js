@@ -246,6 +246,16 @@ function extrairParagrafo(texto) {
     return `§${numDepois[1]}${letra}`;
   }
 
+  const ordinalDepois = texto.match(
+    /par[áa]gra[fd]o\s+(primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo)\b/i
+  );
+  if (ordinalDepois) {
+    const numero = ORDINAIS_MAP[ordinalDepois[1].toLowerCase()];
+    if (numero) {
+      return `§${numero}`;
+    }
+  }
+
   const ordinalAntes = texto.match(
     /\b(\d+[ºª°]?|primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo)\s+par[áa]gra[fd]o\b/i
   );
@@ -333,7 +343,9 @@ function extrairInciso(texto) {
 }
 
 function extrairAlinea(texto) {
-  const explicita = texto.match(/\bal[íi]nea\s*["'“”]?([a-z])["'“”]?\b/i);
+  const explicita = texto.match(
+    /\bal[íi]nea\s*["'“”]?([a-z])["'“”]?(?=$|[\s,.;:()"'“”])/i
+  );
   if (explicita) {
     return explicita[1].toLowerCase();
   }
@@ -375,6 +387,40 @@ export function montarIdHtml(corpoDispositivo) {
   return `${idArtigo}${idParagrafo}${idInciso}${idAlinea}`;
 }
 
+// Texto que vem ANTES do "art." e é só parte do dispositivo (ex.: "§1º, II,",
+// "parágrafo único do", "alínea 'b' do inciso II do"), e não o nome da norma.
+// Exige palavra-chave (§, parágrafo, inciso, alínea) para não confundir sigla
+// como "CC" ou "CDC" com número romano.
+function ehPrefixoDeDispositivo(prefixo) {
+  const texto = String(prefixo || '').trim();
+  if (!texto) return false;
+  if (!/(?:§|\bpar[áa]gra[fd]os?\b|\binc(?:iso|isos|\.)?(?=[\s.]|$)|\bal[íi]neas?\b)/i.test(texto)) {
+    return false;
+  }
+
+  const ROMANO = /^(?:m{0,3})(?:cm|cd|d?c{0,3})(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})$/i;
+  const PALAVRAS = new Set([
+    'paragrafo', 'paragrafos', 'unico', 'inciso', 'incisos', 'inc', 'alinea', 'alineas',
+    'primeiro', 'segundo', 'terceiro', 'quarto', 'quinto', 'sexto', 'setimo', 'oitavo', 'nono', 'decimo',
+    'do', 'da', 'de', 'dos', 'das', 'e', 'a', 'o'
+  ]);
+
+  const tokens = stripAccents(texto)
+    .toLowerCase()
+    .split(/[\s,;]+/)
+    .filter(Boolean);
+
+  return tokens.every((tok) => {
+    const t = tok.replace(/^[\"'“”‘’(]+|[\"'“”‘’).]+$/g, '');
+    if (!t) return true;
+    if (PALAVRAS.has(t)) return true;
+    if (/^§+\s*\d*[ºª°o]?(?:-[a-z])?$/.test(t)) return true;
+    if (/^\d+[ºª°o]?(?:-[a-z])?$/.test(t)) return true;
+    if (/^[a-z]$/.test(t)) return true;
+    return ROMANO.test(t);
+  });
+}
+
 export function separarLeiEId(texto) {
   const trimmed = String(texto || '').trim();
   if (!trimmed) {
@@ -391,9 +437,32 @@ export function separarLeiEId(texto) {
     };
   }
 
-  // Caso 1: Começa com sigla de lei antes do dispositivo (ex.: "CF 5º, II", "eca 122")
+  // Subpadrões precisos de complementos de dispositivo (parágrafo, inciso, alínea, intervalo de artigos),
+  // tolerantes à ausência de espaços ou vírgulas (ex.: "§ 1º", "§1º", "§1º,II,'a'", "parágrafo único").
+  const COMPLEMENTO_ITEM = [
+    // Parágrafo com símbolo § (ex.: "§ 1º", "§1º", "§ 3º-A", "§§ 1º e 2º")
+    `§+\\s*\\d+\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?`,
+    // Parágrafo por extenso (ex.: "parágrafo único", "parágrafo 1º", "parágrafo primeiro")
+    `par[áa]gra[fd]o(?:s)?\\s+(?:[úu]nico\\b|\\d+\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?|(?:primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo)\\b)`,
+    // Ordinal antes de parágrafo (ex.: "1º parágrafo", "primeiro parágrafo")
+    `(?:\\d+\\s*[ºª°]?|(?:primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo))\\s+par[áa]gra[fd]o\\b`,
+    // Inciso com prefixo (ex.: "inciso II", "inc. II", "inc.II")
+    `\\binc(?:iso|isos|\\.)\\s*[ivxlcdm]+\\b`,
+    // Inciso em algarismo romano isolado (ex.: "II", "LXXVIII")
+    `\\b[ivxlcdm]+\\b`,
+    // Alínea com prefixo (ex.: "alínea 'a'", "alínea a")
+    `\\bal[íi]nea(?:s)?\\s*(?:["'“”][a-z]["'“”]|[a-z]\\b)`,
+    // Alínea entre aspas (ex.: "'a'", "“b”")
+    `["'“”][a-z]["'“”]`,
+    // Artigo adicional em intervalo ou enumeração com conector explícito (ex.: ", 4º", " e 5º", " a 10")
+    `(?:,|;|\\be\\b|\\ba\\b|\\bat[ée]\\b|\\/|-|–|—)\\s*(?:arts?\\.?|artigos?)?\\s*\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?`
+  ].join('|');
+
+  const COMPLEMENTOS_DISPOSITIVO_SEQ = `(?:\\s*(?:,|;|\\be\\b|\\ba\\b|\\bat[ée]\\b|\\/|-|–|—)?\\s*(?:${COMPLEMENTO_ITEM}))*`;
+
+  // Caso 1: Começa com sigla de lei antes do dispositivo (ex.: "CF 5º, II", "CF,5º,II", "eca 122")
   const prefixoRegex = new RegExp(
-    `^(${SIGLAS_PREFIXO.join('|')})\\b[,\\s]+(.+)$`,
+    `^(${SIGLAS_PREFIXO.join('|')})(?:[,\\s]+|(?=\\d))(.+)$`,
     'i'
   );
   const matchPrefixo = trimmed.match(prefixoRegex);
@@ -419,8 +488,12 @@ export function separarLeiEId(texto) {
     const antesEDuranteArtigo = trimmed.slice(0, fimArtigo);
     const depoisDoArtigo = trimmed.slice(fimArtigo);
 
+    // Dispositivo escrito "de trás para frente" (ex.: "parágrafo único do art. 6 do CDC",
+    // "§1º, II, art. 14 do CDC", "§1º,II,art.14,CDC"): o que vem antes do "art." é parte do dispositivo.
+    const prefixoDispositivo = ehPrefixoDeDispositivo(antesDoArtigo) ? antesDoArtigo : '';
+
     // 2A: Norma vem ANTES do "art."/"arts." (ex.: "Lei 8.245/1991, art. 39")
-    if (antesDoArtigo) {
+    if (antesDoArtigo && !prefixoDispositivo) {
       const leiAntes = antesDoArtigo.replace(/[,;:\-–—]+$/, '').trim();
       if (leiAntes.length >= 2) {
         const idHtml = montarIdHtml(duranteEDepoisDoArtigo);
@@ -435,46 +508,29 @@ export function separarLeiEId(texto) {
       }
     }
 
-    // 2B: Norma vem APÓS o dispositivo introduzida por preposição
-    const prepLeiMatch = depoisDoArtigo.match(
-      /^(.*?)\s*\b(?:do|da|de|dos|das|no|na)\s+(.+)$/i
+    // 2B: Norma vem APÓS o dispositivo (com ou sem preposição, vírgula ou espaços)
+    // Ex.: "art. 3º, § 1º lei 10.259/01", "art. 3º, §1º, lei 10.259/01", "art.3º,§1º,lei 10.259/01",
+    // "art. 4 da lei 10.259/01", "art. 23 lei de drogas", "art. 14 parágrafo único CPC"
+    const aposDispositivoRegex = new RegExp(
+      `^(${COMPLEMENTOS_DISPOSITIVO_SEQ})\\s*(?:[,;]\\s*)?(?:\\b(?:do|da|de|dos|das|no|na)\\s+)?(.+)$`,
+      'i'
     );
+    const aposDispositivoMatch = depoisDoArtigo.match(aposDispositivoRegex);
 
-    if (prepLeiMatch) {
-      const complementoDispositivo = prepLeiMatch[1];
-      const leiTexto = prepLeiMatch[2].trim();
-      const corpoCompleto = `${antesEDuranteArtigo}${complementoDispositivo}`;
-
-      return {
-        entrada: trimmed,
-        idHtml: montarIdHtml(corpoCompleto),
-        leiTexto,
-        isUnsupportedAct: false
-      };
-    }
-
-    // 2C: Norma separada por vírgula no final (ex.: "art. 14, parágrafo único, CPC")
-    const virgulaMatch = depoisDoArtigo.match(/^(.*),\s*([^,]+)$/);
-    if (virgulaMatch) {
-      const possivelLei = virgulaMatch[2].trim();
-      const ehSiglaConhecida = new RegExp(
-        `^(?:${SIGLAS_PREFIXO.join('|')})$`,
-        'i'
-      ).test(possivelLei);
-      const pareceLei =
-        ehSiglaConhecida ||
-        /\b(?:lei|c[óo]digo|constitui[çc][aã]o|decreto|estatuto)\b/i.test(
-          possivelLei
-        );
-
-      if (pareceLei) {
-        const corpoCompleto = `${antesEDuranteArtigo}${virgulaMatch[1]}`;
-        return {
-          entrada: trimmed,
-          idHtml: montarIdHtml(corpoCompleto),
-          leiTexto: possivelLei,
-          isUnsupportedAct: false
-        };
+    if (aposDispositivoMatch) {
+      const complementoDispositivo = aposDispositivoMatch[1] || '';
+      const leiTexto = aposDispositivoMatch[2].replace(/^[,;:\s]+/, '').trim();
+      if (leiTexto.length >= 2) {
+        const corpoCompleto = `${prefixoDispositivo} ${antesEDuranteArtigo} ${complementoDispositivo}`;
+        const idHtml = montarIdHtml(corpoCompleto);
+        if (idHtml) {
+          return {
+            entrada: trimmed,
+            idHtml,
+            leiTexto,
+            isUnsupportedAct: false
+          };
+        }
       }
     }
 
@@ -486,9 +542,29 @@ export function separarLeiEId(texto) {
     };
   }
 
-  // Caso 3: Começa pelo número do dispositivo (sem "art.") e termina com sigla conhecida (ex.: "122 eca")
+  // Caso 2.5: Número do dispositivo seguido diretamente de citação de norma por espécie e número
+  // (ex.: "14 lei 8.078/1990", "5 decreto-lei 2.848 de 1940")
+  const dispositivoSeguidoDeCitacaoMatch = trimmed.match(
+    /^(\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?)(?:[\s,;]+|(?<=[ºª°]))(\S.*)$/
+  );
+  if (dispositivoSeguidoDeCitacaoMatch) {
+    const candidatoLei = dispositivoSeguidoDeCitacaoMatch[2].trim();
+    if (CITACAO_DIRETA_ESPECIE_NUMERO_REGEX.test(candidatoLei)) {
+      const idHtml = montarIdHtml(dispositivoSeguidoDeCitacaoMatch[1].trim());
+      if (idHtml) {
+        return {
+          entrada: trimmed,
+          idHtml,
+          leiTexto: candidatoLei,
+          isUnsupportedAct: false
+        };
+      }
+    }
+  }
+
+  // Caso 3: Começa pelo número do dispositivo (sem "art.") e termina com sigla conhecida (ex.: "122 eca", "5º,II,CF")
   const sufixoSiglaRegex = new RegExp(
-    `^(\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?(?:[\\s,;]+.+?)?)[\\s,;]+(${SIGLAS_PREFIXO.join('|')})$`,
+    `^(\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?${COMPLEMENTOS_DISPOSITIVO_SEQ})[\\s,;]+(${SIGLAS_PREFIXO.join('|')})$`,
     'i'
   );
   const matchSufixoSigla = trimmed.match(sufixoSiglaRegex);
@@ -528,12 +604,16 @@ export function separarLeiEId(texto) {
     }
   }
 
-  // Caso 5: Dispositivo sem "art." seguido de preposição e nome da norma (ex.: "23 da lei de drogas")
-  const dispositivoPrepNomeRegex = /^(\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?(?:[\s,;]+.*?)?)\s+\b(?:do|da|de|dos|das|no|na)\s+(.+)$/i;
-  const matchDispPrepNome = trimmed.match(dispositivoPrepNomeRegex);
-  if (matchDispPrepNome) {
-    const corpoDispositivo = matchDispPrepNome[1].trim();
-    const candidatoLei = matchDispPrepNome[2].trim();
+  // Caso 5: Dispositivo sem "art." seguido (com ou sem preposição, vírgula ou espaços) do nome/apelido da norma
+  // Ex.: "23 da lei de drogas", "23 lei de drogas", "5º, II, da constituição", "5º,II constituição"
+  const dispositivoNomeRegex = new RegExp(
+    `^(\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?${COMPLEMENTOS_DISPOSITIVO_SEQ})\\s*(?:[,;]\\s*)?(?:\\b(?:do|da|de|dos|das|no|na)\\s+)?(.+)$`,
+    'i'
+  );
+  const matchDispNome = trimmed.match(dispositivoNomeRegex);
+  if (matchDispNome) {
+    const corpoDispositivo = matchDispNome[1].trim();
+    const candidatoLei = matchDispNome[2].replace(/^[,;:\s]+/, '').trim();
     const idHtml = montarIdHtml(corpoDispositivo);
     if (idHtml && candidatoLei.length >= 2) {
       return {
@@ -1407,9 +1487,107 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
   };
 }
 
+// ----------------------------------------------------------------------------
+// Pré-filtro do botão flutuante: o texto selecionado só é considerado se tiver
+// indício de norma: (1) alias de norma do normas.json, (2) palavra de espécie
+// normativa (lei, lc, decreto, ec...) ou (3) formato de número/ano ("1234/2020",
+// "1234/20", "1234 de 20", "1.234-A/1966"...).
+// ----------------------------------------------------------------------------
+
+// Aplicado sobre texto sem acentos e em minúsculas.
+const PALAVRA_NORMA_REGEX = new RegExp(
+  '(?<![a-z0-9])(?:' +
+    'leis?|lcp?|ld|dl|ec|mp|mpv|dec|decs?|decretos?|' +
+    'lei\\s+(?:ordinaria|complementar|delegada)|' +
+    'decretos?[-\\s]*leis?|' +
+    'emendas?\\s+constitucionais?|' +
+    'medidas?\\s+provisorias?|' +
+    'constituicao|codigos?|estatutos?' +
+  ')(?![a-z0-9])'
+);
+
+// Também aceita as formas com pontos ("l.c.", "d.l.", "e.c.", "m.p.").
+const SIGLA_COM_PONTOS_REGEX = /(?<![a-z0-9])(?:l\.\s?c\.?p?\.?|l\.\s?d\.|d\.\s?l\.|e\.\s?c\.|m\.\s?p\.\s?v?\.?)(?![a-z0-9])/;
+
+// "1234/2020", "1234/20", "1234 de 20", "1234 de 2020", "1.234, de 2020",
+// "4.950-A/1966", "2.200-2/2001". Evita datas ("12/05/2020").
+const FORMATO_NUMERO_ANO_REGEX = new RegExp(
+  '(?<![\\d./-])' +
+    '(?:\\d{1,3}(?:\\.\\d{3})+|\\d{1,7})' +   // número, com ou sem separador de milhar
+    '(?:-[a-z0-9]{1,2})?' +                   // sufixo (-A) ou edição de MP (-2)
+    '\\s*(?:/|,?\\s+de\\s+)\\s*' +            // "/" ou "de"
+    '(?:\\d{4}|\\d{2})' +                     // ano com 4 ou 2 dígitos
+  '(?![\\d/])'
+);
+
+let aliasGateCache = null;
+
+async function getAliasGate() {
+  const idx = await getNormasIndex();
+  if (aliasGateCache && aliasGateCache.source === idx) return aliasGateCache;
+
+  const set = new Set();
+  let maxTokens = 1;
+  for (let i = 0; i < idx.entries.length; i++) {
+    const aliases = idx.entries[i].aliases;
+    for (let j = 0; j < aliases.length; j++) {
+      const key = aliases[j].norm;
+      if (!key || key.length < 2) continue;
+      set.add(key);
+      const n = key.split(' ').length;
+      if (n > maxTokens) maxTokens = n;
+    }
+  }
+
+  aliasGateCache = { source: idx, set, maxTokens };
+  return aliasGateCache;
+}
+
+async function textoContemAliasDeNorma(text) {
+  const tokens = normalizeAliasKey(text).split(' ').filter(Boolean);
+  if (tokens.length === 0) return false;
+
+  const { set, maxTokens } = await getAliasGate();
+  if (set.size === 0) return false;
+
+  for (let start = 0; start < tokens.length; start++) {
+    let phrase = '';
+    const limit = Math.min(tokens.length, start + maxTokens);
+    for (let end = start; end < limit; end++) {
+      phrase = end === start ? tokens[end] : `${phrase} ${tokens[end]}`;
+      if (set.has(phrase)) return true;
+    }
+  }
+  return false;
+}
+
+export async function selecaoTemIndicioDeNorma(rawText) {
+  const plain = stripAccents(String(rawText || '')).toLowerCase();
+  if (!plain.trim()) return false;
+
+  // Testes baratos primeiro; o alias (que depende do normas.json) por último.
+  if (PALAVRA_NORMA_REGEX.test(plain) || SIGLA_COM_PONTOS_REGEX.test(plain)) return true;
+  if (FORMATO_NUMERO_ANO_REGEX.test(plain)) return true;
+  if (await textoContemAliasDeNorma(rawText)) return true;
+
+  // Sigla conhecida (CDC, CF, CPC...) acompanhada de dispositivo (art., § ou número),
+  // mesmo que o alias não esteja no normas.json.
+  if (/(?:(?<![a-z0-9])arts?(?![a-z])|artigos?|§|\d)/.test(plain)) {
+    const siglas = new Set(SIGLAS_PREFIXO.map((x) => stripAccents(x).toLowerCase()));
+    const tokens = normalizeAliasKey(rawText).split(' ');
+    if (tokens.some((t) => siglas.has(t))) return true;
+  }
+  return false;
+}
+
 export async function checkSelectionCandidate(rawInput) {
   const text = String(rawInput || '').trim();
   if (!text || text.length < 2 || text.length > 140 || /[\r\n]/.test(text)) {
+    return { valid: false };
+  }
+
+  // Só segue se o texto tiver alias de norma, palavra de norma ou formato de número/ano.
+  if (!(await selecaoTemIndicioDeNorma(text))) {
     return { valid: false };
   }
 
