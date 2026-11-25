@@ -221,55 +221,246 @@ const ESPECIE_NORMATIVA_PURA_REGEX = /^(?:lei(?:\s+ordin[aá]ria|\s+complementar
 
 const CITACAO_DIRETA_ESPECIE_NUMERO_REGEX = /^(?:lei(?:\s+ordin[aá]ria|\s+complementar|\s+delegada)?|decreto(?:[-\s]*lei)?|medida\s+provis[oó]ria|emenda\s+constitucional|l\.?\s*c\.?p?\.?|l\.?\s*d\.?|d\.?\s*l\.?|e\.?\s*c\.?|m\.?\s*p\.?v?\.?|dec\.?)\s*(?:n[º°oª.]*\s*)?\d[\d.\s]*\d(?:\s*(?:\/|\bde\b|-)\s*\d{2,4})?\s*$/i;
 
-const ATO_NAO_LEGISLACAO_REGEX = /\b(?:s[úu]mula(?:s)?|ac[óo]rd[ãa]o(?:s)?|jurisprud[êe]ncia|recurso\s+especial|resp|re|agravo|tema(?:s)?|repercuss[ãa]o\s+geral|portaria(?:s)?|resolu[çc][ãa]o(?:oes|ões)?|instru[çc][ãa]o\s+normativa|of[íi]cio|circular|parecer(?:es)?)\b/i;
+// Atos que NÃO são legislação federal listada no portal. Só são considerados como tal quando o
+// termo vem acompanhado de número (ex.: "súmula 331", "resolução nº 5", "REsp 1.234", "tema 1000").
+// Termos isolados ("agravo interno", "resolução do mérito", "recurso especial", "repercussão geral",
+// "súmulas") NÃO são bloqueados: seguem para a busca por assunto/apelido.
+const ATO_NAO_LEGISLACAO_REGEX = /(?<![\p{L}\p{N}])(?:s[úu]mulas?(?:\s+vinculantes?)?|ac[óo]rd[ãa]os?|portarias?|resolu[çc](?:[ãa]o|[õo]es)|instru[çc](?:[ãa]o|[õo]es)\s+normativas?|of[íi]cios?|circulares?|pareceres?|temas?|resp|re)\s*(?:n[º°o.]*\s*)?\d/iu;
+
+// Siglas conhecidas (sem acento, minúsculas) — usadas para não confundir sigla com numeral romano.
+const SIGLAS_CONHECIDAS = new Set(
+  SIGLAS_PREFIXO.map((s) => stripAccents(s).toLowerCase()).concat(['lc', 'lcp', 'dl', 'ld', 'mp', 'mpv', 'ec', 'cc', 'cdc'])
+);
+
+const ORDINAIS_EXTENSO = 'primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo';
 
 function normalizarNumeroArtigo(numStr) {
   return String(numStr || '').replace(/\./g, '').trim();
 }
 
-function extrairParagrafo(texto) {
-  if (/par[áa]gra[fd]o\s+[úu]nico\b/i.test(texto)) {
-    return 'p';
-  }
+// ----------------------------------------------------------------------------
+// Utilitários de reconhecimento (numeral romano de inciso, norma conhecida)
+// ----------------------------------------------------------------------------
 
-  // Suporta parágrafos com número e letra opcional (ex.: "§ 3º-A", "§ 3-A", "parágrafo 3º-A")
-  const numDepois = texto.match(
-    /(?:§+|par[áa]gra[fd]o(?:s)?)\s*(\d+)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
-  );
-  if (numDepois) {
-    const rawLetra = numDepois[2] || numDepois[3] || '';
-    const ignorarLetras = new Set(['a', 'o', 'e']);
-    const letra =
-      rawLetra && (numDepois[2] || !ignorarLetras.has(rawLetra.toLowerCase()))
-        ? rawLetra.toLowerCase()
-        : '';
-    return `§${numDepois[1]}${letra}`;
-  }
+// Numeral romano canônico até 199 (incisos reais nunca passam disso). Isso evita que siglas
+// formadas só por letras romanas (CC=200, DL=550, LC, CDC, MC...) sejam lidas como inciso.
+function romanoComoInciso(tok) {
+  const t = String(tok || '').toUpperCase();
+  if (!t || !/^[IVXLCDM]+$/.test(t)) return false;
+  const v = parseRomanToNumber(t);
+  return v != null && v <= 199 && intToRoman(v) === t;
+}
 
-  const ordinalDepois = texto.match(
-    /par[áa]gra[fd]o\s+(primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo)\b/i
-  );
-  if (ordinalDepois) {
-    const numero = ORDINAIS_MAP[ordinalDepois[1].toLowerCase()];
-    if (numero) {
-      return `§${numero}`;
+// Letra solta após o número do artigo/parágrafo ("art. 3 B", "§ 2 A") é sufixo (3-B) apenas se não
+// for conectivo (a, o, e) nem numeral romano de inciso (i, v, x, l, c).
+function letraSufixoValida(letra) {
+  const l = String(letra || '').toLowerCase();
+  if (!l || 'aoe'.includes(l)) return false;
+  return !romanoComoInciso(l);
+}
+
+// O texto começa com uma norma conhecida (sigla ou alias de normas.json)?
+function comecaComNormaConhecida(texto) {
+  const tokens = normalizeAliasKey(texto).split(' ').filter(Boolean);
+  if (tokens.length === 0) return false;
+  if (SIGLAS_CONHECIDAS.has(tokens[0])) return true;
+  const idx = normasIndexCache;
+  if (!idx) return false;
+  let phrase = '';
+  const lim = Math.min(tokens.length, 8);
+  for (let i = 0; i < lim; i++) {
+    phrase = i === 0 ? tokens[i] : `${phrase} ${tokens[i]}`;
+    if (idx.exactMap.has(phrase)) return true;
+  }
+  return false;
+}
+
+// O trecho "parece" o nome de uma norma? (espécie normativa, código, estatuto, constituição,
+// ou alias/sigla conhecidos)
+function pareceNorma(texto) {
+  const t = String(texto || '').trim();
+  if (!t) return false;
+  if (comecaComNormaConhecida(t)) return true;
+  return /(?<![\p{L}\p{N}])(?:leis?|decretos?|decretos?[-\s]*leis?|medidas?\s+provis[óo]rias?|emendas?\s+constitucionais?|c[óo]digos?|estatutos?|constitui[çc][aã]o|consolida[çc][aã]o|regulamento|lc|ld|dl|ec|mp|mpv)(?![\p{L}\p{N}])/iu.test(t);
+}
+
+function limparTextoDeLei(resto) {
+  let s = String(resto || '').replace(/^[\s,;:.\-–—]+/, '');
+  let anterior;
+  do {
+    anterior = s;
+    s = s
+      .replace(/^(?:do|da|de|dos|das|no|na|nos|nas|pelo|pela|pelos|pelas|ao|aos|à|às)\s+/i, '')
+      .replace(/^(?:a|o|as|os)\s+(?=\S)/i, '');
+  } while (s !== anterior);
+  return s.replace(/[\s,;:.]+$/, '').trim();
+}
+
+// ----------------------------------------------------------------------------
+// Complementos do dispositivo (§, parágrafo, inciso, alínea, caput, numeral romano, artigos
+// adicionais). Implementado como tokenizador linear (sem regex com quantificador aninhado), o que
+// elimina o risco de backtracking exponencial e aceita qualquer combinação de espaços/vírgulas.
+// ----------------------------------------------------------------------------
+
+const ITENS_COMPLEMENTO = [
+  /§+\s*\d+\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?/iy,
+  new RegExp(
+    `par[áa]gra[fd]os?\\s+(?:[úu]nico\\b|\\d+\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?|(?:${ORDINAIS_EXTENSO})\\b)`,
+    'iy'
+  ),
+  new RegExp(`(?:\\d+\\s*[ºª°]?|(?:${ORDINAIS_EXTENSO}))\\s+par[áa]gra[fd]o\\b`, 'iy'),
+  /inc(?:isos?\b|\.)\s*[ivxlcdm]+\b/iy,
+  /al[íi]neas?\s*(?:["'“”‘’][a-z]["'“”‘’]|[a-z](?![a-z0-9]))/iy,
+  /["'“”‘’][a-z]["'“”‘’]/iy,
+  /caput\b/iy
+];
+const CONECTOR_COMPLEMENTO = /(?:\be\b|\ba\b|\bat[ée]\b|\/|-|–|—)\s*/iy;
+const ARTIGO_EXTRA = /\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?/y;
+const ROMANO_SOLTO = /[ivxlcdm]+(?![a-zA-Z0-9])/iy;
+const LETRA_SOLTA = /[a-zA-Z](?![a-zA-Z0-9])/y;
+
+function acharItemComplemento(texto, q, ctx) {
+  for (let i = 0; i < ITENS_COMPLEMENTO.length; i++) {
+    const rx = ITENS_COMPLEMENTO[i];
+    rx.lastIndex = q;
+    const m = rx.exec(texto);
+    if (m && m.index === q) {
+      let fim = q + m[0].replace(/\s+$/, '').length;
+      // Parágrafo com letra separada por espaço ("§ 2 B", "parágrafo 3 A")
+      if (i <= 1) {
+        const ext = /^\s+([a-zA-Z])(?![a-zA-Z0-9])/.exec(texto.slice(fim));
+        if (ext && letraSufixoValida(ext[1])) fim += ext[0].length;
+      }
+      return fim;
     }
   }
 
-  const ordinalAntes = texto.match(
-    /\b(\d+[ºª°]?|primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo)\s+par[áa]gra[fd]o\b/i
-  );
-  if (ordinalAntes) {
-    const raw = ordinalAntes[1]
-      .toLowerCase()
-      .replace(/[ºª°]/g, '');
+  // Letra do artigo logo após o número ("3 B", "3-B" já é tratado no cabeçalho)
+  if (ctx.primeiro && !ctx.conector && !ctx.virgula) {
+    LETRA_SOLTA.lastIndex = q;
+    const m = LETRA_SOLTA.exec(texto);
+    if (m && letraSufixoValida(m[0])) return q + m[0].length;
+  }
+
+  // Outro artigo em enumeração/intervalo ("e 6", "a 10", ", 7", "/ 88")
+  if (ctx.conector || ctx.virgula) {
+    ARTIGO_EXTRA.lastIndex = q;
+    const m = ARTIGO_EXTRA.exec(texto);
+    if (m && m.index === q) return q + m[0].length;
+  }
+
+  // Inciso em numeral romano isolado (desde que não seja o início do nome da norma)
+  ROMANO_SOLTO.lastIndex = q;
+  const r = ROMANO_SOLTO.exec(texto);
+  if (r && r.index === q && romanoComoInciso(r[0])) {
+    if (r[0].length >= 2 && comecaComNormaConhecida(texto.slice(q))) return -1;
+    return q + r[0].length;
+  }
+
+  return -1;
+}
+
+function consumirComplementos(texto) {
+  const n = texto.length;
+  let pos = 0;
+  let fim = 0;
+  let primeiro = true;
+
+  while (pos < n) {
+    let p = pos;
+    let virgula = false;
+    while (p < n && /[\s,;]/.test(texto[p])) {
+      if (texto[p] === ',' || texto[p] === ';') virgula = true;
+      p++;
+    }
+    if (p >= n) break;
+
+    CONECTOR_COMPLEMENTO.lastIndex = p;
+    const cm = CONECTOR_COMPLEMENTO.exec(texto);
+    let fimItem = -1;
+
+    if (cm && cm.index === p) {
+      fimItem = acharItemComplemento(texto, p + cm[0].length, { conector: true, virgula, primeiro });
+    }
+    if (fimItem < 0) {
+      fimItem = acharItemComplemento(texto, p, { conector: false, virgula, primeiro });
+    }
+    if (fimItem < 0) break;
+
+    fim = fimItem;
+    pos = fimItem;
+    primeiro = false;
+  }
+
+  return { consumido: texto.slice(0, fim), resto: texto.slice(fim) };
+}
+
+function analisarAposDispositivo(depois) {
+  const { consumido, resto } = consumirComplementos(depois);
+  const lei = limparTextoDeLei(resto);
+  const temLetra = /\p{L}/u.test(lei);
+  const ehSoEspecie = ESPECIE_NORMATIVA_PURA_REGEX.test(`${lei} `);
+  return {
+    complemento: consumido,
+    leiTexto: lei.length >= 2 && temLetra && !ehSoEspecie ? lei : null
+  };
+}
+
+// ----------------------------------------------------------------------------
+// Localização de artigo / parágrafo / inciso / alínea
+// ----------------------------------------------------------------------------
+
+const NUM_ARTIGO_SRC = '(\\d+(?:\\.\\d+)?)\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*([a-zA-Z])\\b)?';
+
+function localizarArtigo(texto) {
+  let m = new RegExp(`\\b(?:arts?\\.?|artigos?)\\s*${NUM_ARTIGO_SRC}`, 'i').exec(texto);
+  if (!m) m = new RegExp(`^\\s*${NUM_ARTIGO_SRC}`, 'i').exec(texto);
+  if (!m) return null;
+
+  let end = m.index + m[0].replace(/\s+$/, '').length;
+  let letra = m[2] || '';
+  if (!letra) {
+    const sl = /^\s+([a-zA-Z])(?=$|[\s,.;:()])/.exec(texto.slice(end));
+    if (sl && letraSufixoValida(sl[1])) {
+      letra = sl[1];
+      end += sl[0].length;
+    }
+  }
+  return { numero: normalizarNumeroArtigo(m[1]), letra: letra.toLowerCase(), index: m.index, end };
+}
+
+function localizarParagrafo(texto) {
+  let m = /par[áa]gra[fd]o\s+[úu]nico\b/i.exec(texto);
+  if (m) return { id: 'p', index: m.index, end: m.index + m[0].length };
+
+  m = /(?:§+|par[áa]gra[fd]os?)\s*(\d+)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b)?/i.exec(texto);
+  if (m) {
+    let end = m.index + m[0].replace(/\s+$/, '').length;
+    let letra = m[2] || '';
+    if (!letra) {
+      const sl = /^\s+([a-zA-Z])(?=$|[\s,.;:()])/.exec(texto.slice(end));
+      if (sl && letraSufixoValida(sl[1])) {
+        letra = sl[1];
+        end += sl[0].length;
+      }
+    }
+    return { id: `§${m[1]}${letra.toLowerCase()}`, index: m.index, end };
+  }
+
+  m = new RegExp(`par[áa]gra[fd]o\\s+(${ORDINAIS_EXTENSO})\\b`, 'i').exec(texto);
+  if (m) {
+    const numero = ORDINAIS_MAP[m[1].toLowerCase()];
+    if (numero) return { id: `§${numero}`, index: m.index, end: m.index + m[0].length };
+  }
+
+  m = new RegExp(`\\b(\\d+[ºª°]?|${ORDINAIS_EXTENSO})\\s+par[áa]gra[fd]o\\b`, 'i').exec(texto);
+  if (m) {
+    const raw = m[1].toLowerCase().replace(/[ºª°]/g, '');
     const numero = /^\d+$/.test(raw) ? raw : ORDINAIS_MAP[raw];
-    if (numero) {
-      return `§${numero}`;
-    }
+    if (numero) return { id: `§${numero}`, index: m.index, end: m.index + m[0].length };
   }
 
-  return '';
+  return null;
 }
 
 function isolarPrimeiroArtigo(corpoDispositivo) {
@@ -310,47 +501,42 @@ function isolarPrimeiroArtigo(corpoDispositivo) {
   return texto;
 }
 
-function extrairInciso(texto) {
-  const explicito = texto.match(
-    /\binc(?:iso|\.)?\s+([IVXLCDM]+)\b/i
-  );
+
+function extrairInciso(texto, spansRemover = []) {
+  const explicito = texto.match(/\binc(?:isos?\b|\.)\s*([ivxlcdm]+)\b/i);
   if (explicito) {
     return explicito[1].toLowerCase();
   }
 
-  // Remove artigo e parágrafo (inclusive com letra, ex.: "§ 1º-I" ou "§ 3º-A") para não confundir letra com inciso
-  const semArtigoEParagrafo = texto
-    .replace(
-      /\b(?:arts?\.?|artigos?)\s*\d+(?:\.\d+)?\s*(?:[ºª°])?\s*(?:[-–—]?\s*[a-zA-Z])?/i,
-      ''
-    )
-    .replace(
-      /(?:§+|par[áa]gra[fd]o(?:s)?)\s*\d+\s*(?:[ºª°])?\s*(?:[-–—]?\s*[a-zA-Z])?/i,
-      ''
-    );
+  // Remove artigo e parágrafo já reconhecidos para não confundi-los com inciso
+  let restante = texto;
+  const ordenados = spansRemover.slice().sort((a, b) => b.index - a.index);
+  for (const s of ordenados) {
+    restante = `${restante.slice(0, s.index)} ${restante.slice(s.end)}`;
+  }
 
   const preposicoesIgnoradas = new Set([
     'a', 'o', 'e', 'em', 'de', 'da', 'do', 'das', 'dos', 'na', 'no', 'nas', 'nos'
   ]);
-  const tokens = semArtigoEParagrafo.split(/[\s,()'“”]+/);
-  const romanoToken = tokens.find((tok) => {
-    const clean = tok.toLowerCase();
+  const tokens = restante.split(/[\s,;()'"“”‘’]+/);
+  const romano = tokens.find((tok) => {
+    const clean = tok.toLowerCase().replace(/\.+$/, '');
     if (!clean || preposicoesIgnoradas.has(clean)) return false;
-    return /^(?:m{0,3})(?:cm|cd|d?c{0,3})(?:xc|xl|l?x{0,3})(?:ix|iv|v?i{0,3})$/.test(clean);
+    return romanoComoInciso(clean);
   });
 
-  return romanoToken ? romanoToken.toLowerCase() : '';
+  return romano ? romano.toLowerCase().replace(/\.+$/, '') : '';
 }
 
 function extrairAlinea(texto) {
   const explicita = texto.match(
-    /\bal[íi]nea\s*["'“”]?([a-z])["'“”]?(?=$|[\s,.;:()"'“”])/i
+    /\bal[íi]nea\s*["'“”‘’]?([a-z])["'“”‘’]?(?=$|[\s,.;:()"'“”‘’])/i
   );
   if (explicita) {
     return explicita[1].toLowerCase();
   }
 
-  const entreAspas = texto.match(/["'“”]([a-z])["'“”]/i);
+  const entreAspas = texto.match(/["'“”‘’]([a-z])["'“”‘’]/i);
   if (entreAspas) {
     return entreAspas[1].toLowerCase();
   }
@@ -358,33 +544,48 @@ function extrairAlinea(texto) {
   return '';
 }
 
+export function montarDispositivo(corpoDispositivo) {
+  const corpo = isolarPrimeiroArtigo(corpoDispositivo);
+  const art = localizarArtigo(corpo);
+  if (!art) return null;
+
+  const par = localizarParagrafo(corpo);
+  const spans = [{ index: art.index, end: art.end }];
+  if (par) spans.push({ index: par.index, end: par.end });
+
+  const inciso = extrairInciso(corpo, spans);
+  const alinea = extrairAlinea(corpo);
+  const paragrafo = par ? par.id : '';
+
+  return {
+    id: `art${art.numero}${art.letra}${paragrafo}${inciso}${alinea}`,
+    artigo: art.numero,
+    letra: art.letra,
+    paragrafo,
+    inciso,
+    alinea
+  };
+}
+
 export function montarIdHtml(corpoDispositivo) {
-  const corpoNormalizado = isolarPrimeiroArtigo(corpoDispositivo);
+  const d = montarDispositivo(corpoDispositivo);
+  return d ? d.id : null;
+}
 
-  const artMatch =
-    corpoNormalizado.match(
-      /\b(?:arts?\.?|artigos?)\s*(\d+(?:\.\d+)?)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
-    ) ||
-    corpoNormalizado.match(
-      /^\s*(\d+(?:\.\d+)?)\s*(?:[ºª°])?(?:\s*[-–—]\s*([a-zA-Z])\b|\s+([a-zA-Z])(?=$|[\s,.;:()]))?/i
-    );
-
-  if (!artMatch) return null;
-
-  const numeroArt = normalizarNumeroArtigo(artMatch[1]);
-  const rawLetra = artMatch[2] || artMatch[3] || '';
-  const ignorarLetras = new Set(['a', 'o', 'e']);
-  const letraArt =
-    rawLetra && (artMatch[2] || !ignorarLetras.has(rawLetra.toLowerCase()))
-      ? rawLetra.toLowerCase()
-      : '';
-  const idArtigo = `art${numeroArt}${letraArt}`;
-
-  const idParagrafo = extrairParagrafo(corpoNormalizado);
-  const idInciso = extrairInciso(corpoNormalizado);
-  const idAlinea = extrairAlinea(corpoNormalizado);
-
-  return `${idArtigo}${idParagrafo}${idInciso}${idAlinea}`;
+// Rótulo legível do dispositivo (ex.: "art. 5º, XXXI", "art. 14, § 1º, II, 'a'")
+export function rotuloDispositivo(d) {
+  if (!d) return '';
+  const n = parseInt(d.artigo, 10);
+  const partes = [`art. ${d.artigo}${n >= 1 && n <= 9 ? 'º' : ''}${d.letra ? `-${d.letra.toUpperCase()}` : ''}`];
+  if (d.paragrafo === 'p') {
+    partes.push('parágrafo único');
+  } else if (d.paragrafo) {
+    const m = d.paragrafo.match(/^§(\d+)([a-z]?)$/);
+    if (m) partes.push(`§ ${m[1]}º${m[2] ? `-${m[2].toUpperCase()}` : ''}`);
+  }
+  if (d.inciso) partes.push(d.inciso.toUpperCase());
+  if (d.alinea) partes.push(`'${d.alinea}'`);
+  return partes.join(', ');
 }
 
 // Texto que vem ANTES do "art." e é só parte do dispositivo (ex.: "§1º, II,",
@@ -421,58 +622,40 @@ function ehPrefixoDeDispositivo(prefixo) {
   });
 }
 
+
 export function separarLeiEId(texto) {
   const trimmed = String(texto || '').trim();
   if (!trimmed) {
-    return { entrada: '', idHtml: null, leiTexto: null, isUnsupportedAct: false };
+    return { entrada: '', idHtml: null, dispositivo: null, leiTexto: null, isUnsupportedAct: false };
   }
+
+  const resultado = (dispositivo, leiTexto) => ({
+    entrada: trimmed,
+    idHtml: dispositivo ? dispositivo.id : null,
+    dispositivo: dispositivo || null,
+    leiTexto,
+    isUnsupportedAct: false
+  });
 
   const temArtigoExplicito = /\b(?:arts?\.?|artigos?)\s*\d+/i.test(trimmed);
   if (!temArtigoExplicito && ATO_NAO_LEGISLACAO_REGEX.test(trimmed)) {
     return {
       entrada: trimmed,
       idHtml: null,
+      dispositivo: null,
       leiTexto: null,
       isUnsupportedAct: true
     };
   }
 
-  // Subpadrões precisos de complementos de dispositivo (parágrafo, inciso, alínea, intervalo de artigos),
-  // tolerantes à ausência de espaços ou vírgulas (ex.: "§ 1º", "§1º", "§1º,II,'a'", "parágrafo único").
-  const COMPLEMENTO_ITEM = [
-    // Parágrafo com símbolo § (ex.: "§ 1º", "§1º", "§ 3º-A", "§§ 1º e 2º")
-    `§+\\s*\\d+\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?`,
-    // Parágrafo por extenso (ex.: "parágrafo único", "parágrafo 1º", "parágrafo primeiro")
-    `par[áa]gra[fd]o(?:s)?\\s+(?:[úu]nico\\b|\\d+\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?|(?:primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo)\\b)`,
-    // Ordinal antes de parágrafo (ex.: "1º parágrafo", "primeiro parágrafo")
-    `(?:\\d+\\s*[ºª°]?|(?:primeiro|segundo|terceiro|quarto|quinto|sexto|s[ée]timo|oitavo|nono|d[ée]cimo))\\s+par[áa]gra[fd]o\\b`,
-    // Inciso com prefixo (ex.: "inciso II", "inc. II", "inc.II")
-    `\\binc(?:iso|isos|\\.)\\s*[ivxlcdm]+\\b`,
-    // Inciso em algarismo romano isolado (ex.: "II", "LXXVIII")
-    `\\b[ivxlcdm]+\\b`,
-    // Alínea com prefixo (ex.: "alínea 'a'", "alínea a")
-    `\\bal[íi]nea(?:s)?\\s*(?:["'“”][a-z]["'“”]|[a-z]\\b)`,
-    // Alínea entre aspas (ex.: "'a'", "“b”")
-    `["'“”][a-z]["'“”]`,
-    // Artigo adicional em intervalo ou enumeração com conector explícito (ex.: ", 4º", " e 5º", " a 10")
-    `(?:,|;|\\be\\b|\\ba\\b|\\bat[ée]\\b|\\/|-|–|—)\\s*(?:arts?\\.?|artigos?)?\\s*\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?`
-  ].join('|');
-
-  const COMPLEMENTOS_DISPOSITIVO_SEQ = `(?:\\s*(?:,|;|\\be\\b|\\ba\\b|\\bat[ée]\\b|\\/|-|–|—)?\\s*(?:${COMPLEMENTO_ITEM}))*`;
-
-  // Caso 1: Começa com sigla de lei antes do dispositivo (ex.: "CF 5º, II", "CF,5º,II", "eca 122")
+  // Caso 1: Começa com sigla de lei antes do dispositivo (ex.: "CF 5º, II", "CF,5º,II", "CF5", "eca 122")
   const prefixoRegex = new RegExp(
     `^(${SIGLAS_PREFIXO.join('|')})(?:[,\\s]+|(?=\\d))(.+)$`,
     'i'
   );
   const matchPrefixo = trimmed.match(prefixoRegex);
   if (matchPrefixo) {
-    return {
-      entrada: trimmed,
-      idHtml: montarIdHtml(matchPrefixo[2].trim()),
-      leiTexto: matchPrefixo[1].trim(),
-      isUnsupportedAct: false
-    };
+    return resultado(montarDispositivo(matchPrefixo[2].trim()), matchPrefixo[1].trim());
   }
 
   // Caso 2: Possui "art.", "arts.", "artigo" ou "artigos" em qualquer posição
@@ -485,61 +668,38 @@ export function separarLeiEId(texto) {
     const fimArtigo = inicioArtigo + artPosMatch[0].length;
     const antesDoArtigo = trimmed.slice(0, inicioArtigo).trim();
     const duranteEDepoisDoArtigo = trimmed.slice(inicioArtigo).trim();
-    const antesEDuranteArtigo = trimmed.slice(0, fimArtigo);
+    const duranteArtigo = trimmed.slice(inicioArtigo, fimArtigo);
     const depoisDoArtigo = trimmed.slice(fimArtigo);
 
     // Dispositivo escrito "de trás para frente" (ex.: "parágrafo único do art. 6 do CDC",
     // "§1º, II, art. 14 do CDC", "§1º,II,art.14,CDC"): o que vem antes do "art." é parte do dispositivo.
     const prefixoDispositivo = ehPrefixoDeDispositivo(antesDoArtigo) ? antesDoArtigo : '';
+    const leiAntes = antesDoArtigo.replace(/[,;:\-–—]+$/, '').trim();
+    const antesPodeSerLei = Boolean(antesDoArtigo) && !prefixoDispositivo && leiAntes.length >= 2;
 
-    // 2A: Norma vem ANTES do "art."/"arts." (ex.: "Lei 8.245/1991, art. 39")
-    if (antesDoArtigo && !prefixoDispositivo) {
-      const leiAntes = antesDoArtigo.replace(/[,;:\-–—]+$/, '').trim();
-      if (leiAntes.length >= 2) {
-        const idHtml = montarIdHtml(duranteEDepoisDoArtigo);
-        if (idHtml) {
-          return {
-            entrada: trimmed,
-            idHtml,
-            leiTexto: leiAntes,
-            isUnsupportedAct: false
-          };
-        }
+    // Norma vem APÓS o dispositivo, com ou sem preposição/vírgula/espaços
+    // (ex.: "art. 5 CF", "art. 5º, § 1º lei 10.259/01", "art. 6 viii cdc", "art. 186 CC/2002")
+    const apos = analisarAposDispositivo(depoisDoArtigo);
+
+    // 2A: Norma vem ANTES do "art." (ex.: "Lei 8.245/1991, art. 39"). Se o que vem antes não parece
+    // nome de norma (ex.: "multa do art. 477 da CLT") e há norma depois, prevalece a norma de depois.
+    if (antesPodeSerLei && (pareceNorma(leiAntes) || !apos.leiTexto)) {
+      const disp = montarDispositivo(duranteEDepoisDoArtigo);
+      if (disp) {
+        return resultado(disp, leiAntes);
       }
     }
 
-    // 2B: Norma vem APÓS o dispositivo (com ou sem preposição, vírgula ou espaços)
-    // Ex.: "art. 3º, § 1º lei 10.259/01", "art. 3º, §1º, lei 10.259/01", "art.3º,§1º,lei 10.259/01",
-    // "art. 4 da lei 10.259/01", "art. 23 lei de drogas", "art. 14 parágrafo único CPC"
-    const aposDispositivoRegex = new RegExp(
-      `^(${COMPLEMENTOS_DISPOSITIVO_SEQ})\\s*(?:[,;]\\s*)?(?:\\b(?:do|da|de|dos|das|no|na)\\s+)?(.+)$`,
-      'i'
-    );
-    const aposDispositivoMatch = depoisDoArtigo.match(aposDispositivoRegex);
-
-    if (aposDispositivoMatch) {
-      const complementoDispositivo = aposDispositivoMatch[1] || '';
-      const leiTexto = aposDispositivoMatch[2].replace(/^[,;:\s]+/, '').trim();
-      if (leiTexto.length >= 2) {
-        const corpoCompleto = `${prefixoDispositivo} ${antesEDuranteArtigo} ${complementoDispositivo}`;
-        const idHtml = montarIdHtml(corpoCompleto);
-        if (idHtml) {
-          return {
-            entrada: trimmed,
-            idHtml,
-            leiTexto,
-            isUnsupportedAct: false
-          };
-        }
+    // 2B: Norma vem depois do dispositivo
+    if (apos.leiTexto) {
+      const corpoCompleto = `${prefixoDispositivo} ${duranteArtigo} ${apos.complemento}`;
+      const disp = montarDispositivo(corpoCompleto);
+      if (disp) {
+        return resultado(disp, apos.leiTexto);
       }
     }
 
-    return {
-      entrada: trimmed,
-      idHtml: montarIdHtml(trimmed),
-      leiTexto: null,
-      isUnsupportedAct: false
-    };
+    return resultado(montarDispositivo(trimmed), null);
   }
 
   // Caso 2.5: Número do dispositivo seguido diretamente de citação de norma por espécie e número
@@ -550,34 +710,35 @@ export function separarLeiEId(texto) {
   if (dispositivoSeguidoDeCitacaoMatch) {
     const candidatoLei = dispositivoSeguidoDeCitacaoMatch[2].trim();
     if (CITACAO_DIRETA_ESPECIE_NUMERO_REGEX.test(candidatoLei)) {
-      const idHtml = montarIdHtml(dispositivoSeguidoDeCitacaoMatch[1].trim());
-      if (idHtml) {
-        return {
-          entrada: trimmed,
-          idHtml,
-          leiTexto: candidatoLei,
-          isUnsupportedAct: false
-        };
+      const disp = montarDispositivo(dispositivoSeguidoDeCitacaoMatch[1].trim());
+      if (disp) {
+        return resultado(disp, candidatoLei);
       }
     }
   }
 
-  // Caso 3: Começa pelo número do dispositivo (sem "art.") e termina com sigla conhecida (ex.: "122 eca", "5º,II,CF")
-  const sufixoSiglaRegex = new RegExp(
-    `^(\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?${COMPLEMENTOS_DISPOSITIVO_SEQ})[\\s,;]+(${SIGLAS_PREFIXO.join('|')})$`,
-    'i'
+  // Caso 3: Começa pelo número do dispositivo (sem "art."), seguido de complementos opcionais e do
+  // nome/sigla da norma, com ou sem preposição/vírgula/espaços
+  // (ex.: "122 eca", "5º,II,CF", "5º, II, da constituição", "23 lei de drogas", "23 da lei de drogas")
+  const cabecalhoNumero = trimmed.match(
+    /^(\d+(?:\.\d+)?\s*(?:[ºª°])?(?:\s*[-–—]\s*[a-zA-Z]\b)?)([\s\S]*)$/
   );
-  const matchSufixoSigla = trimmed.match(sufixoSiglaRegex);
-  if (matchSufixoSigla) {
-    const corpoDispositivo = matchSufixoSigla[1].trim();
-    const idHtml = montarIdHtml(corpoDispositivo);
-    if (idHtml) {
-      return {
-        entrada: trimmed,
-        idHtml,
-        leiTexto: matchSufixoSigla[2].trim(),
-        isUnsupportedAct: false
-      };
+  if (cabecalhoNumero) {
+    const { consumido, resto } = consumirComplementos(cabecalhoNumero[2]);
+    const candidatoLei = limparTextoDeLei(resto);
+    const ehSoEspecie = ESPECIE_NORMATIVA_PURA_REGEX.test(`${candidatoLei} `);
+    const comecaComDigito = /^\d/.test(candidatoLei);
+
+    if (
+      candidatoLei.length >= 2 &&
+      /\p{L}/u.test(candidatoLei) &&
+      !ehSoEspecie &&
+      !comecaComDigito
+    ) {
+      const disp = montarDispositivo(`${cabecalhoNumero[1]} ${consumido}`);
+      if (disp) {
+        return resultado(disp, candidatoLei);
+      }
     }
   }
 
@@ -592,45 +753,14 @@ export function separarLeiEId(texto) {
     const ehAnoIsolado = /^(?:18\d{2}|19\d{2}|20\d{2})$/.test(candidatoDispositivo);
 
     if (!ehEspeciePura && !ehAnoIsolado && candidatoLei.length >= 2) {
-      const idHtml = montarIdHtml(candidatoDispositivo);
-      if (idHtml) {
-        return {
-          entrada: trimmed,
-          idHtml,
-          leiTexto: candidatoLei,
-          isUnsupportedAct: false
-        };
+      const disp = montarDispositivo(candidatoDispositivo);
+      if (disp) {
+        return resultado(disp, candidatoLei);
       }
     }
   }
 
-  // Caso 5: Dispositivo sem "art." seguido (com ou sem preposição, vírgula ou espaços) do nome/apelido da norma
-  // Ex.: "23 da lei de drogas", "23 lei de drogas", "5º, II, da constituição", "5º,II constituição"
-  const dispositivoNomeRegex = new RegExp(
-    `^(\\d+(?:\\.\\d+)?\\s*(?:[ºª°])?(?:\\s*[-–—]\\s*[a-zA-Z]\\b)?${COMPLEMENTOS_DISPOSITIVO_SEQ})\\s*(?:[,;]\\s*)?(?:\\b(?:do|da|de|dos|das|no|na)\\s+)?(.+)$`,
-    'i'
-  );
-  const matchDispNome = trimmed.match(dispositivoNomeRegex);
-  if (matchDispNome) {
-    const corpoDispositivo = matchDispNome[1].trim();
-    const candidatoLei = matchDispNome[2].replace(/^[,;:\s]+/, '').trim();
-    const idHtml = montarIdHtml(corpoDispositivo);
-    if (idHtml && candidatoLei.length >= 2) {
-      return {
-        entrada: trimmed,
-        idHtml,
-        leiTexto: candidatoLei,
-        isUnsupportedAct: false
-      };
-    }
-  }
-
-  return {
-    entrada: trimmed,
-    idHtml: null,
-    leiTexto: null,
-    isUnsupportedAct: false
-  };
+  return resultado(null, null);
 }
 
 function applyProvisionIdToUrl(baseUrl, idHtml) {
@@ -714,6 +844,15 @@ function buildAssuntosIndex(assuntos) {
     const rawAliases = Array.isArray(assunto.alias) ? assunto.alias : [];
     const aliases = [];
     const entryTokenSet = new Set(topicoTokens);
+
+    if (topicoNorm) {
+      let topicBucket = exactMap.get(topicoNorm);
+      if (!topicBucket) {
+        topicBucket = [];
+        exactMap.set(topicoNorm, topicBucket);
+      }
+      if (!topicBucket.includes(assunto)) topicBucket.push(assunto);
+    }
 
     for (let j = 0; j < rawAliases.length; j++) {
       const rawAl = rawAliases[j];
@@ -931,7 +1070,7 @@ export function formatIdentifiersReadable(identificadores) {
   if (identificadores == null) return '';
 
   const rawJoined = Array.isArray(identificadores)
-    ? identificadores.map((v) => (v == null ? '' : String(v).trim())).filter(Boolean).join(' ')
+    ? identificadores.map((v) => (v == null ? '' : String(v).trim())).filter(Boolean).join(', ')
     : String(identificadores).trim();
 
   let working = rawJoined.replace(/^#+/, '').trim();
@@ -964,11 +1103,12 @@ export function formatIdentifiersReadable(identificadores) {
   if (!paragraphLabel) {
     // Suporta parágrafos com número e letra opcional (ex.: "§3a" -> "§ 3º-A", "§ 3º-A" -> "§ 3º-A")
     const paraNumMatch = working.match(
-      /^(?:§|par(?:ágrafo|agrafo)?\.?)\s*(\d+)[º°o]?(?:\s*[-–—]?\s*([a-zA-Z]))?/i
+      /^(?:§|par(?:ágrafo|agrafo)?\.?)\s*(\d+)[º°o]?(?:\s*[-–—]\s*([a-zA-Z])(?![a-zA-Z])|([a-zA-Z])(?![a-zA-Z]))?/i
     );
     if (paraNumMatch) {
       const numPart = `§ ${parseInt(paraNumMatch[1], 10)}º`;
-      const letterPart = paraNumMatch[2] ? `-${paraNumMatch[2].toUpperCase()}` : '';
+      const paraLetter = paraNumMatch[2] || paraNumMatch[3];
+      const letterPart = paraLetter ? `-${paraLetter.toUpperCase()}` : '';
       paragraphLabel = `${numPart}${letterPart}`;
       working = working.slice(paraNumMatch[0].length).trim();
     }
@@ -1037,6 +1177,40 @@ export function formatIdentifiersReadable(identificadores) {
   }
 
   return [paragraphLabel, incisoLabel, alineaLabel].filter(Boolean).join(', ');
+}
+
+const BUTTON_NORMA_MAX_CHARS = 30;
+
+// Nome da norma para o botão: sem trechos entre parênteses e com no máximo 30 caracteres
+function nomeCurtoDaNorma(lei) {
+  const original = String(lei || '').replace(/\s+/g, ' ').trim();
+  let semParenteses = original;
+  let anterior;
+  do {
+    anterior = semParenteses;
+    semParenteses = semParenteses.replace(/\([^()]*\)/g, ' ');
+  } while (semParenteses !== anterior);
+  semParenteses = semParenteses.replace(/\(.*$/, ' ').replace(/\s+/g, ' ').trim();
+
+  const nome = semParenteses || original;
+  if (nome.length <= BUTTON_NORMA_MAX_CHARS) return nome;
+  return `${nome.slice(0, BUTTON_NORMA_MAX_CHARS - 1).trimEnd()}…`;
+}
+
+// Rótulo do botão flutuante: "[tópico] ([norma], [dispositivo])"
+function buildAssuntoButtonLabel(assunto) {
+  const topico = assunto.topico || '';
+  const artClean = assunto.artigo
+    ? String(assunto.artigo).trim().replace(/^art\.?\s*/i, '')
+    : '';
+  const dispositivo = [
+    artClean ? `Art. ${artClean}` : '',
+    formatIdentifiersReadable(assunto.identificadores)
+  ].filter(Boolean).join(', ');
+  const norma = nomeCurtoDaNorma(assunto.lei);
+
+  const partes = [norma, dispositivo].filter(Boolean);
+  return partes.length > 0 ? `${topico} (${partes.join(', ')})` : topico;
 }
 
 function buildAssuntoDisplayTitle(assunto) {
@@ -1112,6 +1286,7 @@ async function fetchHtmlWithCache(url, forceRefresh = false) {
 }
 
 export async function clearLegislationCache() {
+  dynamicCatalogCache = null;
   normasMemoryCache = null;
   normasIndexCache = null;
   assuntosMemoryCache = null;
@@ -1332,6 +1507,19 @@ async function parseListingPage(pageUrl, expectedType, periodFilter = null) {
 // Interpretação da Consulta do Usuário
 // ============================================================================
 
+function chaveAliasConhecida(key) {
+  if (!key) return false;
+  return Boolean(
+    (normasIndexCache && normasIndexCache.exactMap.has(key)) ||
+    (assuntosIndexCache && assuntosIndexCache.exactMap.has(key))
+  );
+}
+
+// Garante que os índices de normas e assuntos estão em memória (o parser os consulta de forma síncrona)
+async function ensureIndexes() {
+  await Promise.all([getNormasIndex(), getAssuntosIndex()]);
+}
+
 export function parseUserQuery(rawInput, selectedType = 'auto') {
   const original = String(rawInput || '').trim();
   if (!original) {
@@ -1341,7 +1529,7 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
   const sanitized = original
     .replace(/\bacessar\b/gi, ' ')
     .replace(/^[\s.,;:!?()[\]"'“”«»–—-]+/, '')
-    .replace(/^(?:do|da|dos|das|no|na|nos|nas|pelo|pela|pelos|pelas|ao|aos|à|às|de|em)\s+/i, '')
+    .replace(/^(?:do|da|dos|das|no|na|nos|nas|pelo|pela|pelos|pelas|ao|aos|à|às|de|em|a|o|as|os)\s+/i, '')
     .replace(/[\s.,;:!?[\]"'“”«»–—-]+$/, '')
     .replace(/[^\p{L}\p{N}\s.\-\/º°ª()]/gu, ' ')
     .replace(/\s+/g, ' ')
@@ -1349,6 +1537,29 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
 
   if (!sanitized) {
     return { kind: 'empty' };
+  }
+
+  // Alias/título cadastrado (normas.json e assuntos.json) tem prioridade sobre qualquer interpretação
+  // estrutural: "cf 88", "cc 2002", "multa do art. 477 da CLT", "prazo de 6", "agravo interno"...
+  const keySanitizada = normalizeAliasKey(sanitized);
+  const keyOriginal = normalizeAliasKey(original);
+  // Citação direta por espécie + número ("Lei 7.716/1989") segue sempre o caminho numérico, mesmo que
+  // o texto também seja alias de algum assunto; já apelidos/siglas de normas têm prioridade sempre.
+  const ehCitacaoDireta = CITACAO_DIRETA_ESPECIE_NUMERO_REGEX.test(sanitized);
+  const chaveConhecida = (k) => (ehCitacaoDireta
+    ? Boolean(normasIndexCache && normasIndexCache.exactMap.has(k))
+    : chaveAliasConhecida(k));
+  const keyConhecida = chaveConhecida(keySanitizada)
+    ? keySanitizada
+    : (chaveConhecida(keyOriginal) ? keyOriginal : null);
+  if (keyConhecida) {
+    return {
+      kind: 'name',
+      query: sanitized,
+      normalizedQuery: normalizeTextForSearch(sanitized),
+      aliasKey: keyConhecida,
+      original
+    };
   }
 
   const citacaoDiretaEspecieNumero = CITACAO_DIRETA_ESPECIE_NUMERO_REGEX.test(sanitized);
@@ -1365,6 +1576,8 @@ export function parseUserQuery(rawInput, selectedType = 'auto') {
       return {
         kind: 'provision',
         idHtml: provisionInfo.idHtml,
+        dispositivo: provisionInfo.dispositivo,
+        dispositivoLabel: rotuloDispositivo(provisionInfo.dispositivo),
         leiTexto: provisionInfo.leiTexto,
         original
       };
@@ -1523,23 +1736,31 @@ const FORMATO_NUMERO_ANO_REGEX = new RegExp(
 let aliasGateCache = null;
 
 async function getAliasGate() {
-  const idx = await getNormasIndex();
-  if (aliasGateCache && aliasGateCache.source === idx) return aliasGateCache;
+  const [idx, aidx] = await Promise.all([getNormasIndex(), getAssuntosIndex()]);
+  if (aliasGateCache && aliasGateCache.source === idx && aliasGateCache.sourceAssuntos === aidx) {
+    return aliasGateCache;
+  }
 
   const set = new Set();
   let maxTokens = 1;
+  const add = (key) => {
+    if (!key || key.length < 2) return;
+    set.add(key);
+    const n = key.split(' ').length;
+    if (n > maxTokens) maxTokens = n;
+  };
+
   for (let i = 0; i < idx.entries.length; i++) {
     const aliases = idx.entries[i].aliases;
-    for (let j = 0; j < aliases.length; j++) {
-      const key = aliases[j].norm;
-      if (!key || key.length < 2) continue;
-      set.add(key);
-      const n = key.split(' ').length;
-      if (n > maxTokens) maxTokens = n;
-    }
+    for (let j = 0; j < aliases.length; j++) add(aliases[j].norm);
+  }
+  for (let i = 0; i < aidx.entries.length; i++) {
+    const e = aidx.entries[i];
+    add(e.topicoNorm);
+    for (let j = 0; j < e.aliases.length; j++) add(e.aliases[j].norm);
   }
 
-  aliasGateCache = { source: idx, set, maxTokens };
+  aliasGateCache = { source: idx, sourceAssuntos: aidx, set, maxTokens };
   return aliasGateCache;
 }
 
@@ -1580,13 +1801,30 @@ export async function selecaoTemIndicioDeNorma(rawText) {
   return false;
 }
 
+async function confirmarNormaPorNumero(text) {
+  try {
+    const outcome = await Promise.race([
+      resolveLegislation(text, 'auto'),
+      new Promise((resolve) => setTimeout(() => resolve(null), 6000))
+    ]);
+    if (!outcome) return null;
+    if (outcome.status === 'found') return { text: outcome.result?.text || '' };
+    if (outcome.status === 'multiple' || outcome.status === 'confirm') return { text: '' };
+  } catch (_) {
+    // sem rede/erro: não confirma
+  }
+  return null;
+}
+
 export async function checkSelectionCandidate(rawInput) {
   const text = String(rawInput || '').trim();
   if (!text || text.length < 2 || text.length > 140 || /[\r\n]/.test(text)) {
     return { valid: false };
   }
 
-  // Só segue se o texto tiver alias de norma, palavra de norma ou formato de número/ano.
+  await ensureIndexes();
+
+  // Só segue se o texto tiver alias de norma/assunto, palavra de norma ou formato de número/ano.
   if (!(await selecaoTemIndicioDeNorma(text))) {
     return { valid: false };
   }
@@ -1598,9 +1836,15 @@ export async function checkSelectionCandidate(rawInput) {
   }
 
   if (parsed.kind === 'provision') {
+    // Só oferece o botão se o trecho que identifica a norma realmente parece uma norma
+    // (sigla/alias conhecido, espécie normativa, código, estatuto, constituição...).
+    if (!pareceNorma(parsed.leiTexto)) {
+      return { valid: false };
+    }
+    const nome = parsed.leiTexto.length <= 6 ? parsed.leiTexto.toUpperCase() : parsed.leiTexto;
     return {
       valid: true,
-      label: `Abrir ${parsed.leiTexto} (#${parsed.idHtml})`
+      label: `Abrir ${nome}, ${parsed.dispositivoLabel || parsed.idHtml}`
     };
   }
 
@@ -1614,10 +1858,17 @@ export async function checkSelectionCandidate(rawInput) {
 
     const typeLabel = TYPE_LABELS[parsed.type] || 'Norma';
     const yearSuffix = parsed.year ? `/${parsed.year}` : '';
-    return {
-      valid: true,
-      label: `Abrir ${typeLabel} ${parsed.number.canonical}${yearSuffix}`
-    };
+    let label = `Abrir ${typeLabel} ${parsed.number.canonical}${yearSuffix}`;
+
+    // "número/ano" sem espécie declarada (ex.: "10/20", "2020/2021") pode ser qualquer coisa:
+    // só mostra o botão se a norma realmente existir na listagem oficial.
+    if (!parsed.explicitType && parsed.year != null) {
+      const confirmada = await confirmarNormaPorNumero(text);
+      if (!confirmada) return { valid: false };
+      if (confirmada.text) label = `Abrir ${confirmada.text}`;
+    }
+
+    return { valid: true, label };
   }
 
   if (parsed.kind === 'name') {
@@ -1641,11 +1892,16 @@ export async function checkSelectionCandidate(rawInput) {
     const assuntosIdx = await getAssuntosIndex();
     const assuntoHits = assuntosIdx.exactMap.get(qAliasKey);
     if (assuntoHits && assuntoHits.length > 0) {
-      const first = assuntoHits[0];
-      const artLabel = first.artigo ? ` (Art. ${first.artigo})` : '';
+      // Mesma ordem usada na busca (assunto mais parecido com o texto; empate: tópico mais curto)
+      const first = assuntoHits.slice().sort((a, b) => {
+        const diff = similarityScore(qAliasKey, b.topico || '') - similarityScore(qAliasKey, a.topico || '');
+        if (diff !== 0) return diff;
+        return (a.topico || '').length - (b.topico || '').length;
+      })[0];
+      // Formato: "[tópico] ([norma], [dispositivo])"
       return {
         valid: true,
-        label: `Abrir ${first.lei}${artLabel}`
+        label: buildAssuntoButtonLabel(first)
       };
     }
   }
@@ -1941,6 +2197,20 @@ async function resolveWithoutYear(type, numberNorm) {
 // Busca Otimizada por Nome / Sigla / Códigos / Estatutos / Apelidos / Assuntos
 // ============================================================================
 
+let dynamicCatalogCache = null;
+
+// Catálogo de códigos/estatutos do portal, memoizado (evita reler e reprocessar o HTML a cada busca)
+async function getDynamicCatalog() {
+  if (dynamicCatalogCache && (Date.now() - dynamicCatalogCache.ts) < CACHE_TTL_MS) {
+    return dynamicCatalogCache.data;
+  }
+  const data = await loadDynamicCatalog();
+  if (data.length > 0) {
+    dynamicCatalogCache = { ts: Date.now(), data };
+  }
+  return data;
+}
+
 async function loadDynamicCatalog() {
   const catalog = [];
   const sources = [
@@ -2200,18 +2470,63 @@ async function resolveCatalogEntry(entry) {
   return null;
 }
 
+// "A (Lei nº 1/2000) e B (Lei nº 2/2001)" -> ["A (Lei nº 1/2000)", "B (Lei nº 2/2001)"]
+function dividirCampoLei(leiField) {
+  const texto = String(leiField || '').trim();
+  const partes = [];
+  const re = /\)\s*(?:,|;|\be\b)\s+(?=\S)/g;
+  let last = 0;
+  let m;
+  while ((m = re.exec(texto)) !== null) {
+    partes.push(texto.slice(last, m.index + 1));
+    last = m.index + m[0].length;
+  }
+  partes.push(texto.slice(last));
+  return partes.map((p) => p.trim()).filter(Boolean);
+}
+
+// Extrai "Lei nº 8.078/1990", "Decreto-Lei nº 5.452/1943" etc. de dentro do texto
+function extrairCitacaoNorma(texto) {
+  const m = String(texto || '').match(
+    /(?<![\p{L}\p{N}])(Lei\s+Complementar|Lei\s+Delegada|Decreto[-\s]*Lei|Medida\s+Provis[óo]ria|Emenda\s+Constitucional|Decreto|Lei|LCP?|DL|EC|MPV?)\s*(?:n[º°o.]*\s*)?(\d[\d.]*(?:-[A-Za-z0-9])?)\s*(?:\/|,\s*de|\s+de)\s*(\d{4}|\d{2})\b/iu
+  );
+  if (!m) return null;
+  return `${m[1]} ${m[2]}/${m[3]}`;
+}
+
+async function resolverUmaLei(segmento) {
+  const citacao = extrairCitacaoNorma(segmento);
+  const outcome = await resolveLegislation(segmento, 'auto', { allowAssuntos: false });
+
+  if (outcome.status === 'found' && outcome.result?.url) return outcome.result.url;
+  if (outcome.status === 'confirm' && outcome.suggestion) {
+    const u = await resolvePendingCatalogItem(outcome.suggestion);
+    if (u) return u;
+  }
+
+  // Pela citação (número/ano) — independe do catálogo local
+  if (citacao) {
+    const porNumero = await resolveLegislation(citacao, 'auto', { allowAssuntos: false });
+    if (porNumero.status === 'found' && porNumero.result?.url) return porNumero.result.url;
+  }
+
+  if (outcome.status === 'multiple' && outcome.results?.length > 0) {
+    const ordenados = outcome.results
+      .slice()
+      .sort((a, b) => similarityScore(segmento, b.title || '') - similarityScore(segmento, a.title || ''));
+    return await resolvePendingCatalogItem(ordenados[0]);
+  }
+
+  return null;
+}
+
 async function resolveAssuntoEntry(assunto) {
   let baseUrl = assunto.url || null;
 
   if (!baseUrl && assunto.lei) {
-    const leiOutcome = await resolveLegislation(assunto.lei, 'auto', { allowAssuntos: false });
-
-    if (leiOutcome.status === 'found' && leiOutcome.result?.url) {
-      baseUrl = leiOutcome.result.url;
-    } else if (leiOutcome.status === 'confirm' && leiOutcome.suggestion) {
-      baseUrl = await resolvePendingCatalogItem(leiOutcome.suggestion);
-    } else if (leiOutcome.status === 'multiple' && leiOutcome.results?.length > 0) {
-      baseUrl = await resolvePendingCatalogItem(leiOutcome.results[0]);
+    for (const segmento of dividirCampoLei(assunto.lei)) {
+      baseUrl = await resolverUmaLei(segmento);
+      if (baseUrl) break;
     }
   }
 
@@ -2244,13 +2559,55 @@ async function resolveByName(parsedQuery, options = {}) {
   const qAliasKey = parsedQuery.aliasKey || normalizeAliasKey(parsedQuery.query);
   const qTokens = extractSignificantTokens(qAliasKey);
 
-  const [normasIdx, dynamicCatalog, assuntosIdx] = await Promise.all([
+  const [normasIdx, assuntosIdx] = await Promise.all([
     getNormasIndex(),
-    loadDynamicCatalog(),
     allowAssuntos ? getAssuntosIndex() : Promise.resolve(null)
   ]);
   const knownNorms = await loadNormas();
   const codigosFallback = new URL(INDEX_PAGES.codigos, BASE_URL).href;
+
+  // 1) Alias/título exato de norma (não depende do catálogo dinâmico do portal)
+  const exactNormHits = normasIdx.exactMap.get(qAliasKey);
+  if (exactNormHits && exactNormHits.length > 0) {
+    const resolved = await resolveCatalogEntry(exactNormHits[0]);
+    if (resolved) {
+      return { status: 'found', result: resolved, fallbackUrl: codigosFallback };
+    }
+  }
+
+  // 2) Assunto exato
+  if (allowAssuntos && assuntosIdx) {
+    const exactAssuntos = assuntosIdx.exactMap.get(qAliasKey) || [];
+
+    if (exactAssuntos.length === 1) {
+      const resolvedAssunto = await resolveAssuntoEntry(exactAssuntos[0]);
+      if (resolvedAssunto) {
+        return { status: 'found', result: resolvedAssunto, fallbackUrl: codigosFallback };
+      }
+      return {
+        status: 'not_found',
+        message: `Não foi possível localizar a norma "${exactAssuntos[0].lei}" vinculada ao assunto "${exactAssuntos[0].topico}".`,
+        fallbackUrl: codigosFallback
+      };
+    } else if (exactAssuntos.length > 1) {
+      const sortedExactAssuntos = exactAssuntos.slice().sort((a, b) => {
+        const scoreA = similarityScore(qAliasKey, a.topico || '');
+        const scoreB = similarityScore(qAliasKey, b.topico || '');
+        if (scoreB !== scoreA) return scoreB - scoreA;
+        return (a.topico || '').length - (b.topico || '').length;
+      });
+
+      return {
+        status: 'multiple',
+        message: `Encontramos ${sortedExactAssuntos.length} assuntos correspondentes a "${parsedQuery.original}":`,
+        results: sortedExactAssuntos.map(formatAssuntoPendingItem),
+        fallbackUrl: codigosFallback
+      };
+    }
+  }
+
+  // 3) Catálogo dinâmico (códigos e estatutos do portal; memoizado)
+  const dynamicCatalog = await getDynamicCatalog();
 
   if (qAliasKey === 'codigo' || qAliasKey === 'codigos') {
     const allCodes = [
@@ -2280,14 +2637,6 @@ async function resolveByName(parsedQuery, options = {}) {
     };
   }
 
-  const exactNormHits = normasIdx.exactMap.get(qAliasKey);
-  if (exactNormHits && exactNormHits.length > 0) {
-    const resolved = await resolveCatalogEntry(exactNormHits[0]);
-    if (resolved) {
-      return { status: 'found', result: resolved, fallbackUrl: codigosFallback };
-    }
-  }
-
   const exactDynamic = dynamicCatalog.find((item) => item.aliasKey === qAliasKey);
   if (exactDynamic) {
     return {
@@ -2295,36 +2644,6 @@ async function resolveByName(parsedQuery, options = {}) {
       result: { title: exactDynamic.title, url: exactDynamic.url, category: exactDynamic.category },
       fallbackUrl: codigosFallback
     };
-  }
-
-  if (allowAssuntos && assuntosIdx) {
-    const exactAssuntos = assuntosIdx.exactMap.get(qAliasKey) || [];
-
-    if (exactAssuntos.length === 1) {
-      const resolvedAssunto = await resolveAssuntoEntry(exactAssuntos[0]);
-      if (resolvedAssunto) {
-        return { status: 'found', result: resolvedAssunto, fallbackUrl: codigosFallback };
-      }
-      return {
-        status: 'not_found',
-        message: `Não foi possível localizar a norma "${exactAssuntos[0].lei}" vinculada ao assunto "${exactAssuntos[0].topico}".`,
-        fallbackUrl: codigosFallback
-      };
-    } else if (exactAssuntos.length > 1) {
-      const sortedExactAssuntos = exactAssuntos.slice().sort((a, b) => {
-        const scoreA = similarityScore(qAliasKey, a.topico || '');
-        const scoreB = similarityScore(qAliasKey, b.topico || '');
-        if (scoreB !== scoreA) return scoreB - scoreA;
-        return (a.topico || '').length - (b.topico || '').length;
-      });
-
-      return {
-        status: 'multiple',
-        message: `Encontramos ${sortedExactAssuntos.length} assuntos correspondentes a "${parsedQuery.original}":`,
-        results: sortedExactAssuntos.map(formatAssuntoPendingItem),
-        fallbackUrl: codigosFallback
-      };
-    }
   }
 
   const MIN_SIMILARITY = 0.50;
@@ -2489,7 +2808,21 @@ function deduplicateItems(items) {
 // Ponto de Entrada Principal
 // ============================================================================
 
+// "CDC/90" -> ["CDC/90", "CDC"]; "CF de 1988" -> ["CF de 1988", "CF"]
+function candidatosDeLei(leiTexto) {
+  const base = String(leiTexto || '').trim();
+  const out = [base];
+  const semAno = base.replace(/[\s.\/-]*(?:de\s+)?\d{1,4}$/i, '').trim();
+  if (semAno.length >= 2 && semAno !== base) out.push(semAno);
+  return out;
+}
+
 export async function resolveLegislation(rawInput, selectedType = 'auto', options = {}) {
+  try {
+    await ensureIndexes();
+  } catch (_) {
+    // segue sem os índices; o parser apenas não aplica a prioridade de aliases
+  }
   const parsed = parseUserQuery(rawInput, selectedType);
 
   if (parsed.kind === 'empty') {
@@ -2510,10 +2843,14 @@ export async function resolveLegislation(rawInput, selectedType = 'auto', option
 
   try {
     if (parsed.kind === 'provision') {
-      const leiOutcome = await resolveLegislation(parsed.leiTexto, selectedType, {
-        ...options,
-        allowAssuntos: false
-      });
+      let leiOutcome = null;
+      for (const tentativa of candidatosDeLei(parsed.leiTexto)) {
+        leiOutcome = await resolveLegislation(tentativa, selectedType, {
+          ...options,
+          allowAssuntos: false
+        });
+        if (['found', 'confirm', 'multiple'].includes(leiOutcome.status)) break;
+      }
 
       if (leiOutcome.status === 'found' && leiOutcome.result?.url) {
         return {
@@ -2551,6 +2888,22 @@ export async function resolveLegislation(rawInput, selectedType = 'auto', option
             provisionId: parsed.idHtml
           }))
         };
+      }
+
+      // Nenhuma norma resolvida: a entrada pode não ser um dispositivo (ex.: assunto com números);
+      // tenta como busca por nome/assunto antes de desistir.
+      if (leiOutcome.status === 'not_found' && options.allowAssuntos !== false) {
+        const key = normalizeAliasKey(parsed.original);
+        if (key) {
+          const porNome = await resolveByName({
+            kind: 'name',
+            query: parsed.original,
+            normalizedQuery: normalizeTextForSearch(parsed.original),
+            aliasKey: key,
+            original: parsed.original
+          }, options);
+          if (porNome.status !== 'not_found') return porNome;
+        }
       }
 
       return leiOutcome;
