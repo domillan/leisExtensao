@@ -23,7 +23,7 @@ async function loadSavedOpenMode() {
   if (saved === 'new_tab' || saved === 'side_panel' || saved === 'current_tab') {
     openModeSelect.value = saved;
   } else {
-    openModeSelect.value = 'new_tab';
+    openModeSelect.value = 'side_panel';
   }
 }
 
@@ -32,7 +32,7 @@ openModeSelect.addEventListener('change', async () => {
 });
 
 async function navigateToUrl(targetUrl) {
-  const mode = openModeSelect.value || 'new_tab';
+  const mode = openModeSelect.value || 'side_panel';
   await chrome.storage.local.set({ [OPEN_TARGET_PREF_KEY]: mode });
 
   if (mode === 'side_panel') {
